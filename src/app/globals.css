@@ -2,26 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+:root {
+  --ideal-font-size: 16;
+  --ideal-viewport-width: 1280;
+  --current-viewport-width: 100vw;
+
+  --tablet-ideal-font-size: 16;
+  --tablet-ideal-viewport-width: 768;
+  --tablet-current-viewport-width: 100vw;
+
+  --mobile-ideal-font-size: 15;
+  --mobile-ideal-viewport-width: 360;
+  --mobile-current-viewport-width: 100vw;
+}
+
+html {
+  font-size: calc(var(--mobile-ideal-font-size) * (var(--mobile-current-viewport-width) / var(--mobile-ideal-viewport-width)));
+}
+
+@screen sm {
+  html {
+    font-size: calc(var(--tablet-ideal-font-size) * (var(--tablet-current-viewport-width) / var(--tablet-ideal-viewport-width)));
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@screen lg {
+  html {
+    font-size: calc(var(--ideal-font-size) * (var(--current-viewport-width) / var(--ideal-viewport-width)));
+  }
 }
