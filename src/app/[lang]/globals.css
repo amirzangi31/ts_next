@@ -16,15 +16,15 @@ input[type="number"] {
 }
 
 :root {
-  --ideal-font-size: 16;
+  --ideal-font-size: 14;
   --ideal-viewport-width: 1280;
   --current-viewport-width: 100vw;
 
-  --tablet-ideal-font-size: 16;
+  --tablet-ideal-font-size: 14;
   --tablet-ideal-viewport-width: 768;
   --tablet-current-viewport-width: 100vw;
 
-  --mobile-ideal-font-size: 15;
+  --mobile-ideal-font-size: 12;
   --mobile-ideal-viewport-width: 360;
   --mobile-current-viewport-width: 100vw;
 }
