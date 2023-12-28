@@ -15,32 +15,19 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-:root {
-  --ideal-font-size: 14;
-  --ideal-viewport-width: 1280;
-  --current-viewport-width: 100vw;
-
-  --tablet-ideal-font-size: 14;
-  --tablet-ideal-viewport-width: 768;
-  --tablet-current-viewport-width: 100vw;
-
-  --mobile-ideal-font-size: 12;
-  --mobile-ideal-viewport-width: 360;
-  --mobile-current-viewport-width: 100vw;
-}
 
 html {
-  font-size: calc(var(--mobile-ideal-font-size) * (var(--mobile-current-viewport-width) / var(--mobile-ideal-viewport-width)));
+  font-size: 14px;
 }
 
 @screen sm {
   html {
-    font-size: calc(var(--tablet-ideal-font-size) * (var(--tablet-current-viewport-width) / var(--tablet-ideal-viewport-width)));
+    font-size: 14px;
   }
 }
 
 @screen lg {
   html {
-    font-size: calc(var(--ideal-font-size) * (var(--current-viewport-width) / var(--ideal-viewport-width)));
+    font-size: 16px;
   }
 }

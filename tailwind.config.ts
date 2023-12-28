@@ -8,9 +8,8 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      container : {
+      container: {},
       
-      }
     },
   },
   plugins: [require("daisyui")],

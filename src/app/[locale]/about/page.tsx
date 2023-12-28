@@ -6,7 +6,12 @@ const About = () => {
 
 
     return (
-        <div>{t("title")}</div>
+        <>
+            <div>{t("title")}</div>
+            <div className='p-4 bg-red-200'>
+
+            </div>
+        </>
     )
 }
 
