@@ -54,7 +54,21 @@ const Header = () => {
               <li className='rtl:mr-auto ltr:ml-auto'>
                 <LinkElement link="/profile">
                   
-                    <ButtonElement type={"button"} bgColor={"bg-white"} size={"sm"} textColor='text-primary' width='w-[11.25rem]' border='border-red-200'>
+                    <ButtonElement type={"button"} bgColor={"bg-white"} size={"sm"} textColor='text-primary' width='w-[11.25rem]' border='border-red-200' hover='hover:bg-primary hover:border-white hover:text-white
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    '>
                       {t("profile")}
                     </ButtonElement>
                   

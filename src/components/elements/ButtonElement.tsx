@@ -15,15 +15,16 @@ interface ButtonElementType {
   fontSize?: string,
   width?: string,
   border?: string,
-  customStyle?: string
+  customStyle?: string,
+  hover?: string
 }
 
 
 
 
-const ButtonElement = ({ type = "button", size = "sm", bgColor = "btn-primary", outlined = false, children, borderRadius = "rounded-full", animation = true, textColor = "text-white", fontSize = "text-md", width = "w-full", border, customStyle }: ButtonElementType) => {
+const ButtonElement = ({ type = "button", size = "sm", bgColor = "btn-primary", outlined = false, children, borderRadius = "rounded-full", animation = true, textColor = "text-white", fontSize = "text-md", width = "w-full", border, customStyle, hover }: ButtonElementType) => {
   return (
-    <button type={type} className={cn(`px-4 `,
+    <button type={type} className={cn(`px-4 transition-all duration-300`,
       bgColor,
       width,
       borderRadius,
@@ -31,13 +32,14 @@ const ButtonElement = ({ type = "button", size = "sm", bgColor = "btn-primary", 
       fontSize,
       border,
       customStyle,
+      hover,
       {
         "btn-outline": outlined,
         "no-animation": !animation,
         "min-h-[2.5rem]": size === "sm",
         "min-h-[3rem]": size === "md",
         "min-h-[4rem]": size === "lg",
-        "border": border
+        "border": border,
       })}>
       {children}
     </button>
