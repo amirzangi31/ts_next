@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 
+
+body {
+  @apply min-h-screen ;
+}
+
+
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -31,3 +38,19 @@ html {
     font-size: 16px;
   }
 }
+
+
+/*--------------------CONTAINER--------------------*/
+.container {
+  @apply max-w-[84rem] px-5 min-[1364px]:px-0;
+}
+
+/*--------------------CONTAINER--------------------*/
+
+
+/*--------------------BTNS_STYLES--------------------*/
+.btn-lg {
+  @apply min-h-[2rem] max-h-[3rem];
+}
+
+/*--------------------BTNS_STYLES--------------------*/
