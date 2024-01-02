@@ -1,6 +1,7 @@
 import React from 'react'
 import TitlePagesMobile from '../modules/titles/TitlePagesMobile'
 import { useTranslations } from 'next-intl'
+import BottomNavigation from '../modules/menu/BottomNavigation';
 
 const HomePage = () => {
 
@@ -12,6 +13,7 @@ const HomePage = () => {
     return (
         <>
             <TitlePagesMobile title={t("home")} />
+            <BottomNavigation route='home' />
         </>
     )
 }
