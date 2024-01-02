@@ -32,6 +32,7 @@
       "@hooks/*": ["./src/hooks/*"],
       "@services/*": ["./src/services/*"],
       "@utils/*": ["./src/utils/*"],
+      "@types/*": ["./src/types/*"],
       "@helper/*": ["./src/helper/*"],
       "@data/*": ["./src/data/*"],
       "@messages/*": ["./src/messages/*"],

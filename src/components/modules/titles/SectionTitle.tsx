@@ -36,7 +36,7 @@ const SectionTitle = ({
 }: SectionTitleType) => {
 
     return (
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center pb-4">
             <h3
                 className={cn(`text-lg font-bold `, {
                     "rtl:mr-[20px] ltr:ml-[20px] relative after:absolute after:rtl:-right-[20px] after:rounded-lg after:top-0 after:block after:bg-primary after:w-1.5 after:h-full":

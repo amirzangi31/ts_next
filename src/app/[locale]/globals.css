@@ -58,3 +58,11 @@ html {
 }
 
 /*--------------------BTNS_STYLES--------------------*/
+
+
+/*----------Start : Swiper Free Mode-----------*/
+.swiper_width_auto {
+  @apply w-auto !important;
+}
+
+/*----------End : Swiper Free Mode-----------*/
