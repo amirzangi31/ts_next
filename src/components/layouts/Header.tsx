@@ -13,8 +13,8 @@ const Header = () => {
   const pathName = usePathname()
 
   return (
-    <header className='hidden  bg-primary min-h-[5rem] md:flex  justify-center items-center'>
-      <div className="container py-2 ">
+    <header className='  bg-primary min-h-[5rem] md:flex  justify-center items-center'>
+      <div className="container py-2 hidden">
         <div className='flex items-center w-full '>
 
           {/* Logo */}
