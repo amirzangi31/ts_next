@@ -24,10 +24,11 @@ const Header = () => {
               <li>
                 <LinkElement link="/">
 
-                  <ButtonElement type={"button"} bgColor={cn(``, {
-                    "bg-primary": pathName !== '/' && pathName !== "/en",
-                    "bg-secondary": pathName === '/' || pathName === "/en"
-                  })} size={"sm"} >
+                  <ButtonElement type={"button"}
+                    typeButton={pathName !== '/' && pathName !== "/en" ? "primary" : pathName === '/' || pathName === "/en" ? "gray" : undefined}
+
+
+                    size={"sm"} >
                     {t("home")}
                   </ButtonElement>
 
@@ -53,8 +54,8 @@ const Header = () => {
               </li>
               <li className='rtl:mr-auto ltr:ml-auto'>
                 <LinkElement link="/profile">
-                  
-                    <ButtonElement type={"button"} bgColor={"bg-white"} size={"sm"} textColor='text-primary' width='w-[11.25rem]' border='border-red-200' hover='hover:bg-primary hover:border-white hover:text-white
+
+                  <ButtonElement type={"button"} bgColor={"bg-white"} size={"sm"} textColor='text-primary' width='w-[11.25rem]' border='border-red-200' hover='hover:bg-primary hover:border-white hover:text-white
                     
                     
                     
@@ -69,9 +70,9 @@ const Header = () => {
                     
                     
                     '>
-                      {t("profile")}
-                    </ButtonElement>
-                  
+                    {t("profile")}
+                  </ButtonElement>
+
                 </LinkElement>
               </li>
             </ul>
