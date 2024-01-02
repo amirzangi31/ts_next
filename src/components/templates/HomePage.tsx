@@ -61,6 +61,15 @@ const HomePage = () => {
                 />
                 <SwiperContainerFreeMode gap={10} data={categories} CardComponent={CategoryPrimaryCard} />
             </section >
+            <section>
+                <SectionTitle
+                    title={g("most-visited-specializations")}
+                    textLink={g("View-more")}
+                    link='/search'
+                    btn={true}
+                />
+                <SwiperContainerFreeMode gap={10} data={categories} CardComponent={CategoryPrimaryCard} />
+            </section >
             <BottomNavigation route='home' />
         </>
     )
