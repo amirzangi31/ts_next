@@ -3,9 +3,7 @@ import { useTranslations } from "next-intl";
 
 import cn from "@utils/clsxFun";
 
-
 import LinkElement from "@/components/elements/LinkElement";
-
 
 // import useAuth from "@/hooks/useAuth";
 
@@ -20,6 +18,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
 
     return (
         <div className="fixed bottom-0 left-0 w-full h-[78px] bg-white flex justify-between items-center flex-row-reverse md:hidden px-8 z-[10] shadow-shadow_bottom_nav">
+
             {/* Blog button */}
             <LinkElement
                 link={`/blog`}
@@ -68,7 +67,6 @@ const BottomNavigation = ({ route }: { route: string }) => {
                     <MagnifierIcon active={route === "search" ? true : false} />
                 </span>
             </LinkElement>
-
             {/* if authorization === true profile button else login button */}
             {false ? (
                 <LinkElement
@@ -105,7 +103,6 @@ const BottomNavigation = ({ route }: { route: string }) => {
                     </span>
                 </LinkElement>
             )}
-
         </div>
     );
 };
