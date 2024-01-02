@@ -22,6 +22,15 @@ export const metadata = {
     copyright: "طراحان سیستم پنام",
     "revisit-after": "3 Days",
   },
+  keywords: ["نوبت دهی آنلاین", " مدیریت مالی مطب", "مدیریت مطب آنلاین پزشک", " مدیریت کلینک، ثبت درمان"],
+  icons: {
+    icon: '/favIcon.png', // /public path
+    ohter: {
+      'og:site_name': 'سامانه مدیریت پزشکی آرناپ',
+    }
+  },
+
+
 }
 
 export default async function RootLayout({

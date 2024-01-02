@@ -21,6 +21,7 @@ const HomePage = () => {
                     link='/search'
                     btn={true}
                 />
+                
             </section>
             <BottomNavigation route='home' />
         </>
