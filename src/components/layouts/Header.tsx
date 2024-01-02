@@ -26,9 +26,10 @@ const Header = () => {
 
                   <ButtonElement type={"button"}
                     typeButton={pathName !== '/' && pathName !== "/en" ? "primary" : pathName === '/' || pathName === "/en" ? "gray" : undefined}
-
-
-                    size={"sm"} >
+                    size={"sm"}
+                    variant='contained'
+                    width='w-[7rem]'
+                  >
                     {t("home")}
                   </ButtonElement>
 
@@ -36,43 +37,38 @@ const Header = () => {
               </li>
               <li>
                 <LinkElement link="/blog">
-
-                  <ButtonElement type={"button"} bgColor={cn(``, { "bg-primary": !pathName.startsWith("/blog") && !pathName.startsWith("/en/blog"), "bg-primary-light": pathName.startsWith("/blog") || pathName.startsWith("/en/blog") })} size={"sm"} >
+                  <ButtonElement type={"button"}
+                    typeButton={pathName !== '/blog' && pathName !== "/en/blog" ? "primary" : pathName === '/blog' || pathName === "/en/blog" ? "gray" : undefined}
+                    size={"sm"}
+                    variant='contained'
+                    width='w-[7rem]'
+                  >
                     {t("blog")}
                   </ButtonElement>
-
                 </LinkElement>
               </li>
               <li>
                 <LinkElement link="/search">
-
-                  <ButtonElement type={"button"} bgColor={cn(``, { "bg-primary": !pathName.startsWith("/search") && !pathName.startsWith("/en/search"), "bg-primary-light": pathName.startsWith("/search") || pathName.startsWith("/en/search") })} size={"sm"} >
+                  <ButtonElement type={"button"}
+                    typeButton={pathName !== '/search' && pathName !== "/en/search" ? "primary" : pathName === '/search' || pathName === "/en/search" ? "gray" : undefined}
+                    size={"sm"}
+                    variant='contained'
+                    width='w-[7rem]'
+                  >
                     {t("search")}
                   </ButtonElement>
-
                 </LinkElement>
               </li>
               <li className='rtl:mr-auto ltr:ml-auto'>
                 <LinkElement link="/profile">
-
-                  <ButtonElement type={"button"} bgColor={"bg-white"} size={"sm"} textColor='text-primary' width='w-[11.25rem]' border='border-red-200' hover='hover:bg-primary hover:border-white hover:text-white
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    '>
+                  <ButtonElement type={"button"}
+                    typeButton={"secondary"}
+                    size={"sm"}
+                    variant='contained'
+                    width='w-[7rem]'
+                  >
                     {t("profile")}
                   </ButtonElement>
-
                 </LinkElement>
               </li>
             </ul>

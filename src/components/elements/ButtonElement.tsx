@@ -6,7 +6,7 @@ interface ButtonElementType {
   type?: "submit" | "button" | "reset" | undefined;
   size?: "sm" | "md" | "lg";
   variant?: "text" | "outlined" | "contained";
-  typeButton: "primary" | "secondary"
+  typeButton: "primary" | "secondary" | "gray" | undefined
   disabled?: boolean;
   handler?: () => {};
   fontSize?: "sm" | "md" | "lg";
@@ -19,7 +19,8 @@ interface ButtonElementType {
 }
 
 
-const ButtonElement = ({ customStyle, handler, hover, size, variant, type = "button", animation, width = "w-full", children, fontSize = "md", fontWeight = "normal", typeButton }: ButtonElementType) => {
+const ButtonElement = ({ customStyle, handler, hover, size, variant="contained", type = "button", animation, width = "w-full", children, fontSize = "md", fontWeight = "normal", typeButton }: ButtonElementType) => {
+  console.log(typeButton)
   return (
     <button type={type} onClick={handler} className={cn(`px-4 transition-all duration-300`,
       customStyle,
@@ -37,9 +38,11 @@ const ButtonElement = ({ customStyle, handler, hover, size, variant, type = "but
         "font-bold": fontWeight === "bold",
         "font-[900]": fontWeight === "fat",
         "bg-primary text-white rounded-full hover:bg-white hover:text-primary": typeButton === "primary" && variant === "contained",
+        "bg-primary-light text-white rounded-full hover:bg-white hover:text-primary": typeButton === "gray" && variant === "contained",
         "bg-white text-primary rounded-full hover:bg-primary hover:text-white": typeButton === "secondary" && variant === "contained",
-        "bg-transparent border border-primary rounded-full": typeButton === "secondary" && variant === "outlined",
-        "bg-transparent border border-white rounded-full": typeButton === "secondary" && variant === "outlined",
+        "bg-transparent border border-primary rounded-full hover:bg-primary hover:text-white": typeButton === "secondary" && variant === "outlined",
+        "bg-transparent border border-white rounded-full hover:bg-white hover:text-primary": typeButton === "secondary" && variant === "outlined",
+        "bg-transparent border border-primary-light rounded-full hover:bg-primary-light hover:text-white": typeButton === "gray" && variant === "outlined",
       })}>
       {children}
     </button >
