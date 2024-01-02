@@ -1,24 +1,27 @@
 "use client"
+import Image from 'next/image'
 
 import { usePathname } from 'next/navigation'
-import LinkElement from '../elements/LinkElement'
-import Image from 'next/image'
-import ButtonElement from '../elements/ButtonElement'
-import cn from '@/utils/clsxFun'
 import { useTranslations } from 'next-intl'
+
+import LinkElement from '@elements/LinkElement'
+import ButtonElement from '@elements/ButtonElement'
+
 
 const Header = () => {
   const t = useTranslations("header")
-
   const pathName = usePathname()
 
   return (
     <header className='hidden  bg-primary min-h-[5rem] md:flex  justify-center items-center'>
       <div className="container py-2 ">
         <div className='flex items-center w-full '>
+
+          {/* Logo */}
           <LinkElement link='/' prefetch={true} >
             <Image src={"/Logo.png"} width={1000} height={1000} alt='Logo website' className='w-[1.875rem]' />
           </LinkElement>
+          {/* Navbar */}
           <nav className='rtl:mr-4 ltr:ml-4 flex-1 ' >
             <ul className='flex justify-start items-center gap-3 text-white  w-full'>
               <li>
@@ -73,6 +76,7 @@ const Header = () => {
               </li>
             </ul>
           </nav>
+
         </div>
       </div>
     </header>

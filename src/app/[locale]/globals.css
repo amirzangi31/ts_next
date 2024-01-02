@@ -5,9 +5,13 @@
 
 
 body {
-  @apply min-h-screen ;
+  @apply min-h-screen bg-bg_content;
 }
 
+input,
+textarea {
+  @apply bg-transparent outline-none border-none;
+}
 
 
 /* Chrome, Safari, Edge, Opera */

@@ -6,7 +6,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
     return (
         <>
             <Header />
-            <main className='container py-4'>
+            <main className='container py-4 min-h-[calc(100vh-26.5375rem)]'>
                 {children}
             </main>
             <Footer />
