@@ -20,7 +20,6 @@ interface ButtonElementType {
 
 
 const ButtonElement = ({ customStyle, handler, hover, size, variant="contained", type = "button", animation, width = "w-full", children, fontSize = "md", fontWeight = "normal", typeButton }: ButtonElementType) => {
-  console.log(typeButton)
   return (
     <button type={type} onClick={handler} className={cn(`px-4 transition-all duration-300`,
       customStyle,
