@@ -70,7 +70,7 @@ const PhysicainCardPrimary = ({
                 </div>
                 <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-center gap-1 items-start flex-col min-h-[60px]">
                     <p className="text-lg font-bold ">{firstName} {lastName}</p>
-                    <p className="text-md short-text-2">{physicianSpecialities[0]?.specialityTitle}</p>
+                    {physicianSpecialities?.length ? <p className="text-md short-text-2">{physicianSpecialities[0]?.specialityTitle}</p> : null}
                 </div>
             </div>
             <div className="px-4 w-full">

@@ -11,6 +11,11 @@ import SwiperContainerFreeMode from '@modules/swiper/SwiperContianerFreeMode';
 import CategoryPrimaryCard from '@modules/cards/CategoryPrimaryCard';
 import { PhysicainCardPrimaryType } from '@/types/cards';
 import PhysicainCardPrimary from '@modules/cards/Physicain/PhysicianCardPrimary';
+import articleData from '@/data/articleData';
+import ArticleCardPrimary from '../modules/cards/Articles/ArticleCardPrimary';
+
+
+
 
 interface HomePagePropType {
     physicians: PhysicainCardPrimaryType[]
@@ -56,6 +61,9 @@ const HomePage = (props: HomePagePropType) => {
         },
     ]
 
+  const articles = [...articleData]
+
+
     return (
         <>
             <TitlePagesMobile title={t("home")} />
@@ -70,7 +78,7 @@ const HomePage = (props: HomePagePropType) => {
                 <SwiperContainerFreeMode gap={10} data={categories} CardComponent={CategoryPrimaryCard} />
             </section >
             {/* Best Physicians */}
-            <section className='mt-6'>
+            {/* <section className='mt-6'>
                 <SectionTitle
                     title={g("most-visited-specializations")}
                     textLink={g("View-more")}
@@ -78,12 +86,27 @@ const HomePage = (props: HomePagePropType) => {
                     btn={true}
                 />
                 <SwiperContainerFreeMode gap={10} data={physicians} CardComponent={PhysicainCardPrimary} />
-            </section >
-            {/* Best Articles  */}
+            </section > */}
+            {/* Newest Articles  */}
             <section className="mt-6">
-                
+                <SectionTitle
+                    title={g("latest-articles")}
+                    textLink={g("View-more")}
+                    link='/search'
+                    btn={true}
+                />
+                <SwiperContainerFreeMode gap={10} data={articles} CardComponent={ArticleCardPrimary} />
             </section>
-            {/* Best Comments  */}
+            {/* User Comments  */}
+            {/* <section className="mt-6">
+                <SectionTitle
+                    title={g("User-comments")}
+                    textLink={g("View-more")}
+                    link='/search'
+                    btn={true}
+                />
+                <SwiperContainerFreeMode gap={10} data={physicians} CardComponent={PhysicainCardPrimary} />
+            </section> */}
             <BottomNavigation route='home' />
         </>
     )

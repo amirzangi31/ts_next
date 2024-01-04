@@ -20,7 +20,6 @@ export interface PhysicainCardPrimaryType {
   rate: number;
   physicianSpecialities: PhysicianSpeciality[];
 }
-
 export interface PhysicianSpeciality {
   id: number;
   specialityTitle: string;
@@ -29,4 +28,14 @@ export interface PhysicianSpeciality {
   parentId: any;
   parent: any;
   citySpecialties: any;
+}
+export interface ArticleCardType {
+  id: string;
+  title: string;
+  description: string[];
+  image: string;
+  author: string;
+  date: string;
+
+  speciality: string;
 }
