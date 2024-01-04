@@ -24,27 +24,27 @@ import { PhysicainCardPrimaryType } from "@/types/cards";
 
 const PhysicainCardPrimary = ({
     id,
-    link,
-    name,
-    category,
-    freeMode,
-    consultationPlanItems,
-    city,
+    firstName,
+    lastName,
+    cityName,
+    hasImage,
+    physicianProfileUrl,
+    onlineAppointment,
+    textConsultation,
+    voiceConsultation,
+    immediateConsultation,
     rate,
-    image,
-}: PhysicainCardPrimaryType ) => {
-    const consultationPlanItemsObj = consultationPlanItems;
-    const imageURL = image ? getUrlImage(id) : "/noImage.jfif";
+    physicianSpecialities,
+}: PhysicainCardPrimaryType) => {
+
+    const imageURL = hasImage ? getUrlImage(id) : "/noImage.jfif";
 
     return (
         <LinkElement
-            link={`/${link}`}
+            link={`/Physician/${physicianProfileUrl}`}
             className={cn(
-                `bg-white rounded-sm shadow-shadow_category min-h-[230px]  flex justify-between items-start flex-col`,
-                {
-                    "w-[320px]": freeMode,
-                    "w-full": !freeMode,
-                }
+                `bg-white rounded-sm w-[320px] shadow-shadow_category min-h-[230px]  flex justify-between items-start flex-col`,
+
             )}
         >
             <div className="p-4  w-full flex justify-between items-start">
@@ -60,17 +60,17 @@ const PhysicainCardPrimary = ({
                         <span
                             className={cn(`w-[12px] h-[12px] rounded-full `,
                                 {
-                                    "bg-primary-100": consultationPlanItemsObj.immediateConsultation.active,
-                                    "bg-gray-400": !consultationPlanItemsObj.immediateConsultation.active,
+                                    "bg-primary-100": immediateConsultation,
+                                    "bg-gray-400": !immediateConsultation,
                                 }
                             )
                             }
                         ></span>
                     </span>
                 </div>
-                <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-between items-start flex-col min-h-[60px]">
-                    <p className="text-lg font-bold ">{name}</p>
-                    <p className="text-md short-text-2">{category}</p>
+                <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-center gap-1 items-start flex-col min-h-[60px]">
+                    <p className="text-lg font-bold ">{firstName} {lastName}</p>
+                    <p className="text-md short-text-2">{physicianSpecialities[0]?.specialityTitle}</p>
                 </div>
             </div>
             <div className="px-4 w-full">
@@ -78,26 +78,26 @@ const PhysicainCardPrimary = ({
             </div>
             <div className="px-4 w-full grid grid-cols-2 gap-1">
                 <TagPhysician
-                    title={consultationPlanItemsObj.onlineAppointment.title}
-                    disabled={consultationPlanItemsObj.onlineAppointment.active}
+                    title={"نوبت دهی حضوری"}
+                    disabled={onlineAppointment}
                 />
                 <TagPhysician
-                    title={consultationPlanItemsObj.textConsultation.title}
-                    disabled={consultationPlanItemsObj.textConsultation.active}
+                    title={"مشاوره متنی"}
+                    disabled={textConsultation}
                 />
                 <TagPhysician
-                    title={consultationPlanItemsObj.voiceConsultation.title}
-                    disabled={consultationPlanItemsObj.voiceConsultation.active}
+                    title={"مشاوره متنی"}
+                    disabled={voiceConsultation}
                 />
                 <TagPhysician
-                    title={consultationPlanItemsObj.immediateConsultation.title}
-                    disabled={consultationPlanItemsObj.immediateConsultation.active}
+                    title={"مشاوره تلفنی فوری"}
+                    disabled={immediateConsultation}
                 />
             </div>
             <div className="px-2 pb-2 w-full">
                 <div className="bg-gray-700 p-1 rounded-ss flex justify-between items-center min-h-[46px]">
                     <p className="px-5 relative border-l border-black border-dashed ">
-                        {city}
+                        {cityName}
                     </p>
 
                     <div className="flex px-5 justify-start items-center gap-1 ">

@@ -9,9 +9,16 @@ import SectionTitle from '../modules/titles/SectionTitle';
 import SwiperContainerFreeMode from '@modules/swiper/SwiperContianerFreeMode';
 
 import CategoryPrimaryCard from '@modules/cards/CategoryPrimaryCard';
+import { PhysicainCardPrimaryType } from '@/types/cards';
+import PhysicainCardPrimary from '@modules/cards/Physicain/PhysicianCardPrimary';
+
+interface HomePagePropType {
+    physicians: PhysicainCardPrimaryType[]
+}
 
 
-const HomePage = () => {
+const HomePage = (props: HomePagePropType) => {
+    const { physicians } = props
 
     const g = useTranslations("global");
     const t = useTranslations("Routes_name_m");
@@ -52,6 +59,7 @@ const HomePage = () => {
     return (
         <>
             <TitlePagesMobile title={t("home")} />
+            {/* Best Specialities  */}
             <section>
                 <SectionTitle
                     title={g("most-visited-specializations")}
@@ -61,15 +69,21 @@ const HomePage = () => {
                 />
                 <SwiperContainerFreeMode gap={10} data={categories} CardComponent={CategoryPrimaryCard} />
             </section >
-            <section>
+            {/* Best Physicians */}
+            <section className='mt-6'>
                 <SectionTitle
                     title={g("most-visited-specializations")}
                     textLink={g("View-more")}
                     link='/search'
                     btn={true}
                 />
-                <SwiperContainerFreeMode gap={10} data={categories} CardComponent={CategoryPrimaryCard} />
+                <SwiperContainerFreeMode gap={10} data={physicians} CardComponent={PhysicainCardPrimary} />
             </section >
+            {/* Best Articles  */}
+            <section className="mt-6">
+                
+            </section>
+            {/* Best Comments  */}
             <BottomNavigation route='home' />
         </>
     )

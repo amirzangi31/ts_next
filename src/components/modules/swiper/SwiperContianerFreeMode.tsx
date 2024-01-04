@@ -8,14 +8,14 @@ import { FreeMode, Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import { CategoryPrimaryType } from '@/types/cards';
+import { CategoryPrimaryType, PhysicainCardPrimaryType } from '@/types/cards';
 
 
 
 interface SwiperContainerFreeModeType {
     CardComponent: React.ComponentType<any>;
     gap?: number;
-    data: CategoryPrimaryType[]
+    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[]
 }
 
 

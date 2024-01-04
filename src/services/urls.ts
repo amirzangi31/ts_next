@@ -1,9 +1,8 @@
-import { apiDomainNobat } from "./getApiUrl";
 
 const urls = {
   physician: {
     bestPhysician: {
-      url: `${apiDomainNobat}/PublicServices/PhysicianProfile/TopRatedPhysicians`,
+      url: `/PublicServices/PhysicianProfile/TopRatedPhysicians`,
       method: "POST",
       parametrs: {
         pageNumber: "number",

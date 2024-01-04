@@ -1,5 +1,5 @@
-import axios from "axios";
 import urls from "../urls";
+import { apiDomainNobat } from "../getApiUrlServer";
 
 const getBestPhysician = async (
   provinceId: number,
@@ -14,8 +14,19 @@ const getBestPhysician = async (
     itemsCountPerPage,
   };
   try {
-    const res = await axios.post(urls.physician.bestPhysician.url, data);
-    return res.data;
+    const res = await fetch(
+      `${apiDomainNobat}${urls.physician.bestPhysician.url}`,
+      {
+        method: urls.physician.bestPhysician.method,
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      }
+    );
+    const result = await res.json();
+    return result.value.items;
   } catch (error) {
     console.log(error);
   }

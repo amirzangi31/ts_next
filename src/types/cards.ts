@@ -5,33 +5,28 @@ export interface CategoryPrimaryType {
   image: string;
 }
 
-
-
 export interface PhysicainCardPrimaryType {
   id: string;
-  link: string;
-  name: string;
-  category: string;
-  freeMode: boolean;
-  consultationPlanItems: {
-    onlineAppointment: {
-      title: string;
-      active: boolean;
-    };
-    textConsultation: {
-      title: string;
-      active: boolean;
-    };
-    voiceConsultation: {
-      title: string;
-      active: boolean;
-    };
-    immediateConsultation: {
-      title: string;
-      active: boolean;
-    };
-  };
-  city: string;
+  firstName: string;
+  lastName: string;
+  provinceName: string;
+  cityName: string;
+  hasImage: boolean;
+  physicianProfileUrl: string;
+  onlineAppointment: boolean;
+  textConsultation: boolean;
+  voiceConsultation: boolean;
+  immediateConsultation: boolean;
   rate: number;
-  image: string;
+  physicianSpecialities: PhysicianSpeciality[];
+}
+
+export interface PhysicianSpeciality {
+  id: number;
+  specialityTitle: string;
+  counter: number;
+  enName: any;
+  parentId: any;
+  parent: any;
+  citySpecialties: any;
 }
