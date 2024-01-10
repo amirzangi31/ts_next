@@ -43,8 +43,7 @@ const PhysicainCardPrimary = ({
         <LinkElement
             link={`/Physician/${physicianProfileUrl}`}
             className={cn(
-                `bg-white rounded-sm w-[320px] shadow-shadow_category min-h-[230px]  flex justify-between items-start flex-col`,
-
+                `bg-white rounded-sm group  transition-all duration-300 w-[320px] shadow-shadow_category min-h-[230px]  flex justify-between items-start flex-col`,
             )}
         >
             <div className="p-4  w-full flex justify-between items-start">
@@ -95,7 +94,7 @@ const PhysicainCardPrimary = ({
                 />
             </div>
             <div className="px-2 pb-2 w-full">
-                <div className="bg-gray-700 p-1 rounded-ss flex justify-between items-center min-h-[46px]">
+                <div className="bg-gray-700 group-hover:bg-gray-400 group-hover:text-white  transition-all duration-500 p-1 rounded-ss flex justify-between items-center min-h-[46px]">
                     <p className="px-5 relative border-l border-black border-dashed ">
                         {cityName}
                     </p>

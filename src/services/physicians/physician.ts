@@ -1,6 +1,7 @@
 import urls from "../urls";
 import { apiDomainNobat } from "../getApiUrlServer";
 
+
 const getBestPhysician = async (
   provinceId: number,
   cityId: number,
@@ -22,7 +23,7 @@ const getBestPhysician = async (
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "no-store",
+        next: { revalidate: 60 * 60 * 24 * 7 } //one week ,
       }
     );
     const result = await res.json();

@@ -39,3 +39,10 @@ export interface ArticleCardType {
 
   speciality: string;
 }
+
+export interface CommentCardPrimaryType {
+  id: string;
+  name: string;
+  physician: string;
+  comment: string;
+}

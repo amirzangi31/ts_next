@@ -13,7 +13,7 @@ const ArticleCardPrimary = (props: ArticleCardType) => {
         <LinkElement
             link={`/blog/${id}`}
             className={cn(
-                `p-2 h-[260px] w-[180px] flex justify-between items-start flex-col  bg-white rounded-sm`,
+                `p-2 h-[260px] group w-[180px] flex justify-between items-start flex-col  bg-white rounded-sm`,
                 {
 
                 }
@@ -24,6 +24,7 @@ const ArticleCardPrimary = (props: ArticleCardType) => {
                     src={`/${image}.jpg`}
                     width={500}
                     height={500}
+                    className='group-hover:scale-110 transition-all duration-500'
                     alt="article_pic"
                 />
             </div>

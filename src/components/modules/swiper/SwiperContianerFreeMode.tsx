@@ -8,19 +8,19 @@ import { FreeMode, Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import { ArticleCardType, CategoryPrimaryType, PhysicainCardPrimaryType } from '@/types/cards';
+import { ArticleCardType, CategoryPrimaryType, CommentCardPrimaryType, PhysicainCardPrimaryType } from '@/types/cards';
 
 
 
 interface SwiperContainerFreeModeType {
     CardComponent: React.ComponentType<any>;
     gap?: number;
-    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[] | ArticleCardType[]
+    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[] | ArticleCardType[] | CommentCardPrimaryType[]
 }
 
 
 const SwiperContainerFreeMode = ({ data, gap, CardComponent }: SwiperContainerFreeModeType) => {
-   
+
     return (
         <Swiper
             spaceBetween={gap}
