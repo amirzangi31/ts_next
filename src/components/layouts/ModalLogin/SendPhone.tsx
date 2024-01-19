@@ -1,8 +1,90 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
+import { SetpLoginType } from './ModalLogin'
 
-const SendPhone = () => {
+import {
+  Formik,
+  Form,
+  Field,
+  FormikProps,
+} from 'formik';
+import FormControl from '@elements/inputs/FormControl';
+import useCaptcha from '@/hooks/useCaptcha';
+import Image from 'next/image';
+import Loader from '@/components/elements/Loader';
+import ButtonElement from '@/components/elements/ButtonElement';
+import { sendPhoneSchema } from '@utils/validations';
+import useLogin from '@/hooks/useLogin';
+
+interface InitialValuesType {
+  phoneNumber: string;
+  captcha: string;
+}
+
+const SendPhone = ({ changeStep }: SetpLoginType) => {
+  const [loadingBtn, setLoadingBtn] = useState(false)
+  const { loading, captcha, resetCaptcha, key } = useCaptcha()
+  const { sendPhoneHandler } = useLogin()
+  
+
+
+
+  const initialValues: InitialValuesType = {
+    phoneNumber: "",
+    captcha: "",
+  }
+
+
+
+
   return (
-    <div>SendPhone</div>
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={sendPhoneSchema}
+        onSubmit={async (values, actions) => {
+          setLoadingBtn(true)
+          const result = await sendPhoneHandler(values.phoneNumber.toString(), values.captcha.toString(), key)
+          if (result.resultCode === 200) {
+            changeStep(2)
+            actions.resetForm()
+          }
+          setLoadingBtn(false)
+        }
+        }
+      >
+        {(props: FormikProps<any>) => (
+          <Form>
+            <Field name="phoneNumber" type="tel" placeholder="شماره همراه خود را وارد کنید" title="شماره همراه" component={FormControl} />
+            <div className='grid grid-cols-2 gap-2 mt-4'>
+              <Field name="captcha" type="number" placeholder="کد امنیتی" component={FormControl} />
+              <div className="border border-gray rounded-[30px] overflow-hidden flex justify-center items-center">
+                {loading ? (
+                  <Loader
+                    size="size-[2.35rem]"
+                    color="border-primary"
+                  />
+                ) : (
+                  <Image
+                    width={500}
+                    height={500}
+                    src={`data:image/jpeg;base64,${captcha}`}
+                    alt="captcha"
+                    className="h-[2.35rem] w-full cursor-pointer"
+                    onClick={resetCaptcha}
+                  />
+                )}
+              </div>
+            </div>
+            <div className='mt-4'>
+              <ButtonElement type='submit' typeButton='primary' size='sm' loading={loadingBtn} >
+                ارسال
+              </ButtonElement>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </>
   )
 }
 

@@ -16,6 +16,8 @@ import PhysicainCardPrimary from '@modules/cards/Physicain/PhysicianCardPrimary'
 import BottomNavigation from '@modules/menu/BottomNavigation';
 import SectionTitle from '@modules/titles/SectionTitle';
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
+import useModalLogin from '@/hooks/useModalLogin';
+import ModalLogin from '../layouts/ModalLogin/ModalLogin';
 
 
 
@@ -31,7 +33,7 @@ const HomePage = (props: HomePagePropType) => {
     const g = useTranslations("global");
     const t = useTranslations("Routes_name_m");
 
-    
+
 
     // Static Data
     const categories = [
@@ -68,6 +70,11 @@ const HomePage = (props: HomePagePropType) => {
     ]
     const articles = [...articleData]
     const comments = [...commentsList]
+
+    const { openModalLogin } = useModalLogin()
+
+
+
 
 
     return (
@@ -113,6 +120,11 @@ const HomePage = (props: HomePagePropType) => {
                 />
                 <SwiperContainerFreeMode gap={10} data={comments} CardComponent={CommentCardPrimary} />
             </section>
+
+
+            <button type='button' className='text-xl font-bold' onClick={openModalLogin}>showModal login</button>
+
+            <ModalLogin /> 
             <BottomNavigation route='home' />
         </>
     )

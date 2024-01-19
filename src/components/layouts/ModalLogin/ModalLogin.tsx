@@ -1,9 +1,49 @@
-import React from 'react'
+"use client"
+
+import BottomSheetAndCenterContent from '@/components/modules/modals/BottomSheetAndCenterContent'
+import useModalLogin from '@hooks/useModalLogin'
+import Modal from '@modules/modals/Modal'
+import React, { useState } from 'react'
+import SendPhone from './SendPhone'
+import CloseButton from '@/components/elements/CloseButton'
+
+export type SetpLoginType = {
+    closeModal?: () => void,
+    changeStep: (nextStep: number) => void,
+
+}
+
+
 
 const ModalLogin = () => {
-  return (
-    <div>ModalLogin</div>
-  )
+    const [stepLogin, setStepLogin] = useState(1)
+    const { isShow, closeModalLogin } = useModalLogin()
+    
+    const changeStepHandler = (nextStep: number) => {
+        setStepLogin(nextStep)
+    }
+
+
+    return (
+        <Modal show={isShow} closeHandler={closeModalLogin}>
+            <BottomSheetAndCenterContent show={isShow}>
+                <div className='grid grid-cols-3'>
+                    <span ></span>
+                    <p className='flex justify-center items-center font-bold'>
+                        ورود / ثبت نام
+                    </p>
+                    <div className='flex justify-end items-center'>
+                        <CloseButton closeHanlder={closeModalLogin} />
+                    </div>
+                </div>
+                <div className='mt-4'>
+                    {
+                        stepLogin === 1 ? <SendPhone changeStep={changeStepHandler} /> : null
+                    }
+                </div>
+            </BottomSheetAndCenterContent>
+        </Modal>
+    )
 }
 
 export default ModalLogin

@@ -40,7 +40,7 @@
       "@providers/*": ["./src/providers/*"],
       "@context/*": ["./src/context/*"],
       "@config/*": ["./src/config/*"],
-      "@redux/*": ["./src/redux/*"]
+      "@store/*": ["./src/store/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -5,7 +5,7 @@ interface ModalLoginType {
 }
 
 const initialState: ModalLoginType = {
-  show: false,
+  show: true,
 };
 
 const ModalLoginSlice = createSlice({

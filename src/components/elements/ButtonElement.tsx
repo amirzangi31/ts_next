@@ -1,5 +1,6 @@
 import cn from '@/utils/clsxFun';
 import { ReactNode } from 'react'
+import Loader from './Loader';
 
 
 interface ButtonElementType {
@@ -12,16 +13,17 @@ interface ButtonElementType {
   fontSize?: "sm" | "md" | "lg";
   fontWeight?: "normal" | "bold" | "fat";
   width?: string;
-  children: ReactNode;
+  children?: ReactNode;
   hover?: string;
   animation?: string;
-  customStyle?: string
+  customStyle?: string,
+  loading?: boolean
 }
 
 
-const ButtonElement = ({ customStyle, handler, hover, size, variant="contained", type = "button", animation, width = "w-full", children, fontSize = "md", fontWeight = "normal", typeButton }: ButtonElementType) => {
+const ButtonElement = ({ loading = false, customStyle, handler, hover, size, variant = "contained", type = "button", animation, width = "w-full", children, fontSize = "md", fontWeight = "normal", typeButton }: ButtonElementType) => {
   return (
-    <button type={type} onClick={handler} className={cn(`px-4 transition-all duration-300`,
+    <button type={type} disabled={loading} onClick={handler} className={cn(`px-4 transition-all duration-300 flex justify-center items-center gap-2`,
       customStyle,
       hover,
       width,
@@ -43,7 +45,7 @@ const ButtonElement = ({ customStyle, handler, hover, size, variant="contained",
         "bg-transparent border border-white rounded-full hover:bg-white hover:text-primary": typeButton === "secondary" && variant === "outlined",
         "bg-transparent border border-primary-light rounded-full hover:bg-primary-light hover:text-white": typeButton === "gray" && variant === "outlined",
       })}>
-      {children}
+      {loading ? <Loader size='size-[2.25rem]' color={typeButton === "primary" ? "border-white" : "border-primary"} /> : children}
     </button >
   )
 }
