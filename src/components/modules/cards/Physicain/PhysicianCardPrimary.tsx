@@ -43,7 +43,7 @@ const PhysicainCardPrimary = ({
         <LinkElement
             link={`/Physician/${physicianProfileUrl}`}
             className={cn(
-                `bg-white rounded-sm group  transition-all duration-300 w-[320px] shadow-shadow_category min-h-[230px]  flex justify-between items-start flex-col`,
+                `bg-white rounded-sm group   transition-all duration-300 w-[320px] shadow-shadow_category min-h-[230px]  flex justify-between items-start flex-col`,
             )}
         >
             <div className="p-4  w-full flex justify-between items-start">

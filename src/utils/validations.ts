@@ -1,5 +1,8 @@
 import * as Yup from "yup";
-import { phoneNumberValidator } from "@persian-tools/persian-tools";
+import {
+  phoneNumberValidator,
+  verifyIranianNationalId,
+} from "@persian-tools/persian-tools";
 
 const sendPhoneSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -11,5 +14,12 @@ const sendPhoneSchema = Yup.object().shape({
     ),
   captcha: Yup.string().required("کد امنیتی الزامی میباشد"),
 });
+const signUpSchema = Yup.object().shape({
+  firstName: Yup.string().required(" نام الزامی میباشد"),
+  lastName: Yup.string().required(" نام خانوادگی الزامی میباشد"),
+  // nationalNumber: Yup.string()
+  //   .required(" کدملی  الزامی میباشد")
+   
+});
 
-export { sendPhoneSchema };
+export { sendPhoneSchema, signUpSchema };

@@ -10,7 +10,7 @@ body {
 
 input,
 textarea {
-  @apply bg-transparent outline-none border-none;
+  @apply bg-transparent outline-none ;
 }
 
 

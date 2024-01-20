@@ -9,7 +9,7 @@ import {
   FormikProps,
 } from 'formik';
 import FormControl from '@elements/inputs/FormControl';
-import useCaptcha from '@/hooks/useCaptcha';
+
 import Image from 'next/image';
 import Loader from '@/components/elements/Loader';
 import ButtonElement from '@/components/elements/ButtonElement';
@@ -22,10 +22,10 @@ interface InitialValuesType {
 }
 
 const SendPhone = ({ changeStep }: SetpLoginType) => {
-  const [loadingBtn, setLoadingBtn] = useState(false)
-  const { loading, captcha, resetCaptcha, key } = useCaptcha()
-  const { sendPhoneHandler } = useLogin()
   
+  
+  const { sendPhoneHandler, loading, captcha, resetCaptcha, key , loadingButton } = useLogin()
+
 
 
 
@@ -43,13 +43,14 @@ const SendPhone = ({ changeStep }: SetpLoginType) => {
         initialValues={initialValues}
         validationSchema={sendPhoneSchema}
         onSubmit={async (values, actions) => {
-          setLoadingBtn(true)
+
           const result = await sendPhoneHandler(values.phoneNumber.toString(), values.captcha.toString(), key)
+          actions.resetForm()
+
           if (result.resultCode === 200) {
             changeStep(2)
             actions.resetForm()
           }
-          setLoadingBtn(false)
         }
         }
       >
@@ -77,7 +78,7 @@ const SendPhone = ({ changeStep }: SetpLoginType) => {
               </div>
             </div>
             <div className='mt-4'>
-              <ButtonElement type='submit' typeButton='primary' size='sm' loading={loadingBtn} >
+              <ButtonElement type='submit' typeButton='primary' size='sm' loading={loadingButton} >
                 ارسال
               </ButtonElement>
             </div>

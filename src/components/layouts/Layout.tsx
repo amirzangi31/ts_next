@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import StoreProvider from '@/providers/StoreProvider'
+import { Toaster } from 'react-hot-toast'
 
 
 
@@ -20,6 +21,15 @@ const Layout = ({ children }: { children: ReactNode }) => {
                     {children}
                 </main>
                 <Footer />
+                <Toaster
+                    position="bottom-center"
+                    reverseOrder={false}
+                    toastOptions={
+                        {
+                            duration: 3000
+                        }
+                    }
+                />
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </StoreProvider>

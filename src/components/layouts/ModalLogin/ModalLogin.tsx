@@ -1,14 +1,15 @@
 "use client"
-
 import BottomSheetAndCenterContent from '@/components/modules/modals/BottomSheetAndCenterContent'
 import useModalLogin from '@hooks/useModalLogin'
 import Modal from '@modules/modals/Modal'
 import React, { useState } from 'react'
 import SendPhone from './SendPhone'
 import CloseButton from '@/components/elements/CloseButton'
+import VerifyCodeOpt from './VerifyCodeOpt'
+import Signup from './Signup'
 
 export type SetpLoginType = {
-    closeModal?: () => void,
+    
     changeStep: (nextStep: number) => void,
 
 }
@@ -18,7 +19,7 @@ export type SetpLoginType = {
 const ModalLogin = () => {
     const [stepLogin, setStepLogin] = useState(1)
     const { isShow, closeModalLogin } = useModalLogin()
-    
+
     const changeStepHandler = (nextStep: number) => {
         setStepLogin(nextStep)
     }
@@ -39,6 +40,12 @@ const ModalLogin = () => {
                 <div className='mt-4'>
                     {
                         stepLogin === 1 ? <SendPhone changeStep={changeStepHandler} /> : null
+                    }
+                    {
+                        stepLogin === 2 ? <VerifyCodeOpt changeStep={changeStepHandler} /> : null
+                    }
+                    {
+                        stepLogin === 3 ? <Signup changeStep={changeStepHandler} /> : null
                     }
                 </div>
             </BottomSheetAndCenterContent>
