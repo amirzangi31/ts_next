@@ -17,9 +17,7 @@ const sendPhoneSchema = Yup.object().shape({
 const signUpSchema = Yup.object().shape({
   firstName: Yup.string().required(" نام الزامی میباشد"),
   lastName: Yup.string().required(" نام خانوادگی الزامی میباشد"),
-  // nationalNumber: Yup.string()
-  //   .required(" کدملی  الزامی میباشد")
-   
+  notionalNumber: Yup.string().required(" کدملی  الزامی میباشد").test("validation_nationalCode" , "کدملی معتبر وارد کنید" , (value) => verifyIranianNationalId(value))
 });
 
 export { sendPhoneSchema, signUpSchema };
