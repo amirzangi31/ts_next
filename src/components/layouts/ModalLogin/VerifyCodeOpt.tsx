@@ -14,6 +14,11 @@ const VerifyCodeOpt = ({ changeStep, callbacks, isCallback, callbacksIndex = 0 }
   const verficationOtp = async (otp: number, verifycation: string) => {
 
     const result = await sendOtpHandler(otp, verifycation)
+
+    if (result.resultCode === 200) {
+      changeStep(1)
+      setOtp("")
+    }
     if (result.resultCode === 200 && isCallback) {
       callbacks?.[callbacksIndex]()
     }

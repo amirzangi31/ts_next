@@ -8,6 +8,7 @@ import { savePhoneVerificationCodeId, saveSessionId, saveTokens } from '@/store/
 import { getCaptcha } from '@/services/captcha/captcha';
 import { useEffect, useState } from 'react';
 import useModalLogin from './useModalLogin';
+import useUserInfo from './useUserInfo';
 
 
 const useLogin = (isCallback: boolean = false, indexCallback: number = 0, callbacks: Function[] = []) => {
@@ -18,7 +19,7 @@ const useLogin = (isCallback: boolean = false, indexCallback: number = 0, callba
     const [loading, setLoading] = useState(true)
     const [loadingButton, setLoadingButton] = useState(false)
     const { closeModalLogin, isShow } = useModalLogin()
-
+    const { getUser } = useUserInfo()
 
     const getCaptchaApi = async () => {
         setLoading(true)
@@ -86,12 +87,13 @@ const useLogin = (isCallback: boolean = false, indexCallback: number = 0, callba
                 obj
             );
             const data = res.data;
-            console.log(data)
             if (data.resultCode === 200) {
                 localStorage.setItem("accessToken", data.value.accessToken)
                 localStorage.setItem("refreshToken", data.value.refreshToken)
                 dispatch(saveTokens({ accessToken: data.value.accessToken, refreshToken: data.value.refreshToken }))
                 closeModalLogin()
+                getUser()
+
                 if (isCallback) {
                     callbacks[indexCallback]()
                 }
@@ -116,8 +118,8 @@ const useLogin = (isCallback: boolean = false, indexCallback: number = 0, callba
     ) => {
         const obj = {
             nationalNumber,
-            gender : "U",
-            cityId : 98,
+            gender: "U",
+            cityId: 98,
             firstName,
             lastName,
             sessionId,
@@ -132,6 +134,8 @@ const useLogin = (isCallback: boolean = false, indexCallback: number = 0, callba
                 closeModalLogin()
                 localStorage.setItem("accessToken", data.value.accessToken)
                 localStorage.setItem("refreshToken", data.value.refreshToken)
+                getUser()
+
                 if (isCallback) {
                     callbacks[indexCallback]()
                 }

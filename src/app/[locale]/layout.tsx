@@ -6,6 +6,7 @@ import iranSans from '@utils/localFonts'
 import { isRtlLang } from 'rtl-detect'
 import Layout from '@layouts/Layout'
 import { NextIntlClientProvider } from 'next-intl'
+import StoreProvider from '@/providers/StoreProvider'
 
 
 export const metadata = {
@@ -58,9 +59,11 @@ export default async function RootLayout({
     <html lang={locale} dir={isRtl ? "rtl" : "ltr"} >
       <body className={iranSans.className} data-theme="Arenap_theme">
         <NextIntlClientProvider locale={local} messages={messages}>
-          <Layout>
-            {children}
-          </Layout>
+          <StoreProvider>
+            <Layout>
+              {children}
+            </Layout>
+          </StoreProvider>
         </NextIntlClientProvider>
       </body>
     </html>

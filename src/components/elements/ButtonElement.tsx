@@ -9,7 +9,7 @@ interface ButtonElementType {
   variant?: "text" | "outlined" | "contained";
   typeButton: "primary" | "secondary" | "gray" | undefined
   disabled?: boolean;
-  handler?: () => {};
+  handler?: () => void;
   fontSize?: "sm" | "md" | "lg";
   fontWeight?: "normal" | "bold" | "fat";
   width?: string;

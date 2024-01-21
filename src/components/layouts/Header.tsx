@@ -6,9 +6,13 @@ import { useTranslations } from 'next-intl'
 
 import LinkElement from '@elements/LinkElement'
 import ButtonElement from '@elements/ButtonElement'
+import useUserInfo from '@/hooks/useUserInfo'
+import Loader from '../elements/Loader'
+import AcoountButtonHeader from '../elements/AccountButtonHeader'
 
 
 const Header = () => {
+  const { user, isLogin } = useUserInfo()
   const t = useTranslations("header")
   const pathName = usePathname()
 
@@ -63,16 +67,33 @@ const Header = () => {
                 </LinkElement>
               </li>
               <li className='rtl:mr-auto ltr:ml-auto'>
-                <LinkElement link="/profile">
-                  <ButtonElement type={"button"}
-                    typeButton={"secondary"}
-                    size={"sm"}
-                    variant='contained'
-                    width='w-[7rem]'
-                  >
-                    {t("profile")}
-                  </ButtonElement>
-                </LinkElement>
+                {
+                  isLogin === "isLoading" ?
+                    <ButtonElement typeButton='secondary' size='md' variant='contained' width='w-[10.625rem]'>
+                      <Loader size='size-[2.25rem]' color='border-primary' />
+                    </ButtonElement> : null
+                }
+                {
+                  isLogin === "authorization" ?
+                    <AcoountButtonHeader user={user} />
+                    : null
+                }
+                {
+                  isLogin === "unauthorization" ?
+                    <LinkElement link="/login">
+                      <ButtonElement type={"button"}
+                        typeButton={"secondary"}
+                        size={"md"}
+                        variant='contained'
+                        width='w-[10.625rem]'
+                      >
+                        {t("profile")}
+                      </ButtonElement>
+                    </LinkElement>
+                    : null
+                }
+            
+
               </li>
             </ul>
           </nav>
