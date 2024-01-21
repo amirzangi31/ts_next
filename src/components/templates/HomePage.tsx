@@ -71,10 +71,6 @@ const HomePage = (props: HomePagePropType) => {
     const articles = [...articleData]
     const comments = [...commentsList]
 
-    const { openModalLogin } = useModalLogin()
-
-
-
 
 
     return (
@@ -120,11 +116,6 @@ const HomePage = (props: HomePagePropType) => {
                 />
                 <SwiperContainerFreeMode gap={10} data={comments} CardComponent={CommentCardPrimary} />
             </section>
-
-
-            <button type='button' className='text-xl font-bold' onClick={openModalLogin}>showModal login</button>
-
-            <ModalLogin /> 
             <BottomNavigation route='home' />
         </>
     )

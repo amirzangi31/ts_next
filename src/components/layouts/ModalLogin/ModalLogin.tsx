@@ -9,14 +9,21 @@ import VerifyCodeOpt from './VerifyCodeOpt'
 import Signup from './Signup'
 
 export type SetpLoginType = {
-    
-    changeStep: (nextStep: number) => void,
 
+    changeStep: (nextStep: number) => void,
+    callbacks?: Function[],
+    callbacksIndex?: number,
+    isCallback?: boolean
+}
+export type PropsType = {
+    callbacks?: Function[],
+    callbacksIndex?: number,
+    isCallback?: boolean
 }
 
 
 
-const ModalLogin = () => {
+const ModalLogin = (props: PropsType) => {
     const [stepLogin, setStepLogin] = useState(1)
     const { isShow, closeModalLogin } = useModalLogin()
 
@@ -39,13 +46,13 @@ const ModalLogin = () => {
                 </div>
                 <div className='mt-4'>
                     {
-                        stepLogin === 1 ? <SendPhone changeStep={changeStepHandler} /> : null
+                        stepLogin === 1 ? <SendPhone  changeStep={changeStepHandler} /> : null
                     }
                     {
-                        stepLogin === 2 ? <VerifyCodeOpt changeStep={changeStepHandler} /> : null
+                        stepLogin === 2 ? <VerifyCodeOpt isCallback={props.isCallback} callbacks={props.callbacks} callbacksIndex={props.callbacksIndex} changeStep={changeStepHandler} /> : null
                     }
                     {
-                        stepLogin === 3 ? <Signup changeStep={changeStepHandler} /> : null
+                        stepLogin === 3 ? <Signup isCallback={props.isCallback} callbacks={props.callbacks} callbacksIndex={props.callbacksIndex} changeStep={changeStepHandler} /> : null
                     }
                 </div>
             </BottomSheetAndCenterContent>

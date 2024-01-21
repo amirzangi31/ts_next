@@ -49,8 +49,9 @@ const SendPhone = ({ changeStep }: SetpLoginType) => {
 
           if (result.resultCode === 200) {
             changeStep(2)
-            actions.resetForm()
+            actions.resetForm() 
           }
+
         }
         }
       >

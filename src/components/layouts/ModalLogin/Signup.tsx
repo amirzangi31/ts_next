@@ -19,7 +19,7 @@ interface InitialValuesType {
 
 
 
-const Signup = ({ changeStep }: SetpLoginType) => {
+const Signup = ({ changeStep , callbacks, isCallback, callbacksIndex = 0 }: SetpLoginType) => {
   const { loadingButton, loginVerifications, signUpHandler } = useLogin()
 
 
@@ -29,7 +29,7 @@ const Signup = ({ changeStep }: SetpLoginType) => {
     notionalNumber: ""
   }
 
- 
+
 
   return (
     <Formik
@@ -43,6 +43,9 @@ const Signup = ({ changeStep }: SetpLoginType) => {
         if (result.resultCode === 200) {
           actions.resetForm()
           changeStep(1)
+        }
+        if (result.resultCode === 200 && isCallback) {
+          callbacks?.[callbacksIndex]()
         }
       }
       }

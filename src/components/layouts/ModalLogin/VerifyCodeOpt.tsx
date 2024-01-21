@@ -5,15 +5,19 @@ import { SetpLoginType } from './ModalLogin'
 import OtpInput from '@modules/OtpElement'
 import Timer from '@modules/Timer'
 
-const VerifyCodeOpt = ({ changeStep }: SetpLoginType) => {
+const VerifyCodeOpt = ({ changeStep, callbacks, isCallback, callbacksIndex = 0 }: SetpLoginType) => {
   const { loginVerifications, sendOtpHandler } = useLogin()
 
   const [otp, setOtp] = useState("")
 
 
   const verficationOtp = async (otp: number, verifycation: string) => {
+
     const result = await sendOtpHandler(otp, verifycation)
-    if(result.resultCode === 1200){
+    if (result.resultCode === 200 && isCallback) {
+      callbacks?.[callbacksIndex]()
+    }
+    if (result.resultCode === 1200) {
       changeStep(3)
       setOtp("")
     }
