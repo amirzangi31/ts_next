@@ -13,25 +13,20 @@ import LinkProfilePageCard from '@/components/modules/cards/Link/LinkProfilePage
 import LinkElement from '@/components/elements/LinkElement'
 import TitlePagesMobile from '@/components/modules/titles/TitlePagesMobile'
 import useUserInfo from '@/hooks/useUserInfo'
+import ProfileCard from '@/components/modules/cards/Profile/ProfileCard'
 
 
 const ProfilePage = () => {
     const { isLogin, user } = useUserInfo()
-
     const t = useTranslations("profile")
-
-
-
-
 
     return (
         <>
             <TitlePagesMobile title={t("profile")} />
-
             <div className="container " >
                 <section className='mt-12 md:hidden'>
 
-                    {isLogin === "authorization" ? (<div>kadsln;vn</div>) : (
+                    {isLogin === "authorization" ? (<ProfileCard  /> ) : (
                         <div className='relative w-full '>
                             <div className='bg-white  rounded-full w-20 h-20 flex justify-center items-center absolute left-[calc(50%-40px)] -top-10 '>
                                 <Image src={"/user.png"} alt='user_picture' width={700} height={700} className=' h-[73px] rounded-lg w-[73px]' />

@@ -1,37 +1,39 @@
 "use client"
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+
 import AppointmentIcon from '@icons/profile/AppointmentIcon'
 import EditIcon from '@icons/profile/EditIcon'
 import MessageIcon from '@icons/profile/MessageIcon'
-import MoreIcon from '@icons/profile/MoreIcon'
+
 import WalletIcon from '@icons/profile/WalletIcon'
 import { useLocale, useTranslations } from 'next-intl'
 import LogoutIcon from '@/components/icons/LogoutIcon'
 
-import ContentModalCenter from '../modal/ContentModalCenter'
-import CloseButtonCom from '@/components/elements/buttons/CloseButtonCom'
-import ButtonElement from '@/components/elements/buttons/ButtonElement'
-import { removeCookies } from '@/services/cookie/cookiesOperation'
+
+
 
 import { usePathname, useRouter } from 'next/navigation'
 
 
 import UserIcon from '@/components/icons/menu/UserIcon'
 import cn from '@/utils/clsxFun'
-import Modal from '../../modals/Modal'
+import { UserType } from '@/types/global'
+import LinkElement from '@/components/elements/LinkElement'
+import ButtonElement from '@elements/ButtonElement'
+import BottomSheetAndCenterContent from '../../modals/BottomSheetAndCenterContent'
+import CloseButton from '@/components/elements/CloseButton'
 
 
 
 
 
 
-const ProfileCard = ({ user, type, showLogoutModal }) => {
+const ProfileCard = ({ user, type, showLogoutModal }: { user: UserType, type: boolean, showLogoutModal: () => void }) => {
     const { firstName, lastName, phoneNumber, nationalNumber } = user
     const t = useTranslations("profile")
     const p = useTranslations("person")
-    const local = useLocale()
+
 
 
     const pathName = usePathname()
@@ -45,15 +47,15 @@ const ProfileCard = ({ user, type, showLogoutModal }) => {
 
                 <div className='bg-white rounded-sm p-3.5 relative'>
                     <div className='flex justify-between items-center '>
-                        <Link href={`/${local}/profile/edit`} className={cn(`z-[10]`, {
+                        <LinkElement link={`/profile/edit`} className={cn(`z-[10]`, {
                             "-mt-6": pathName === "/profile" || pathName === "/en/profile" || pathName === "/fa/profile"
-                        })}    ><EditIcon /></Link>
-                        {/* <Link href={"/"}><MoreIcon /> </Link> */}
+                        })}    ><EditIcon /></LinkElement>
+                  
                         <div className={cn("", {
-                            "absolute flex justify-center items-end w-full bg-white rounded-sm left-0  h-[80px]": pathName === "/profile" || pathName === "/en/profile" || pathName === "/fa/profile"
+                            "absolute flex justify-center items-end w-full bg-white rounded-sm left-0  h-[5rem]": pathName === "/profile" || pathName === "/en/profile" || pathName === "/fa/profile"
                         })}>
-                            <div className='bg-white  rounded-full w-20 h-20 flex justify-center items-center -mt-[54px] '>
-                                <Image src={"/user.png"} alt='user_picture' width={700} height={700} className=' h-[73px] rounded-lg w-[73px]' />
+                            <div className='bg-white  rounded-full w-20 h-20 flex justify-center items-center -mt-[3.375rem] '>
+                                <Image src={"/user.png"} alt='user_picture' width={700} height={700} className=' size-[4.5625rem] rounded-lg ' />
                             </div>
                         </div>
 
@@ -76,44 +78,44 @@ const ProfileCard = ({ user, type, showLogoutModal }) => {
                         </div>
                     </div>
                     <div className={cn(`grid  mt-6  `, {
-                        "grid-cols-3 h-[90px]": !type,
+                        "grid-cols-3 h-[5.625rem]": !type,
                         "grid-cols-1": type,
 
                     })} >
                         {
                             type && pathName !== "/profile" && pathName !== "/en/profile" && pathName !== "/fa/profile" ? (
-                                <Link href={`/${local}/profile`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
+                                <LinkElement link={`/profile`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
                                     "flex-col justify-center": !type,
                                     "flex-row justify-start py-3": type,
                                 })} >
                                     <span><UserIcon /> </span>
                                     <span>{t("profile")}</span>
-                                </Link>
+                                </LinkElement>
                             ) : null
                         }
-                        <Link href={"/"} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
+                        <LinkElement link={"/"} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
                             "flex-col justify-center": !type,
                             "flex-row justify-start py-3": type,
                         })} >
                             <span><MessageIcon /> </span>
                             <span>{t("My-messages")}</span>
-                        </Link>
+                        </LinkElement>
 
-                        <Link href={`/${local}/profile/myappointments`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
+                        <LinkElement link={`/profile/myappointments`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
                             "flex-col justify-center border-l-2 border-r-2 border-dashed": !type,
                             "flex-row justify-start py-3": type,
                         })} >
                             <span><AppointmentIcon /> </span>
                             <span>{t("appointments")}</span>
-                        </Link>
+                        </LinkElement>
 
-                        <Link href={`/${local}/profile/wallet`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
+                        <LinkElement link={`/profile/wallet`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
                             "flex-col justify-center": !type,
                             "flex-row justify-start py-3": type,
                         })} >
                             <span><WalletIcon /> </span>
                             <span>{t("wallet")}</span>
-                        </Link>
+                        </LinkElement>
 
                     </div>
                 </div>
