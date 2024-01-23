@@ -68,6 +68,19 @@ const urls = {
       method: "POST",
       parametrs: {},
       query: {},
+    },
+    cancel: {
+      url: "/User/UserPhysicianProfileCalendar/DeleteAppointment/",
+      method: "POST",
+      parametrs: {
+
+      },
+      query: {
+        calendarId: "string",
+        index: "number",
+        physicianProfileUrl: "string",
+      },
+
     }
   },
   //favorite 
@@ -88,8 +101,11 @@ const urls = {
         }
       },
       query: {},
-    }
+    },
+
   }
 };
 
 export default urls;
+
+

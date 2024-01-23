@@ -20,4 +20,14 @@ const getMyAppointment = async () => {
 
 
 
-export { getMyAppointment }
+const deleteAppointment = async (calendarId: string, index: number, physicianProfileUrl: string) => {
+    try {
+        const res = await http.delete(`${apiDomainNobat}${urls.appointment.cancel.url}${calendarId}/${index}/${physicianProfileUrl}`)
+        return res.data
+    } catch (error: any) {
+
+        Toastify("error", error?.response?.data?.resultMessage)
+    }
+}
+
+export { getMyAppointment, deleteAppointment }

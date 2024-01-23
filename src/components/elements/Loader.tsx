@@ -2,7 +2,7 @@ import cn from "@/utils/clsxFun"
 
 const Loader = ({ color, size }: {
     size: string,
-    color: "border-primary" | "border-white",
+    color: "border-primary" | "border-white" | "border-error",
 }) => {
     return (
         <div style={{ perspective: "48.75rem" }} className={cn(`relative  rounded-full`,
