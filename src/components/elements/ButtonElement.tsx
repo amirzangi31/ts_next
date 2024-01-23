@@ -7,7 +7,7 @@ interface ButtonElementType {
   type?: "submit" | "button" | "reset" | undefined;
   size?: "sm" | "md" | "lg";
   variant?: "text" | "outlined" | "contained";
-  typeButton: "primary" | "secondary" | "gray" | undefined
+  typeButton: "primary" | "secondary" | "gray" | "error"| "transparent" | undefined
   disabled?: boolean;
   handler?: () => void;
   fontSize?: "sm" | "md" | "lg";
@@ -38,6 +38,8 @@ const ButtonElement = ({ loading = false, customStyle, handler, hover, size, var
         "font-normal": fontWeight === "normal",
         "font-bold": fontWeight === "bold",
         "font-[900]": fontWeight === "fat",
+        "bg-error-dark text-white rounded-full hover:bg-white hover:text-error-dark": typeButton === "error" && variant === "contained",
+        "bg-transparent text-primary border border-primary rounded-full hover:bg-primary hover:text-white": typeButton === "transparent" && variant === "contained",
         "bg-primary text-white rounded-full hover:bg-white hover:text-primary": typeButton === "primary" && variant === "contained",
         "bg-primary-light text-white rounded-full hover:bg-white hover:text-primary": typeButton === "gray" && variant === "contained",
         "bg-white text-primary rounded-full hover:bg-primary hover:text-white": typeButton === "secondary" && variant === "contained",

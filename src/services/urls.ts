@@ -61,6 +61,35 @@ const urls = {
       query: {},
     },
   },
+  //appointment
+  appointment: {
+    myAppointment: {
+      url: "/User/UserPhysicianProfileCalendar/List",
+      method: "POST",
+      parametrs: {},
+      query: {},
+    }
+  },
+  //favorite 
+  favorite: {
+    getAll: {
+      url: "/User/UserFavouritePhysicianProfile/List",
+      method: "POST",
+      parametrs: {
+        input: {
+          cityId: "number",
+          provinceId: "number",
+          physicianSpecialityIds: "number",
+          filter: "string"
+        },
+        pagedListInputDto: {
+          pageNumber: "number",
+          itemsCountPerPage: "number"
+        }
+      },
+      query: {},
+    }
+  }
 };
 
 export default urls;

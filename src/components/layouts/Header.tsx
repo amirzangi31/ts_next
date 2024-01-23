@@ -9,6 +9,7 @@ import ButtonElement from '@elements/ButtonElement'
 import useUserInfo from '@/hooks/useUserInfo'
 import Loader from '../elements/Loader'
 import AcoountButtonHeader from '../elements/AccountButtonHeader'
+import ModalLogOut from './ModalLogOut'
 
 
 const Header = () => {
@@ -92,7 +93,7 @@ const Header = () => {
                     </LinkElement>
                     : null
                 }
-            
+
 
               </li>
             </ul>
@@ -100,6 +101,7 @@ const Header = () => {
 
         </div>
       </div>
+      <ModalLogOut />
     </header>
   )
 }

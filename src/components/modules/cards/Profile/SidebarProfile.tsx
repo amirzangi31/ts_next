@@ -7,7 +7,7 @@ import ProfileCard from './ProfileCard'
 import useUserInfo from '@/hooks/useUserInfo'
 
 
-const SidebarProfile = ({ showLogoutModal }: { showLogoutModal: () => void }) => {
+const SidebarProfile = () => {
     const { user } = useUserInfo(true)
 
     const pathName = usePathname()
@@ -19,7 +19,7 @@ const SidebarProfile = ({ showLogoutModal }: { showLogoutModal: () => void }) =>
             "pt-10": pathName === "/profile" || pathName === "/en/profile" || pathName === "/fa/profile"
         })} >
             <div className=''>
-                <ProfileCard user={user} type={true} showLogoutModal={showLogoutModal} />
+                <ProfileCard  type={true}  />
             </div>
         </div>
     )

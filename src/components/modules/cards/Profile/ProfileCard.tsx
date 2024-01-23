@@ -7,7 +7,7 @@ import EditIcon from '@icons/profile/EditIcon'
 import MessageIcon from '@icons/profile/MessageIcon'
 
 import WalletIcon from '@icons/profile/WalletIcon'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import LogoutIcon from '@/components/icons/LogoutIcon'
 
 
@@ -18,39 +18,30 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import UserIcon from '@/components/icons/menu/UserIcon'
 import cn from '@/utils/clsxFun'
-import { UserType } from '@/types/global'
 import LinkElement from '@/components/elements/LinkElement'
-import ButtonElement from '@elements/ButtonElement'
-import BottomSheetAndCenterContent from '../../modals/BottomSheetAndCenterContent'
-import CloseButton from '@/components/elements/CloseButton'
+import useLogoutModal from '@/hooks/useLogoutModal'
+import useUserInfo from '@/hooks/useUserInfo'
 
 
 
-
-
-
-const ProfileCard = ({ user, type, showLogoutModal }: { user: UserType, type: boolean, showLogoutModal: () => void }) => {
-    const { firstName, lastName, phoneNumber, nationalNumber } = user
+const ProfileCard = ({ type }: { type: boolean }) => {
+    const { openLogoutModal } = useLogoutModal()
     const t = useTranslations("profile")
     const p = useTranslations("person")
-
-
-
+    const { user } = useUserInfo()
     const pathName = usePathname()
 
-
+    
     return (
         <>
-            <div className={cn(`relative w-full `, {
-
-            })}>
+            <div className={cn(`relative w-full`)}>
 
                 <div className='bg-white rounded-sm p-3.5 relative'>
                     <div className='flex justify-between items-center '>
                         <LinkElement link={`/profile/edit`} className={cn(`z-[10]`, {
                             "-mt-6": pathName === "/profile" || pathName === "/en/profile" || pathName === "/fa/profile"
                         })}    ><EditIcon /></LinkElement>
-                  
+
                         <div className={cn("", {
                             "absolute flex justify-center items-end w-full bg-white rounded-sm left-0  h-[5rem]": pathName === "/profile" || pathName === "/en/profile" || pathName === "/fa/profile"
                         })}>
@@ -62,22 +53,22 @@ const ProfileCard = ({ user, type, showLogoutModal }: { user: UserType, type: bo
 
                         <button type='button' className={cn(`z-[10]`, {
                             "-mt-6": pathName === "/profile" || pathName === "/en/profile" || pathName === "/fa/profile"
-                        })} onClick={showLogoutModal}><LogoutIcon /> </button>
+                        })} onClick={openLogoutModal}><LogoutIcon /> </button>
 
 
                     </div>
-                    <p className='flex justify-center items-center py-1 font-bold'>{firstName} {lastName}</p>
+                    <p className='flex justify-center items-center py-1 font-bold'>{user?.firstName} {user?.lastName}</p>
                     <div className={cn(`flex justify-center items-center gap-2 mt-4`, {
                         "flex-col": type
                     })}>
                         <div className='bg-gray-100 py-1 px-2 rounded-sm text-md'>
-                            {p("nationalNumber")} : <span className='text-sm min-[430px]:text-md'>{nationalNumber}</span>
+                            {p("nationalNumber")} : <span className='text-sm min-[430px]:text-md'>{user?.nationalNumber}</span>
                         </div>
                         <div className='bg-gray-100 py-1 px-2 rounded-sm text-md'>
-                            {p("phoneNumber")} : <span className='text-sm min-[430px]:text-md'>{phoneNumber}</span>
+                            {p("phoneNumber")} : <span className='text-sm min-[430px]:text-md'>{user?.phoneNumber}</span>
                         </div>
                     </div>
-                    <div className={cn(`grid  mt-6  `, {
+                    <div className={cn(`grid mt-6 `, {
                         "grid-cols-3 h-[5.625rem]": !type,
                         "grid-cols-1": type,
 
