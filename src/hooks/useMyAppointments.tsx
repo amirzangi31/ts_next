@@ -53,7 +53,6 @@ const useMyAppointments = () => {
         },
 
     })
-    console.log(data)
 
     useEffect(() => {
         if (!isLoading) {
