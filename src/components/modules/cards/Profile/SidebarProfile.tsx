@@ -8,7 +8,7 @@ import useUserInfo from '@/hooks/useUserInfo'
 
 
 const SidebarProfile = () => {
-    const { user } = useUserInfo(true)
+    
 
     const pathName = usePathname()
 

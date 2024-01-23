@@ -30,6 +30,7 @@ const ModalLogOut = () => {
         localStorage.removeItem("accessToken")
         localStorage.removeItem("refreshToken")
         getUser()
+        closeLogoutModal()
         router.replace(`/${local}/login`)
     }
 

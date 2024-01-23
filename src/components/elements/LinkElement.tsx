@@ -14,7 +14,7 @@ const LinkElement = ({ children, link, prefetch, className }: LinkElementCom) =>
     const local = useLocale()
 
     return (
-        <Link href={`${local}/${link}`} locale={local} prefetch={prefetch} className={cn(className)}>
+        <Link href={`/${local}/${link}`} locale={local} prefetch={prefetch} className={cn(className)}>
             {children}
         </Link>
     )

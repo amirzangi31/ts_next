@@ -23,13 +23,9 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
 
     const { isLogin, getUser } = useUserInfo()
     const router = useRouter()
- 
-
- 
-
-    
 
     useEffect(() => {
+        
         if (isLogin === "unauthorization") {
             router.replace(`/${local}/login`)
         }

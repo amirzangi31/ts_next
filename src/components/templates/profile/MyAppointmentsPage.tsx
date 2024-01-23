@@ -47,7 +47,7 @@ const MyAppointmentsPage = () => {
   // appointments hook
   const { isLoading, futureAppointments, pastAppointments } = useMyAppointments()
 
-  console.log(pastAppointments)
+
 
 
   const [activeTab, setActiveTab] = useState(0);
@@ -125,7 +125,7 @@ const MyAppointmentsPage = () => {
               </div>
             ) : null}
 
-            {!futureAppointments.length && !isLoading ? (
+            {!futureAppointments?.length && !isLoading ? (
               <div className="h-[calc(100vh-400px)] flex justify-center items-center flex-col gap-8">
                 <div>
                   <Image
@@ -145,6 +145,7 @@ const MyAppointmentsPage = () => {
                         typeButton="primary"
                         fontWeight="bold"
                         fontSize="md"
+                        size="sm"
                       >
                         {a("text-button")}!
                       </ButtonElement>
@@ -154,7 +155,7 @@ const MyAppointmentsPage = () => {
               </div>
             ) : null}
 
-            {futureAppointments.length && !isLoading ? (
+            {futureAppointments?.length && !isLoading ? (
               <div className="mt-4 grid grid-cols-1 min-[1200px]:grid-cols-2 gap-2">
                 {futureAppointments?.map((item: MyAppointmentType) => (
                   <AppointmentCard key={item.id} {...item} />
@@ -163,7 +164,7 @@ const MyAppointmentsPage = () => {
             ) : null}
           </TabPanel>
           <TabPanel>
-            {!pastAppointments.length ? (
+            {!pastAppointments?.length ? (
               <div className="h-[calc(100vh-400px)] flex justify-center items-center flex-col gap-8">
                 <div>
                   <Image
@@ -194,7 +195,7 @@ const MyAppointmentsPage = () => {
             ) : (
               <div className="mt-4">
                 <div className="mt-4 grid grid-cols-1 min-[1200px]:grid-cols-2 gap-2">
-                  {pastAppointments.map((item: MyAppointmentType) => (
+                  {pastAppointments?.map((item: MyAppointmentType) => (
                     <AppointmentCardOff key={item.id} {...item} />
                   ))}
                 </div>
@@ -249,11 +250,6 @@ const AppointmentCard = (props: MyAppointmentType) => {
   const { calendar, index } = props;
   const { cancelMutation } = useMyAppointments()
 
-
-
-
-  const { getUser, isLogin } = useUserInfo()
-
   //cancel appointment handler
   const cancelHanlder = (calendarId: string, index: number, physicianProfileUrl: string) => {
     cancelMutation.mutate({
@@ -263,29 +259,29 @@ const AppointmentCard = (props: MyAppointmentType) => {
     })
   }
 
-
-
   return (
     <>
       <div className="bg-white rounded-sm shadow-shadow_category  w-full  flex justify-start items-start flex-col gap-2">
         <div className="p-4  w-full flex justify-between items-center ">
 
-          <Image
-            src={props.hasImage ? getUrlImage(props.physicianProfileId) : "/noImage.jfif"}
-            width={500}
-            height={500}
-            alt="doctor_profile"
-            className="w-[3.75rem] h-[3.75rem] rounded-full z-1"
-          />
+          <div className="relative">
+            <Image
+              src={props.hasImage ? getUrlImage(props.physicianProfileId) : "/noImage.jfif"}
+              width={500}
+              height={500}
+              alt="doctor_profile"
+              className="w-[3.75rem] h-[3.75rem] rounded-full z-1"
+            />
 
-          {/* <span className="w-[1rem] h-[1rem] bg-white rounded-full absolute bottom-0 rtl:right-0 ltr:left-0 flex justify-center items-center ">
-          <span
-            className={cn(`w-[0.75rem] h-[0.75rem]  rounded-full `, {
-              "bg-primary-100": props.immediateConsultation,
-              "bg-gray-400": !props.immediateConsultation,
-            })}
-          ></span>
-        </span> */}
+            <span className="w-[1rem] h-[1rem] bg-white rounded-full absolute bottom-0 rtl:right-0 ltr:left-0 flex justify-center items-center ">
+              <span
+                className={cn(`w-[0.75rem] h-[0.75rem]  rounded-full `, {
+                  "bg-primary-100": props.immediateConsultation,
+                  "bg-gray-400": !props.immediateConsultation,
+                })}
+              ></span>
+            </span>
+          </div>
           <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-between items-start flex-col min-h-[3.75rem]">
             <div className="flex justify-between items-center w-full">
               <p className="text-lg  ">{props.physicianName}</p>
@@ -470,7 +466,7 @@ const AppointmentCardOff = (props: MyAppointmentType) => {
   return (
     <div className="bg-white rounded-sm shadow-shadow_category  w-full  flex justify-start items-start flex-col gap-2">
       <div className="p-4  w-full flex justify-between items-center">
-        <div className="">
+        <div className="relative">
           <Image
             src={false ? getUrlImage(props.physicianProfileId) : "/noImage.jfif"}
             width={500}
@@ -578,7 +574,7 @@ const AppointmentCardOff = (props: MyAppointmentType) => {
                     {/* "Paid Payment" */}
                     <button
                       type="button"
-                      className="w-[6.25rem] flex justify-center items-center text-primary bg-[#EFF1F0] h-[2.5rem] font-bold rounded-sm"
+                      className="px-2 flex justify-center items-center text-primary bg-[#EFF1F0] h-[2.5rem] font-bold rounded-sm"
                     >
                       {g("View-details")}
                     </button>
