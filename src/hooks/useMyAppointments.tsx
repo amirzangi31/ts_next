@@ -61,7 +61,7 @@ const useMyAppointments = () => {
         }
     }, [isLoading])
 
-
+    
     return {
         myAppointments: data?.value?.items,
         futureAppointments,

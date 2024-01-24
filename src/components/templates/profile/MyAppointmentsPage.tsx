@@ -43,61 +43,71 @@ const MyAppointmentsPage = () => {
   const a = useTranslations("apponitment_profile");
   const s = useTranslations("search");
 
-  // appointments hook
-  const { isLoading, futureAppointments, pastAppointments } = useMyAppointments()
-  const [pastAppointmentsUi, setPastAppointmentsUi] = useState<MyAppointmentType[]>([])
-
-  useEffect(() => {
-    setPastAppointmentsUi(pastAppointments)
-  }, [pastAppointments])
-
-
   const [activeTab, setActiveTab] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [filters, setFilters] = useState<
-    {
-      onlineAppointment: boolean,
-      textConsultation: boolean,
-      voiceConsultation: boolean,
-      immediateConsultation: boolean,
 
-    }>({
-      onlineAppointment: true,
-      textConsultation: true,
-      voiceConsultation: true,
-      immediateConsultation: true,
-    });
+  // appointments hook
+  const { isLoading, futureAppointments, pastAppointments } = useMyAppointments()
+
+  const [pastAppointmentsUi, setPastAppointmentsUi] = useState<MyAppointmentType[]>([])
+  const [fetureAppointmentsUi, setFetureAppointmentsUi] = useState<MyAppointmentType[]>([])
+
   const [disabledFilter, setDisabledFilter] = useState(false)
 
-  const disabledFilterHandler = (val: boolean): MyAppointmentType[] => {
+  const [filters, setFilters] = useState<{
+    onlineAppointment: boolean,
+    textConsultation: boolean,
+    voiceConsultation: boolean,
+    immediateConsultation: boolean,
+    [key: string]: boolean;
+  }>({
+    onlineAppointment: true,
+    textConsultation: true,
+    voiceConsultation: true,
+    immediateConsultation: true,
+  });
+
+  //disabled filter
+  const disabledFilterHandler = (val: boolean) => {
     if (val) {
-      const newArray: MyAppointmentType[] = pastAppointments.filter((item: MyAppointmentType) => item?.status === "Is Deleted By User" || item?.status === "Is Deleted By Physician")
-      setPastAppointmentsUi(newArray)
-      return newArray
-    } else {
-      const newArray: MyAppointmentType[] = pastAppointments.filter(item => item)
-      setPastAppointmentsUi(newArray)
-      return newArray
+      const pastArray: MyAppointmentType[] = pastAppointments.filter((item: MyAppointmentType) => item?.status === "Is Deleted By User" || item?.status === "Is Deleted By Physician")
+
+      const fetureArray: MyAppointmentType[] = futureAppointments.filter((item: MyAppointmentType) => item?.status === "Is Deleted By User" || item?.status === "Is Deleted By Physician")
+
+      setPastAppointmentsUi(pastArray)
+      setFetureAppointmentsUi(fetureArray)
+      return {
+        past: pastArray,
+        feture: fetureArray
+      }
+    }
+
+
+    return {
+      past: pastAppointments,
+      feture: futureAppointments
     }
   }
 
-
-  //filter appointment for render 
+  //Filtering appointments based on defined filters
   useEffect(() => {
-    let filterArray : MyAppointmentType[]= []
-    // const onlineAppointment = disabledFilterHandler(disabledFilter).filter((item) => item.onlineAppointment === filters.onlineAppointment)
-    // const textConsultation = disabledFilterHandler(disabledFilter).filter((item) => item.textConsultation === filters.textConsultation)
-    // const voiceConsultation = disabledFilterHandler(disabledFilter).filter((item) => item.voiceConsultation === filters.voiceConsultation)
-    // const immediateConsultation = disabledFilterHandler(disabledFilter).filter((item) => item.immediateConsultation === filters.immediateConsultation)
+    let pastArray: MyAppointmentType[] = []
+    let fetureArray: MyAppointmentType[] = []
 
-    for(let i in filters) {
-      // for(let key = 0)
-
+    if (!isLoading) {
+      for (let i in filters) {
+        if (filters[i]) {
+          const past = disabledFilterHandler(disabledFilter).past.filter((item) => item[i] === filters[i]);
+          const feture = disabledFilterHandler(disabledFilter).feture.filter((item) => item[i] === filters[i]);
+          pastArray = [...pastArray, ...past];
+          fetureArray = [...fetureArray, ...feture];
+        }
+      }
     }
 
-
-    setPastAppointmentsUi([])
-  }, [filters, disabledFilter, pastAppointments]);
+    setPastAppointmentsUi(pastArray)
+    setFetureAppointmentsUi(fetureArray)
+  }, [filters, disabledFilter, pastAppointments, futureAppointments]);
 
 
 
@@ -152,7 +162,7 @@ const MyAppointmentsPage = () => {
               </div>
             ) : null}
 
-            {!futureAppointments?.length && !isLoading ? (
+            {!fetureAppointmentsUi?.length && !isLoading ? (
               <div className="h-[calc(100vh-400px)] flex justify-center items-center flex-col gap-8">
                 <div>
                   <Image
@@ -182,9 +192,9 @@ const MyAppointmentsPage = () => {
               </div>
             ) : null}
 
-            {futureAppointments?.length && !isLoading ? (
+            {fetureAppointmentsUi?.length && !isLoading ? (
               <div className="mt-4 grid grid-cols-1 min-[1200px]:grid-cols-2 gap-2">
-                {futureAppointments?.map((item: MyAppointmentType) => (
+                {fetureAppointmentsUi?.map((item: MyAppointmentType) => (
                   <AppointmentCard key={item.id} {...item} />
                 ))}
               </div>
@@ -473,7 +483,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
       </div>
       <Modal show={showModalDelete} closeHandler={() => setShowModalDelete(false)}>
 
-        <div className="p-5 bg-white shadow-shadow_category rounded-sm w-[18.75rem] max-w-full absolute top-1/2 left-[calc(50%-150px)]">
+        <div className="p-5 bg-white shadow-shadow_category rounded-sm w-[18.75rem] max-w-full absolute top-1/2 -translate-y-1/2  left-[calc(50%-9.375rem)]">
           <div className="flex justify-start gap-10 items-center w-full flex-col">
             <p className="font-bold text-center w-full">برای لغو این نوبت اطمینان دارید ؟</p>
             <div className="flex justify-between items-center gap-2">
