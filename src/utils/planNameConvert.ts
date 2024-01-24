@@ -6,21 +6,21 @@ const planNameConvert = (type: string) => {
 
 
     switch (type) {
-        case "OnlineAppointment":
+        case "onlineAppointment":
             return "Face-to-face-appointment"
             break;
 
-        case "TextConsultation":
+        case "textConsultation":
             return "Text-advice"
 
             break;
 
-        case "VoiceConsultation":
+        case "voiceConsultation":
             return "phone-consultancy"
 
             break;
 
-        case "ImmediateConsultation":
+        case "immediateConsultation":
 
             return "Immediate-phone-consultation"
             break;

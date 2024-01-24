@@ -1,92 +1,106 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import TitlePageMobile from "../../modules/titleComponents/TitlePageMobile";
-import BaseCard from "../../modules/cards/BaseCard";
-import ButtonElement from "../../elements/buttons/ButtonElement";
+
+import BaseCard from "@modules/cards/BaseCard";
+
 import Image from "next/image";
-import Modal from "../../modules/modal/Modal";
-import ContentModalCenter from "../../modules/modal/ContentModalCenter";
-import CloseButtonCom from "../../elements/buttons/CloseButtonCom";
-import { priceSplitter } from "@/helper/priceSplitter";
-import useAuth from "@/hooks/useAuth";
+
+
+
+
 import Skeleton from "react-loading-skeleton";
 
 import moment from "jalali-moment";
 
 
 import { useTranslations } from "next-intl";
-import CustomCheckBox from "@/components/elements/CustomCheckBox";
-import { createPayment } from "@/services/payment/payment";
-import Toastify from "@/components/elements/Toastify";
+
+
+
 import Loader from "@/components/elements/Loader";
-import SwiperFreeModeModule from "@/components/modules/SwiperFreeModeModule";
-import { SwiperSlide } from "swiper/react";
-import cn from "@/helper/cnFun";
+
+
+
 import useTransactions from "@/hooks/useTransactions";
+import useUserInfo from "@/hooks/useUserInfo";
+import CloseButton from "@/components/elements/CloseButton";
+import Checkbox from "@/components/elements/inputs/Checkbox";
+import cn from "@/utils/clsxFun";
+
+import priceSplitter from "@/utils/priceSplitter";
+import BottomSheetAndCenterContent from "@/components/modules/modals/BottomSheetAndCenterContent";
+import Modal from "@/components/modules/modals/Modal";
+import ButtonElement from "@/components/elements/ButtonElement";
+import TitlePagesMobile from "@/components/modules/titles/TitlePagesMobile";
+import { TransctionsType } from "@/types/global";
+import SwiperContainerWalletPage from "@/components/modules/swiper/SwiperContainerWalletPage";
+import { SearchParamsWalletType } from "@/app/[locale]/profile/wallet/page";
 
 
-const WalletPage = (props) => {
-  const { params } = props;
-  const { transactions, loading } = useTransactions(true)
+const WalletPage = (props: { params: SearchParamsWalletType }) => {
+
+
+  const { transactions, isLoading, loadingPayment, paymentHandler } = useTransactions()
+
+
+
 
   const t = useTranslations("wallet_page");
 
-  const { isLogin, user } = useAuth();
-
+  const { isLogin, user } = useUserInfo();
+  const [activePrice, setActivePrice] = useState(1)
+  const [showCount, setShowCount] = useState(false)
+  const [totalPrice, setTotalPrice] = useState(10000)
+  const [countAppointment, setCountAppointment] = useState<number | string>("")
   const [showModalIncrease, setShowModalIncrease] = useState(false);
   const [showSuccessDepositModal, setShowSuccessDepositModal] = useState(false);
   const [showFailureDepositModal, setShowFailureDepositModal] = useState(false);
-  const [price, setPrice] = useState(params?.amount ? +params.amount : "");
-  const [date, setDate] = useState({
+  const [price, setPrice] = useState(props.params?.amount ? +props.params.amount : "");
+  
+  const [date, setDate] = useState<{
+    year: string | undefined,
+    month: string | undefined,
+    day: string | undefined,
+  }>({
     year: "",
     month: "",
     day: "",
   });
   const [disabledButtonPayment, setDisabledButtonPayment] = useState(false);
-  const [page, setPage] = useState(1);
-  const [loadingPayment, setLoddingPayment] = useState(false);
+
+
 
 
   const showModalIncreaseHandler = () => {
     setShowModalIncrease(true);
   };
 
-  // const getTransactionsHandle = async () => {
-  //   const data = await getTransactions(page, 50);
-  //   setTransactions(data?.value?.items);
-  // };
+
 
   useEffect(() => {
-    if (params?.Status === "Fail") {
+    if (props.params?.Status === "Fail") {
       setShowFailureDepositModal(true);
     }
-    if (params.Status === "Success") {
+    if (props.params?.Status === "Success") {
       setShowSuccessDepositModal(true);
       setDate({
-        year: params.date.slice(0, 4),
-        month: params.date.slice(4, 6),
-        day: params.date.slice(6, 8),
+        year: props.params?.date?.slice(0, 4),
+        month: props.params?.date?.slice(4, 6),
+        day: props.params?.date?.slice(6, 8),
       });
     }
   }, []);
 
-  // useEffect(() => {
-  //   getTransactionsHandle();
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [page]);
 
 
 
 
 
-  const [activePrice, setActivePrice] = useState(1)
-  const [showCount, setShowCount] = useState(false)
-  const [totalPrice, setTotalPrice] = useState(10000)
-  const [countAppointment, setCountAppointment] = useState("")
-  const inputRef = useRef(null)
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const activePriceHandler = (count) => {
+
+  // active button price handler for charge wallet
+  const activePriceHandler = (count: number) => {
     setCountAppointment("")
     setDisabledButtonPayment(false)
     setShowCount(false)
@@ -94,7 +108,9 @@ const WalletPage = (props) => {
     setActivePrice(count)
   }
 
-  const changeCountAppointmentHandler = (e) => {
+
+  // change handler for input count appointment
+  const changeCountAppointmentHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (+e.target.value > 500) {
       setCountAppointment(500)
       setTotalPrice(500 * 10000)
@@ -107,51 +123,34 @@ const WalletPage = (props) => {
       setDisabledButtonPayment(false)
     } else {
       setCountAppointment("")
-      setTotalPrice("")
+      setTotalPrice(0)
       setDisabledButtonPayment(true)
     }
   }
+
+  // focus in count input
   useEffect(() => {
     if (showCount === false) return;
-    inputRef.current.focus()
+
+    inputRef?.current?.focus()
   }, [showCount]);
 
-  const paymentHandler = async (price) => {
+  // show input for insert count appointment
+  const showcountPriceHandler = () => {
+    setShowCount(true)
+    setActivePrice(0)
+    setTotalPrice(0)
+    setDisabledButtonPayment(true)
+  }
 
-    setLoddingPayment(true);
-    if (price >= 50000000) {
-      Toastify("error", "حداکثر مبلغ مجاز برای پرداخت پنج میلیون تومان میباشد")
-      return
-    }
-    try {
-      const res = await createPayment(0, price, 0);
-      if (res !== undefined) {
-        window.location.href = res;
-      }
-    } catch (error) {
-      Toastify("error", error?.response?.data?.resultMessage);
-    }
-    setLoddingPayment(false);
-  };
-
-  // const tryAgainPayment = async () => {
-  //   setLoddingPayment(true)
-  //   try {
-  //     const res = await createPayment(0, +price * 10, 0);
-  //     if (res !== undefined) {
-  //       window.location.href = res;
-  //     }
-  //   } catch (error) {
-  //     Toastify("error", error?.response?.data?.resultMessage);
-  //   }
-  //   setLoddingPayment(false)
-  // }
 
 
   return (
     <>
-      <TitlePageMobile title={t("title")} />
+      <TitlePagesMobile title={t("title")} />
       <div className="container mt-4">
+
+        {/* header  */}
         <header>
           <BaseCard title={t("title")}>
             <div className="py-4 px-6 bg-gray-100 rounded-sm mt-4">
@@ -169,14 +168,14 @@ const WalletPage = (props) => {
                       stroke="#313033"
                       strokeWidth="1.5"
                       strokeLinecap="round"
-                      inejoin="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M18.7522 11.6429H18.4345"
                       stroke="#313033"
                       strokeWidth="1.5"
                       strokeLinecap="round"
-                      inejoin="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       fillRule="evenodd"
@@ -185,14 +184,14 @@ const WalletPage = (props) => {
                       stroke="#313033"
                       strokeWidth="1.5"
                       strokeLinecap="round"
-                      inejoin="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M7.52637 7.5382H13.0295"
                       stroke="#313033"
                       strokeWidth="1.5"
                       strokeLinecap="round"
-                      inejoin="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </span>
@@ -200,8 +199,8 @@ const WalletPage = (props) => {
                 <p className="font-bold text-md flex justify-start gap-2 items-center ">
                   {t("Wallet-balance")}:
                   {isLogin === "isLoading" && (
-                    <span className="w-[100px] block">
-                      <Skeleton className="h-20px" />{" "}
+                    <span className="w-[6.25rem] block">
+                      <Skeleton className="h-[1.25rem]" />{" "}
                     </span>
                   )}
                   <span className="font-normal">
@@ -214,21 +213,23 @@ const WalletPage = (props) => {
                 </p>
               </div>
             </div>
-            <div className="w-[120px] absolute top-4 ltr:right-4 rtl:left-4">
+            <div className="w-[11.25rem] absolute top-4 ltr:right-4 rtl:left-4">
               <ButtonElement
-                bg={"bg-primary"}
-                fontW={"font-bold"}
-                textC={"text-white"}
-                clickHandler={showModalIncreaseHandler}
+                typeButton="primary"
+                fontWeight="bold"
+                handler={showModalIncreaseHandler}
+                size="sm"
               >
                 {t("Increase-credit")}
               </ButtonElement>
             </div>
           </BaseCard>
         </header>
+        {/* content page */}
         <section className="mt-4">
-          {transactions?.length === 0 && !loading ? (
-            <div className="h-[calc(100vh-320px)] flex justify-center items-center flex-col gap-8">
+          {/* if  transactions is 0 length or empty */}
+          {transactions?.length === 0 && !isLoading ? (
+            <div className="h-[calc(100vh-31.25rem)] flex justify-center items-center flex-col gap-8">
               <div>
                 <Image
                   src={"/noTransactions.png"}
@@ -241,12 +242,11 @@ const WalletPage = (props) => {
               <div className="flex justify-start items-center gap-4 flex-col">
                 <p className="text-md ">{t("No-transaction")}!</p>
                 <p className="text-sm ">{t("Log-in-search")} </p>
-                <div className="w-[220px]">
+                <div className="w-[21.25rem]">
                   <ButtonElement
-                    bg={"bg-primary"}
-                    fontW={"font-bold"}
-                    textC={"text-white"}
-                    clickHandler={showModalIncreaseHandler}
+                    typeButton="primary"
+                    fontWeight="bold"
+                    handler={showModalIncreaseHandler}
                   >
                     {t("Increase-credit")}
                   </ButtonElement>
@@ -254,19 +254,20 @@ const WalletPage = (props) => {
               </div>
             </div>
           ) : null}
-          {!loading && transactions.length > 0 ?
+          {/* if  transactions is length > 0 */}
+          {!isLoading && transactions?.length > 0 ?
             <BaseCard title={t("Transaction-history")}>
               <div className="flex justify-start items-center flex-col gap-2">
-                {transactions?.map((item, index) => (
+                {transactions?.map((item: TransctionsType, index: number) => (
                   <TransactionCard key={item.id} {...item} />
                 ))}
               </div>
             </BaseCard>
             : null
           }
-
+          {/* loding */}
           {
-            loading ?
+            isLoading ?
               <BaseCard title={t("Transaction-history")}>
 
 
@@ -279,224 +280,165 @@ const WalletPage = (props) => {
               </BaseCard> : null
           }
         </section>
-        <div>
-          <Modal
-            show={showModalIncrease}
-            closeHandler={() => setShowModalIncrease(false)}
-          >
-            <ContentModalCenter show={showModalIncrease}>
-              <div>
-                <span className="absolute top-[30px] rtl:left-[15px] ltr:right-[15px] xs:rtl:left-[30px] xs:ltr:right[30px]">
-                  <CloseButtonCom
-                    closeHanlder={() => setShowModalIncrease(false)}
-                  />
-                </span>
-                <p className="text-md font-bold">{t("Wallet-balance")} : <span className={cn("   ", {
-                  "text-error": +user.accountBalance < 100000,
-                  "text-primary": +user.accountBalance > 0
-                })}>{+user.accountBalance === 0
-                  ? 0
-                  : priceSplitter(+user.accountBalance / 10)} تومان</span></p>
-                <div className="mt-4 flex justify-start items-center gap-3 py-3">
-                  <p className="text-center text-md w-full font-bold">برای چند نوبت میخوای شارژ کنی؟</p>
-                </div>
-                <div className="py-2">
-
-                  <SwiperFreeModeModule gap={10}>
-                    <SwiperSlide className="w-auto-important ">
-                      <button type="button" onClick={() => activePriceHandler(1)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[100px] border text-md border-primary", {
-                        "bg-primary text-white ": activePrice === 1
-                      })} >
-                        یک نوبت
-                      </button>
-                    </SwiperSlide>
-                    <SwiperSlide className="w-auto-important ">
-                      <button type="button" onClick={() => activePriceHandler(3)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[100px] border text-md border-primary", {
-                        "bg-primary text-white ": activePrice === 3
-                      })} >
-                        سه نوبت
-                      </button>
-                    </SwiperSlide>
-                    <SwiperSlide className="w-auto-important ">
-                      <button type="button" onClick={() => activePriceHandler(5)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[100px] border text-md border-primary", {
-                        "bg-primary text-white ": activePrice === 5
-                      })} >
-                        پنج نوبت
-                      </button>
-                    </SwiperSlide>
-                    <SwiperSlide className="w-auto-important ">
-                      <button type="button" onClick={() => activePriceHandler(10)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[100px] border text-md border-primary", {
-                        "bg-primary text-white ": activePrice === 10
-                      })} >
-                        ده نوبت
-                      </button>
-                    </SwiperSlide>
-                    <SwiperSlide className="w-auto-important ">
-                      <button type="button" onClick={() => {
-                        setShowCount(true)
-                        setActivePrice(0)
-                        setTotalPrice(0)
-                        setDisabledButtonPayment(true)
-                      }} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[100px] border text-md border-primary", {
-                        "bg-primary text-white ": showCount
-                      })} >
-                        تعداد دلخواه
-                      </button>
-                    </SwiperSlide>
-
-                  </SwiperFreeModeModule>
-                </div>
-                {
-                  showCount ?
-                    <div className="py-4 flex justify-between items-center gap-2">
-                      <p className="text-md">تعداد نوبت : </p>
-                      <input type="number" ref={inputRef} placeholder="تعداد نوبت " value={countAppointment} onChange={changeCountAppointmentHandler} className="border border-primary flex-1 p-1 rounded-3xl px-2 text-center placeholder:text-sm text-primary text-md " style={{ direction: "ltr" }} />
-                    </div> : null
-                }
-
-                {/* <div className="mt-4">
-                  <p>{t("Increasing-balance")}: </p>
-
-                  <div className="mt-4 w-full border border-gray-200 rounded-3xl  h-[45px]">
-                    <input
-                      type="text"
-                      name="price"
-                      id="price"
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
-                      className="w-full h-full px-4 placeholder:text-md"
-                      placeholder={t("Enter-desired-amount")}
-                    />
-                  </div>
-                </div> */}
-                <div className="mt-4">
-                  <ButtonElement
-                    bg={disabledButtonPayment ? "bg-gray-400" : "bg-primary"}
-                    fontW={"font-bold"}
-                    textC={"text-white"}
-                    disabled={disabledButtonPayment}
-                    clickHandler={() => paymentHandler(+totalPrice * 10)}
-                  >
-                    {loadingPayment ? (
-                      <Loader
-                        width={"w-[40px]"}
-                        height={"h-[40px]"}
-                        color={"border-white"}
-                      />
-                    ) : (
-                      <p>{t("Record")} <span className="text-sm">({priceSplitter(totalPrice)} تومان)</span></p>
-                    )}
-                  </ButtonElement>
-                </div>
+        {/* charge wallet modal  */}
+        <Modal
+          show={showModalIncrease}
+          closeHandler={() => setShowModalIncrease(false)}
+        >
+          <BottomSheetAndCenterContent show={showModalIncrease}>
+            <div>
+              <span className="absolute top-[1.875rem] rtl:left-[0.9375rem] ltr:right-[0.9375rem] xs:rtl:left-[1.875rem] xs:ltr:right[1.875rem]">
+                <CloseButton
+                  closeHanlder={() => setShowModalIncrease(false)}
+                />
+              </span>
+              <p className="text-md font-bold">{t("Wallet-balance")} : <span className={cn("   ", {
+                "text-error": +user.accountBalance < 100000,
+                "text-primary": +user.accountBalance > 0
+              })}>{+user.accountBalance === 0
+                ? 0
+                : priceSplitter(+user.accountBalance / 10)} تومان</span></p>
+              <div className="mt-4 flex justify-start items-center gap-3 py-3">
+                <p className="text-center text-md w-full font-bold">برای چند نوبت میخوای شارژ کنی؟</p>
               </div>
-            </ContentModalCenter>
-          </Modal>
-        </div>
-        <div>
-          <Modal
-            show={showSuccessDepositModal}
-            closeHandler={() => {
-              setShowSuccessDepositModal(false);
-            }}
-          >
-            <div className="w-full h-full flex justify-center items-center">
-              <div className="bg-white p-5 w-[370px] rounded-sm max-w-full relative">
-                <div className="flex justify-end items-center absolute left-[20px] top-[20px]">
-                  <CloseButtonCom
-                    closeHanlder={() => {
-                      setShowSuccessDepositModal(false);
-                    }}
-                  />
-                </div>
-                <div className="flex flex-col items-center gap-3">
-                  <Image
-                    width={500}
-                    height={500}
-                    className="w-[155px] h-[148px]"
-                    src="/SuccessfulDepositInfo.png"
-                    alt="پرداخت موفقیت آمیز"
-                  />
-                  <p>پرداخت شما با موفقیت انجام شد</p>
-                  <div className="w-full p-1 bg-gray-100 rounded-sm flex gap-2 justify-center items-center">
-                    <label htmlFor="paid">
-                      <CustomCheckBox
+              <div className="py-2">
+                <SwiperContainerWalletPage gap={10} activePrice={activePrice} activePriceHandler={activePriceHandler} isShowCount={showCount} showCountHandler={showcountPriceHandler} />
+              </div>
+              {
+                showCount ?
+                  <div className="py-4 flex justify-between items-center gap-2">
+                    <p className="text-md">تعداد نوبت : </p>
+                    <input type="number" ref={inputRef} placeholder="تعداد نوبت " value={countAppointment} onChange={changeCountAppointmentHandler} className="border border-primary flex-1 p-1 rounded-3xl px-2 text-center placeholder:text-sm text-primary text-md " style={{ direction: "ltr" }} />
+                  </div> : null
+              }
+
+
+              <div className="mt-4">
+                {!disabledButtonPayment ? (<ButtonElement
+                  typeButton={disabledButtonPayment ? "secondary" : "primary"}
+                  variant={disabledButtonPayment ? "outlined" : "contained"}
+                  fontSize="md"
+                  disabled={disabledButtonPayment}
+                  handler={() => paymentHandler.mutate({ id: 0, price: +totalPrice * 10, paymentType: 0 })}
+                >
+                  {loadingPayment ? (
+                    <Loader
+                      size="size-[2.5rem]"
+                      color={"border-white"}
+                    />
+                  ) : (
+                    <p>{t("Record")} <span className="text-sm">({priceSplitter(totalPrice)} تومان)</span></p>
+                  )}
+                </ButtonElement>) : null}
+
+              </div>
+            </div>
+          </BottomSheetAndCenterContent>
+        </Modal>
+        {/* payment status = success  */}
+        <Modal
+          show={showSuccessDepositModal}
+          closeHandler={() => {
+            setShowSuccessDepositModal(false);
+          }}
+        >
+          <div className="w-full h-full flex justify-center items-center">
+            <div className="bg-white p-5 w-[23.125rem] rounded-sm max-w-full relative">
+              <div className="flex justify-end items-center absolute left-[1.25rem] top-[1.25rem]">
+                <CloseButton
+                  closeHanlder={() => {
+                    setShowSuccessDepositModal(false);
+                  }}
+                />
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <Image
+                  width={500}
+                  height={500}
+                  className="w-[9.6875rem] h-[9.25rem]"
+                  src="/SuccessfulDepositInfo.png"
+                  alt="پرداخت موفقیت آمیز"
+                />
+                <p>پرداخت شما با موفقیت انجام شد</p>
+                <div className="w-full p-1 bg-gray-100 rounded-sm flex gap-2 justify-center items-center">
+                  <label htmlFor="paid">
+                    {/* <Checkbox
                         id="paid"
                         defaultChecked={true}
                         bg="bg-primary"
                         disabled
-                      />
-                    </label>
-                    <p className="font-bold">
-                      مبلغ {priceSplitter(price)} ریال
-                    </p>
-                  </div>
-                  <div className="mt-3 flex flex-col gap-2">
-                    <p className="text-md">
-                      <span className="font-bold">تاریخ انجام: </span>
-                      <span>
-                        {date.year}/{date.month}/{date.day}
-                      </span>
-                    </p>
-                    <p className="text-md">
-                      <span className="font-bold">شماره تراکنش: </span>
-                      <span>{params["transaction-number"]}</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Modal>
-          <Modal
-            show={showFailureDepositModal}
-            closeHandler={() => {
-              setShowFailureDepositModal(false);
-            }}
-          >
-            <div className="w-full h-full flex justify-center items-center px-4">
-              <div className="bg-white p-5 w-[370px] rounded-sm max-w-full relative">
-                <div className="flex justify-end items-center absolute left-[20px] top-[20px]">
-                  <CloseButtonCom
-                    closeHanlder={() => {
-                      setShowFailureDepositModal(false);
-                    }}
-                  />
-                </div>
-                <div className="flex flex-col items-center gap-3">
-                  <Image
-                    width={500}
-                    height={500}
-                    className="w-[155px] h-[135]"
-                    src="/FailureDepositInfo.png"
-                    alt="پرداخت ناموفق"
-                  />
-                  <p className="font-bold">پرداخت شما با مشکل مواجه شده!</p>
-                  <p className="text-center">
-                    در صورت کسر مبلغ، تا 72 ساعت آینده هزینه به حساب شما برگشت
-                    داده خواهد شد.
+                      /> */}
+                  </label>
+                  <p className="font-bold">
+                    مبلغ {priceSplitter(+price)} ریال
                   </p>
-                  <div className="w-full">
-                    <ButtonElement
-                      bg="bg-primary"
-                      fontW="font-bold"
-                      textC="text-white"
-                      clickHandler={() => paymentHandler(+price * 10)}
-                    >
-                      {loadingPayment ? (
-                        <Loader
-                          width={"w-[40px]"}
-                          height={"h-[40px]"}
-                          color={"border-white"}
-                        />
-                      ) : (
-                        "تلاش مجدد"
-                      )}
-                    </ButtonElement>
-                  </div>
+                </div>
+                <div className="mt-3 flex flex-col gap-2">
+                  <p className="text-md">
+                    <span className="font-bold">تاریخ انجام: </span>
+                    <span>
+                      {date.year}/{date.month}/{date.day}
+                    </span>
+                  </p>
+                  <p className="text-md">
+                    <span className="font-bold">شماره تراکنش: </span>
+                    <span>{props.params?.["transaction-number"]}</span>
+                  </p>
                 </div>
               </div>
             </div>
-          </Modal>
-        </div>
+          </div>
+        </Modal>
+        {/* payment status = fail  */}
+        <Modal
+          show={showFailureDepositModal}
+          closeHandler={() => {
+            setShowFailureDepositModal(false);
+          }}
+        >
+          <div className="w-full h-full flex justify-center items-center px-4">
+            <div className="bg-white p-5 w-[23.125rem] rounded-sm max-w-full relative">
+              <div className="flex justify-end items-center absolute left-[1.25rem] top-[1.25rem]">
+                <CloseButton
+                  closeHanlder={() => {
+                    setShowFailureDepositModal(false);
+                  }}
+                />
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <Image
+                  width={500}
+                  height={500}
+                  className="w-[9.6875rem] h-[8.4375rem]"
+                  src="/FailureDepositInfo.png"
+                  alt="پرداخت ناموفق"
+                />
+                <p className="font-bold">پرداخت شما با مشکل مواجه شده!</p>
+                <p className="text-center">
+                  در صورت کسر مبلغ، تا 72 ساعت آینده هزینه به حساب شما برگشت
+                  داده خواهد شد.
+                </p>
+                <div className="w-full">
+                  <ButtonElement
+                    typeButton="primary"
+                    fontWeight="bold"
+                    handler={() => paymentHandler.mutate({ id: 0, price: +price * 10, paymentType: 0 })}
+                  >
+                    {loadingPayment ? (
+                      <Loader
+                        size="size-[2.5rem]"
+                        color={"border-white"}
+                      />
+                    ) : (
+                      "تلاش مجدد"
+                    )}
+                  </ButtonElement>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
+
       </div>
     </>
   );
@@ -504,7 +446,10 @@ const WalletPage = (props) => {
 
 export default WalletPage;
 
-const TransactionCard = (props) => {
+
+
+
+const TransactionCard = (props: TransctionsType) => {
   const t = useTranslations("wallet_page");
 
   return (
@@ -555,19 +500,21 @@ const TransactionCard = (props) => {
     </div>
   );
 };
+
+
 const TransactionCardLoading = () => {
   return (
     <div className="p-4 rounded-sm border border-gray-200  gap-2  w-full grid grid-cols-3">
       <div className="text-md ">
-        <Skeleton className="h-[20px]" />{" "}
+        <Skeleton className="h-[1.25rem]" />{" "}
       </div>
 
       <div className="text-md font-bold ">
-        <Skeleton className="h-[20px]" />{" "}
+        <Skeleton className="h-[1.25rem]" />{" "}
       </div>
 
       <div className="">
-        <Skeleton className="h-[20px]" />{" "}
+        <Skeleton className="h-[1.25rem]" />{" "}
       </div>
     </div>
   );

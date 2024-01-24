@@ -11,3 +11,23 @@ export interface UserType {
   provinceName: string;
   accountBalance: number;
 }
+
+export interface TransctionsType {
+  id: string;
+  isSuccess: boolean;
+  userId: string;
+  user?: any;
+  accountBalanceBeforeAction: number;
+  description?: any;
+  amount: number;
+  status?: any;
+  createdAt: string;
+  actionType: number;
+  authority?: any;
+  refId?: any;
+  isValidConnectToBankForPay: boolean;
+  isValidConnectToBankForResult: boolean;
+  userPhysicianProfileClanedarId: string;
+  userPhysicianProfileClanedar?: any;
+}
+

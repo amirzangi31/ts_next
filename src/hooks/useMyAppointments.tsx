@@ -56,15 +56,11 @@ const useMyAppointments = () => {
 
     useEffect(() => {
         if (!isLoading) {
-
             setFutureAppointments(data?.value?.items.filter((item: MyAppointmentType) => item.passedOrFuture !== "Passed"))
             setPastAppointments(data?.value?.items.filter((item: MyAppointmentType) => item.passedOrFuture === "Passed"))
-
         }
     }, [isLoading])
 
-
-    
 
     return {
         myAppointments: data?.value?.items,

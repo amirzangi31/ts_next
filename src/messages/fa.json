@@ -146,6 +146,7 @@
         "deposit": "واریزی",
         "withdrawal": "برداشت",
         "return": "برگشت",
+        "cancel": "لغو",
         "Increasing-balance": "افزایش موجودی کیف پول به مبلغ",
         "Enter-desired-amount": "مبلغ مورد نظر را به عدد (تومان) اینجا وارد کنید",
         "Record": "ثبت",

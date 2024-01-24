@@ -32,7 +32,6 @@ import ButtonElement from "@/components/elements/ButtonElement";
 import CloseButton from "@/components/elements/CloseButton";
 import useMyAppointments from "@/hooks/useMyAppointments";
 import TitlePagesMobile from "@/components/modules/titles/TitlePagesMobile";
-import useUserInfo from "@/hooks/useUserInfo";
 import { getUrlImage } from "@/services/getImageUrl/getImageUrl";
 import Checkbox from "@/components/elements/inputs/Checkbox";
 import { MyAppointmentType } from "@/types/appointment";
@@ -46,33 +45,61 @@ const MyAppointmentsPage = () => {
 
   // appointments hook
   const { isLoading, futureAppointments, pastAppointments } = useMyAppointments()
+  const [pastAppointmentsUi, setPastAppointmentsUi] = useState<MyAppointmentType[]>([])
 
-
+  useEffect(() => {
+    setPastAppointmentsUi(pastAppointments)
+  }, [pastAppointments])
 
 
   const [activeTab, setActiveTab] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [filters, setFilters] = useState({
-    OnlineAppointment: false,
-    TextConsultation: false,
-    VoiceConsultation: false,
-    ImmediateConsultation: false,
-    disabled: false,
-  });
+  const [filters, setFilters] = useState<
+    {
+      onlineAppointment: boolean,
+      textConsultation: boolean,
+      voiceConsultation: boolean,
+      immediateConsultation: boolean,
 
+    }>({
+      onlineAppointment: true,
+      textConsultation: true,
+      voiceConsultation: true,
+      immediateConsultation: true,
+    });
+  const [disabledFilter, setDisabledFilter] = useState(false)
 
+  const disabledFilterHandler = (val: boolean): MyAppointmentType[] => {
+    if (val) {
+      const newArray: MyAppointmentType[] = pastAppointments.filter((item: MyAppointmentType) => item?.status === "Is Deleted By User" || item?.status === "Is Deleted By Physician")
+      setPastAppointmentsUi(newArray)
+      return newArray
+    } else {
+      const newArray: MyAppointmentType[] = pastAppointments.filter(item => item)
+      setPastAppointmentsUi(newArray)
+      return newArray
+    }
+  }
 
 
   //filter appointment for render 
   useEffect(() => {
+    let filterArray : MyAppointmentType[]= []
+    // const onlineAppointment = disabledFilterHandler(disabledFilter).filter((item) => item.onlineAppointment === filters.onlineAppointment)
+    // const textConsultation = disabledFilterHandler(disabledFilter).filter((item) => item.textConsultation === filters.textConsultation)
+    // const voiceConsultation = disabledFilterHandler(disabledFilter).filter((item) => item.voiceConsultation === filters.voiceConsultation)
+    // const immediateConsultation = disabledFilterHandler(disabledFilter).filter((item) => item.immediateConsultation === filters.immediateConsultation)
 
-  }, [isLoading]);
+    for(let i in filters) {
+      // for(let key = 0)
+
+    }
 
 
-  //fitler appointments 
-  useEffect(() => {
+    setPastAppointmentsUi([])
+  }, [filters, disabledFilter, pastAppointments]);
 
-  }, [filters]);
+
 
 
 
@@ -108,12 +135,12 @@ const MyAppointmentsPage = () => {
               <FilterIcon />
               <span className="text-lg font-bold ">{t("Filters")}</span>
               <span className="text-sm ">
-                ({Object.values(filters).filter((item) => item === true).length}{" "}
+                ({Object.values(filters).filter((item) => item === true).length + (disabledFilter ? 1 : 0)}
                 مورد)
               </span>
             </button>
           </div>
-
+          {/* feture appointments */}
           <TabPanel>
             {isLoading ? (
               <div className="mt-4 grid grid-col-1 md:grid-cols-2 gap-2 flex-col ">
@@ -163,8 +190,9 @@ const MyAppointmentsPage = () => {
               </div>
             ) : null}
           </TabPanel>
+          {/* past appointments */}
           <TabPanel>
-            {!pastAppointments?.length ? (
+            {!pastAppointmentsUi?.length ? (
               <div className="h-[calc(100vh-400px)] flex justify-center items-center flex-col gap-8">
                 <div>
                   <Image
@@ -195,7 +223,7 @@ const MyAppointmentsPage = () => {
             ) : (
               <div className="mt-4">
                 <div className="mt-4 grid grid-cols-1 min-[1200px]:grid-cols-2 gap-2">
-                  {pastAppointments?.map((item: MyAppointmentType) => (
+                  {pastAppointmentsUi?.map((item: MyAppointmentType) => (
                     <AppointmentCardOff key={item.id} {...item} />
                   ))}
                 </div>
@@ -214,27 +242,39 @@ const MyAppointmentsPage = () => {
             <p className="flex justify-center items-center h-[2.5rem] font-bold ">
               {g("Filters")}
             </p>
-            {/* <div className="mt-4 flex justify-start items-start gap-2 flex-col ">
+            <div className="mt-4 flex justify-start items-start gap-2 flex-col ">
               {Object.keys(filters).map((item, index) => (
-                <label
-                  htmlFor={item}
-                  key={index}
-                  className="flex justify-start items-start gap-1 text-md cursor-pointer "
-                >
-                  <Checkbox
-                    
-                    id={item}
-                    value={filters[item]}
-                    defaultChecked={filters[item]}
-                    onChangeProp={() =>
-                      setFilters({ ...filters, [item]: !filters[item] })
-                    }
-                  />
 
-                  {s(planNameConvert(item))}
-                </label>
+                <Checkbox
+                  key={item}
+                  title={s(planNameConvert(item))}
+                  id={item}
+                  checkHandler={(e) => {
+                    setFilters({
+                      ...filters,
+                      [e.target.name]: !Object.values(filters)?.[index]
+                    })
+                    // filterAppintmentHandler(e.target.checked, item)
+                  }}
+                  checked={Object.values(filters)?.[index]}
+                  name={Object.keys(filters)?.[index]}
+                />
+
+
+
               ))}
-            </div> */}
+              <Checkbox
+
+                title={s(planNameConvert("disabled"))}
+
+                checkHandler={(e) => {
+                  setDisabledFilter(!disabledFilter)
+                  disabledFilterHandler(e.target.checked)
+                }}
+                checked={disabledFilter}
+                name={"disabled"}
+              />
+            </div>
           </div>
         </BottomSheetAndCenterContent>
       </Modal>

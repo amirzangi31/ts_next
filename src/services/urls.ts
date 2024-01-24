@@ -103,6 +103,37 @@ const urls = {
       query: {},
     },
 
+  },
+
+
+  //wallet 
+  wallet: {
+    transctions: {
+      url: "/User/PaymentHistory/List",
+      method: "POST",
+      parametrs: {
+
+        pagedListInputDto: {
+          pageNumber: 0,
+          itemsCountPerPage: 0
+        }
+      },
+      query: {}
+    }
+  },
+
+  //payment 
+  payment: {
+    payment: {
+      url: "/User/Payment/Payment",
+      method: "POST",
+      parametrs: {
+        id: 0,
+        amount: 0,
+        paymentType: 0
+      },
+      query: {}
+    }
   }
 };
 

@@ -17,6 +17,7 @@
     "axios": "^1.6.3",
     "clsx": "^2.0.0",
     "formik": "^2.4.5",
+    "jalali-moment": "^3.3.11",
     "next": "14.0.4",
     "next-intl": "^3.4.0",
     "react": "^18",

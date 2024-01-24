@@ -145,6 +145,7 @@
         "deposit": "Deposit",
         "withdrawal": "Withdrawal",
         "return": "Return",
+        "cancel": "Cancel",
         "Increasing-balance": "Increasing the balance of the wallet in the amount of",
         "Enter-desired-amount": "Enter the desired amount in numbers (tomans) here",
         "Record": "Record",
@@ -217,19 +218,19 @@
         "arenap": "Arenap",
         "I-accept": "terms and conditions"
     },
-    "blogDetailes_page" : {
-        "blog" : "blog",
-        "Related-articles" : "Related articles",
-        "Suggested-doctors" : "Suggested doctors in this field",
-        "Hashtags" : "Hashtags" ,
-        "User-comments" : "User comments",
-        "Register-comment" : "Register a comment",
-        "To-register-comment" : "To register a comment, first ",
-        "log-here" : "log in here",
-        "sha" : "",
-        "author" : "author",
+    "blogDetailes_page": {
+        "blog": "blog",
+        "Related-articles": "Related articles",
+        "Suggested-doctors": "Suggested doctors in this field",
+        "Hashtags": "Hashtags",
+        "User-comments": "User comments",
+        "Register-comment": "Register a comment",
+        "To-register-comment": "To register a comment, first ",
+        "log-here": "log in here",
+        "sha": "",
+        "author": "author",
         "Comment-content": "Comment content",
-        "Enter-text" : "Enter the text",
-        "take-appointment" : "Take appointment"
+        "Enter-text": "Enter the text",
+        "take-appointment": "Take appointment"
     }
 }
