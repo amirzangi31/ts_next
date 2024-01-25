@@ -5,16 +5,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 const useFavorite = (physicianProfileId: string) => {
     const queryClient = useQueryClient();
 
-    const allFavorite = useQuery(["myFavorite"], async () => {
-        const result = await getAllFavorite()
-        return result
-    }, { cacheTime: 5 * 60000 })
 
     const userFavorite = useQuery(["userFavorite"], async () => {
         const result = await isFavorite(physicianProfileId)
         return result
     })
-
 
     const addFavoriteHandler = useMutation({
         mutationFn: async () => {
@@ -40,14 +35,15 @@ const useFavorite = (physicianProfileId: string) => {
         onSuccess: async () => {
             const result = await queryClient.invalidateQueries({
                 queryKey: [`userFavorite`],
+
             });
 
         },
     })
 
     return {
-        myFavorite: allFavorite?.data,
-        isLoading: allFavorite?.isLoading,
+        // myFavorite: allFavorite?.data,
+        // isLoading: allFavorite?.isLoading,
         userFavorite: userFavorite?.data?.isFavorite,
         isLodingUserFavorite: userFavorite.isLoading,
         addFavorite: addFavoriteHandler?.mutate,
