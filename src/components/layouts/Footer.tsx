@@ -138,7 +138,7 @@ const Footer = () => {
     //   </div>
     // </footer>
     <footer className='bg-white'>
-      <div className="container max-w-[1300px] pb-[93px] lg:pb-5 pt-4">
+      <div className="container max-w-[81.25rem] pb-[5.8125rem] lg:pb-5 pt-4">
         <div className='flex justify-between items-start flex-wrap'>
           <div className='w-full lg:w-1/3 flex justify-between items-center gap-1 px-2' >
             <div className='flex justify-center items-center flex-col w-full'>
@@ -192,10 +192,10 @@ const Footer = () => {
           {/* Send Comment */}
           <div className='w-full order-3 min-[480px]:order-none min-[480px]:w-1/2 lg:w-1/3 px-2 mt-4 lg:mt-0  rounded-sm p-2'  >
             <div className='grid grid-cols-2 gap-1'>
-              <div className='border-b border-gray-500   px-2 h-[45px] '>
+              <div className='border-b border-gray-500   px-2 h-[2.8125rem] '>
                 <input type="text" name='firstName' value={form.firstName} onChange={changeHandler} className='w-full h-full text-sm ' placeholder='نام' />
               </div>
-              <div className='border-b border-gray-500   px-2 h-[45px] '>
+              <div className='border-b border-gray-500   px-2 h-[2.8125rem] '>
                 <input type="text" name='lastName' value={form.lastName} onChange={changeHandler} className='w-full h-full text-sm ' placeholder='نام خانوادگی' />
               </div>
             </div>
@@ -205,10 +205,10 @@ const Footer = () => {
           <div className='w-full mt-4 lg:order-2'>
             <div className='flex justify-center items-center gap-2'>
               <div className="border border-gray-500 p-1 rounded-sm ">
-                <Image alt='enamad_icon' src={"/enamad.jpg"} width={500} height={500} className='w-[80px] h-[80px]' />
+                <Image alt='enamad_icon' src={"/enamad.jpg"} width={500} height={500} className='size-[5rem]' />
               </div>
               <div className="border border-gray-500 p-1 rounded-sm ">
-                <Image alt='enamad_icon' src={"/samandehi.jpg"} width={500} height={500} className='w-[80px] h-[80px]' />
+                <Image alt='enamad_icon' src={"/samandehi.jpg"} width={500} height={500} className='size-[5rem]' />
               </div>
             </div>
           </div>

@@ -34,35 +34,35 @@ const SwiperContainerWalletPage = ({ gap, activePrice, activePriceHandler, showC
             dir="rtl"
         >
             <SwiperSlide className="swiper_width_auto ">
-                <button type="button" onClick={() => activePriceHandler(1)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[100px] border text-md border-primary", {
+                <button type="button" onClick={() => activePriceHandler(1)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[6.25rem] border text-md border-primary", {
                     "bg-primary text-white ": activePrice === 1
                 })} >
                     یک نوبت
                 </button>
             </SwiperSlide>
             <SwiperSlide className="swiper_width_auto ">
-                <button type="button" onClick={() => activePriceHandler(3)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[100px] border text-md border-primary", {
+                <button type="button" onClick={() => activePriceHandler(3)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[6.25rem] border text-md border-primary", {
                     "bg-primary text-white ": activePrice === 3
                 })} >
                     سه نوبت
                 </button>
             </SwiperSlide>
             <SwiperSlide className="swiper_width_auto ">
-                <button type="button" onClick={() => activePriceHandler(5)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[100px] border text-md border-primary", {
+                <button type="button" onClick={() => activePriceHandler(5)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[6.25rem] border text-md border-primary", {
                     "bg-primary text-white ": activePrice === 5
                 })} >
                     پنج نوبت
                 </button>
             </SwiperSlide>
             <SwiperSlide className="swiper_width_auto ">
-                <button type="button" onClick={() => activePriceHandler(10)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[100px] border text-md border-primary", {
+                <button type="button" onClick={() => activePriceHandler(10)} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[6.25rem] border text-md border-primary", {
                     "bg-primary text-white ": activePrice === 10
                 })} >
                     ده نوبت
                 </button>
             </SwiperSlide>
             <SwiperSlide className="swiper_width_auto ">
-                <button type="button" onClick={showCountHandler} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[100px] border text-md border-primary", {
+                <button type="button" onClick={showCountHandler} className={cn("p-2 bg-white shadow-shadow_category text-primary font-bold text-center rounded-[6.25rem] border text-md border-primary", {
                     "bg-primary text-white ": isShowCount
                 })} >
                     تعداد دلخواه

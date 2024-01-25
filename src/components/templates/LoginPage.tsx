@@ -43,7 +43,7 @@ const LoginPage = () => {
         <>
             <TitlePagesMobile title={t("sign")} />
             <ModalLogin  />
-            <div className="container pb-5 max-w-[1000px]">
+            <div className="container pb-5 max-w-[62.5rem]">
                 <header className="mt-12">
                     <div className="relative w-full ">
                         <div className="bg-white  rounded-full w-20 h-20 flex justify-center items-center absolute left-[calc(50%-40px)] -top-10 ">
@@ -52,10 +52,10 @@ const LoginPage = () => {
                                 alt="user_picture"
                                 width={700}
                                 height={700}
-                                className=" h-[73px] rounded-lg w-[73px]"
+                                className=" rounded-lg size-[4.5625rem]"
                             />
                         </div>
-                        <div className="bg-white rounded-sm px-3.5 pt-[60px] pb-3.5">
+                        <div className="bg-white rounded-sm px-3.5 pt-[3.75rem] pb-3.5">
                             <ButtonElement
                                 fontWeight={"bold"}
                                 typeButton="primary"
@@ -83,7 +83,7 @@ const LoginPage = () => {
                 </section>
 
                 <div className="flex justify-end items-center mt-2 ">
-                    <Link href={`/${local}/Auth/Login`} className="w-[250px]">
+                    <Link href={`/${local}/Auth/Login`} className="w-[15.625rem]">
                         <ButtonElement typeButton="secondary" size="sm" >
                             <p className="text-md">
                                 {" "}

@@ -53,9 +53,9 @@ const PhysicianProfileCard = ({
 
   return (
     <>
-      <div className="flex flex-col gap-5 justify-between p-5 rounded-sm bg-white mt-3 min-h-[310px] shadow-shadow_category">
+      <div className="flex flex-col gap-5 justify-between p-5 rounded-sm bg-white mt-3 min-h-[19.375rem] shadow-shadow_category">
         <div className="flex gap-3">
-          <div className="rounded-full relative w-[92px] h-[92px] min-w-[92px] shadow-[0px_0px_8px_0px_rgba(0,0,0,0.08)]">
+          <div className="rounded-full relative size-[5.75rem] min-w-[5.75rem] shadow-[0px_0px_8px_0px_rgba(0,0,0,0.08)]">
             <Image
               src={profileURL}
               width={200}
@@ -70,9 +70,9 @@ const PhysicianProfileCard = ({
                                 </span>
                             </span>
                         } */}
-            <span className="w-[16px] h-[16px] bg-white rounded-full absolute bottom-[1px] rtl:right-[9px] ltr:-left-[5px] flex justify-center items-center ">
+            <span className="size-[4] bg-white rounded-full absolute bottom-[1px] rtl:right-[9px] ltr:-left-[5px] flex justify-center items-center ">
               <span
-                className={cn(`w-[10px]  h-[10px] rounded-full `, {
+                className={cn(`size-[0.625rem] rounded-full `, {
                   "bg-primary-100 animate-pulse": status,
                   "bg-gray-400": !status,
                 })}
@@ -123,13 +123,13 @@ const PhysicianProfileCard = ({
           <div className="flex gap-3 items-center">
             <button
               type="button"
-              className="flex justify-center items-center rounded-full p-2 bg-gray-100 h-[43px] w-[43px]"
+              className="flex justify-center items-center rounded-full p-2 bg-gray-100 size-[2.6875rem]"
             >
               <ShareIcon />
             </button>
             <button
               type="button"
-              className="flex justify-center items-center rounded-full p-2 bg-gray-100 h-[43px] w-[43px]"
+              className="flex justify-center items-center rounded-full p-2 bg-gray-100 size-[2.6875rem]"
               onClick={addFavorite}
             >
               <LikeIcon liked={liked} />

@@ -32,7 +32,7 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
     }, [isLogin])
 
     return (
-        <div className=" max-w-[1300px] relative pb-5 container flex justify-start items-start gap-2">
+        <div className=" max-w-[81.25rem] relative pb-5 container flex justify-start items-start gap-2">
             <SidebarProfile  />
            
             <div className="flex-1">

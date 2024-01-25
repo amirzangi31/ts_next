@@ -24,7 +24,7 @@ const AcoountButtonHeader = ({ user } : {user : UserType}) => {
         <>
             {showDrop ? (<span className='fixed w-screen left-0 top-0 h-screen  block' onClick={() => setShowDrop(false)}></span>) : ""}
             <div onClick={() => setShowDrop(!showDrop)} className='relative z-[58] flex justify-between items-center  p-1 h-[3.125rem] bg-white gap-2  font-bold rounded-3xl text-center max-[15.625rem] cursor-pointer'>
-                <Image src={"/user.png"} width={500} height={500} className='w-[40px]' alt="profil_image" />
+                <Image src={"/user.png"} width={500} height={500} className='w-[2.5rem]' alt="profil_image" />
                 <span className='text-black text-sm'>{user.firstName} {user.lastName}</span>
                 <div className='px-3'>
                     <span className={cn("block transition-all duration-300", {

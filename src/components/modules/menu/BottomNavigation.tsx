@@ -17,7 +17,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
     // const { isLogin } = useAuth(true)
 
     return (
-        <div className="fixed bottom-0 left-0 w-full h-[78px] bg-white flex justify-between items-center flex-row-reverse md:hidden px-8 z-[10] shadow-shadow_bottom_nav">
+        <div className="fixed bottom-0 left-0 w-full h-[4.875rem] bg-white flex justify-between items-center flex-row-reverse md:hidden px-8 z-[10] shadow-shadow_bottom_nav">
 
             {/* Blog button */}
             <LinkElement

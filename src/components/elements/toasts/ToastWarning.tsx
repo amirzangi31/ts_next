@@ -8,7 +8,7 @@ const ToastWarning = (title: string, subTitle: string, second: number = 3000, po
     return (
         toast.custom((t) => (
             <div
-                className={`animate-opacity max-w-[400px] shadow-shadow_toast  w-full flex items-center h-[60px] rounded-sm justify-between px-4 text-md     pointer-events-auto  bg-[#FFDF9B]  z-[100] `}
+                className={`animate-opacity max-w-[25rem] shadow-shadow_toast  w-full flex items-center h-[3.75rem] rounded-sm justify-between px-4 text-md     pointer-events-auto  bg-[#FFDF9B]  z-[100] `}
             >
                 <div className='flex justify-center items-center'>
                     {

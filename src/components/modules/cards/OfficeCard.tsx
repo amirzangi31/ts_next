@@ -90,7 +90,7 @@ const OfficeCard = ({ title, address, numbers, longitude, latitude }: OfficeCard
             if (target.id === "modal_address") setShowModalAddress(false);
           }}
         >
-          <div className=" w-[700px] max-w-full  bg-white p-5 rounded-sm shadow-shadow_category">
+          <div className=" w-[43.75rem] max-w-full  bg-white p-5 rounded-sm shadow-shadow_category">
             <p className="text-center text-link font-bold">
               مسیر یابی روی نقشه
             </p>

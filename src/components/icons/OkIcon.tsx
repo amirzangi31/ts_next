@@ -6,9 +6,9 @@ const OkIcon = ({ disabled }: { disabled: boolean }) => {
         <>
             {
                 disabled ?
-                    <Image src={"/OkIcon.png"} width={500} height={500} alt='okIcon' className='w-[24px] h-[24px]' />
+                    <Image src={"/OkIcon.png"} width={500} height={500} alt='okIcon' className='size-[1.5rem]' />
                     :
-                    <Image src={"/OkGray.png"} width={500} height={500} alt='okIcon' className='w-[24px] h-[24px]' />
+                    <Image src={"/OkGray.png"} width={500} height={500} alt='okIcon' className='size-[1.5rem]' />
             }
         </>
     )

@@ -87,7 +87,7 @@ const useLogin = (isCallback: boolean = false, indexCallback: number = 0, callba
                 obj
             );
             const data = res.data;
-            if (data.resultCode === 200) {
+            if (data?.resultCode === 200) {
                 localStorage.setItem("accessToken", data.value.accessToken)
                 localStorage.setItem("refreshToken", data.value.refreshToken)
                 dispatch(saveTokens({ accessToken: data.value.accessToken, refreshToken: data.value.refreshToken }))
@@ -99,7 +99,7 @@ const useLogin = (isCallback: boolean = false, indexCallback: number = 0, callba
                 }
             }
 
-            if (data.resultCode === 1200) {
+            if (data?.resultCode === 1200) {
                 dispatch(saveSessionId({ sessionId: data.value.sessionId }))
             }
 
@@ -130,7 +130,7 @@ const useLogin = (isCallback: boolean = false, indexCallback: number = 0, callba
                 obj
             );
             const data = res.data;
-            if (data.resultCode === 200) {
+            if (data?.resultCode === 200) {
                 closeModalLogin()
                 localStorage.setItem("accessToken", data.value.accessToken)
                 localStorage.setItem("refreshToken", data.value.refreshToken)

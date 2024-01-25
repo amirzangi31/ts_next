@@ -21,7 +21,7 @@ const FormControl = (props: FormControlType) => {
     return (
         <div className='flex justify-between items-start flex-col relative'>
             {title && <label className='my-2 text-sm font-bold text-black px-2' htmlFor={field.name}>{title}</label>}
-            <div className={cn(`px-2 py-2 border   rounded-[30px] w-full text-sm`, {
+            <div className={cn(`px-2 py-2 border   rounded-[1.875rem] w-full text-sm`, {
                 "border-error": form.errors?.[field.name] && form.touched?.[field.name],
                 "border-gray": !form.errors?.[field.name] && !form.touched?.[field.name]
             })}>

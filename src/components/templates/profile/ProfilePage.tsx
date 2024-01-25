@@ -29,7 +29,7 @@ const ProfilePage = () => {
                     {isLogin === "authorization" ? (<ProfileCard type={false} />) : (
                         <div className='relative w-full '>
                             <div className='bg-white  rounded-full w-20 h-20 flex justify-center items-center absolute left-[calc(50%-40px)] -top-10 '>
-                                <Image src={"/user.png"} alt='user_picture' width={700} height={700} className=' h-[73px] rounded-lg w-[73px]' />
+                                <Image src={"/user.png"} alt='user_picture' width={700} height={700} className=' h-[4.5625rem] rounded-lg w-[4.5625rem]' />
                             </div>
                             <div className='bg-white rounded-sm p-3.5'>
                                 <div className='flex justify-between items-center'>

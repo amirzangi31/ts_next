@@ -39,7 +39,7 @@ const SectionTitle = ({
         <div className="flex justify-between items-center pb-4">
             <h3
                 className={cn(`text-lg font-bold `, {
-                    "rtl:mr-[20px] ltr:ml-[20px] relative after:absolute after:rtl:-right-[20px] after:rounded-lg after:top-0 after:block after:bg-primary after:w-1.5 after:h-full":
+                    "rtl:mr-[1.25rem] ltr:ml-[1.25rem] relative after:absolute after:rtl:-right-[1.25rem] after:rounded-lg after:top-0 after:block after:bg-primary after:w-1.5 after:h-full":
                         prefix,
                 })}
             >
@@ -47,7 +47,7 @@ const SectionTitle = ({
             </h3>
             {btn && link && (
                 <LinkElement link={`/${link}`} >
-                    <div className="w-[120px]">
+                    <div className="w-[7.5rem]">
                         <button
                             type="button"
                             className="bg-gray-200 text-sm border-gray-200 text-primary h-[2.5rem] px-4 flex justify-center items-center gap-2 w-full rounded-3xl"
@@ -61,7 +61,7 @@ const SectionTitle = ({
                 </LinkElement>
             )}
             {btn && !link && (
-                <div className="w-[120px]">
+                <div className="w-[7.5rem]">
                     <button
                         type="button"
                         className="bg-gray-200 text-sm border-gray-200 text-primary h-[2.5rem] px-4 flex justify-center items-center gap-2 w-full rounded-3xl"

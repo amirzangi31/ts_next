@@ -13,7 +13,7 @@ const ArticleCardPrimary = (props: ArticleCardType) => {
         <LinkElement
             link={`/blog/${id}`}
             className={cn(
-                `p-2 h-[260px] group w-[180px] flex justify-between items-start flex-col  bg-white rounded-sm`,
+                `p-2 h-[16.25rem] group w-[11.25rem] flex justify-between items-start flex-col  bg-white rounded-sm`,
                 {
 
                 }

@@ -39,7 +39,7 @@ const ModalLogOut = () => {
         <>
             <Modal show={isShow} closeHandler={closeLogoutModal} >
                 <BottomSheetAndCenterContent show={isShow}>
-                    <span className='absolute top-[30px] rtl:left-[15px] ltr:right-[15px] xs:rtl:left-[30px] xs:ltr:right[30px]' ><CloseButton closeHanlder={closeLogoutModal} /></span>
+                    <span className='absolute top-[1.875rem] rtl:left-[0.9375rem] ltr:right-[0.9375rem] xs:rtl:left-[1.875rem] xs:ltr:right[1.875rem]' ><CloseButton closeHanlder={closeLogoutModal} /></span>
 
                     <p className="font-bold">
                         خارج شدن از حساب کاربری
@@ -54,7 +54,7 @@ const ModalLogOut = () => {
             </Modal>
             <Modal show={finalLogoutModalShow} closeHandler={closeFinalLogoutModalHandler}>
                 <div className='w-full h-full flex justify-center items-center z-10  '>
-                    <div className='bg-white p-5 w-[300px] rounded-sm max-w-full'>
+                    <div className='bg-white p-5 w-[18.75rem] rounded-sm max-w-full'>
                         <div className='flex justify-end items-center '>
                             <CloseButton closeHanlder={closeFinalLogoutModalHandler} />
                         </div>

@@ -43,7 +43,7 @@ const PhysicainCardPrimary = ({
         <LinkElement
             link={`/Physician/${physicianProfileUrl}`}
             className={cn(
-                `bg-white rounded-sm group   transition-all duration-300 w-[320px] shadow-shadow_category min-h-[230px]  flex justify-between items-start flex-col`,
+                `bg-white rounded-sm group   transition-all duration-300 w-[20rem] shadow-shadow_category min-h-[14.375rem]  flex justify-between items-start flex-col`,
             )}
         >
             <div className="p-4  w-full flex justify-between items-start">
@@ -53,11 +53,11 @@ const PhysicainCardPrimary = ({
                         width={500}
                         height={500}
                         alt="doctor_profile"
-                        className="w-[60px] h-[60px] rounded-full"
+                        className="size-[3.75rem] rounded-full"
                     />
-                    <span className="w-[16px] h-[16px] bg-white rounded-full absolute bottom-0 rtl:right-0 ltr:left-0 flex justify-center items-center ">
+                    <span className="size-4 bg-white rounded-full absolute bottom-0 rtl:right-0 ltr:left-0 flex justify-center items-center ">
                         <span
-                            className={cn(`w-[12px] h-[12px] rounded-full `,
+                            className={cn(`size-3 rounded-full `,
                                 {
                                     "bg-primary-100": immediateConsultation,
                                     "bg-gray-400": !immediateConsultation,
@@ -67,7 +67,7 @@ const PhysicainCardPrimary = ({
                         ></span>
                     </span>
                 </div>
-                <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-center gap-1 items-start flex-col min-h-[60px]">
+                <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-center gap-1 items-start flex-col min-h-[3.75rem]">
                     <p className="text-lg font-bold ">{firstName} {lastName}</p>
                     {physicianSpecialities?.length ? <p className="text-md short-text-2">{physicianSpecialities[0]?.specialityTitle}</p> : null}
                 </div>
@@ -94,7 +94,7 @@ const PhysicainCardPrimary = ({
                 />
             </div>
             <div className="px-2 pb-2 w-full">
-                <div className="bg-gray-700 group-hover:bg-gray-400 group-hover:text-white  transition-all duration-500 p-1 rounded-ss flex justify-between items-center min-h-[46px]">
+                <div className="bg-gray-700 group-hover:bg-gray-400 group-hover:text-white  transition-all duration-500 p-1 rounded-ss flex justify-between items-center min-h-[2.875rem]">
                     <p className="px-5 relative border-l border-black border-dashed ">
                         {cityName}
                     </p>

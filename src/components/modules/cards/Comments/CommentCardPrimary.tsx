@@ -5,12 +5,12 @@ import React from 'react'
 const CommentCardPrimary = (props: CommentCardPrimaryType) => {
     const { name, physician, comment } = props
     return (
-        <div className={` p-6 h-full flex items-start flex-col min-h-[250px] w-[370px] bg-white rounded-lg shadow-shadow_comment`}>
+        <div className={` p-6 h-full flex items-start flex-col min-h-[15.625rem] w-[23.125rem] bg-white rounded-lg shadow-shadow_comment`}>
             <div className='flex items-center'>
                 <div className="rtl:pl-4 ltr:pr-4 ">
-                    <Image src={'/noImage.jfif'} width={500} height={500} alt='doctor_profile' className='w-[55px] h-[55px]  rounded-full shadow-shadow_category' />
+                    <Image src={'/noImage.jfif'} width={500} height={500} alt='doctor_profile' className='size-[3.4375rem]  rounded-full shadow-shadow_category' />
                 </div>
-                <div className="h-[55px] flex justify-center items-start flex-col gap-1">
+                <div className="h-[3.4375rem] flex justify-center items-start flex-col gap-1">
                     <p className="text-lg font-bold">
                         {name}
                     </p>
