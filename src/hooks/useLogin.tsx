@@ -1,5 +1,5 @@
 "use client"
-import Toastify from '@elements/Toastify';
+import Toastify from '@/components/elements/toasts/Toastify';
 import { apiDomainNobat } from '@/services/getApiUrl';
 import urls from '@/services/urls';
 import axios from 'axios';

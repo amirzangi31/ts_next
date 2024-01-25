@@ -10,10 +10,10 @@ export interface MyAppointmentType {
   hour: string;
   minute: string;
   hasImage: boolean;
-  onlineAppointment: boolean 
-  textConsultation: boolean 
-  voiceConsultation: boolean 
-  immediateConsultation: boolean 
+  onlineAppointment: boolean;
+  textConsultation: boolean;
+  voiceConsultation: boolean;
+  immediateConsultation: boolean;
   calendar: Calendar;
   specialities: Speciality[];
   [key: string]: any;

@@ -1,4 +1,4 @@
-import Toastify from "@/components/elements/Toastify";
+import Toastify from "@/components/elements/toasts/Toastify";
 import { http } from "../axios";
 import { apiDomainNobat } from "../getApiUrl";
 import urls from "../urls";

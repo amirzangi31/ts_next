@@ -12,6 +12,14 @@ const urls = {
       },
       query: {},
     },
+    physicianProfile :{ 
+      url : "/PublicServices/PhysicianProfile/Page?url=",
+      method : "GET",
+      parametrs :{},
+      query : {
+        url : "physicianProfileUrl"
+      }
+    }
   },
   //login
   login: {

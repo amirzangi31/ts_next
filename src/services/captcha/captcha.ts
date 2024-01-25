@@ -1,7 +1,7 @@
 import axios from "axios";
 import { apiDomainNobat } from "../getApiUrl";
 import urls from "../urls";
-import Toastify from "@/components/elements/Toastify";
+import Toastify from "@/components/elements/toasts/Toastify";
 
 const getCaptcha = async () => {
   try {

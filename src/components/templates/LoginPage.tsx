@@ -11,7 +11,7 @@ import useModalLogin from "@/hooks/useModalLogin";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
-import Toastify from "../elements/Toastify";
+import Toastify from "../elements/toasts/Toastify";
 
 import ButtonElement from "../elements/ButtonElement";
 import BottomNavigation from "../modules/menu/BottomNavigation";

@@ -1,7 +1,6 @@
 import urls from "../urls";
 import { apiDomainNobat } from "../getApiUrlServer";
 
-
 const getBestPhysician = async (
   provinceId: number,
   cityId: number,
@@ -23,7 +22,7 @@ const getBestPhysician = async (
         headers: {
           "Content-Type": "application/json",
         },
-        next: { revalidate: 60 * 60 * 24 * 7 } //one week ,
+        next: { revalidate: 60 * 60 * 24 * 7 }, //one week ,
       }
     );
     const result = await res.json();
@@ -33,4 +32,20 @@ const getBestPhysician = async (
   }
 };
 
-export { getBestPhysician };
+const getProfilePhysician = async (physicianProfileUrl: string) => {
+  try {
+    const res = await fetch(
+      `${apiDomainNobat}${urls.physician.physicianProfile.url}${physicianProfileUrl}`,
+      {
+        next: { revalidate: 60 * 60 * 24 * 3 }, //three days  
+      }
+    );
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getBestPhysician, getProfilePhysician };

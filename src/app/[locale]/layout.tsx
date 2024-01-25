@@ -58,6 +58,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={isRtl ? "rtl" : "ltr"} >
       <body className={iranSans.className} data-theme="Arenap_theme">
+        
         <NextIntlClientProvider locale={local} messages={messages}>
           <StoreProvider>
             <Layout>

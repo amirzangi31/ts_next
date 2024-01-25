@@ -2,14 +2,14 @@
 import toast from 'react-hot-toast'
 import CloseIcon from '@icons/CloseIcon'
 import ForbiddenIcon from '@icons/ForbiddenIcon'
-import SuccessIcon from '../icons/SuccessIcon'
+import SuccessIcon from '../../icons/SuccessIcon'
 
 const Toastify = (type: string, text: string = "", duration = 3000) => {
 
     return (
         toast.custom((t) => (
             <div
-                className={`animate-opacity max-w-[400px] shadow-shadow_toast  w-full flex items-center min-h-[60px]  rounded-sm justify-between px-4 text-md    text-white pointer-events-auto  z-[100] ${type === "error" ? "bg-error" : "bg-primary"}`}
+                className={`animate-opacity max-w-[25rem] shadow-shadow_toast  w-full flex items-center min-h-[3.75rem]  rounded-sm justify-between px-4 text-md    text-white pointer-events-auto  z-[100] ${type === "error" ? "bg-error" : "bg-primary"}`}
             >
                 <div className='flex justify-center items-center'>
                     {
