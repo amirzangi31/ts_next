@@ -12,14 +12,14 @@ const urls = {
       },
       query: {},
     },
-    physicianProfile :{ 
-      url : "/PublicServices/PhysicianProfile/Page?url=",
-      method : "GET",
-      parametrs :{},
-      query : {
-        url : "physicianProfileUrl"
-      }
-    }
+    physicianProfile: {
+      url: "/PublicServices/PhysicianProfile/Page?url=",
+      method: "GET",
+      parametrs: {},
+      query: {
+        url: "physicianProfileUrl",
+      },
+    },
   },
   //login
   login: {
@@ -80,18 +80,15 @@ const urls = {
     cancel: {
       url: "/User/UserPhysicianProfileCalendar/DeleteAppointment/",
       method: "POST",
-      parametrs: {
-
-      },
+      parametrs: {},
       query: {
         calendarId: "string",
         index: "number",
         physicianProfileUrl: "string",
       },
-
-    }
+    },
   },
-  //favorite 
+  //favorite
   favorite: {
     getAll: {
       url: "/User/UserFavouritePhysicianProfile/List",
@@ -101,36 +98,61 @@ const urls = {
           cityId: "number",
           provinceId: "number",
           physicianSpecialityIds: "number",
-          filter: "string"
+          filter: "string",
         },
         pagedListInputDto: {
           pageNumber: "number",
-          itemsCountPerPage: "number"
-        }
+          itemsCountPerPage: "number",
+        },
       },
       query: {},
     },
-
+    isFavorite: {
+      url: "/User/UserFavouritePhysicianProfile/CheckIfPhysicianIsInFavouriteList/",
+      method: "GET",
+      parametrs: {},
+      query: {
+        profileId: "string",
+      },
+    },
+    addFavorite: {
+      url: "/User/UserFavouritePhysicianProfile",
+      method: "POST",
+      parametrs: {
+        physicianProfileId: "string",
+      },
+      query: {
+        
+      },
+    },
+    deleteFavorite: {
+      url: "/User/UserFavouritePhysicianProfile/",
+      method: "DELETE",
+      parametrs: {
+        physicianProfileId: "string",
+      },
+      query: {
+        physicianProfileId  :"string"
+      },
+    },
   },
 
-
-  //wallet 
+  //wallet
   wallet: {
     transctions: {
       url: "/User/PaymentHistory/List",
       method: "POST",
       parametrs: {
-
         pagedListInputDto: {
           pageNumber: 0,
-          itemsCountPerPage: 0
-        }
+          itemsCountPerPage: 0,
+        },
       },
-      query: {}
-    }
+      query: {},
+    },
   },
 
-  //payment 
+  //payment
   payment: {
     payment: {
       url: "/User/Payment/Payment",
@@ -138,13 +160,11 @@ const urls = {
       parametrs: {
         id: 0,
         amount: 0,
-        paymentType: 0
+        paymentType: 0,
       },
-      query: {}
-    }
-  }
+      query: {},
+    },
+  },
 };
 
 export default urls;
-
-

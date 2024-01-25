@@ -64,6 +64,7 @@ import PhysicianProfileCard from "../modules/cards/Physicain/PhysicianProfileCar
 import LinkElement from "../elements/LinkElement";
 import SwiperContainerFreeMode from "../modules/swiper/SwiperContianerFreeMode";
 import PhysicainCardPrimary from '../modules/cards/Physicain/PhysicianCardPrimary';
+import BottomSheetAndCenterContent from "../modules/modals/BottomSheetAndCenterContent";
 
 const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }) => {
 
@@ -256,6 +257,8 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
     setLoadingButtonComment(false)
   };
 
+  const { userFavorite, addFavorite, deleteFavorite } = useFavorite(physician.id)
+
   // const { isFavorite, deleteFovoritePhysician, addFavoritePhysician } = useFavorite(physician.id)
 
   const favoritePhysicianHandler = async () => {
@@ -266,13 +269,18 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       return;
     }
 
-    // if (!isFavorite) {
-    //   const res = await addFavoritePhysician(physician.id);
-    // } else {
-    //   const status = await deleteFovoritePhysician(physician.id);
+    if (!userFavorite) {
+      const res = addFavorite();
 
-    // }
+    } else {
+      const status = deleteFavorite();
+
+    }
   };
+
+
+
+
 
   //callbacks index
   const [callbackIndex, setCallbackIndex] = useState(0)
@@ -295,13 +303,13 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       <ModalLogin isCallback={true} callbacks={callbacks} callbacksIndex={callbackIndex} />
 
       {/* ----------content------------- */}
-      <div className="container max-w-[62.5rem] relative md:pb-5 flex flex-wrap ">
+      <div className="container relative md:pb-5 flex flex-wrap ">
         {/* ----------section------------- */}
         {/* Button */}
         {consultationList.find((item) => item.active) && (
-          <div className="sticky bottom-[1.25rem] left-0 order-[13]  w-full flex justify-center items-center z-[19] pt-4">
-            <div className=" w-full  max-w-[62.5rem]">
-              <LinkElement link={buttonLink as string}>
+          <div className="sticky  bottom-[1.25rem] left-0 order-[13]  w-full flex justify-center items-center z-[19] pt-4">
+            <div className=" w-full ">
+              <LinkElement link={buttonLink as string} className="block w-full">
                 <ButtonElement
                   typeButton="primary"
                   fontWeight="bold"
@@ -331,7 +339,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
             }}
             MENumber={physician.medicalSystemCode}
             city={physician.cityName}
-            liked={false}
+            liked={userFavorite}
             status={physician.immediateConsultation}
             addFavorite={favoritePhysicianHandler}
           />
@@ -381,7 +389,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                   <Link
                     href={`/${local}/search?specialities=${item.specialityTitle}`}
                     key={index}
-                    className="bg-gray-100 w-auto px-3 py-1 rounded-sm text-md"
+                    className="bg-gray-100 w-auto px-3 py-1 rounded-sm text-md transition-all duration-300 hover:bg-gray-400 hover:text-white"
                   >
                     {item.specialityTitle}
                   </Link>
@@ -700,8 +708,9 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       </Modal>
       {/* ----------modal------------- */}
 
-      {/* <Modal show={showFormModal} closeHandler={() => setShowFormModal(false)}>
-        <ContentModalCenter show={showFormModal}>
+      {/* ----------modal------------- */}
+      <Modal show={showFormModal} closeHandler={() => setShowFormModal(false)}>
+        <BottomSheetAndCenterContent show={showFormModal}>
           <div className="h-[calc(100vh-137px)] overflow-y-auto">
             <div>
               <span className="absolute top-[30px]  rtl:left-[15px] ltr:right-[15px] xs:rtl:left-[30px] xs:ltr:right[30px]">
@@ -710,14 +719,14 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
             </div>
             <p className="font-bold text-center mb-3">امتیاز</p>
             <div className="flex justify-center mb-8">
-              <FunctionalStarRateModule
+              {/* <FunctionalStarRateModule
                 size="xl"
                 rate={rate}
                 rateHandler={rateHandler}
                 ltr={true}
-              />
+              /> */}
             </div>
-            {isPresent && (
+            {/* {isPresent && (
               <>
                 <p className="text-md font-bold mb-5">مدت زمان انتظار</p>
                 <div className="flex flex-col gap-4 mb-8">
@@ -787,7 +796,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                   </label>
                 </div>
               </>
-            )}
+            )} */}
             <p className="text-md font-bold mb-5">این پزشک را پیشنهاد میکنید؟</p>
             <div className="grid grid-cols-2 gap-4 mb-8 overflow-hidden">
               <label htmlFor="recommended">
@@ -866,8 +875,10 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
               </ButtonElement>
             </div>
           </div>
-        </ContentModalCenter>
-      </Modal> */}
+        </BottomSheetAndCenterContent>
+      </Modal>
+      {/* ----------modal------------- */}
+
     </>
   );
 };
