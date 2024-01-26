@@ -5,12 +5,6 @@ import urls from "../urls";
 
 const getAllFavorite = async () => {
   const dataObj = {
-    input: {
-      cityId: 0,
-      provinceId: 0,
-      physicianSpecialityIds: 0,
-      filter: "",
-    },
     pagedListInputDto: {
       pageNumber: 1,
       itemsCountPerPage: 200,
@@ -18,19 +12,13 @@ const getAllFavorite = async () => {
   };
 
   try {
-    const { status, data } = await http.post(
+    const res = await http.post(
       `${apiDomainNobat}${urls.favorite.getAll.url}`,
       dataObj
     );
-    if (status === 200) {
-      return data?.value;
-    }
+    return res.data;
   } catch (error: any) {
-    if (error.response) {
-      if (error.response.status) {
-        Toastify("error", error.response.data.resultMessage);
-      }
-    }
+    Toastify("error", error?.response?.data?.resultMessage);
   }
 };
 const isFavorite = async (physicianProfileId: string) => {

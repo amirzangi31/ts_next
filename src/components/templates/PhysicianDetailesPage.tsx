@@ -100,7 +100,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
     } else {
       const status = deleteFavorite();
     }
-  }, () => setShowVisitQuestionModal(true)]
+  }]
 
 
 
@@ -122,18 +122,6 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       waitingTimeArray[3] * 90) /
     waitingTimeArray.reduce((partialSum, a) => partialSum + a, 0)
   );
-
-
-  const [isPresent, setIsPresent] = useState(false);
-  const [showVisitQuestionModal, setShowVisitQuestionModal] = useState(false);
-  const [showVisitTypeQuestionModal, setShowVisitTypeQuestionModal] =
-    useState(false);
-  const [showFormModal, setShowFormModal] = useState(false);
-
-  const [rate, setRate] = useState(0);
-  const [waitingTime, setWaitingTime] = useState(0);
-  const [recommendation, setRecommendation] = useState<boolean | null>(null);
-  const [commentText, setCommentText] = useState("");
 
   const consultationList: {
     id: string,
@@ -208,86 +196,6 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
     if (findName) setButtonLink(findName.url);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeConsultation]);
-
-
-
-
-
-  const visitQuestionModalHandler = () => {
-    if (isLogin === "unauthorization") {
-      openModalLogin();
-      setCallbackIndex(1)
-      return;
-    }
-
-    setRate(0);
-    setWaitingTime(0);
-    setRecommendation(null);
-    setCommentText("");
-
-    setShowVisitTypeQuestionModal(false);
-    setShowFormModal(false);
-    setShowVisitQuestionModal(true);
-  };
-  const visitTypeQuestionModalHandler = () => {
-    setShowVisitQuestionModal(false);
-    setShowFormModal(false);
-    setShowVisitTypeQuestionModal(true);
-  };
-
-  const newCommentModalHandler = (isPresent: boolean) => {
-    setIsPresent(isPresent);
-    setShowVisitQuestionModal(false);
-    setShowVisitTypeQuestionModal(false);
-    setShowFormModal(true);
-  };
-
-  const rateHandler = (value: number) => {
-    setRate(value);
-  };
-
-  const waitingTimeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWaitingTime(+e.target.value);
-  };
-
-
-  const [loadingButtonComment, setLoadingButtonComment] = useState(false)
-
-
-
-  const submitCommentHandler = async () => {
-    if (commentText.length === 0) {
-      Toastify("error", "لطفا متن نظر خود را وارد نمائید");
-      return;
-    }
-
-    setLoadingButtonComment(true)
-    try {
-      // const res = await createComment(
-      //   physician.id,
-      //   null,
-      //   rate,
-      //   waitingTime,
-      //   recommendation,
-      //   commentText
-      // );
-      // console.log(res)
-    } catch (error: any) {
-
-    }
-
-    setRate(0)
-    setWaitingTime(0)
-    setRecommendation(null)
-    setCommentText("")
-    setShowFormModal(false)
-    setLoadingButtonComment(false)
-  };
-
-
-
-
-
 
   return (
     <>

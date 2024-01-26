@@ -101,12 +101,6 @@ const urls = {
       url: "/User/UserFavouritePhysicianProfile/List",
       method: "POST",
       parametrs: {
-        input: {
-          cityId: "number",
-          provinceId: "number",
-          physicianSpecialityIds: "number",
-          filter: "string",
-        },
         pagedListInputDto: {
           pageNumber: "number",
           itemsCountPerPage: "number",

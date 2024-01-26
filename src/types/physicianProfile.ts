@@ -53,3 +53,24 @@ interface PhysicianSpeciality {
   parent?: any;
   citySpecialties?: any;
 }
+
+// ------------------------------------------------------------------------------------//
+export interface PhysicainProfileSecondaryType {
+  id: string;
+  firstName: string;
+  lastName: string;
+  physicianProfileUrl: string;
+  cityId: number;
+  cityName: string;
+  provinceId: number;
+  provinceName: string;
+  hasImage: boolean;
+  rate: number;
+  onlineAppointment: boolean;
+  textConsultation: boolean;
+  voiceConsultation: boolean;
+  immediateConsultation: boolean;
+  firstAppointment?: any;
+  freeMode?: boolean,
+  physicianSpecialities: PhysicianSpeciality[];
+}

@@ -9,12 +9,12 @@ const useAllFavorite = () => {
         const result = await getAllFavorite()
         return result
 
-    }, { cacheTime: 5 * 60000 })
+    })
 
 
 
     return {
-        myFavorite: allFavorite?.data,
+        myFavorite: allFavorite?.data?.value?.items,
         isLoading: allFavorite?.isLoading,
     }
 }

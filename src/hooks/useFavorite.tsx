@@ -42,8 +42,8 @@ const useFavorite = (physicianProfileId: string) => {
     })
 
     return {
-        // myFavorite: allFavorite?.data,
-        // isLoading: allFavorite?.isLoading,
+        
+        
         userFavorite: userFavorite?.data?.isFavorite,
         isLodingUserFavorite: userFavorite.isLoading,
         addFavorite: addFavoriteHandler?.mutate,

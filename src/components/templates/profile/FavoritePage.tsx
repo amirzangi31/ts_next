@@ -1,0 +1,164 @@
+"use client"
+
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+
+//COMPONENTS
+// import CardLoaderSkeleton from '@components/modules/loadings/CardLoaderSkeleton'
+import Toastify from '@components/elements/toasts/Toastify'
+import TitlePagesMobile from '@components/modules/titles/TitlePagesMobile'
+import ButtonElement from '@components/elements/ButtonElement'
+import PhysicianCardSecondary from '@modules/cards/Physicain/PhysicianCardSecondary';
+import ArticleCardSecondary from '@/components/modules/cards/Articles/ArticleCardSecondary'
+
+//REACT-TABS
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+
+//NEXT-INTL
+import { useLocale, useTranslations } from 'next-intl'
+
+//SKELETON
+import Skeleton from 'react-loading-skeleton'
+
+
+
+// HOOKS
+import useAllFavorite from '@/hooks/useAllFavorite'
+import { PhysicainProfileSecondaryType } from '@/types/physicianProfile'
+import LinkElement from '@/components/elements/LinkElement'
+import PhysicianLoadingPrimaryCard from '@/components/modules/cards/Skeletons/PhysicianLoadingPrimaryCard'
+
+
+
+
+
+const FavoritePage = () => {
+    const [activeTab, setActiveTab] = useState(0)
+    const g = useTranslations("global")
+    const t = useTranslations("profile")
+    const [favoriteArticles, setFavoriteArticles] = useState([])
+    const { myFavorite, isLoading } = useAllFavorite()
+
+
+
+
+    return (
+        <>
+            <TitlePagesMobile title={t("interest")} />
+            <div className="container">
+                <Tabs selectedIndex={activeTab} onSelect={(index) => setActiveTab(index)} selectedTabClassName="pb-2 border-b-[3px] border-[#00A29E] font-bold">
+                    <TabList>
+                        <div className="grid grid-cols-2 text-center gap-2 bg-white rounded-sm shadow-shadow_category py-3 px-5 mt-6 mb-2">
+                            <Tab className="px-2 cursor-pointer">
+                                <button type="button">
+                                    {g("favorite-physicians")}
+                                </button>
+                            </Tab>
+                            <Tab className="px-2 cursor-pointer">
+                                <button type="button">
+                                    {g("favorite-articles")}
+                                </button>
+                            </Tab>
+                        </div>
+                    </TabList>
+                    <TabPanel>
+                        <div className="flex flex-col gap-2">
+                            {isLoading ?
+                                <PhysicianCardSecondaryLoading />
+                                :
+                                myFavorite?.length > 0 ?
+                                    <>
+                                        <div className='grid grid-cols-1 min-[1200px]:grid-cols-2 gap-2'>
+                                            {
+                                                myFavorite?.map((item: PhysicainProfileSecondaryType, index: number) => (
+                                                    <PhysicianCardSecondary freeMode={false} key={`${item.id}-${index}`}  {...item} />
+                                                ))
+                                            }
+                                        </div>
+
+                                    </>
+                                    :
+                                    <div className='h-[calc(100vh-220px)] flex justify-center items-center flex-col gap-8'>
+                                        <div>
+                                            <Image src={"/noPeoples.png"} width={500} height={500} alt='noPeoples_image' className='w-full' />
+                                        </div>
+                                        <div className='flex justify-start items-center gap-4 flex-col'>
+                                            <p className='text-md '>{t("No-favorite-doctor")}</p>
+                                            <div className='w-[220px]'>
+                                                <LinkElement link={`/search`}>
+                                                    <ButtonElement typeButton='primary' fontWeight='bold' >
+                                                        {t("Search-among-doctors")}
+                                                    </ButtonElement>
+                                                </LinkElement>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                            }
+                        </div>
+                    </TabPanel>
+                    <TabPanel>
+                        <div className="flex flex-col gap-2">
+                            {favoriteArticles.length > 0 ?
+                                <ArticleCardSecondary />
+                                :
+                                <div className='h-[calc(100vh-220px)] flex justify-center items-center flex-col gap-8'>
+                                    <div>
+                                        <Image src={"/noPeoples.png"} width={500} height={500} alt='noPeoples_image' className='w-full' />
+                                    </div>
+                                    <div className='flex justify-start items-center gap-4 flex-col'>
+                                        <p className='text-md '>{t("No-favorite-articles")}</p>
+                                        <LinkElement link={`/blog`} className='w-[220px]'>
+                                            <ButtonElement typeButton='primary' fontWeight='bold'>
+                                                {t("Search-among-articles")}
+                                            </ButtonElement>
+                                        </LinkElement>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </TabPanel>
+                </Tabs>
+            </div>
+        </>
+    )
+}
+
+export default FavoritePage
+
+
+const PhysicianCardSecondaryLoading = () => {
+    return (
+        <div className="grid grid-cols-2 gap-2 w-full">
+            <PhysicianLoadingPrimaryCard freeMode={false} />
+            <PhysicianLoadingPrimaryCard freeMode={false} />
+        </div>
+    )
+}
+
+const ArticleCardLoading = () => {
+    return (
+        <div className={`p-4 flex justify-between items-start flex-col w-full bg-white rounded-sm shadow-shadow_category`}>
+            <div className="pl-5">
+                <div className="flex items-center gap-5">
+                    <div className='rounded-sm overflow-hidden w-1/3'>
+                        <div className='w-[120px] rounded-sm overflow-hidden'><Skeleton className='h-[120px] ' /> </div>
+                    </div>
+                    <div className='w-2/3'>
+                        <div className='text-lg font-bold py-2 w-1/2'><Skeleton className='h-[20px]' /> </div>
+
+                        <div className='text-md short-text-3 w-1/2'>
+                            <Skeleton className='h-[40px]' />
+                        </div>
+                        <div className='w-full flex justify-between items-center text-md text-gray-500 mt-2'>
+                            <div className='w-[20px]'><Skeleton className='h-[12px]' /></div>
+                            <div className='w-[20px]'><Skeleton className='h-[12px]' /></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
