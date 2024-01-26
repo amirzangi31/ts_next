@@ -59,6 +59,13 @@ const urls = {
       },
       query: {},
     },
+    refreshToken: {
+      url: "/Public/Auth/RefreshToken",
+      method: "POST",
+      parametrs: {
+        refreshToken: "string",
+      },
+    },
   },
   //captcha
   captcha: {
@@ -121,9 +128,7 @@ const urls = {
       parametrs: {
         physicianProfileId: "string",
       },
-      query: {
-        
-      },
+      query: {},
     },
     deleteFavorite: {
       url: "/User/UserFavouritePhysicianProfile/",
@@ -132,7 +137,7 @@ const urls = {
         physicianProfileId: "string",
       },
       query: {
-        physicianProfileId  :"string"
+        physicianProfileId: "string",
       },
     },
   },

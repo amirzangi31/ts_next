@@ -65,13 +65,42 @@ import LinkElement from "../elements/LinkElement";
 import SwiperContainerFreeMode from "../modules/swiper/SwiperContianerFreeMode";
 import PhysicainCardPrimary from '../modules/cards/Physicain/PhysicianCardPrimary';
 import BottomSheetAndCenterContent from "../modules/modals/BottomSheetAndCenterContent";
+import CreateCommentCom from "../modules/CreateCommentCom";
 
 const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }) => {
 
 
   const local = useLocale();
 
+  const { isLogin, getUser } = useUserInfo();
+  const { isShow, openModalLogin } = useModalLogin();
+  //use favorite hook
+  const { userFavorite, addFavorite, deleteFavorite } = useFavorite(physician.id)
+  const favoritePhysicianHandler = async () => {
+    if (isLogin === "isLoading") return;
+    if (isLogin === "unauthorization") {
+      openModalLogin();
+      setCallbackIndex(0)
+      return;
+    }
 
+    if (!userFavorite) {
+      const res = addFavorite();
+    } else {
+      const status = deleteFavorite();
+    }
+  };
+
+  //callbacks index
+  const [callbackIndex, setCallbackIndex] = useState(0)
+  //callbacks for after login
+  const callbacks = [async () => {
+    if (!userFavorite) {
+      const res = addFavorite();
+    } else {
+      const status = deleteFavorite();
+    }
+  }, () => setShowVisitQuestionModal(true)]
 
 
 
@@ -94,8 +123,6 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
     waitingTimeArray.reduce((partialSum, a) => partialSum + a, 0)
   );
 
-  const { isLogin, getUser } = useUserInfo();
-  const { isShow, openModalLogin } = useModalLogin();
 
   const [isPresent, setIsPresent] = useState(false);
   const [showVisitQuestionModal, setShowVisitQuestionModal] = useState(false);
@@ -257,44 +284,9 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
     setLoadingButtonComment(false)
   };
 
-  const { userFavorite, addFavorite, deleteFavorite } = useFavorite(physician.id)
-
-  // const { isFavorite, deleteFovoritePhysician, addFavoritePhysician } = useFavorite(physician.id)
-
-  const favoritePhysicianHandler = async () => {
-    if (isLogin === "isLoading") return;
-    if (isLogin === "unauthorization") {
-      openModalLogin();
-      setCallbackIndex(0)
-      return;
-    }
-
-    if (!userFavorite) {
-      const res = addFavorite();
-
-    } else {
-      const status = deleteFavorite();
-
-    }
-  };
 
 
 
-
-
-  //callbacks index
-  const [callbackIndex, setCallbackIndex] = useState(0)
-
-
-
-
-  const callbacks = [async () => {
-    // if (!isFavorite) {
-    //   const res = await addFavoritePhysician(physician.id);
-    // } else {
-    //   const status = await deleteFovoritePhysician(physician.id);
-    // }
-  }, () => setShowVisitQuestionModal(true)]
 
 
   return (
@@ -574,16 +566,8 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
               </span>
             </h3>
             <div className="w-[11.25rem]">
-              <ButtonElement
-                typeButton="primary"
-                fontWeight="bold"
-                type={"button"}
-                size="sm"
-                handler={visitQuestionModalHandler}
-              >
-                <span className="ml-3">ثبت نظر جدید</span>
-                <PencilIcon />
-              </ButtonElement>
+              <CreateCommentCom firstName={physician.firstName} lastName={physician.lastName} />
+
             </div>
           </div>
           {physician.comments.length > 0 ? (
@@ -625,259 +609,9 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       </div>
       {/* ----------content------------- */}
 
-      {/* ----------modal------------- */}
-      <Modal
-        show={showVisitQuestionModal}
-        closeHandler={() => {
-          setShowVisitQuestionModal(false);
-        }}
-      >
-        <div className="w-full h-full flex justify-center items-center  ">
-          <div className="bg-white p-5 w-[18.75rem] rounded-sm max-w-full">
-            <div className="flex justify-end items-center ">
-              <CloseButton
-                closeHanlder={() => setShowVisitQuestionModal(false)}
-              />
-            </div>
-            <div className="mt-1">
-              {`آیا تا بحال توسط دکتر ${physician.firstName} ${physician.lastName} ویزیت شده اید؟`}
-            </div>
-            <div className="mt-8 flex justify-between items-center gap-2 ">
-              <ButtonElement
-                typeButton="primary"
-                size={"sm"}
-                handler={visitTypeQuestionModalHandler}
-              >
-                بله
-              </ButtonElement>
-              <ButtonElement
-                typeButton="transparent"
-                fontWeight="bold"
 
 
-                size={"sm"}
-                handler={() => {
-                  ToastWarning("امکان ثبت نظر برای شما وجود ندارد", "بعد از ویزیت شما توسط پزشک نظر خود را ثبت کنید", 3000)
-                  setShowVisitQuestionModal(false);
-                }}
-              >
-                خیر
-              </ButtonElement>
-            </div>
-          </div>
-        </div>
-      </Modal>
-      {/* ----------modal------------- */}
-      {/* ----------modal------------- */}
-      <Modal
-        show={showVisitTypeQuestionModal}
-        closeHandler={() => {
-          setShowVisitTypeQuestionModal(false);
-        }}
-      >
-        <div className="w-full h-full flex justify-center items-center  ">
-          <div className="bg-white p-5 w-[18.75rem] rounded-sm max-w-full">
-            <div className="flex justify-end items-center ">
-              <CloseButton
-                closeHanlder={() => setShowVisitTypeQuestionModal(false)}
-              />
-            </div>
-            <div className="mt-1">نوع ویزیت شما به چه شکل بوده است؟</div>
-            <div className="mt-8 flex justify-between items-center gap-2 ">
-              <ButtonElement
 
-
-                typeButton="primary"
-                fontWeight="bold"
-                size={"sm"}
-                handler={() => newCommentModalHandler(true)}
-              >
-                حضوری
-              </ButtonElement>
-              <ButtonElement
-                typeButton="primary"
-                fontWeight="bold"
-                size={"sm"}
-                handler={() => newCommentModalHandler(false)}
-              >
-                تلفنی
-              </ButtonElement>
-            </div>
-          </div>
-        </div>
-      </Modal>
-      {/* ----------modal------------- */}
-
-      {/* ----------modal------------- */}
-      <Modal show={showFormModal} closeHandler={() => setShowFormModal(false)}>
-        <BottomSheetAndCenterContent show={showFormModal}>
-          <div className="h-[calc(100vh-137px)] overflow-y-auto">
-            <div>
-              <span className="absolute top-[30px]  rtl:left-[15px] ltr:right-[15px] xs:rtl:left-[30px] xs:ltr:right[30px]">
-                <CloseButton closeHanlder={() => setShowFormModal(false)} />
-              </span>
-            </div>
-            <p className="font-bold text-center mb-3">امتیاز</p>
-            <div className="flex justify-center mb-8">
-              {/* <FunctionalStarRateModule
-                size="xl"
-                rate={rate}
-                rateHandler={rateHandler}
-                ltr={true}
-              /> */}
-            </div>
-            {/* {isPresent && (
-              <>
-                <p className="text-md font-bold mb-5">مدت زمان انتظار</p>
-                <div className="flex flex-col gap-4 mb-8">
-                  <label
-                    className="flex items-center gap-3"
-                    htmlFor="zero-to-fifteen"
-                  >
-                    <CustomRadioButton selected={waitingTime === 0} />
-                    <p className="text-md">۰ تا ۱۵ دقیقه</p>
-                    <input
-                      type="radio"
-                      name="waiting-time"
-                      id="zero-to-fifteen"
-                      value={0}
-                      onChange={waitingTimeHandler}
-                      checked={waitingTime === 0}
-                      hidden
-                    />
-                  </label>
-                  <label
-                    className="flex items-center gap-3"
-                    htmlFor="fifteen-to-fortyfive"
-                  >
-                    <CustomRadioButton selected={waitingTime === 1} />
-                    <p className="text-md">۱۵ تا ۴۵ دقیقه</p>
-                    <input
-                      type="radio"
-                      name="waiting-time"
-                      id="fifteen-to-fortyfive"
-                      value={1}
-                      onChange={waitingTimeHandler}
-                      checked={waitingTime === 1}
-                      hidden
-                    />
-                  </label>
-                  <label
-                    className="flex items-center gap-3"
-                    htmlFor="fortyfive-to-ninety"
-                  >
-                    <CustomRadioButton selected={waitingTime === 2} />
-                    <p className="text-md">۴۵ تا ۹۰ دقیقه</p>
-                    <input
-                      type="radio"
-                      name="waiting-time"
-                      id="fortyfive-to-ninety"
-                      value={2}
-                      onChange={waitingTimeHandler}
-                      checked={waitingTime === 2}
-                      hidden
-                    />
-                  </label>
-                  <label
-                    className="flex items-center gap-3"
-                    htmlFor="more-than-ninety"
-                  >
-                    <CustomRadioButton selected={waitingTime === 3} />
-                    <p className="text-md">بیش از ۹۰ دقیقه</p>
-                    <input
-                      type="radio"
-                      name="waiting-time"
-                      id="more-than-ninety"
-                      value={3}
-                      onChange={waitingTimeHandler}
-                      checked={waitingTime === 3}
-                      hidden
-                    />
-                  </label>
-                </div>
-              </>
-            )} */}
-            <p className="text-md font-bold mb-5">این پزشک را پیشنهاد میکنید؟</p>
-            <div className="grid grid-cols-2 gap-4 mb-8 overflow-hidden">
-              <label htmlFor="recommended">
-                <div
-                  className={cn(
-                    `p-1 flex justify-center bg-[#DEFFDB] rounded-[47px] items-center gap-3 text-md w-full cursor-pointer`,
-                    {
-                      "opacity-100 animate-opacity_60": recommendation,
-                      "opacity-60": !recommendation,
-                    }
-                  )}
-                >
-                  <div
-                    className={cn(`relative `, {
-                      "animate-like_thumb": recommendation,
-                    })}
-                  >
-                    <UpThumbIcon size="30px" />
-                  </div>
-                  پیشنهاد میکنم
-                </div>
-                <input
-                  type="radio"
-                  name="recommendation"
-                  id="recommended"
-
-                  onChange={() => setRecommendation(true)}
-                  checked={recommendation ? true : false}
-                  hidden
-                />
-              </label>
-              <label htmlFor="not-recommended">
-                <div
-                  className={cn(
-                    `p-1 flex justify-center bg-[#FFF1F1] rounded-[47px] items-center gap-3 text-md w-full cursor-pointer`,
-                    {
-                      "opacity-100 animate-bouncing": recommendation === false,
-                      "opacity-60": recommendation === null || recommendation,
-                    }
-                  )}
-                >
-                  <DownThumbIcon size="30px" />
-                  پیشنهاد نمیکنم
-                </div>
-                <input
-                  type="radio"
-                  name="recommendation"
-                  id="not-recommended"
-
-                  onChange={() => setRecommendation(false)}
-                  checked={recommendation === false}
-                  hidden
-                />
-              </label>
-            </div>
-            <label className="text-md font-bold" htmlFor="comment">
-              نظر
-            </label>
-            <textarea
-              name="comment"
-              id="comment"
-              rows={4}
-              className="w-full bg-gray-100 rounded-sm text-sm p-3 placeholder-[#B5B5B5] mt-3 mb-8"
-              placeholder="نظر خود را وارد کنید..."
-              value={commentText}
-              onChange={(e) => setCommentText(e.target.value)}
-            ></textarea>
-            <div className="w-full">
-              <ButtonElement
-                typeButton="primary"
-                fontWeight="bold"
-                handler={submitCommentHandler}
-                disabled={loadingButtonComment}
-              >
-                {loadingButtonComment ? <Loader size="size-[1.875rem]" color="border-white" /> : "ثبت نظر"}
-              </ButtonElement>
-            </div>
-          </div>
-        </BottomSheetAndCenterContent>
-      </Modal>
-      {/* ----------modal------------- */}
 
     </>
   );

@@ -60,7 +60,7 @@ const SendPhone = ({ changeStep }: SetpLoginType) => {
             <Field name="phoneNumber" type="tel" placeholder="شماره همراه خود را وارد کنید" title="شماره همراه" component={FormControl} />
             <div className='grid grid-cols-2 gap-2 mt-4'>
               <Field name="captcha" type="number" placeholder="کد امنیتی"        component={FormControl} />
-              <div className="border border-gray rounded-[30px] overflow-hidden flex justify-center items-center">
+              <div className="border border-gray rounded-[1.875rem] overflow-hidden flex justify-center items-center">
                 {loading ? (
                   <Loader
                     size="size-[2.35rem]"
