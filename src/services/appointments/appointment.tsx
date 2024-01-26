@@ -18,8 +18,6 @@ const getMyAppointment = async () => {
     }
 }
 
-
-
 const deleteAppointment = async (calendarId: string, index: number, physicianProfileUrl: string) => {
     try {
         const res = await http.delete(`${apiDomainNobat}${urls.appointment.cancel.url}${calendarId}/${index}/${physicianProfileUrl}`)
@@ -30,4 +28,17 @@ const deleteAppointment = async (calendarId: string, index: number, physicianPro
     }
 }
 
-export { getMyAppointment, deleteAppointment }
+const lockedAppointment = async (calendarId: string, physicianProfileId: string, index: number | null) => {
+    const obj = { calendarId, physicianProfileId, index }
+    
+    try {
+        const res = await http.post(`${apiDomainNobat}${urls.appointment.lockedAppointment.url}`, obj)
+        return res.data
+    } catch (error: any) {
+        Toastify("error", error?.response?.data?.resultMessage)
+    }
+}
+
+
+
+export { getMyAppointment, deleteAppointment, lockedAppointment }

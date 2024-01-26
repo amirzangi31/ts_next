@@ -7,7 +7,7 @@ export type CustomRadioButtonType = {
     name: string,
     index: number,
     value: number | string,
-    changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
+    changeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 const RadioButton = ({ selected, color = "bg-primary", title, changeHandler, name, index, value }: CustomRadioButtonType) => {
 

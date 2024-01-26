@@ -1,13 +1,15 @@
+import cn from '@/utils/clsxFun'
 import React from 'react'
 type CheckboxType = {
     id?: string,
     name?: string,
     title: string,
     checked: boolean,
+    bg?: string,
     checkHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const Checkbox = ({ name, title, checked , checkHandler }: CheckboxType) => {
+const Checkbox = ({ name, title, checked, checkHandler, bg }: CheckboxType) => {
 
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +19,9 @@ const Checkbox = ({ name, title, checked , checkHandler }: CheckboxType) => {
     return (
         <label htmlFor={name} className='flex justify-start items-center gap-2 cursor-pointer' >
             {
-                checked ? <span className=' size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'>
+                checked ? <span className={cn(
+                    ' size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center', bg
+                )}>
                     <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.8 4.2998L1.2 2.6998L0 3.8998L2.8 6.6998L8 1.4998L6.8 0.299805L2.8 4.2998Z" fill="white" />
                     </svg>

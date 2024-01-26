@@ -1,7 +1,7 @@
 import cn from '@/utils/clsxFun'
 import React from 'react'
 
-const TurnsIcon = ({ active, white }: { active: boolean, white: boolean }) => {
+const TurnsIcon = ({ active, white }: { active: boolean, white?: boolean }) => {
     return (
         <>
             {

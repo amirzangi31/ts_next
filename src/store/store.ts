@@ -4,13 +4,15 @@ import modalLoginReducer from "./features/Modallogin";
 import loginReducer from "./features/LoginSlice";
 import userInfoReducer from "./features/userInfoSlice";
 import logoutModalReducer from "./features/logOutModalSlice";
+import appointmentReducer from "./features/appointmentSlice";
 
 const store = configureStore({
   reducer: {
     modalLogin: modalLoginReducer,
     login: loginReducer,
     userInfo: userInfoReducer,
-    modalLogout: logoutModalReducer
+    modalLogout: logoutModalReducer,
+    appointment: appointmentReducer,
   },
 });
 

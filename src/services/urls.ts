@@ -94,6 +94,28 @@ const urls = {
         physicianProfileUrl: "string",
       },
     },
+    calendarPhysician: {
+      url: "/PublicServices/PhysicianProfileCalendar/",
+      method: "GET",
+      parametrs: {},
+      query: {
+        physicianProfileUrl: "string",
+      },
+    },
+    ramainingTime: {
+      url: "/Public/GetCurrentDate/GetRamainingTime",
+      method: "GET",
+    },
+    lockedAppointment: {
+      url: "/User/UserPhysicianProfileCalendar/CheckAppointmentStatus/CheckAppointmentStatus",
+      method: "POST",
+      parametrs: {
+        calendarId: "string",
+        physicianProfileId: "string",
+        index: "number",
+      },
+      query: {},
+    },
   },
   //favorite
   favorite: {
