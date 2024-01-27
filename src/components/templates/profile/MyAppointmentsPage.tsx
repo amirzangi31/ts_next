@@ -509,7 +509,6 @@ const AppointmentCard = (props: MyAppointmentType) => {
     </>
   );
 };
-
 const AppointmentCardOff = (props: MyAppointmentType) => {
 
   const g = useTranslations("global");

@@ -4,7 +4,7 @@ import { apiDomainNobat } from '@/services/getApiUrlServer'
 import urls from '@/services/urls'
 
 import convertToHour from '@/utils/convertHour'
-import axios from 'axios'
+
 import { redirect } from 'next/navigation'
 import React from 'react'
 
@@ -33,14 +33,13 @@ const Appointment = async ({ params }: {
 
         ramainingTime = data.value.ramainigTime
     } catch (error) {
-        // redirect("/404")
-        console.log(error)
+        redirect("/404")
     }
 
 
 
     return (
-        <AppointmentPage calendar={physicianCalendar.physicianProfileCalendars} physician={physicianCalendar.physicianProfile} ramainingTime={ramainingTime} times={convertToHour()} firstAppointment={physicianCalendar.firstppointment} />
+        <AppointmentPage calendar={physicianCalendar?.physicianProfileCalendars} physician={physicianCalendar.physicianProfile} ramainingTime={ramainingTime} times={convertToHour()} firstAppointment={physicianCalendar.firstppointment} />
     )
 }
 

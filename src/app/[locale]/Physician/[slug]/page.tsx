@@ -13,9 +13,9 @@ const PhysicainDetailes = async (props: {
 
   const physician = await getProfilePhysician(props.params.slug)
 
-  if (physician.resultCode !== 200) {
-    redirect("/404")
-  }
+  // if (physician?.resultCode !== 200) {
+  //   redirect("/404")
+  // }
 
 
 

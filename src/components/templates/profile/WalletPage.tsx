@@ -41,12 +41,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
 
 
   const { transactions, isLoading, loadingPayment, paymentHandler } = useTransactions()
-
-
-
-
   const t = useTranslations("wallet_page");
-
   const { isLogin, user } = useUserInfo();
   const [activePrice, setActivePrice] = useState(1)
   const [showCount, setShowCount] = useState(false)

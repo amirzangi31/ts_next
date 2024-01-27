@@ -35,7 +35,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
   const [activeTab, setActiveTab] = useState(calendar.findIndex(item => item.available === true) ? calendar.findIndex(item => item.available === true) : 0)
   const [activeMonth, setActiveMonth] = useState<string | number | undefined>(calendar.findIndex(item => item.available === true) ? calendar.find(item => item.available === true)?.calendar.month : calendar.find(item => item.available === false)?.calendar.month)
   const [showWarningRules, setShowWarningRules] = useState(false)
-  const router = useRouter()
+  
   const showHoursType = !physician.doNotShowMyCalendar
 
 
@@ -60,7 +60,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
 
     lockedAppointmentHandler.mutate()
   }
-
+  
   const time = new Date()
   time.setSeconds(time.getSeconds() + ramainingTime)
   return (

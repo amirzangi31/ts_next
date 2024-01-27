@@ -5,58 +5,32 @@
 
 import BaseCard from "@modules/cards/BaseCard"
 
-
-
-
-
-
-
-import PencilIcon from "@icons/PencilIcon";
-// import PhysicianCommentCard from "@modules/cards/PhysicianCommentCard";
-// import ConsultationPlanItemCard from "@modules/cards/ConsultationPlanItemCard";
 import { useEffect, useState } from "react";
 import ProfileSummaryCard from "@modules/cards/ProfileSummaryCard";
 import Link from "next/link";
-
-
-
-
-
 import useModalLogin from "@/hooks/useModalLogin";
 
-
-
-// import ContentModalCenter from "../modules/modal/ContentModalCenter";
-// import FunctionalStarRateModule from "../modules/FunctionalStarRateModule";
-// import CustomRadioButton from "../elements/CustomRadioButton";
-import UpThumbIcon from "../icons/UpThumbIcon";
-import DownThumbIcon from "../icons/DownThumbIcon";
 
 
 
 
 import { useLocale } from "next-intl";
 
-// import convertWaitingTime from "@/helper/convertWaitingTime";
-// import createComment from "@/services/comment/createComment";
-import Toastify from "../elements/toasts/Toastify";
-
 
 
 
 
 import useFavorite from "@/hooks/useFavorite";
-import Loader from "../elements/Loader";
 import { PhysicainProfileType } from "@/types/physicianProfile";
 import TitlePagesMobile from "../modules/titles/TitlePagesMobile";
 
 import TitlePrimary from "../modules/titles/TitlePrimary";
-import ToastWarning from "../elements/toasts/ToastWarning";
+
 import ModalLogin from "../layouts/ModalLogin/ModalLogin";
 import cn from "@/utils/clsxFun";
 import { getUrlImage } from "@/services/getImageUrl/getImageUrl";
-import Modal from "../modules/modals/Modal";
-import CloseButton from "../elements/CloseButton";
+
+
 import useUserInfo from "@/hooks/useUserInfo";
 import ButtonElement from "../elements/ButtonElement";
 import OfficeCard from "../modules/cards/OfficeCard";
@@ -64,7 +38,6 @@ import PhysicianProfileCard from "../modules/cards/Physicain/PhysicianProfileCar
 import LinkElement from "../elements/LinkElement";
 import SwiperContainerFreeMode from "../modules/swiper/SwiperContianerFreeMode";
 import PhysicainCardPrimary from '../modules/cards/Physicain/PhysicianCardPrimary';
-import BottomSheetAndCenterContent from "../modules/modals/BottomSheetAndCenterContent";
 import CreateCommentCom from "../modules/CreateCommentCom";
 
 const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }) => {
@@ -173,7 +146,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
         active: physician.textConsultation,
         status: null,
       },
-    ];
+  ];
 
   const [buttonText, setButtonText] = useState(
     consultationList.find((item) => item.active)?.title
