@@ -2,7 +2,7 @@ import { acceptRuleOne, acceptRuleTwo, selectAppointment , lockedAppointmentRedu
 import { useAppDispatch, useAppSelector } from './useRedux'
 import useUserInfo from './useUserInfo'
 import { useMutation } from '@tanstack/react-query'
-import { lockedAppointment } from '@/services/appointments/appointment'
+import { lockedAppointment , getFirstForce } from '@/services/appointments/appointment'
 
 
 
@@ -41,6 +41,16 @@ const useSelectAppointment = () => {
     })
 
 
+    const firstAppointment = useMutation({
+        mutationFn: async ({physicianProfileId} : {physicianProfileId : string}) => {
+            
+            const res = await getFirstForce(physicianProfileId)
+            console.log(res)
+            return res.data
+        }
+    })
+
+
 
     return {
         appointmentInfo: appointmentSelectInfo,
@@ -55,7 +65,8 @@ const useSelectAppointment = () => {
             acceptRuleOneHandler,
             acceptRuleTwoHandler
         },
-        lockedAppointmentHandler: locked
+        lockedAppointmentHandler: locked,
+        firstAppointmentHandler : firstAppointment
     }
 }
 

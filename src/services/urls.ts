@@ -116,6 +116,13 @@ const urls = {
       },
       query: {},
     },
+    firstAppointment: {
+      url: "/User/UserPhysicianProfileCalendar/GetFirstForce/GetFirstForce/",
+      method: "POST",
+      query: {
+        physicianId: "string",
+      },
+    },
   },
   //favorite
   favorite: {

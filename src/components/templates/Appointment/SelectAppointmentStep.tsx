@@ -17,10 +17,8 @@ import ArrowLeft from '@/components/icons/ArrowLeft';
 import Image from 'next/image';
 import Checkbox from '@/components/elements/inputs/Checkbox';
 import ButtonElement from '@/components/elements/ButtonElement';
-import Loader from '@/components/elements/Loader';
 import LinkElement from '@/components/elements/LinkElement';
 import Timer from '@/components/modules/Timer';
-import { useRouter } from 'next/navigation';
 
 
 const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null }) => {
@@ -35,7 +33,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
   const [activeTab, setActiveTab] = useState(calendar.findIndex(item => item.available === true) ? calendar.findIndex(item => item.available === true) : 0)
   const [activeMonth, setActiveMonth] = useState<string | number | undefined>(calendar.findIndex(item => item.available === true) ? calendar.find(item => item.available === true)?.calendar.month : calendar.find(item => item.available === false)?.calendar.month)
   const [showWarningRules, setShowWarningRules] = useState(false)
-  
+
   const showHoursType = !physician.doNotShowMyCalendar
 
 
@@ -43,10 +41,12 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
   const { openModalLogin } = useModalLogin()
   const { isLogin, user } = useUserInfo()
   const [callbackIndex, setCallbackIndex] = useState(0)
-  const callbacks = [() => { console.log("test") }, () => { }, () => { lockedAppointmentHandler.mutate() }]
+  const callbacks = [() => { console.log("test") }, () => {
+    console.log("test")
+  }, () => { lockedAppointmentHandler.mutate() }]
 
   //selectAppointment
-  const { selectAppointment, selectIndex, selectCalendarId, isRules, rules, acceptRules, isNextStep, lockedAppointmentHandler } = useSelectAppointment()
+  const { selectAppointment, selectIndex, selectCalendarId, isRules, rules, acceptRules, isNextStep, lockedAppointmentHandler , firstAppointmentHandler } = useSelectAppointment()
 
 
 
@@ -60,9 +60,22 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
 
     lockedAppointmentHandler.mutate()
   }
-  
-  const time = new Date()
-  time.setSeconds(time.getSeconds() + ramainingTime)
+
+  let time = new Date()
+  time.setSeconds(time.getSeconds() + 100)
+
+
+  const getFirstAppointment = () => {
+    if(isLogin === "isLoading") return;
+    if(isLogin === "unauthorization"){
+      openModalLogin()
+      setCallbackIndex(1)
+      return
+    }
+    firstAppointmentHandler.mutate({physicianProfileId  : physician.id})
+  }
+
+
   return (
     <>
       <ModalLogin callbacks={callbacks} isCallback={true} callbacksIndex={callbackIndex} />
@@ -79,8 +92,8 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
         </div>
       </header>
       {/* ----------header------------- */}
-      <main>
 
+      <main>
 
         {/* ----------section------------- */}
         {/* Tabs section */}
@@ -342,7 +355,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
                     ramainingTime > 0 && firstAppointment !== null ? "gray-light" : "primary"
                   }
 
-                  handler={() => { console.log("first") }}
+                  handler={getFirstAppointment}
                 >
 
 
