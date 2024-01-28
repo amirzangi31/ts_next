@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export type AppointmentType = {
+  stepPage: 1 | 2;
   appointmentSelectInfo: AppointmentSelectInfoType;
   isSelectAppointment: boolean;
   isRules: boolean;
@@ -28,6 +29,7 @@ type AppointmentSelectInfoType = {
 };
 
 const initialState: AppointmentType = {
+  stepPage: 1,
   appointmentSelectInfo: {
     year: null,
     month: null,
@@ -106,6 +108,10 @@ const appointmentSlice = createSlice({
 
       state.isLocked = true;
     },
+    changeStepPage: (state, { payload }) => {
+      console.log(payload)
+      state.stepPage = payload.step;
+    },
   },
 });
 
@@ -115,6 +121,6 @@ export const {
   acceptRuleOne,
   acceptRuleTwo,
   lockedAppointmentRedux,
-  
+  changeStepPage,
 } = appointmentSlice.actions;
 export default appointmentSlice.reducer;

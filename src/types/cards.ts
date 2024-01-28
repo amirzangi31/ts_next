@@ -46,3 +46,20 @@ export interface CommentCardPrimaryType {
   physician: string;
   comment: string;
 }
+
+export interface AppointmentPrimaryCardType {
+  firstName: string;
+  lastName: string;
+  hasImage: string;
+  physicianProfileId: string;
+  price: string;
+  date: string;
+  time: string;
+  phoneNumber: string;
+  address: string;
+  location: [number, number];
+  status: string;
+  speciality: string;
+  plans: {}[];
+  lockTime : number
+}

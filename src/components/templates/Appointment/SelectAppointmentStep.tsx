@@ -21,7 +21,7 @@ import LinkElement from '@/components/elements/LinkElement';
 import Timer from '@/components/modules/Timer';
 
 
-const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment, changeStep }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null, changeStep: (step: 1 | 2) => void }) => {
+const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null }) => {
 
 
   const [selectAppointmentBeforeSign, setSelectAppointmentBeforeSign] = useState({

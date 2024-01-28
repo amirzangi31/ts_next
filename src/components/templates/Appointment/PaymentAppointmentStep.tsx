@@ -1,8 +1,11 @@
+import AppointmentPrimaryCard from '@modules/cards/Appointment/AppointmentPrimaryCard'
 import React from 'react'
 
 const PaymentAppointmentStep = () => {
   return (
-    <div>PaymentAppointmentStep</div>
+    <>
+      <AppointmentPrimaryCard />
+    </>
   )
 }
 
