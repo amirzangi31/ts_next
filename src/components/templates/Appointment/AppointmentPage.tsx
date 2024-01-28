@@ -16,11 +16,15 @@ export type AppointmentPageType = {
 
 const AppointmentPage = ({ calendar, physician, ramainingTime, times, firstAppointment }: AppointmentPageType) => {
   const [stepPage, setStepPage] = useState<1 | 2>(1)
-  
+
+  const changeStepHandler = (step: 1 | 2) => {
+    setStepPage(step)
+  }
+
   return (
     <>
       <TitlePagesMobile title='صفحه ی نوبت دهی اینترنتی دکتر حسین کرمی' />
-      {stepPage === 1 ? <SelectAppointmentStep calendar={calendar} physician={physician} ramainingTime={ramainingTime} times={times} firstAppointment={firstAppointment} /> : null}
+      {stepPage === 1 ? <SelectAppointmentStep calendar={calendar} physician={physician} ramainingTime={ramainingTime} times={times} firstAppointment={firstAppointment} changeStep={changeStepHandler} /> : null}
       {stepPage === 2 ? <PaymentAppointmentStep /> : null}
     </>
   )

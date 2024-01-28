@@ -19,6 +19,7 @@ import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
 import useModalLogin from '@/hooks/useModalLogin';
 import ModalLogin from '../layouts/ModalLogin/ModalLogin';
 import useUserInfo from '@/hooks/useUserInfo';
+import SearchHomePage from '../modules/search/SearchHomePage';
 
 
 
@@ -33,8 +34,6 @@ const HomePage = (props: HomePagePropType) => {
     // translations
     const g = useTranslations("global");
     const t = useTranslations("Routes_name_m");
-
-
 
     // Static Data
     const categories = [
@@ -72,11 +71,19 @@ const HomePage = (props: HomePagePropType) => {
     const articles = [...articleData]
     const comments = [...commentsList]
 
-    
+
 
     return (
         <>
             <TitlePagesMobile title={t("home")} />
+            {/* ----------section------------- */}
+            {/* Best Specialities  */}
+            <header>
+                <SearchHomePage />
+            </header>
+            {/* ----------section------------- */}
+
+            {/* ----------section------------- */}
             {/* Best Specialities  */}
             <section>
                 <SectionTitle
@@ -87,6 +94,9 @@ const HomePage = (props: HomePagePropType) => {
                 />
                 <SwiperContainerFreeMode gap={10} data={categories} CardComponent={CategoryPrimaryCard} />
             </section >
+            {/* ----------section------------- */}
+
+            {/* ----------section------------- */}
             {/* Best Physicians */}
             <section className='mt-6'>
                 <SectionTitle
@@ -97,6 +107,9 @@ const HomePage = (props: HomePagePropType) => {
                 />
                 <SwiperContainerFreeMode gap={10} data={physicians} CardComponent={PhysicainCardPrimary} />
             </section >
+            {/* ----------section------------- */}
+
+            {/* ----------section------------- */}
             {/* Newest Articles  */}
             <section className="mt-6">
                 <SectionTitle
@@ -107,6 +120,9 @@ const HomePage = (props: HomePagePropType) => {
                 />
                 <SwiperContainerFreeMode gap={10} data={articles} CardComponent={ArticleCardPrimary} />
             </section>
+            {/* ----------section------------- */}
+
+            {/* ----------section------------- */}
             {/* User Comments  */}
             <section className="mt-6">
                 <SectionTitle
@@ -117,6 +133,8 @@ const HomePage = (props: HomePagePropType) => {
                 />
                 <SwiperContainerFreeMode gap={10} data={comments} CardComponent={CommentCardPrimary} />
             </section>
+            {/* ----------section------------- */}
+
             <BottomNavigation route='home' />
         </>
     )

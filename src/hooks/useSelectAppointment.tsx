@@ -1,4 +1,4 @@
-import { acceptRuleOne, acceptRuleTwo, selectAppointment , lockedAppointmentRedux } from '@/store/features/appointmentSlice'
+import { acceptRuleOne, acceptRuleTwo, selectAppointment , lockedAppointmentRedux, offSelectAppointment } from '@/store/features/appointmentSlice'
 import { useAppDispatch, useAppSelector } from './useRedux'
 import useUserInfo from './useUserInfo'
 import { useMutation } from '@tanstack/react-query'
@@ -8,18 +8,20 @@ import { lockedAppointment , getFirstForce } from '@/services/appointments/appoi
 
 
 const useSelectAppointment = () => {
-    const { appointmentSelectInfo, isRules, rules, isSelectAppointment } = useAppSelector(state => state.appointment)
+    const { appointmentSelectInfo, isRules, rules, isSelectAppointment  } = useAppSelector(state => state.appointment)
+    
     const { isLogin } = useUserInfo()
     const dispatch = useAppDispatch()
 
     const selectAppointmentHandler = (year: string, month: string, day: string, index: number, calendarId: string, physicianProfileId: string) => {
-
         dispatch(selectAppointment({
             year, month, day, index, calendarId,
             physicianProfileId,
         }))
     }
-
+    const offSelectHandler = () => {
+        dispatch(offSelectAppointment())
+    }
 
     const acceptRuleOneHandler = () => {
         dispatch(acceptRuleOne())
@@ -43,10 +45,10 @@ const useSelectAppointment = () => {
 
     const firstAppointment = useMutation({
         mutationFn: async ({physicianProfileId} : {physicianProfileId : string}) => {
-            
             const res = await getFirstForce(physicianProfileId)
-            console.log(res)
-            return res.data
+            
+            selectAppointmentHandler(res.year , res.month , res.day , res.index , res.calendarId , res.physicianProfileId ) 
+            return res
         }
     })
 
@@ -66,7 +68,8 @@ const useSelectAppointment = () => {
             acceptRuleTwoHandler
         },
         lockedAppointmentHandler: locked,
-        firstAppointmentHandler : firstAppointment
+        firstAppointmentHandler : firstAppointment,
+        offSelectHandler
     }
 }
 

@@ -27,15 +27,6 @@ http.interceptors.request.use(
   }
 );
 
-const asd = (failedRequest: any) =>
-  axios
-    .post("https://www.example.com/auth/token/refresh")
-    .then((tokenRefreshResponse) => {
-      localStorage.setItem("token", tokenRefreshResponse.data.token);
-      failedRequest.response.config.headers["Authorization"] =
-        "Bearer " + tokenRefreshResponse.data.token;
-      return Promise.resolve();
-    });
 
 const refreshAuthLogic = async (failedRequest: any) => {
   const refreshToken = localStorage.getItem("refreshToken");
@@ -64,6 +55,7 @@ const refreshAuthLogic = async (failedRequest: any) => {
 
     return Promise.resolve();
   } catch (error) {
+    console.log(error)
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     Toastify("error", "دوباره لاگین شوید توکن منقضی شده است");

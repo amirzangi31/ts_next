@@ -2,21 +2,24 @@ import ArrowLeft from '@/components/icons/ArrowLeft'
 import useUserInfo from '@/hooks/useUserInfo'
 import { UserType } from '@/types/global'
 import cn from '@/utils/clsxFun'
-import { useLocale } from 'next-intl'
 import Image from 'next/image'
-import Link from 'next/link'
 import React, { useState } from 'react'
 import LinkElement from './LinkElement'
+import useSelectAppointment from '@/hooks/useSelectAppointment'
 
 
-const AcoountButtonHeader = ({ user } : {user : UserType}) => {
+const AcoountButtonHeader = ({ user }: { user: UserType }) => {
 
     const { getUser } = useUserInfo()
     const [showDrop, setShowDrop] = useState(false)
-    
+    const { offSelectHandler } = useSelectAppointment()
+
+
     const logOut = () => {
         localStorage.removeItem("accessToken")
         localStorage.removeItem("refreshToken")
+        offSelectHandler()
+
         getUser()
     }
 

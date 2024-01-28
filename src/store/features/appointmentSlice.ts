@@ -115,5 +115,6 @@ export const {
   acceptRuleOne,
   acceptRuleTwo,
   lockedAppointmentRedux,
+  
 } = appointmentSlice.actions;
 export default appointmentSlice.reducer;

@@ -1,14 +1,20 @@
 import { addFavorite, deleteFavorite, getAllFavorite, isFavorite } from '@/services/favorite/favorite'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import useUserInfo from './useUserInfo';
 
 
 const useFavorite = (physicianProfileId: string) => {
     const queryClient = useQueryClient();
-
+    const { isLogin } = useUserInfo()
 
     const userFavorite = useQuery(["userFavorite"], async () => {
-        const result = await isFavorite(physicianProfileId)
-        return result
+        if (isLogin === "authorization") {
+            const result = await isFavorite(physicianProfileId)
+            return result
+        }else {
+            return false
+        }
+
     })
 
     const addFavoriteHandler = useMutation({
@@ -42,8 +48,8 @@ const useFavorite = (physicianProfileId: string) => {
     })
 
     return {
-        
-        
+
+
         userFavorite: userFavorite?.data?.isFavorite,
         isLodingUserFavorite: userFavorite.isLoading,
         addFavorite: addFavoriteHandler?.mutate,

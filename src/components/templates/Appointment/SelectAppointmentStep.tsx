@@ -21,8 +21,17 @@ import LinkElement from '@/components/elements/LinkElement';
 import Timer from '@/components/modules/Timer';
 
 
-const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null }) => {
+const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment, changeStep }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null, changeStep: (step: 1 | 2) => void }) => {
 
+
+  const [selectAppointmentBeforeSign, setSelectAppointmentBeforeSign] = useState({
+    year: "",
+    month: "",
+    day: "",
+    physicianId: "",
+    index: 0,
+    calendar: ""
+  })
 
 
 
@@ -41,12 +50,20 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
   const { openModalLogin } = useModalLogin()
   const { isLogin, user } = useUserInfo()
   const [callbackIndex, setCallbackIndex] = useState(0)
-  const callbacks = [() => { console.log("test") }, () => {
-    console.log("test")
+  const callbacks = [() => {
+    selectAppointment(selectAppointmentBeforeSign.year, selectAppointmentBeforeSign.month, selectAppointmentBeforeSign.day, selectAppointmentBeforeSign.index, selectAppointmentBeforeSign.calendar, selectAppointmentBeforeSign.physicianId)
+  }, () => {
+    firstAppointmentHandler.mutate({ physicianProfileId: physician.id })
+
+    for (let i = 0; i < calendar.length; i++) {
+      if (calendar[i].calendar.id === appointmentInfo.calendarId) {
+        setActiveTab(i);
+      }
+    }
   }, () => { lockedAppointmentHandler.mutate() }]
 
   //selectAppointment
-  const { selectAppointment, selectIndex, selectCalendarId, isRules, rules, acceptRules, isNextStep, lockedAppointmentHandler , firstAppointmentHandler } = useSelectAppointment()
+  const { selectAppointment, isSelectAppointment, selectIndex, selectCalendarId, isRules, rules, acceptRules, isNextStep, lockedAppointmentHandler, firstAppointmentHandler, appointmentInfo } = useSelectAppointment()
 
 
 
@@ -62,18 +79,62 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
   }
 
   let time = new Date()
-  time.setSeconds(time.getSeconds() + 100)
+  time.setSeconds(time.getSeconds() + ramainingTime)
 
 
   const getFirstAppointment = () => {
-    if(isLogin === "isLoading") return;
-    if(isLogin === "unauthorization"){
+    if (isLogin === "isLoading") return;
+    if (isLogin === "unauthorization") {
       openModalLogin()
       setCallbackIndex(1)
       return
     }
-    firstAppointmentHandler.mutate({physicianProfileId  : physician.id})
+    firstAppointmentHandler.mutate({ physicianProfileId: physician.id })
+
+    for (let i = 0; i < calendar.length; i++) {
+      if (calendar[i].calendar.id === appointmentInfo.calendarId) {
+        setActiveTab(i);
+      }
+    }
   }
+
+  const selectHandler = (calendar: PhysicianProfileCalendar, index: number) => {
+    if (isLogin === "isLoading") return
+    if (isLogin === "unauthorization") {
+      setSelectAppointmentBeforeSign({
+        year: calendar.calendar.year,
+        month: calendar.calendar.month,
+        day: calendar.calendar.dayOfMonth,
+        index: index,
+        calendar: calendar.calendar.id,
+        physicianId: physician.id,
+      })
+      openModalLogin()
+      setCallbackIndex(0)
+      return
+    }
+
+
+    selectAppointment(calendar.calendar.year, calendar.calendar.month, calendar.calendar.dayOfMonth, index, calendar.calendar.id, physician.id)
+  }
+
+  useEffect(() => {
+    if (
+      showHoursType === false
+    ) {
+
+      const timesPanel = document.getElementById(`day-${appointmentInfo.calendarId}`);
+      const timeElement: any = document.getElementById(
+        `btn-${appointmentInfo.calendarId}-${appointmentInfo.index}`
+      );
+
+      timesPanel?.scroll({
+        left: timeElement.offsetLeft + 90 - timesPanel.offsetWidth,
+        behavior: "smooth",
+      });
+    }
+  }, [isSelectAppointment])
+
 
 
   return (
@@ -87,12 +148,13 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
             <TurnsIcon active={false} />
           </div>
           <div className="h-[42px] px-2 rounded-3xl text-lg font-bold bg-white shadow-shadow_category flex justify-center items-center">
-            {t("Attending-appointments")}
+            نوبت دهی اینترنتی مطب
           </div>
         </div>
       </header>
       {/* ----------header------------- */}
 
+      {/* ----------main------------- */}
       <main>
 
         {/* ----------section------------- */}
@@ -232,15 +294,12 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
                             })}
                           >
                             {isLogin === "unauthorization" ? (
-                              <span className="absolute top-0 left-0 z-30 block w-full h-full" onClick={() => {
-                                if (isLogin === "unauthorization") {
-                                  openModalLogin()
-                                  return
-                                }
+                              <span className="absolute top-0 left-0 z-10 block w-full h-full" onClick={() => {
+                                selectHandler(item, index)
                               }}></span>
                             ) : null}
                             <AppointmentRadioButton name="Appointment_time" active={true} calendarId={item.calendar.id}
-                              handler={() => selectAppointment(item.calendar.year, item.calendar.month, item.calendar.dayOfMonth, index, item.calendar.id, physician.id)}
+                              handler={() => selectHandler(item, index)}
 
                               index={index} ramainingTime={ramainingTime} selected={selectIndex === index && selectCalendarId === item.calendar.id} time={times[index]} />
                           </button>
@@ -267,13 +326,10 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
                 ))
               }
             </div>
-
-
-
-
           </Tabs>
         </section>
         {/* ----------section------------- */}
+
         {/* ----------section------------- */}
         {/* physician rules */}
         <section className="mt-4">
@@ -347,10 +403,10 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
               <div>
                 <ButtonElement
                   disabled={
-                    ramainingTime > 0
+                    ramainingTime > 0 && firstAppointmentHandler.isLoading
                   }
                   fontWeight='bold'
-
+                  loading={firstAppointmentHandler.isLoading}
                   typeButton={
                     ramainingTime > 0 && firstAppointment !== null ? "gray-light" : "primary"
                   }
@@ -397,6 +453,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
         {/* ----------section------------- */}
 
       </main>
+      {/* ----------main------------- */}
     </>
   )
 }
