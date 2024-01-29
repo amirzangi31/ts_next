@@ -193,6 +193,20 @@ const urls = {
       query: {},
     },
   },
+
+  //search
+  search: {
+    searchPrimary: {
+      url: "/PublicServices/PhysicianProfile/Search",
+      method : "POST",
+      parametrs: {
+        filter: "string",
+        cityId: "number",
+        provinceId: "number",
+      },
+      query: {},
+    },
+  },
 };
 
 export default urls;

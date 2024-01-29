@@ -19,6 +19,8 @@ export interface PhysicainCardPrimaryType {
   immediateConsultation: boolean;
   rate: number;
   physicianSpecialities: PhysicianSpeciality[];
+  bg?: string;
+  key?: string;
 }
 export interface PhysicianSpeciality {
   id: number;
@@ -48,18 +50,12 @@ export interface CommentCardPrimaryType {
 }
 
 export interface AppointmentPrimaryCardType {
-  firstName: string;
-  lastName: string;
-  hasImage: string;
-  physicianProfileId: string;
+  physician: PhysicainCardPrimaryType;
   price: string;
   date: string;
   time: string;
-  phoneNumber: string;
-  address: string;
-  location: [number, number];
   status: string;
   speciality: string;
   plans: {}[];
-  lockTime : number
+  lockTime: number;
 }

@@ -16,9 +16,6 @@ import PhysicainCardPrimary from '@modules/cards/Physicain/PhysicianCardPrimary'
 import BottomNavigation from '@modules/menu/BottomNavigation';
 import SectionTitle from '@modules/titles/SectionTitle';
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
-import useModalLogin from '@/hooks/useModalLogin';
-import ModalLogin from '../layouts/ModalLogin/ModalLogin';
-import useUserInfo from '@/hooks/useUserInfo';
 import SearchHomePage from '../modules/search/SearchHomePage';
 
 
@@ -71,7 +68,7 @@ const HomePage = (props: HomePagePropType) => {
     const articles = [...articleData]
     const comments = [...commentsList]
 
-
+    
 
     return (
         <>
@@ -79,7 +76,7 @@ const HomePage = (props: HomePagePropType) => {
             {/* ----------section------------- */}
             {/* Best Specialities  */}
             <header className='py-4'>
-                <SearchHomePage />
+                <SearchHomePage physicians={physicians} />
             </header>
             {/* ----------section------------- */}
 

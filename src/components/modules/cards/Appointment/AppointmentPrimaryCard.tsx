@@ -2,15 +2,6 @@
 import PathLine from "@/components/elements/PathLine";
 
 import LocationIcon from "@/components/icons/LocationIcon";
-
-
-
-
-
-
-
-
-
 import Image from "next/image";
 import React from "react";
 
@@ -25,28 +16,14 @@ import convertToHour from "@/utils/convertHour";
 import convertDayTime from "@/utils/convertDayTime";
 import cn from "@/utils/clsxFun";
 import ButtonElement from "@/components/elements/ButtonElement";
+import { useLocale } from "next-intl";
+
 import { AppointmentPrimaryCardType } from "@/types/cards";
 
 
 
-
-const AppointmentPrimaryCard = ({
-  firstName: "";
-  lastName: "";
-  hasImage: "";
-  physicianProfileId: "";
-  price: "";
-  date: "";
-  time: "";
-  phoneNumber: "";
-  address: "";
-  location: [10, 10];
-  status: "";
-  speciality: "";
-  plans: [{}];
-  lockTime: 10
-}: AppointmentPrimaryCardType) => {
-  const { year, dayOfMonth, month } = date;
+const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
+  
   const local = useLocale();
   const {
     firstName,
@@ -58,13 +35,14 @@ const AppointmentPrimaryCard = ({
     hasImage,
     specialties,
   } = physician;
+
   const hourSplit = convertToHour()[index]?.split(":");
-  const { getAppointments } = useAppointments()
-  const { isLogin } = useAuth()
+
+
+  const { isLogin } = useUserInfo()
 
   const disabledTimer = () => {
-    if (isLogin === "authorization") getAppointments()
-    window.location.href = `/${local}/appointment/online-appointment/${physician.physicianProfileUrl}`
+    console.log("test")
   };
 
 

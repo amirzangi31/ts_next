@@ -163,7 +163,7 @@ const config: Config = {
             height: "0",
           },
           "100%": {
-            height: "400px",
+            height: "25rem",
           },
         },
       },

@@ -21,7 +21,7 @@ interface SwiperContainerFreeModeType {
 
 
 const SwiperContainerFreeMode = ({ data, gap, CardComponent }: SwiperContainerFreeModeType) => {
-
+    console.log(data)
     return (
         <Swiper
             spaceBetween={gap}
@@ -32,7 +32,7 @@ const SwiperContainerFreeMode = ({ data, gap, CardComponent }: SwiperContainerFr
             dir="rtl"
         >
             {
-                data.map((item) => (
+                data?.map((item) => (
                     <SwiperSlide className='swiper_width_auto' key={item.id}>
                         <CardComponent {...item} />
                     </SwiperSlide>

@@ -42,6 +42,7 @@ export interface RelatedPhysicianType {
   immediateConsultation: boolean;
   rate: number;
   physicianSpecialities: PhysicianSpeciality[];
+  bg?:string
 }
 
 interface PhysicianSpeciality {
