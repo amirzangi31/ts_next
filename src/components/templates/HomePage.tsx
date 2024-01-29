@@ -78,7 +78,7 @@ const HomePage = (props: HomePagePropType) => {
             <TitlePagesMobile title={t("home")} />
             {/* ----------section------------- */}
             {/* Best Specialities  */}
-            <header>
+            <header className='py-4'>
                 <SearchHomePage />
             </header>
             {/* ----------section------------- */}

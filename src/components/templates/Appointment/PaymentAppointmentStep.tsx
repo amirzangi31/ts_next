@@ -4,7 +4,7 @@ import React from 'react'
 const PaymentAppointmentStep = () => {
   return (
     <>
-      <AppointmentPrimaryCard />
+      {/* <AppointmentPrimaryCard /> */}
     </>
   )
 }

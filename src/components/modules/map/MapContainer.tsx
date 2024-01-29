@@ -12,7 +12,7 @@ export type MapContainerType = {
 function MapContainer({ height, location, zoom, markerWidth }: MapContainerType) {
     const [center, setCenter] = useState(location)
 
-
+    
     return (
         <Map height={height} center={center} zoom={zoom} animate={true} >
             <Marker
