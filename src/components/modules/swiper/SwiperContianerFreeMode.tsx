@@ -10,18 +10,19 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import { ArticleCardType, CategoryPrimaryType, CommentCardPrimaryType, PhysicainCardPrimaryType } from '@/types/cards';
 import { RelatedPhysicianType } from '@/types/physicianProfile';
+import { SearchSmallCardType, SpecialitySearchTagType } from '@/types/search';
 
 
 
 interface SwiperContainerFreeModeType {
     CardComponent: React.ComponentType<any>;
     gap?: number;
-    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[] | ArticleCardType[] | CommentCardPrimaryType[] | RelatedPhysicianType[]
+    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[] | ArticleCardType[] | CommentCardPrimaryType[] | RelatedPhysicianType[] | SearchSmallCardType[] | SpecialitySearchTagType[]
 }
 
 
 const SwiperContainerFreeMode = ({ data, gap, CardComponent }: SwiperContainerFreeModeType) => {
-    
+
     return (
         <Swiper
             spaceBetween={gap}
