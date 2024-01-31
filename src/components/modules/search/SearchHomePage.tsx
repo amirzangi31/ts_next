@@ -15,6 +15,10 @@ import { apiDomainNobat } from '@/services/getApiUrl'
 import urls from '@/services/urls'
 import Toastify from '@/components/elements/toasts/Toastify'
 import SpecialityTagSearch from './SpecialityTagSearch'
+import { PhysicianProfileType, PhysicianSpecialityType } from '@/types/search'
+import ButtonElement from '@/components/elements/ButtonElement'
+import Skeleton from 'react-loading-skeleton'
+
 
 
 const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) => {
@@ -22,31 +26,61 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
 
     const [showSearchContent, setShowSearchContent] = useState(false)
     const [searchText, setSearchText] = useState("")
+    const [searchLoading, setSearchLoading] = useState(false)
+    const [isSearched, setIsSearched] = useState(false);
 
-    const [searchData, setSearchData] = useState({
-        specialties: []
+    const [searchData, setSearchData] = useState<{
+        physicianProfiles: RelatedPhysicianType[] | PhysicianProfileType[],
+        specialties: PhysicianSpecialityType[],
+        diseases: any[],
+        signs: any[],
+        services: any[],
+        clinics: any[],
+    }>({
+        physicianProfiles: [],
+        specialties: [],
+        diseases: [],
+        signs: [],
+        services: [],
+        clinics: [],
     })
     const focusHandler = () => {
         setShowSearchContent(true)
         input?.current?.focus()
     }
 
-    console.log(searchData)
+
 
     const debouncedTextSearch = useDebouncedCallback((signal: any) => {
-        if (searchText.length > 0) {
+        if (searchText.trim().length === 0 && isSearched) {
+            setSearchData({
+                physicianProfiles: [],
+                specialties: [],
+                diseases: [],
+                signs: [],
+                services: [],
+                clinics: [],
+            })
+            setIsSearched(false)
+        }
+        if (showSearchContent && searchText.trim().length > 0) {
             const obj = {
                 filter: searchText,
                 cityId: 0,
                 provinceId: 0
             }
+            setSearchLoading(true)
             axios.post(`${apiDomainNobat}${urls.search.searchPrimary.url}`, obj, { signal }).then(res => {
                 setSearchData(res.data.value)
+                setIsSearched(true)
+                setSearchLoading(false)
+
             }).catch(error => {
                 if (error.name === "CanceledError") {
                     return;
                 }
                 Toastify("error", "خطایی رخ داده است");
+                setSearchLoading(false)
             })
         }
     }, 750)
@@ -65,7 +99,9 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
         return () => {
             controller.abort();
         }
-    }, [searchText])
+    }, [searchText, showSearchContent])
+
+
 
 
     return (
@@ -84,7 +120,9 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
                 {
                     "w-full h-screen": showSearchContent
                 }
-            )} onClick={() => setShowSearchContent(false)}></span>
+            )} onClick={() => {
+                setShowSearchContent(false)
+            }}></span>
 
             {/* ----------Search Content------------- */}
             {/* Content */}
@@ -100,7 +138,10 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
                 <div className={cn(
                     "w-full h-full overflow-hidden p-4",
                     " bg-bg_content shadow-shadow_category",//mobile
-                    " md:rounded-sm md:bg-white md:shadow-shadow_category md:overflow-y-scroll ",//descktop
+                    " md:rounded-sm md:bg-white md:shadow-shadow_category ",//descktop
+                    {
+                        "overflow-y-scroll": showSearchContent
+                    }
                 )}>
                     {/* close button */}
                     <div className='p-4 flex justify-end items-center md:hidden'>
@@ -116,28 +157,84 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
                     </div>
 
                     {/* specialities */}
-                    <div>
-                        <TitleSection title="تخصص ها" />
-                        <SwiperContainerFreeMode data={searchData?.specialties} CardComponent={SpecialityTagSearch} gap={10} />
-                    </div>
+                    {
+                        !searchLoading && searchData.specialties.length > 0 ?
+                            (
+                                <div>
+                                    <TitleSection title="تخصص ها" />
+                                    <SwiperContainerFreeMode data={searchData.specialties} CardComponent={SpecialityTagSearch} gap={10} />
+                                </div>
+                            ) : null
+                    }
+                    {
+                        searchLoading ? (
+                            <div>
+                                <div>
+                                    <TitleSection title="تخصص ها" />
+                                    <div className='flex justify-start items-center gap-2'>
+                                        <TagSkeleton />
+                                        <TagSkeleton />
+                                        <TagSkeleton />
+                                    </div>
+                                </div>
+                                <div>
+                                    <TitleSection title="پزشک" />
+                                    <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
+                                        <SearchSkeleton />
+                                        <SearchSkeleton />
+                                        <SearchSkeleton />
+                                        <SearchSkeleton />
+                                    </div>
+                                </div>
+                            </div>
+                        ) : null
+                    }
+
                     {/* physicians */}
-                    <div>
-                        <TitleSection title="پزشک" />
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
-                            {searchData.physicianProfiles.map((item, index) => <SearchSmallCard key={item.id} {...item} bg='md:bg-gray-100 bg-white' />)}
-                        </div>
-                    </div>
-                    {/* cliniks */}
+                    {
+                        !searchLoading && searchData.physicianProfiles.length > 0 ?
+                            (
+
+                                <div>
+                                    <TitleSection title="پزشک" />
+                                    <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
+                                        {searchData.physicianProfiles.map((item, index) => <SearchSmallCard key={item.id} {...item} bg='md:bg-gray-100 bg-white' />)}
+                                    </div>
+                                </div>
+                            ) : null
+                    }
 
 
-                    <div>
-                        <TitleSection title="پزشک" />
-
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
-                            {physicians.slice(0, 6).map((item, index) => <SearchSmallCard key={item.id} {...item} bg='md:bg-gray-100 bg-white' />)}
-                        </div>
-
-                    </div>
+                    {/* For when no data was found */}
+                    {
+                        !searchLoading && searchData.physicianProfiles.length === 0 &&
+                            searchData.specialties.length === 0 &&
+                            searchData.diseases.length === 0 &&
+                            searchData.signs.length === 0 &&
+                            searchData.services.length === 0 &&
+                            searchData.clinics.length === 0 ? (
+                            <>
+                                {
+                                    isSearched ? (
+                                        <>
+                                            <p className='font-bold text-center h-[10rem] flex justify-center items-center'>
+                                                نتیجه مورد نظر یافت نشد!
+                                            </p>
+                                            <p className='font-bold text-right'>
+                                                پیشنهاد شده برای شما
+                                            </p>
+                                        </>
+                                    ) : null
+                                }
+                                <div>
+                                    <TitleSection title="پزشک" />
+                                    <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
+                                        {physicians.slice(0, 6).map((item, index) => <SearchSmallCard key={item.id} {...item} bg='md:bg-gray-100 bg-white' />)}
+                                    </div>
+                                </div>
+                            </>
+                        ) : null
+                    }
 
 
                 </div>
@@ -159,4 +256,24 @@ const TitleSection = ({ title }: { title: string }) => {
 }
 
 
+const TagSkeleton = () => {
+    return (
+        <div className='border border-gray-100 bg-white  px-4 h-[2.8125rem] flex justify-center items-center rounded-3xl'>
+            <div className='w-[7.5rem]'><Skeleton className='h-full' /> </div>
+        </div>
+    )
+}
 
+const SearchSkeleton = () => {
+    return (
+        <div className='flex justify-start items-center bg-white md:border md:border-gray-300 w-full py-2 px-4 rounded-sm'>
+            <div className=' w-[3.4375rem]'>
+                <Skeleton circle={true} className='size-[3.4375rem] rounded-full' />
+            </div>
+            <div className='flex-1 text-sm px-2 justify-between flex-col gap-2 flex '>
+                <p className='font-bold'><Skeleton className='h-[1.25rem]' /></p>
+                <p className='w-1/2'><Skeleton className='h-[1.25rem]' /></p>
+            </div>
+        </div>
+    )
+}

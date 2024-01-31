@@ -10,14 +10,14 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import { ArticleCardType, CategoryPrimaryType, CommentCardPrimaryType, PhysicainCardPrimaryType } from '@/types/cards';
 import { RelatedPhysicianType } from '@/types/physicianProfile';
-import { SearchSmallCardType, SpecialitySearchTagType } from '@/types/search';
+import { PhysicianSpecialityType, SearchSmallCardType, SpecialitySearchTagType } from '@/types/search';
 
 
 
 interface SwiperContainerFreeModeType {
     CardComponent: React.ComponentType<any>;
     gap?: number;
-    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[] | ArticleCardType[] | CommentCardPrimaryType[] | RelatedPhysicianType[] | SearchSmallCardType[] | SpecialitySearchTagType[]
+    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[] | ArticleCardType[] | CommentCardPrimaryType[] | RelatedPhysicianType[] | SearchSmallCardType[] | SpecialitySearchTagType[] | PhysicianSpecialityType[]
 }
 
 
@@ -33,8 +33,8 @@ const SwiperContainerFreeMode = ({ data, gap, CardComponent }: SwiperContainerFr
             dir="rtl"
         >
             {
-                data?.map((item) => (
-                    <SwiperSlide className='swiper_width_auto' key={item.id}>
+                data?.map((item , index) => (
+                    <SwiperSlide className='swiper_width_auto' key={item.id ? item.id : index}>
                         <CardComponent {...item} />
                     </SwiperSlide>
                 ))
