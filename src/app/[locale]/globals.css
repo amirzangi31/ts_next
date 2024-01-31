@@ -149,3 +149,13 @@ html {
 }
 
 /*----------End : Loader-----------*/
+
+
+
+/*----------Start :gradient-----------*/
+.gradient_after::after {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, #008582 50%, rgba(255, 255, 255, 1) 100%);
+}
+
+/*----------End :gradient-----------*/

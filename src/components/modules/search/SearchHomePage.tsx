@@ -16,9 +16,8 @@ import urls from '@/services/urls'
 import Toastify from '@/components/elements/toasts/Toastify'
 import SpecialityTagSearch from './SpecialityTagSearch'
 import { PhysicianProfileType, PhysicianSpecialityType } from '@/types/search'
-import ButtonElement from '@/components/elements/ButtonElement'
 import Skeleton from 'react-loading-skeleton'
-
+import { useCookies } from 'react-cookie';
 
 
 const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) => {
@@ -100,14 +99,14 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
             controller.abort();
         }
     }, [searchText, showSearchContent])
+    
+    
 
-
-
-
+    
     return (
         <div className={cn(
             'h-[3.3125rem] bg-white max-w-[50rem] mx-auto rounded-[10rem] p-2 flex justify-between items-center relative ', {
-            "overflow-hidden": !showSearchContent
+            // "overflow-hidden": !showSearchContent
         }
         )}>
             <input className='md:hiddn text-md placeholder:text-gray-300 flex-1 text-right h-full z-[50]' onChange={changeHandler} value={searchText} placeholder='نام پزشک، تخصص ...' onFocus={focusHandler} />
@@ -155,17 +154,7 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
                             <ChnageCityButton />
                         </div>
                     </div>
-
-                    {/* specialities */}
-                    {
-                        !searchLoading && searchData.specialties.length > 0 ?
-                            (
-                                <div>
-                                    <TitleSection title="تخصص ها" />
-                                    <SwiperContainerFreeMode data={searchData.specialties} CardComponent={SpecialityTagSearch} gap={10} />
-                                </div>
-                            ) : null
-                    }
+                    {/* Loading */}
                     {
                         searchLoading ? (
                             <div>
@@ -189,6 +178,17 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
                             </div>
                         ) : null
                     }
+                    {/* specialities */}
+                    {
+                        !searchLoading && searchData.specialties.length > 0 ?
+                            (
+                                <div>
+                                    <TitleSection title="تخصص ها" />
+                                    <SwiperContainerFreeMode data={searchData.specialties} CardComponent={SpecialityTagSearch} gap={10} />
+                                </div>
+                            ) : null
+                    }
+
 
                     {/* physicians */}
                     {

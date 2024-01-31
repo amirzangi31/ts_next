@@ -198,7 +198,7 @@ const urls = {
   search: {
     searchPrimary: {
       url: "/PublicServices/PhysicianProfile/Search",
-      method : "POST",
+      method: "POST",
       parametrs: {
         filter: "string",
         cityId: "number",
@@ -207,6 +207,17 @@ const urls = {
       query: {},
     },
   },
+  //provinces 
+  provinces: {
+    provinces: {
+      url: "/Public/Address/Provinces",
+      method: "GET"
+    },
+    cities: {
+      url: "/Public/Address/Cities?provinceId=",
+      method: "GET"
+    }
+  }
 };
 
 export default urls;

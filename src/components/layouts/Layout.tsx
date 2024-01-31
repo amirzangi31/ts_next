@@ -11,7 +11,7 @@ import useUserInfo from '@/hooks/useUserInfo'
 import "react-loading-skeleton/dist/skeleton.css";
 
 
-
+import { CookiesProvider } from 'react-cookie';
 
 const Layout = ({ children }: { children: ReactNode }) => {
     const [query] = useState(() => new QueryClient())
@@ -20,21 +20,23 @@ const Layout = ({ children }: { children: ReactNode }) => {
     return (
 
         <QueryClientProvider client={query}>
-            <Header />
-            <main className='container py-4 min-h-[calc(100vh-26.5375rem)]'>
-                {children}
-            </main>
-            <Footer />
-            <Toaster
-                position="bottom-center"
-                reverseOrder={false}
-                toastOptions={
-                    {
-                        duration: 3000
+            <CookiesProvider defaultSetOptions={{ path: '/' }}>
+                <Header />
+                <main className='container py-4 min-h-[calc(100vh-26.5375rem)]'>
+                    {children}
+                </main>
+                <Footer />
+                <Toaster
+                    position="bottom-center"
+                    reverseOrder={false}
+                    toastOptions={
+                        {
+                            duration: 3000
+                        }
                     }
-                }
-            />
-            <ReactQueryDevtools initialIsOpen={false} />
+                />
+                <ReactQueryDevtools initialIsOpen={false} />
+            </CookiesProvider>
         </QueryClientProvider>
 
     )
