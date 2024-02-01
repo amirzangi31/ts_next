@@ -26,11 +26,16 @@ const AppointmentPage = ({
   times,
   firstAppointment,
 }: AppointmentPageType) => {
-  const { step } = useSelectAppointment();
-  
+
+  const [step, setStep] = useState<1 | 2>(1)
+  const changeStepHandler = (step: 1 | 2) => {
+    setStep(step)
+  }
+
+
   return (
     <>
-      <TitlePagesMobile title="صفحه ی نوبت دهی اینترنتی دکتر حسین کرمی" />
+      <TitlePagesMobile title={`صفحه ی نوبت دهی اینترنتی دکتر ${physician.firstName} ${physician.lastName}`} />
       {step === 1 ? (
         <SelectAppointmentStep
           calendar={calendar}
@@ -38,6 +43,7 @@ const AppointmentPage = ({
           ramainingTime={ramainingTime}
           times={times}
           firstAppointment={firstAppointment}
+          changeStep={changeStepHandler}
         />
       ) : null}
       {step === 2 ? <PaymentAppointmentStep /> : null}

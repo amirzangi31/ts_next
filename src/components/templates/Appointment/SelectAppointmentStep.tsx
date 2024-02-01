@@ -21,7 +21,7 @@ import LinkElement from '@/components/elements/LinkElement';
 import Timer from '@/components/modules/Timer';
 
 
-const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null }) => {
+const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment, changeStep }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null, changeStep: (step: 1 | 2) => void }) => {
 
 
   const [selectAppointmentBeforeSign, setSelectAppointmentBeforeSign] = useState({
@@ -37,7 +37,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
 
   const t = useTranslations("appointment_page");
   const p = useTranslations("person");
-// 
+  // 
 
   const [activeTab, setActiveTab] = useState(calendar.findIndex(item => item.available === true) ? calendar.findIndex(item => item.available === true) : 0)
   const [activeMonth, setActiveMonth] = useState<string | number | undefined>(calendar.findIndex(item => item.available === true) ? calendar.find(item => item.available === true)?.calendar.month : calendar.find(item => item.available === false)?.calendar.month)
@@ -64,7 +64,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
 
 
 
-  
+
   //selectAppointment
   const { selectAppointment, isSelectAppointment, selectIndex, selectCalendarId, isRules, rules, acceptRules, isNextStep, lockedAppointmentHandler, firstAppointmentHandler, appointmentInfo } = useSelectAppointment()
 
@@ -80,6 +80,16 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
 
     lockedAppointmentHandler.mutate()
   }
+
+  useEffect(() => {
+    if (lockedAppointmentHandler.isSuccess) {
+      changeStep(2)
+    }
+
+
+  }, [lockedAppointmentHandler.isSuccess])
+
+
 
   let time = new Date()
   time.setSeconds(time.getSeconds() + ramainingTime)

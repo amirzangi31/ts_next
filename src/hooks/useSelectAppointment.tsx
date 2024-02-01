@@ -4,7 +4,7 @@ import {
   selectAppointment,
   lockedAppointmentRedux,
   offSelectAppointment,
-  changeStepPage,
+  
 } from "@/store/features/appointmentSlice";
 import { useAppDispatch, useAppSelector } from "./useRedux";
 import useUserInfo from "./useUserInfo";
@@ -13,6 +13,7 @@ import {
   lockedAppointment,
   getFirstForce,
 } from "@/services/appointments/appointment";
+import { useState } from "react";
 
 
 const useSelectAppointment = () => {
@@ -21,14 +22,10 @@ const useSelectAppointment = () => {
     isRules,
     rules,
     isSelectAppointment,
-    stepPage,
   } = useAppSelector((state) => state.appointment);
-
   const { isLogin } = useUserInfo();
   const dispatch = useAppDispatch();
-  const changeStepHandler = (step: 1 | 2) => {
-    dispatch(changeStepPage({ step }));
-  };
+
 
   const selectAppointmentHandler = (
     year: string,
@@ -67,13 +64,12 @@ const useSelectAppointment = () => {
         appointmentSelectInfo.physicianProfileId,
         appointmentSelectInfo.index
       );
-      console.log(res)
+      
       if (res.resultCode === 200) {
         const { chargeAmount, id, remainingSeconds, status } = res.value;
         dispatch(
           lockedAppointmentRedux({ chargeAmount, id, remainingSeconds, status })
         );
-        changeStepHandler(2);
       }
       return res.data;
     },
@@ -115,8 +111,6 @@ const useSelectAppointment = () => {
     lockedAppointmentHandler: locked,
     firstAppointmentHandler: firstAppointment,
     offSelectHandler,
-    step: stepPage,
-    changeStepHandler,
   };
 };
 
