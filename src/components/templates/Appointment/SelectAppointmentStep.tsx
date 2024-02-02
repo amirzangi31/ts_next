@@ -27,7 +27,7 @@ import usePrice from '@/hooks/usePrice';
 
 
 const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment, changeStep }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null, changeStep: (step: 1 | 2) => void }) => {
-const { price } = usePrice()
+
 
   const [selectAppointmentBeforeSign, setSelectAppointmentBeforeSign] = useState({
     year: "",
