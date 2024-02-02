@@ -18,15 +18,19 @@ import SpecialityTagSearch from './SpecialityTagSearch'
 import { PhysicianProfileType, PhysicianSpecialityType } from '@/types/search'
 import Skeleton from 'react-loading-skeleton'
 import { useCookies } from 'react-cookie';
+import useCity from '@/hooks/useCity'
 
 
 const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) => {
     const input = useRef<HTMLInputElement>(null)
-
+    const contentRef = useRef<HTMLDivElement>(null)
     const [showSearchContent, setShowSearchContent] = useState(false)
     const [searchText, setSearchText] = useState("")
     const [searchLoading, setSearchLoading] = useState(false)
     const [isSearched, setIsSearched] = useState(false);
+    const [cookies] = useCookies(["cityInfo"])
+    
+
 
     const [searchData, setSearchData] = useState<{
         physicianProfiles: RelatedPhysicianType[] | PhysicianProfileType[],
@@ -65,15 +69,16 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
         if (showSearchContent && searchText.trim().length > 0) {
             const obj = {
                 filter: searchText,
-                cityId: 0,
-                provinceId: 0
+                cityId: cookies?.cityInfo?.cityId ? cookies.cityInfo.cityId : 0,
+                provinceId: cookies?.cityInfo?.provinceId ? cookies.cityInfo.provinceId : 0,
+
             }
             setSearchLoading(true)
             axios.post(`${apiDomainNobat}${urls.search.searchPrimary.url}`, obj, { signal }).then(res => {
                 setSearchData(res.data.value)
                 setIsSearched(true)
                 setSearchLoading(false)
-
+                contentRef?.current?.scrollTo({top : 0 , behavior : "smooth"})
             }).catch(error => {
                 if (error.name === "CanceledError") {
                     return;
@@ -92,30 +97,30 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
     useEffect(() => {
         const controller = new AbortController();
         const { signal } = controller;
-
+        
         debouncedTextSearch(signal);
 
         return () => {
             controller.abort();
         }
-    }, [searchText, showSearchContent])
-    
-    
+    }, [searchText, showSearchContent , cookies?.cityInfo ])
 
     
+
+
     return (
         <div className={cn(
             'h-[3.3125rem] bg-white max-w-[50rem] mx-auto rounded-[10rem] p-2 flex justify-between items-center relative ', {
             // "overflow-hidden": !showSearchContent
         }
         )}>
-            <input className='md:hiddn text-md placeholder:text-gray-300 flex-1 text-right h-full z-[50]' onChange={changeHandler} value={searchText} placeholder='نام پزشک، تخصص ...' onFocus={focusHandler} />
+            <input className='md:hiddn text-md placeholder:text-gray-300 flex-1 text-right h-full  md:z-[15]' onChange={changeHandler} value={searchText} placeholder='نام پزشک، تخصص ...' onFocus={focusHandler} />
             <div>
                 <ChnageCityButton />
             </div>
 
             <span className={cn(
-                "fixed w-0 h-0  block top-0 left-0 z-[50]",
+                "fixed w-0 h-0  block top-0 left-0 z-[15] ",
                 {
                     "w-full h-screen": showSearchContent
                 }
@@ -127,7 +132,7 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
             {/* Content */}
             <div className={cn(
                 "transition-all duration-500",
-                "fixed top-full left-full w-full h-screen z-[50]",//mobile
+                "fixed top-full left-full w-full h-screen z-[15]",//mobile
                 "md:absolute md:-top-[3rem] md:opacity-0 md:left-0 md:w-full md:h-0  md:pt-4 ",//descktop
                 {
                     "top-0 left-0": showSearchContent,//mobile
@@ -141,7 +146,10 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
                     {
                         "overflow-y-scroll": showSearchContent
                     }
-                )}>
+                )}
+                ref={contentRef}
+                
+                >
                     {/* close button */}
                     <div className='p-4 flex justify-end items-center md:hidden'>
                         <CloseButton closeHanlder={() => setShowSearchContent(false)} />
@@ -149,7 +157,7 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
 
                     {/* input search */}
                     <div className=' gap-5 h-[3.3125rem] md:hidden bg-white max-w-[50rem] mx-auto rounded-[10rem] p-2 flex justify-between items-center relative'>
-                        <input ref={input} className='md:hiddn text-md placeholder:text-gray-300 flex-1 text-right h-full z-[50]' onChange={changeHandler} value={searchText} placeholder='نام پزشک، تخصص ...' />
+                        <input ref={input} className='md:hiddn text-md placeholder:text-gray-300 flex-1 text-right h-full ' onChange={changeHandler} value={searchText} placeholder='نام پزشک، تخصص ...' />
                         <div>
                             <ChnageCityButton />
                         </div>

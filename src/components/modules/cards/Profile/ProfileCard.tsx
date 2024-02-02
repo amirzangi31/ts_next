@@ -84,7 +84,7 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                                 </LinkElement>
                             ) : null
                         }
-                        <LinkElement link={"/"} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
+                        <LinkElement link={"/"} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary  md:hidden `, {
                             "flex-col justify-center": !type,
                             "flex-row justify-start py-3": type,
                         })} >

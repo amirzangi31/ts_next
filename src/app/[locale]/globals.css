@@ -159,3 +159,25 @@ html {
 }
 
 /*----------End :gradient-----------*/
+
+/*----------Start : Swiper Vertical-----------*/
+.swiper-vertical {
+  @apply h-[12.5rem] !important;
+}
+
+.swiper-vertical .swiper-slide {
+  @apply max-h-full !important;
+  @apply text-[#444444] text-md;
+}
+
+.swiper-vertical .swiper-slide-active {
+  @apply font-bold;
+}
+
+.swiper-vertical .swiper-slide-prev,
+.swiper-vertical .swiper-slide-next {
+
+  @apply text-lg ;
+}
+
+/*----------End : Swiper Vertical-----------*/

@@ -51,7 +51,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
   const [showSuccessDepositModal, setShowSuccessDepositModal] = useState(false);
   const [showFailureDepositModal, setShowFailureDepositModal] = useState(false);
   const [price, setPrice] = useState(props.params?.amount ? +props.params.amount : "");
-  
+
   const [date, setDate] = useState<{
     year: string | undefined,
     month: string | undefined,
@@ -315,15 +315,11 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
                   fontSize="md"
                   disabled={disabledButtonPayment}
                   handler={() => paymentHandler.mutate({ id: 0, price: +totalPrice * 10, paymentType: 0 })}
+                  loading={loadingPayment}
                 >
-                  {loadingPayment ? (
-                    <Loader
-                      size="size-[2.5rem]"
-                      color={"border-white"}
-                    />
-                  ) : (
-                    <p>{t("Record")} <span className="text-sm">({priceSplitter(totalPrice)} تومان)</span></p>
-                  )}
+
+                  <p>{t("Record")} <span className="text-sm">({priceSplitter(totalPrice)} تومان)</span></p>
+
                 </ButtonElement>) : null}
 
               </div>
@@ -418,15 +414,11 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
                     typeButton="primary"
                     fontWeight="bold"
                     handler={() => paymentHandler.mutate({ id: 0, price: +price * 10, paymentType: 0 })}
+                    loading={loadingPayment}
                   >
-                    {loadingPayment ? (
-                      <Loader
-                        size="size-[2.5rem]"
-                        color={"border-white"}
-                      />
-                    ) : (
-                      "تلاش مجدد"
-                    )}
+                    
+                      تلاش مجدد
+              
                   </ButtonElement>
                 </div>
               </div>

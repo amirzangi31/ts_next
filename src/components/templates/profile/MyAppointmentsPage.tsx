@@ -308,13 +308,17 @@ const AppointmentCard = (props: MyAppointmentType) => {
       physicianProfileUrl
     })
   }
-
+  useEffect(() => {
+    if (cancelMutation.isSuccess) {
+      setShowModalDelete(false)
+    }
+  }, [cancelMutation.isSuccess])
   return (
     <>
       <div className="bg-white rounded-sm shadow-shadow_category  w-full  flex justify-start items-start flex-col gap-2">
         <div className="p-4  w-full flex justify-between items-center ">
 
-          <div className="relative">
+          <LinkElement link={`/appointment/online-appointment/${props.physicianProfileUrl}`} className="relative">
             <Image
               src={props.hasImage ? getUrlImage(props.physicianProfileId) : "/noImage.jfif"}
               width={500}
@@ -331,7 +335,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
                 })}
               ></span>
             </span>
-          </div>
+          </LinkElement>
           <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-between items-start flex-col min-h-[3.75rem]">
             <div className="flex justify-between items-center w-full">
               <p className="text-lg  ">{props.physicianName}</p>
@@ -489,12 +493,11 @@ const AppointmentCard = (props: MyAppointmentType) => {
             <div className="flex justify-between items-center gap-2">
               <button type="button" className="rounded-sm border border-gray-450 w-[6.25rem] text-md  h-[2.5rem]" onClick={() => setShowModalDelete(false)} >انصراف</button>
               <button type="button" className="rounded-sm border border-error text-error text-md w-[6.25rem] h-[2.5rem] flex justify-center items-center"
-                onClick={() => cancelHanlder(props.calendarId, props.index, props.physicianProfileUrl)} >
+                onClick={() => cancelHanlder(props.calendarId, props.index, props.physicianProfileUrl)}  >
 
                 {cancelMutation.isLoading ? (
                   <Loader
                     size="size-[1.5625rem]"
-
                     color="border-error"
                   />
                 ) : (

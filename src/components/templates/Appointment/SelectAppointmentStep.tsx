@@ -19,6 +19,10 @@ import Checkbox from '@/components/elements/inputs/Checkbox';
 import ButtonElement from '@/components/elements/ButtonElement';
 import LinkElement from '@/components/elements/LinkElement';
 import Timer from '@/components/modules/Timer';
+import Modal from '@/components/modules/modals/Modal';
+import BottomSheetAndCenterContent from '@/components/modules/modals/BottomSheetAndCenterContent';
+import CloseButton from '@/components/elements/CloseButton';
+import Loader from '@/components/elements/Loader';
 
 
 const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment, changeStep }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null, changeStep: (step: 1 | 2) => void }) => {
@@ -29,11 +33,12 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
     month: "",
     day: "",
     physicianId: "",
+    physicianUrl: "",
     index: 0,
     calendar: ""
   })
-
-
+  const [showModalRules, setShowModalRules] = useState(false)
+  const [showModalRulesArenap, setShowModalRulesArenap] = useState(false)
 
   const t = useTranslations("appointment_page");
   const p = useTranslations("person");
@@ -44,6 +49,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
   const [showWarningRules, setShowWarningRules] = useState(false)
 
   const showHoursType = !physician.doNotShowMyCalendar
+  
 
 
   //Authorization
@@ -51,9 +57,9 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
   const { isLogin, user } = useUserInfo()
   const [callbackIndex, setCallbackIndex] = useState(0)
   const callbacks = [() => {
-    selectAppointment(selectAppointmentBeforeSign.year, selectAppointmentBeforeSign.month, selectAppointmentBeforeSign.day, selectAppointmentBeforeSign.index, selectAppointmentBeforeSign.calendar, selectAppointmentBeforeSign.physicianId)
+    selectAppointment(selectAppointmentBeforeSign.year, selectAppointmentBeforeSign.month, selectAppointmentBeforeSign.day, selectAppointmentBeforeSign.index, selectAppointmentBeforeSign.calendar, selectAppointmentBeforeSign.physicianId, selectAppointmentBeforeSign.physicianUrl)
   }, () => {
-    firstAppointmentHandler.mutate({ physicianProfileId: physician.id })
+    firstAppointmentHandler.mutate({ physicianProfileId: physician.id, physicianProfileUrl: physician.physicianProfileUrl })
 
     for (let i = 0; i < calendar.length; i++) {
       if (calendar[i].calendar.id === appointmentInfo.calendarId) {
@@ -66,7 +72,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
 
 
   //selectAppointment
-  const { selectAppointment, isSelectAppointment, selectIndex, selectCalendarId, isRules, rules, acceptRules, isNextStep, lockedAppointmentHandler, firstAppointmentHandler, appointmentInfo } = useSelectAppointment()
+  const { selectAppointment, isSelectAppointment, selectIndex, selectCalendarId, isNextStep, lockedAppointmentHandler, firstAppointmentHandler, appointmentInfo } = useSelectAppointment()
 
 
 
@@ -102,13 +108,9 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
       setCallbackIndex(1)
       return
     }
-    firstAppointmentHandler.mutate({ physicianProfileId: physician.id })
+    firstAppointmentHandler.mutate({ physicianProfileId: physician.id, physicianProfileUrl: physician.physicianProfileUrl })
 
-    for (let i = 0; i < calendar.length; i++) {
-      if (calendar[i].calendar.id === appointmentInfo.calendarId) {
-        setActiveTab(i);
-      }
-    }
+
   }
 
   const selectHandler = (calendar: PhysicianProfileCalendar, index: number) => {
@@ -121,6 +123,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
         index: index,
         calendar: calendar.calendar.id,
         physicianId: physician.id,
+        physicianUrl: physician.physicianProfileUrl
       })
       openModalLogin()
       setCallbackIndex(0)
@@ -128,7 +131,8 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
     }
 
 
-    selectAppointment(calendar.calendar.year, calendar.calendar.month, calendar.calendar.dayOfMonth, index, calendar.calendar.id, physician.id)
+    selectAppointment(calendar.calendar.year, calendar.calendar.month, calendar.calendar.dayOfMonth, index, calendar.calendar.id, physician.id, physician.physicianProfileUrl)
+
   }
 
   useEffect(() => {
@@ -146,7 +150,13 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
         behavior: "smooth",
       });
     }
-  }, [isSelectAppointment])
+    
+    for (let i = 0; i < calendar.length; i++) {
+      if (calendar[i].calendar.id === appointmentInfo.calendarId) {
+        setActiveTab(i);
+      }
+    }
+  }, [appointmentInfo])
 
 
 
@@ -270,7 +280,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
 
               </div>
               {firstAppointment === null && ramainingTime <= 0 && (
-                <div className="flex flex-col gap-2 absolute z-[20]  left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
+                <div className="flex flex-col gap-2 absolute z-[15]  left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
                   <p className="text-md drop-shadow-[0px_0px_4px_rgba(0,0,0,1)] ">
                     {t("Free-time-not-found")}
                   </p>
@@ -343,74 +353,12 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
         </section>
         {/* ----------section------------- */}
 
-        {/* ----------section------------- */}
-        {/* physician rules */}
-        <section className="mt-4">
-          <DropInfo
-            physician={physician}
-          />
-        </section>
-        {/* ----------section------------- */}
-
-        {/* ----------section------------- */}
-        {/* accept rules */}
-        <section className='mt-6'>
-          <div className="flex relative  justify-start items-start flex-col gap-1">
-            <div className='flex justify-start items-center gap-2 cursor-pointer' onClick={acceptRules.acceptRuleOneHandler}>
-
-              <Checkbox
-                bg={"bg-link"}
-                id={"test"}
-                checked={rules.ruleOne}
-                title={""}
-                checkHandler={acceptRules.acceptRuleOneHandler}
-
-              />
-              {t("accept-doctor's-conditions")}
-            </div>
 
 
-            <div className='flex justify-start items-center gap-2 cursor-pointer' onClick={acceptRules.acceptRuleTwoHandler}>
-              <Checkbox
-                bg={"bg-link"}
-                id={"test_1"}
-                checked={rules.ruleTwo}
-                title=''
-                checkHandler={acceptRules.acceptRuleTwoHandler}
-              />
-              <p>
-                {" "}
-                {t("Terms-and-rules") + " "}
-                <span
-                  className="text-primary font-bold cursor-pointer"
-                // onClick={() => setShowModalRule(true)}
-                >
-                  {t("arenap")}
-                </span>{" "}
-                {t("I-accept")}
-              </p>
-            </div>
-            {showWarningRules && (
-              <span className="flex justify-start items-center gap-1">
-                <Image
-                  src={"/warning-icon.png"}
-                  width={500}
-                  height={500}
-                  alt="warning_icon_ruls"
-                  className="w-[30px]"
-                />
-                <p className="text-md text-yellow-500">
-                  لطفا شرایط بالا بپذیرید
-                </p>
-              </span>
-            )}
-          </div>
-        </section>
-        {/* ----------section------------- */}
 
         {/* ----------section------------- */}
         {/* buttons */}
-        <section className="mt-6  sticky bottom-[20px] w-full left-0 flex justify-center items-center">
+        <section className="mt-6  sticky bottom-[20px] w-full left-0 flex justify-center items-center z-[14]">
           <div className="w-full max-w-[1300px]   gap-2 ">
             <div className="grid grid-cols-2 gap-2">
               <div>
@@ -436,10 +384,10 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
               </div>
               <div>
                 <ButtonElement
-                  disabled={lockedAppointmentHandler.isLoading || ramainingTime > 0 || firstAppointment === null || selectIndex === null || !isRules}
+                  disabled={!isNextStep}
                   typeButton={!isNextStep ? "gray-light" : "primary"}
                   fontWeight='bold'
-                  handler={nextStepHandler}
+                  handler={() => setShowModalRules(true)}
                   loading={lockedAppointmentHandler.isLoading}
                 >
 
@@ -467,6 +415,153 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
 
       </main>
       {/* ----------main------------- */}
+
+
+      {/* ----------Modal------------- */}
+      {/* rules modal and lock appointment */}
+      <Modal show={showModalRules} closeHandler={() => setShowModalRules(false)}>
+        <BottomSheetAndCenterContent show={showModalRules}>
+          <div className="flex justify-between items-center ">
+            <div></div>
+            <p className="font-bold">شرایط پزشک</p>
+            <div><CloseButton closeHanlder={() => setShowModalRules(false)} /></div>
+          </div>
+          <div className="mt-6 rounded-sm bg-bg_content p-4 max-h-[12.5rem] overflow-y-auto">
+            <DropInfo
+              physician={physician}
+            />
+          </div>
+          <div className="flex justify-start items-center gap-1 my-2 text-md">
+            <p>مشاهده</p>
+            <button type="button" className="text-primary font-bold" onClick={() => {
+              setShowModalRulesArenap(true)
+              setShowModalRules(false)
+
+            }} >شرایط و قوانین آرناپ</button>
+          </div>
+          <div className="mt-4">
+            <ButtonElement loading={lockedAppointmentHandler.isLoading} typeButton='primary' handler={nextStepHandler} disabled={ramainingTime > 0 || firstAppointment === null || selectIndex === null}>
+              شرایط پزشک و آرناپ را میپذیرم
+            </ButtonElement>
+          </div>
+        </BottomSheetAndCenterContent>
+      </Modal>
+      {/* ----------Modal------------- */}
+
+      {/* ----------Modal------------- */}
+      {/* Arenap Rules Modal */}
+      <Modal
+        show={showModalRulesArenap}
+        closeHandler={() => {
+          setShowModalRulesArenap(false)
+          setShowModalRules(true)
+        }}
+      >
+        <BottomSheetAndCenterContent show={showModalRulesArenap} >
+          <div className=" overflow-y-auto h-[calc(100vh-150px)]">
+            <span className="absolute top-[30px] rtl:left-[15px] ltr:right-[15px] xs:rtl:left-[30px] xs:ltr:right[30px] z-50">
+              <CloseButton closeHanlder={() => {
+                setShowModalRulesArenap(false)
+                setShowModalRules(true)
+              }} />
+            </span>
+            <p className="text-center font-bold text-lg mt-2">
+              قوانین و شرایط آرناپ
+            </p>
+            <div className="mt-6 flex justify-between items-center gap-6 flex-col  py-[50px]">
+              <BaseCard bg="bg-bg_content" title={"قوانین و مقررات آرناپ"}>
+                <div className='text-md  flex justify-start items-start gap-2 flex-col'>
+                  <p>
+                    سلام و درود خدمت همراهان گرامی آرناپ
+                  </p>
+                  <p>
+                    به پاس اعتماد شما عزیزان تیم آرناپ همواره در تلاش برای ایجاد فضایی امن و راحت برای نوبت گیری از پزشکان مورد نظرتان میباشد.
+                  </p>
+                  <p>
+                    جهت بهبود عملکرد قوانین و مقررات را مطالعه و تایید نمایید.
+                    (سپاس از همراهی شما)
+                  </p>
+                  <p className='text-error font-bold'> عدم رعایت هر یک از قوانین توسط شما منجر به غیر فعال شدن حساب کاربریتان میشود . </p>
+                </div>
+              </BaseCard>
+              <BaseCard bg="bg-bg_content" title={"قوانین و شرایط حساب کاربری :"}>
+                <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
+                  <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2'>
+                    <li className='w-full'>نگهداری اطلاعات از طریق رمزنگاری پیشرفته به وسیله بروزترین روش های روز دنیا بروی فضای امن ابری صورت میگیرد.</li>
+                    <li>از حساب کاربری خود حفاظت کنید در صورت هرگونه خسارت و آسیب آرناپ هیچگونه مسئولیتی را بر عهده نمی گیرد.</li>
+                    <li>درهنگام وارد کردن اطلاعات خود در حساب کاربری از صحت آن اطمینان حاصل فرمایید,درصورت مشاهده هرگونه تناقض اطلاعات وارده شده با اطلاعات واقعی شما حساب کاربریتان غیرفعال میشود.</li>
+                    <li>پس از ثبت اطلاعات خود شما اجازه ی ارسال پیامک از سمت آرناپ  به شماره ای که وارد کرده اید را می دهید .</li>
+                    <li>این پیامک جهت اطلاع رسانی خدمات و سرویس های مناسب با درخواست شما از پلتفرم آرناپ مثل: ثبت نوبت , لغو نوبت و ورود به سایت میباشد.</li>
+                  </ul>
+                </div>
+              </BaseCard>
+              <BaseCard bg="bg-bg_content" title={"لغو نوبت توسط بیمار :"}>
+                <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
+                  <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2'>
+                    <li>اگر در طی یک ماه تعداد نوبت های لغو شده توسط شما به 5 عدد برسد شما تا 24ساعت پس از آن قابلیت نوبت گیری نخواهید داشت</li>
+                    <li>با هر حساب کاربری شما در یک شیفت کاری پزشک مورد نظرتان فقط نوبت میتوانید دربافت کنید.</li>
+                    <li>سامانه آرناپ محدودیتی برای نوبت گرفتن از چند پزشک ندارد.</li>
+                    <li>در صورت لغو نوبت توسط شما مبلغ پرداختی به طور کامل به کیف پول شما در حساب کاربریتان انتقال خواهد یافت.</li>
+                    <li>شش ساعت مانده به زمان نوبت قابلیت لغو وجود نخواهد داشت.</li>
+                    <li>برای دریافت اعتبار موجود در کیف پول با پشتیبان تماس بگیرید.</li>
+                  </ul>
+                </div>
+              </BaseCard>
+              <BaseCard bg="bg-bg_content" title={"قوانین و مقررات ثبت و امتیاز دهی :"}>
+                <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
+                  <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2'>
+                    <li>انتقال تجربه مراجعه شما به سایر کاربران در بهبود فرایند در زمان و ارتقا خدمات پزشکی نقش به سزایی دارد و این امکان را فراهم می سازد تا سایر کاربران برای گرفتن نوبت و خدمات مورد نظرشان از پزشک پروسه راحت و دقیق تری را طی کند.</li>
+                  </ul>
+                </div>
+              </BaseCard>
+              <BaseCard bg="bg-bg_content" title={"چگونه در آرناپ امتیاز دهی به پزشک را انجام دهیم :"}>
+                <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
+                  <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2'>
+                    <li>پس از ورود و ثبت نام شما در سامانه آرناپ شما میتوانید نظرتان را برای پزشک ثبت نمایید. اما برای امتیازدهی باید توسط پزشک ویزیت شده باشید.</li>
+                    <li>در صورت تمایل به امتیازدهی برای پزشک شما ملزم به ثبت زمان انتظار در مطب میباشید.</li>
+
+                  </ul>
+                </div>
+              </BaseCard>
+              <BaseCard bg="bg-bg_content" title={"نمایش نظرات شما : "}>
+                <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
+                  <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2'>
+                    <li>به منظور قوانین و مقررات و رعایت اصول اخلاقی نظر شما قبل از نشان دادن در پروفایل پزشک نیاز به تایید کارشناسان سایت دارد.</li>
+                  </ul>
+                </div>
+              </BaseCard>
+              <BaseCard bg="bg-bg_content" title={"قوانین ثبت نظر: "}>
+                <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
+                  <p>در هنگام ثبت نظر موارد زیر را در نظر بگیرید : </p>
+                  <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2 mt-2'>
+                    <li>
+                      <span className='font-bold'>نظرات با عنوان تبلیغاتی : </span>
+                      نوشتن هرگونه نظر با مضنون تبلیغ برای برندها و محصولات درمانی و بهداشتی و مراکز اکیدا ممنوع می باشد و از طرف کارشناسان سایت تایید نخواهد شد.
+                    </li>
+                    <li>
+                      <span className='font-bold'> محتوای غیر مجاز : </span>
+                      ثبت نظر با محتوای سیاسی , نژادپرستانه , غیراخلاقی , توهین به عقاید و مذهب مجاز نمی باشد.
+                    </li>
+                    <li>
+                      <span className='font-bold'>رعایت احترام و ادب : </span>
+                      نظر ثبت شده باید با رعایت اصول اخلاقی , ادب و احترام نوشته شوند هرگونه بی احترامی به پزشک , منشی و کادر درمان منجر به رد نظر و عدم نمایش و انتشار خواهد شد.
+                    </li>
+                    <li>
+                      <span className='font-bold'>حقوق مادی و معنوی و اختصاصی بودن محتوا : </span>
+                      کلیه حقوق مادی و معنوی این وب سایت متعلق به شرکت فنی و مهندسی طراحان سیستم پنام است و هرگونه کپی برداری از محتوای سایت پیگرد قانونی دارد.
+                    </li>
+
+                  </ul>
+
+                </div>
+              </BaseCard>
+
+            </div>
+          </div>
+        </BottomSheetAndCenterContent>
+      </Modal>
+      {/* ----------Modal------------- */}
+
     </>
   )
 }
@@ -474,52 +569,37 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
 export default SelectAppointmentStep
 
 const DropInfo = ({ physician }: { physician: PhysicianProfile }) => {
-  const t = useTranslations("appointment_page");
-  const g = useTranslations("global");
-  const [showDrop, setShowDrop] = useState(false);
+
+
   const splitTerms = physician?.terms?.split("\n");
 
   return (
-    <BaseCard title={t("Doctor-admission-conditions")}>
-      <div onClick={() => setShowDrop(!showDrop)}>
-        <ul
-          className={cn(
-            `flex justify-start items-start flex-col px-2 gap-1  text-md relative `,
-            {
-              "after:w-full after:h-[25px] after:absolute after:bottom-0 after:left-0 after:bg-white/70":
-                !showDrop,
-            }
-          )}
-        >
-          <li className="list-disc">
-            ساعت اعلام شده تقریبی است و زمان ویزیت شما توسط منشی تعیین میگردد
-          </li>
-          {physician?.description ? (
-            <li className="list-disc">{physician?.description}</li>
-          ) : null}
 
-          {showDrop &&
-            (splitTerms?.length
-              ? splitTerms.map((item: string, index: number) => (
-                <li className="list-disc" key={index}>
-                  {item}
-                </li>
-              ))
-              : null)}
-        </ul>
-        <div className=" flex justify-end items-center ">
-          <button type="button" className="text-primary font-bold  px-5 py-1 ">
-            <span
-              className={cn("transition-all duration-500 block", {
-                "rotate-90": showDrop,
-                "rotate-[270deg]": !showDrop,
-              })}
-            >
-              <ArrowLeft />
-            </span>
-          </button>
-        </div>
-      </div>
-    </BaseCard>
+    <div >
+      <ul
+        className={cn(
+          `flex justify-start items-start flex-col px-2 gap-1  text-md relative `,
+
+        )}
+      >
+        <li className="list-disc">
+          ساعت اعلام شده تقریبی است و زمان ویزیت شما توسط منشی تعیین میگردد
+        </li>
+        {physician?.description ? (
+          <li className="list-disc">{physician?.description}</li>
+        ) : null}
+
+        {
+          splitTerms?.length
+            ? splitTerms.map((item: string, index: number) => (
+              <li className="list-disc" key={index}>
+                {item}
+              </li>
+            ))
+            : null}
+      </ul>
+
+    </div>
+
   );
 };

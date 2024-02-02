@@ -1,7 +1,7 @@
 
 
 
-const convertDayTime = (time : number) => {
+const convertDayTime = (time : number ) => {
 
 
     if (time < 11) {

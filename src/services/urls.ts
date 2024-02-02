@@ -192,6 +192,20 @@ const urls = {
       },
       query: {},
     },
+    createPaymentAppointment: {
+      url: "/User/UserPhysicianProfileCalendar/Create",
+      method: "POST",
+      parametrs: {
+        physicianProfileId: "string",
+        calendarId: "string",
+        index: "number",
+        year: "number",
+        month: "number",
+        dayOfMonth: "number",
+        dayOfWeek: "number",
+      },
+      query : {}
+    },
   },
 
   //search
@@ -207,17 +221,17 @@ const urls = {
       query: {},
     },
   },
-  //provinces 
+  //provinces
   provinces: {
     provinces: {
       url: "/Public/Address/Provinces",
-      method: "GET"
+      method: "GET",
     },
     cities: {
       url: "/Public/Address/Cities?provinceId=",
-      method: "GET"
-    }
-  }
+      method: "GET",
+    },
+  },
 };
 
 export default urls;

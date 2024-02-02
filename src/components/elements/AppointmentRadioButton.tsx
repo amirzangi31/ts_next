@@ -29,7 +29,7 @@ const AppointmentRadioButton = ({ name, time, active, selected, handler, ramaini
                 })}
                 htmlFor={`${calendarId}-${index}`}
             >
-                <div className={clsx(`flex  rounded-[28px] justify-center items-center gap-3 font-bold h-[47px] w-[90px] relative shadow-shadow_category transition-all duration-300 overflow-hidden `,
+                <div className={clsx(`flex group rounded-[28px] justify-center items-center gap-3 font-bold h-[47px] w-[90px] relative shadow-shadow_category transition-all duration-300 overflow-hidden `,
 
 
                     {
@@ -49,7 +49,22 @@ const AppointmentRadioButton = ({ name, time, active, selected, handler, ramaini
                             <div className="z-10 rounded-full w-[11px] h-[11px] bg-white shadow-[0_2px_4px_0_rgba(0,0,0,0.5)]" />
                         }
                     </div>}
-                    <span className="z-10">{time}</span>
+                    <p className="z-10 ">
+                        <span className={cn(
+                            {
+                                "hidden md:block md:group-hover:hidden": !active
+                                
+                            }
+                        )}>{time}</span>
+                        <span className={
+                            cn(
+                                "md:hidden text-sm text-error",
+                                {
+                                    "md:group-hover:block": !active
+                                }
+                            )
+                        }>{!active && " رزرو شده"}</span>
+                    </p>
                 </div>
                 <input
                     type="radio"

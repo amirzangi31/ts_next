@@ -1,3 +1,4 @@
+import Toastify from "@/components/elements/toasts/Toastify"
 import { http } from "../axios"
 import { apiDomainNobat } from "../getApiUrl"
 import urls from "../urls"
@@ -20,6 +21,20 @@ import urls from "../urls"
 //         return error
 //     }
 // }
+
+const createAppointment = async( physicianProfileId: string,calendarId: string,index: number) => {
+    const obj = {
+        physicianProfileId,
+        calendarId,
+        index
+    }
+    try {
+        const res = await http.post(`${apiDomainNobat}${urls.payment.createPaymentAppointment.url}`, obj)
+        return res.data
+    } catch (error : any) {
+        Toastify("error" , error?.response?.data?.resultMessage)
+    }
+}
 
 
 const createPayment = async (id: number, amount: number, paymentType: number = 1) => {
@@ -45,4 +60,4 @@ const createPayment = async (id: number, amount: number, paymentType: number = 1
 
 }
 
-export { createPayment }
+export { createPayment , createAppointment }

@@ -180,7 +180,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
         {/* ----------section------------- */}
         {/* Button */}
         {consultationList.find((item) => item.active) && (
-          <div className="sticky  bottom-[1.25rem] left-0 order-[13]  w-full flex justify-center items-center z-[19] pt-4">
+          <div className="sticky  bottom-[1.25rem] left-0 order-[13]  w-full flex justify-center items-center z-[15] pt-4">
             <div className=" w-full ">
               <LinkElement link={buttonLink as string} className="block w-full">
                 <ButtonElement
@@ -288,7 +288,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
           <OfficeCard
             title={"اطلاعات مطب"}
             address={physician.address}
-            numbers={"۳۴۳۴***-۰۹۱۳۴۲****"}
+            numbers={physician?.telePhoneNumber}
             latitude={physician.latitude}
             longitude={physician.longitude}
           />
@@ -477,7 +477,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
         <div className="w-full mt-4 order-11">
           <ProfileSummaryCard
             physician={physician}
-            tags={["مغزواعصاب", "اطفال"]}
+            tags={[]}
             title={"خلاصه پروفایل"}
             subTitle={"هشتگ های مرتبط"}
           />

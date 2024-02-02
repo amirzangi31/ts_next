@@ -1,58 +1,43 @@
 "use client"
-import PathLine from "@/components/elements/PathLine";
-
-import LocationIcon from "@/components/icons/LocationIcon";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 
-
-import { useRouter } from "next/navigation";
-
-import useUserInfo from "@/hooks/useUserInfo";
-import Timer from "../../Timer";
+import PathLine from "@components/elements/PathLine";
+import LocationIcon from "@components/icons/LocationIcon";
+import Timer from "@modules/Timer";
 import { getUrlImage } from "@/services/getImageUrl/getImageUrl";
-import priceSplitter from "@/utils/priceSplitter";
-import convertToHour from "@/utils/convertHour";
-import convertDayTime from "@/utils/convertDayTime";
-import cn from "@/utils/clsxFun";
-import ButtonElement from "@/components/elements/ButtonElement";
-import { useLocale } from "next-intl";
+import priceSplitter from "@utils/priceSplitter";
+import convertToHour from "@utils/convertHour";
+import convertDayTime from "@utils/convertDayTime";
+import cn from "@utils/clsxFun";
+import ButtonElement from "@components/elements/ButtonElement";
+
 
 import { AppointmentPrimaryCardType } from "@/types/cards";
 
-
-
 const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
-  
-  const local = useLocale();
-  const {
-    firstName,
-    lastName,
-    address,
-    latitude,
-    longitude,
-    id,
-    hasImage,
-    specialties,
-  } = physician;
-
-  const hourSplit = convertToHour()[index]?.split(":");
 
 
-  const { isLogin } = useUserInfo()
-
-  const disabledTimer = () => {
-    console.log("test")
-  };
+  const { index, payment, physician: { hasImage, id, firstName, lastName, specialties, address, latitude, longitude }, price, lockTime, year, month, day, time } = props
 
 
 
+
+
+
+
+
+
+  const timerTime = new Date();
+  timerTime.setSeconds(timerTime.getSeconds() + lockTime);
 
   return (
     <div className=" bg-white rounded-md pb-6 overflow-hidden relative">
+
       <div className="fixed md:absolute top-[110px] z-[10] md:top-[50px] left-0 w-[100px] h-[35px] bg-primary rounded-tr-full rounded-br-full  flex justify-center items-center font-bold text-white text-md shadow-shadow_comment">
         حضوری
       </div>
+
       <div className="px-6 pt-6 -mb-3">
         <div className="flex justify-start items-start">
           <div className="min-w-[60px] h-[60px] rounded-full bg-white shadow-shadow_category  overflow-hidden border-2 border-white">
@@ -96,9 +81,9 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
             <small>تا</small>
             <div className="font-bold">
               <Timer
-                size="text-xl"
-                time={lockTime}
-                setDisabled={disabledTimer}
+                customStyle="text-2xl"
+                expiryTimestamp={timerTime}
+                expireHandler={() => window.location.reload()}
               />
             </div>
             <small>دیگر فرصت دارید نوبت را دریافت کنید</small>
@@ -126,7 +111,7 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
             <span className="font-bold"> تاریخ نوبت :</span>
             <span>
               {year}/{month < 10 ? `0${month}` : month}/
-              {dayOfMonth < 10 ? `0${dayOfMonth}` : dayOfMonth}
+              {day < 10 ? `0${day}` : day}
             </span>
           </div>
           <div className="flex justify-start items-center gap-2">
@@ -149,13 +134,13 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
             <span className="font-bold"> ساعت مراجعه :</span>
             {time ? (
               <span>
-                {`${time.hour}:${time.minute}`} {time.dayTime}
+                {`${time.hour}:${time.minute}`} {convertDayTime(+time.hour)}
               </span>
             ) : null}
             {index ? (
               <p>
-                <span>{convertToHour()[index]}</span>
-                <span>{convertDayTime(+hourSplit[0])}</span>
+                <span>{time.hour}:{time.minute}</span>
+                <span>{convertDayTime(+time.hour)}</span>
               </p>
             ) : null}
           </div>
@@ -222,30 +207,29 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
                     </p>
                   </div>
                 </div>
-                {physician.latitude && physician.longitude ? (
+                {latitude && longitude ? (
                   <div className="w-full px-6 mt-4">
                     <a
                       href={`geo:${latitude},${longitude}?q=${latitude},${longitude}`}
                       className="md:hidden"
                     >
                       <ButtonElement
-                        fontW={"font-bold"}
-                        bg={"bg-link"}
-                        textC={"text-white"}
-                        fontS={"text-md"}
+                        fontWeight="bold"
+                        typeButton="link"
                       >
                         <span>
-                          <LocationIcon color={"fill-white"} />{" "}
+                          <LocationIcon color={"fill-white"} />
                         </span>
 
                         <span>مسیریابی روی نقشه </span>
                       </ButtonElement>
                     </a>
+
                     <div className="hidden md:block">
                       <ButtonElement
-                        fontW={"font-bold"}
-                        bg={"bg-link"}
-                        clickHandler={() =>
+                        fontWeight="bold"
+                        typeButton="link"
+                        handler={() =>
                           window.open(
                             "https://maps.google.com?q=" +
                             latitude +
@@ -253,8 +237,6 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
                             longitude
                           )
                         }
-                        textC={"text-white"}
-                        fontS={"text-md"}
                       >
                         <span>
                           <LocationIcon color={"fill-white"} />{" "}
@@ -285,6 +267,7 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
           </div>
         )}
       </div>
+
     </div>
   );
 };

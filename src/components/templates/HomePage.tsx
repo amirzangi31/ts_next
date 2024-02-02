@@ -17,6 +17,7 @@ import BottomNavigation from '@modules/menu/BottomNavigation';
 import SectionTitle from '@modules/titles/SectionTitle';
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
 import SearchHomePage from '../modules/search/SearchHomePage';
+import FaqPage from './FaqPage';
 
 
 
@@ -68,7 +69,7 @@ const HomePage = (props: HomePagePropType) => {
     const articles = [...articleData]
     const comments = [...commentsList]
 
-    
+
 
     return (
         <>
@@ -131,6 +132,22 @@ const HomePage = (props: HomePagePropType) => {
                 <SwiperContainerFreeMode gap={10} data={comments} CardComponent={CommentCardPrimary} />
             </section>
             {/* ----------section------------- */}
+
+
+            {/* ----------section------------- */}
+            {/* faq */}
+            <section className='mt-6'>
+                <SectionTitle
+                    title={"سوالات متداول"}
+                    textLink={g("View-more")}
+                    link='/faq'
+                    btn={true}
+                />
+                <FaqPage />
+            </section>
+            {/* ----------section------------- */}
+
+
 
             <BottomNavigation route='home' />
         </>

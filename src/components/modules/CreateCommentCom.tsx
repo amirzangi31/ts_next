@@ -318,8 +318,9 @@ const CreateCommentCom = ({ firstName, lastName }: CreateCommentComType) => {
                                 fontWeight="bold"
                                 handler={submitCommentHandler}
                                 disabled={loadingButtonComment}
+                                loading={loadingButtonComment}
                             >
-                                {loadingButtonComment ? <Loader size="size-[1.875rem]" color="border-white" /> : "ثبت نظر"}
+                              ثبت نظر
                             </ButtonElement>
                         </div>
                     </div>

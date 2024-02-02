@@ -24,7 +24,7 @@ const Modal = ({ children, show, closeHandler }: ModalLoginType) => {
         <div
             id="modal_parent"
             className={cn(
-                `modal fixed bottom-0 animate-modal_search  w-full h-screen  backdrop-blur-md z-[20] transition-all duration-300   `,
+                `modal fixed bottom-0 animate-modal_search  w-full h-screen  backdrop-blur-md z-[15] transition-all duration-300   `,
                 {
                     "left-0 opacity-100": show,
                     "left-full opacity-0": !show,

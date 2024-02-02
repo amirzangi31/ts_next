@@ -11,6 +11,9 @@ import {
 } from "@/types/appointment";
 import useSelectAppointment from "@/hooks/useSelectAppointment";
 
+
+
+
 export type AppointmentPageType = {
   calendar: PhysicianProfileCalendar[];
   physician: PhysicianProfile;
@@ -46,7 +49,7 @@ const AppointmentPage = ({
           changeStep={changeStepHandler}
         />
       ) : null}
-      {step === 2 ? <PaymentAppointmentStep /> : null}
+      {step === 2 ? <PaymentAppointmentStep physician={physician}  /> : null}
     </>
   );
 };

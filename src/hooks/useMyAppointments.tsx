@@ -1,3 +1,4 @@
+import Toastify from '@/components/elements/toasts/Toastify'
 import { deleteAppointment, getMyAppointment } from '@/services/appointments/appointment'
 import { MyAppointmentType } from '@/types/appointment'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -14,25 +15,14 @@ const useMyAppointments = () => {
     const { data, isLoading } = useQuery(["myAppointment"], async () => {
         const result = await getMyAppointment()
         return result
-    }, { cacheTime: 5 * 60000 })
+    } , {cacheTime : 0})
 
 
 
     const [futureAppointments, setFutureAppointments] = useState([])
     const [pastAppointments, setPastAppointments] = useState([])
 
-    const mutation = useMutation({
-        mutationFn: async () => {
-
-        },
-        onSuccess: async () => {
-            const result = await queryClient.invalidateQueries({
-                queryKey: [`myAppointment`],
-            });
-
-        },
-
-    })
+ 
 
 
     type ParamsCancel = {
@@ -43,9 +33,14 @@ const useMyAppointments = () => {
 
     const cancelMutation = useMutation({
         mutationFn: async (params: ParamsCancel) => {
-            console.log(params)
+            const res = await deleteAppointment(params.calendarId, params.index, params.physicianProfileUrl)
+            if (res.resultCode === 200) {
+                Toastify("error", "نوبت با موفقیت لغو شد")
+            }
+            return res
         },
         onSuccess: async () => {
+            console.log("test")
             const result = await queryClient.invalidateQueries({
                 queryKey: [`myAppointment`],
             });
@@ -61,7 +56,7 @@ const useMyAppointments = () => {
         }
     }, [isLoading])
 
-    
+
     return {
         myAppointments: data?.value?.items,
         futureAppointments,

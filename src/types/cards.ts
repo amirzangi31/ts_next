@@ -1,3 +1,6 @@
+import { PhysicianProfile } from "./appointment";
+import { PhysicainProfileType } from "./physicianProfile";
+
 export interface CategoryPrimaryType {
   id?: string;
   title: string;
@@ -50,12 +53,17 @@ export interface CommentCardPrimaryType {
 }
 
 export interface AppointmentPrimaryCardType {
-  physician: PhysicainCardPrimaryType;
-  price: string;
-  date: string;
-  time: string;
-  status: string;
-  speciality: string;
-  plans: {}[];
-  lockTime: number;
+  physician: PhysicianProfile;
+  price: number;
+  payment:boolean;
+  index : number;
+  lockTime : number,
+  month: number
+  year: number
+  day: number;
+  time : {
+    hour : number;
+    minute : number;
+    
+  }
 }

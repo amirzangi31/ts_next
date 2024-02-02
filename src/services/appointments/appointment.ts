@@ -60,8 +60,9 @@ const getFirstForce = async (physicianId: string) => {
       `${apiDomainNobat}${urls.appointment.firstAppointment.url}${physicianId}`
     );
     return res.data.value;
-  } catch (error) {
-    return;
+  } catch (error: any) {
+    console.log(error)
+    Toastify("error" , error.response.data.resultMessage)
   }
 };
 

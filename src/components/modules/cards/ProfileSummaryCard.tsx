@@ -45,11 +45,16 @@ const ProfileSummaryCard = (props: ProfileSummaryCardType) => {
           {`دکتر ${physician.firstName} ${physician.lastName} متخصص ${physician.physicianSpecialities[0]?.specialityTitle} فعال در حوزه سلامت در شهر   ${physician.cityName} در استان ${physician.provinceName} میباشد`}
         </p>
         <p>
-          {`آدرس مطب  دکتر ${physician.firstName} ${physician.lastName} : ${physician.address}`}
+          {`آدرس مطب  دکتر ${physician.firstName} ${physician.lastName} : `} <strong className="font-bold">{physician.address}</strong>
         </p>
-        <p>
-          {`شماره تماس   دکتر ${physician.firstName} ${physician.lastName} : 0913xxxxxxx`}
-        </p>
+        {
+          physician.telePhoneNumber ? (
+            <p>
+              {`شماره تماس   دکتر ${physician.firstName} ${physician.lastName} : `} <strong className="font-bold">{physician?.telePhoneNumber}</strong>
+            </p>
+          ) : null
+        }
+
       </div>
 
       {showMore && (

@@ -1,10 +1,8 @@
 import {
-  acceptRuleOne,
-  acceptRuleTwo,
   selectAppointment,
   lockedAppointmentRedux,
   offSelectAppointment,
-  
+
 } from "@/store/features/appointmentSlice";
 import { useAppDispatch, useAppSelector } from "./useRedux";
 import useUserInfo from "./useUserInfo";
@@ -13,19 +11,22 @@ import {
   lockedAppointment,
   getFirstForce,
 } from "@/services/appointments/appointment";
-import { useState } from "react";
+
+import { createAppointment, createPayment } from "@/services/payment/payment";
+import { useRouter } from "next/navigation";
 
 
 const useSelectAppointment = () => {
   const {
     appointmentSelectInfo,
-    isRules,
-    rules,
     isSelectAppointment,
+    lockedAppointmentInfo,
+    patient
   } = useAppSelector((state) => state.appointment);
   const { isLogin } = useUserInfo();
   const dispatch = useAppDispatch();
-
+  const { user } = useUserInfo()
+  const router = useRouter()
 
   const selectAppointmentHandler = (
     year: string,
@@ -33,8 +34,10 @@ const useSelectAppointment = () => {
     day: string,
     index: number,
     calendarId: string,
-    physicianProfileId: string
+    physicianProfileId: string,
+    physicianProfileUrl: string
   ) => {
+    
     dispatch(
       selectAppointment({
         year,
@@ -43,6 +46,7 @@ const useSelectAppointment = () => {
         index,
         calendarId,
         physicianProfileId,
+        physicianProfileUrl
       })
     );
   };
@@ -50,12 +54,6 @@ const useSelectAppointment = () => {
     dispatch(offSelectAppointment());
   };
 
-  const acceptRuleOneHandler = () => {
-    dispatch(acceptRuleOne());
-  };
-  const acceptRuleTwoHandler = () => {
-    dispatch(acceptRuleTwo());
-  };
 
   const locked = useMutation({
     mutationFn: async () => {
@@ -64,11 +62,15 @@ const useSelectAppointment = () => {
         appointmentSelectInfo.physicianProfileId,
         appointmentSelectInfo.index
       );
-      
+
       if (res.resultCode === 200) {
         const { chargeAmount, id, remainingSeconds, status } = res.value;
         dispatch(
-          lockedAppointmentRedux({ chargeAmount, id, remainingSeconds, status })
+          lockedAppointmentRedux({
+            chargeAmount, id, remainingSeconds, status, firstName: user.firstName,
+            lastName: user.lastName,
+            nationalNumber: user.nationalNumber, phoneNumber: user.phoneNumber
+          })
         );
       }
       return res.data;
@@ -78,39 +80,64 @@ const useSelectAppointment = () => {
   const firstAppointment = useMutation({
     mutationFn: async ({
       physicianProfileId,
+      physicianProfileUrl,
     }: {
       physicianProfileId: string;
+      physicianProfileUrl: string;
     }) => {
       const res = await getFirstForce(physicianProfileId);
-
       selectAppointmentHandler(
         res.year,
         res.month,
-        res.day,
+        res.dayOfMonth,
         res.index,
         res.calendarId,
-        res.physicianProfileId
+        res.physicianProfileId,
+        physicianProfileUrl
       );
       return res;
     },
   });
+  const payment = useMutation({
+    mutationFn: async () => {
+      if (lockedAppointmentInfo.chrageAmount === 0) {
+        const res = await createAppointment(appointmentSelectInfo.physicianProfileId, appointmentSelectInfo.calendarId, appointmentSelectInfo.index)
+        
+        if (res.resultCode === 200) {
+          router.replace(
+            `/Check/Payment/${appointmentSelectInfo.physicianProfileurl}?Status=Success&AppointmentId=${res?.value.id}`
+          );
+        }
+        return res
+      } else {
+        const res = await createPayment(lockedAppointmentInfo.id, lockedAppointmentInfo.chrageAmount, 1)
+        window.location.href = res
+        return res
+      }
+    },
+  });
+
+
+
+
+
+
+
 
   return {
     appointmentInfo: appointmentSelectInfo,
     selectIndex: appointmentSelectInfo.index,
     selectAppointment: selectAppointmentHandler,
     selectCalendarId: appointmentSelectInfo.calendarId,
-    isRules,
     isSelectAppointment,
-    isNextStep: isSelectAppointment && isRules && isLogin === "authorization",
-    rules,
-    acceptRules: {
-      acceptRuleOneHandler,
-      acceptRuleTwoHandler,
-    },
+    isNextStep: isSelectAppointment &&  isLogin === "authorization",
+
     lockedAppointmentHandler: locked,
     firstAppointmentHandler: firstAppointment,
     offSelectHandler,
+    lockAppointmentInfo: lockedAppointmentInfo,
+    patient,
+    payment
   };
 };
 

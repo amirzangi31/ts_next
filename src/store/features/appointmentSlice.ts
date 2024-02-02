@@ -1,13 +1,8 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import {  createSlice } from "@reduxjs/toolkit";
 
 export type AppointmentType = {
   appointmentSelectInfo: AppointmentSelectInfoType;
   isSelectAppointment: boolean;
-  isRules: boolean;
-  rules: {
-    ruleOne: boolean;
-    ruleTwo: boolean;
-  };
   isLocked: boolean;
   lockedAppointmentInfo: {
     index: number;
@@ -16,33 +11,44 @@ export type AppointmentType = {
     status: boolean;
     id: number;
   };
+  patient: {
+    firstName: string;
+    lastName: string;
+    nationalNumber: string;
+    phoneNumber: string;
+  };
 };
 
 type AppointmentSelectInfoType = {
-  year: number | null;
-  month: number | null;
-  day: number | null;
-  index: number | null;
+  year: number;
+  month: number;
+  day: number;
+  index: number;
   calendarId: string;
   physicianProfileId: string;
+  physicianProfileurl: string;
 };
 
 const initialState: AppointmentType = {
   appointmentSelectInfo: {
-    year: null,
-    month: null,
-    day: null,
-    index: null,
+    year: 0,
+    month: 0,
+    day: 0,
+    index: 0,
     calendarId: "",
     physicianProfileId: "",
+    physicianProfileurl: "",
+  },
+  patient: {
+    firstName: "",
+    lastName: "",
+    nationalNumber: "",
+    phoneNumber: "",
   },
   isSelectAppointment: false,
-  isRules: false,
+  
   isLocked: false,
-  rules: {
-    ruleOne: false,
-    ruleTwo: false,
-  },
+ 
   lockedAppointmentInfo: {
     index: 0,
     chrageAmount: 0,
@@ -57,6 +63,7 @@ const appointmentSlice = createSlice({
   initialState,
   reducers: {
     selectAppointment: (state, { payload }): void => {
+      
       const data = {
         year: payload.year,
         month: payload.month,
@@ -64,37 +71,24 @@ const appointmentSlice = createSlice({
         index: payload.index,
         calendarId: payload.calendarId,
         physicianProfileId: payload.physicianProfileId,
+        physicianProfileurl: payload.physicianProfileUrl,
       };
       state.appointmentSelectInfo = data;
       state.isSelectAppointment = true;
     },
     offSelectAppointment: (state) => {
       state.appointmentSelectInfo = {
-        year: null,
-        month: null,
-        day: null,
-        index: null,
+        year: 0,
+        month: 0,
+        day: 0,
+        index: 0,
         calendarId: "",
-        physicianProfileId: "null",
+        physicianProfileId: "",
+        physicianProfileurl : ""
       };
       state.isSelectAppointment = false;
     },
-    acceptRuleOne: (state) => {
-      state.rules.ruleOne = !state.rules.ruleOne;
-      if (state.rules.ruleOne && state.rules.ruleTwo) {
-        state.isRules = true;
-      } else {
-        state.isRules = false;
-      }
-    },
-    acceptRuleTwo: (state) => {
-      state.rules.ruleTwo = !state.rules.ruleTwo;
-      if (state.rules.ruleOne && state.rules.ruleTwo) {
-        state.isRules = true;
-      } else {
-        state.isRules = false;
-      }
-    },
+  
     lockedAppointmentRedux: (state, { payload }) => {
       state.lockedAppointmentInfo = {
         index: payload.index,
@@ -103,18 +97,20 @@ const appointmentSlice = createSlice({
         remainingSeconds: payload.remainingSeconds,
         status: payload.status,
       };
-
+      state.patient = {
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        nationalNumber: payload.nationalNumber,
+        phoneNumber: payload.phoneNumber,
+      };
       state.isLocked = true;
     },
-    
   },
 });
 
 export const {
   selectAppointment,
   offSelectAppointment,
-  acceptRuleOne,
-  acceptRuleTwo,
   lockedAppointmentRedux,
 } = appointmentSlice.actions;
 export default appointmentSlice.reducer;
