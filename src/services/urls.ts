@@ -204,7 +204,7 @@ const urls = {
         dayOfMonth: "number",
         dayOfWeek: "number",
       },
-      query : {}
+      query: {},
     },
   },
 
@@ -230,6 +230,15 @@ const urls = {
     cities: {
       url: "/Public/Address/Cities?provinceId=",
       method: "GET",
+    },
+  },
+
+  //price
+  price: {
+    getPrice: {
+      url: "/Public/Captcha",
+      method : "POST",
+      parametrs : {}
     },
   },
 };
