@@ -135,9 +135,7 @@ const PaymentAppointmentStep = ({ physician }: { physician: PhysicianProfile }) 
                 handler={() => payment.mutate()}
                 loading={payment.isLoading}
               >
-                
-                  "پرداخت"
-             
+                  پرداخت
               </ButtonElement>
             </>
           )}

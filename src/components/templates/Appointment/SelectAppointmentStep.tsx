@@ -13,17 +13,13 @@ import useUserInfo from '@/hooks/useUserInfo';
 import AppointmentRadioButton from '@/components/elements/AppointmentRadioButton';
 import useSelectAppointment from '@/hooks/useSelectAppointment';
 import BaseCard from '@/components/modules/cards/BaseCard';
-import ArrowLeft from '@/components/icons/ArrowLeft';
 import Image from 'next/image';
-import Checkbox from '@/components/elements/inputs/Checkbox';
 import ButtonElement from '@/components/elements/ButtonElement';
 import LinkElement from '@/components/elements/LinkElement';
 import Timer from '@/components/modules/Timer';
 import Modal from '@/components/modules/modals/Modal';
 import BottomSheetAndCenterContent from '@/components/modules/modals/BottomSheetAndCenterContent';
 import CloseButton from '@/components/elements/CloseButton';
-import Loader from '@/components/elements/Loader';
-import usePrice from '@/hooks/usePrice';
 
 
 const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment, changeStep }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null, changeStep: (step: 1 | 2) => void }) => {

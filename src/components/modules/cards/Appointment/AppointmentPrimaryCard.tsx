@@ -20,14 +20,6 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
 
   const { index, payment, physician: { hasImage, id, firstName, lastName, specialties, address, latitude, longitude }, price, lockTime, year, month, day, time } = props
 
-
-
-
-
-
-
-
-
   const timerTime = new Date();
   timerTime.setSeconds(timerTime.getSeconds() + lockTime);
 
