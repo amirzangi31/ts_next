@@ -18,6 +18,7 @@ import SectionTitle from '@modules/titles/SectionTitle';
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
 import SearchHomePage from '../modules/search/SearchHomePage';
 import FaqPage from './FaqPage';
+import cn from '@/utils/clsxFun';
 
 
 
@@ -77,6 +78,15 @@ const HomePage = (props: HomePagePropType) => {
             {/* ----------section------------- */}
             {/* Best Specialities  */}
             <header className='py-4'>
+                <div className='flex justify-center items-center'>
+                    <h1 className={cn(
+                        'text-center py-4 font-bold text-2xl relative gradient_after_one px-2',
+                        "after:hidden min-[1000px]:after:block after:absolute after:left-full after:w-[15rem] after:h-0.5 after:top-1/2 after:bg-grid ",
+                        "before:hidden min-[1000px]:before:block before:absolute before:right-full before:w-[15rem] before:h-0.5 before:top-1/2 before:bg-grid "
+                    )}>
+                        آرناپ : نوبت دهی اینترنتی پزشکان | مشاوره و ویزیت آنلاین
+                    </h1>
+                </div>
                 <SearchHomePage physicians={physicians} />
             </header>
             {/* ----------section------------- */}
@@ -132,7 +142,6 @@ const HomePage = (props: HomePagePropType) => {
                 <SwiperContainerFreeMode gap={10} data={comments} CardComponent={CommentCardPrimary} />
             </section>
             {/* ----------section------------- */}
-
 
             {/* ----------section------------- */}
             {/* faq */}

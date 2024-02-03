@@ -10,7 +10,7 @@ const useMyAppointments = () => {
     const queryClient = useQueryClient()
 
 
-
+    
 
     const { data, isLoading } = useQuery(["myAppointment"], async () => {
         const result = await getMyAppointment()
@@ -40,12 +40,13 @@ const useMyAppointments = () => {
             return res
         },
         onSuccess: async () => {
-            console.log("test")
+            
             const result = await queryClient.invalidateQueries({
                 queryKey: [`myAppointment`],
             });
-
+            console.log(result)
         },
+        
 
     })
 

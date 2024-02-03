@@ -36,7 +36,7 @@ const Header = () => {
                     typeButton={pathName !== '/' && pathName !== "/en" ? "primary" : pathName === '/' || pathName === "/en" ? "gray" : undefined}
                     size={"sm"}
                     variant='contained'
-                    width='w-[7rem]'
+                    width='min-w-[7rem]'
                   >
                     {t("home")}
                   </ButtonElement>
@@ -49,7 +49,7 @@ const Header = () => {
                     typeButton={pathName !== '/blog' && pathName !== "/en/blog" ? "primary" : pathName === '/blog' || pathName === "/en/blog" ? "gray" : undefined}
                     size={"sm"}
                     variant='contained'
-                    width='w-[7rem]'
+                    width='min-w-[7rem]'
                   >
                     {t("blog")}
                   </ButtonElement>
@@ -61,7 +61,7 @@ const Header = () => {
                     typeButton={pathName !== '/search' && pathName !== "/en/search" ? "primary" : pathName === '/search' || pathName === "/en/search" ? "gray" : undefined}
                     size={"sm"}
                     variant='contained'
-                    width='w-[7rem]'
+                    width='min-w-[7rem]'
                   >
                     {t("search")}
                   </ButtonElement>

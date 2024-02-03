@@ -6,17 +6,19 @@ import {
 } from "@/store/features/appointmentSlice";
 import { useAppDispatch, useAppSelector } from "./useRedux";
 import useUserInfo from "./useUserInfo";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   lockedAppointment,
   getFirstForce,
 } from "@/services/appointments/appointment";
-
 import { createAppointment, createPayment } from "@/services/payment/payment";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
 const useSelectAppointment = () => {
+  const queryClient = useQueryClient()
+
   const {
     appointmentSelectInfo,
     isSelectAppointment,
@@ -27,6 +29,17 @@ const useSelectAppointment = () => {
   const dispatch = useAppDispatch();
   const { user } = useUserInfo()
   const router = useRouter()
+  const status = useSearchParams().get("status")
+  const calendarId = useSearchParams().get("calendarId")
+  const physicianUrl = useSearchParams().get("physicianUrl")
+  const physicianId = useSearchParams().get("physicianId")
+  const index = useSearchParams().get("index")
+  const year = useSearchParams().get("year")
+  const month = useSearchParams().get("month")
+  const day = useSearchParams().get("day")
+  const [isAutoLocked, setIsAutoLocked] = useState(false)
+
+
 
   const selectAppointmentHandler = (
     year: string,
@@ -37,7 +50,7 @@ const useSelectAppointment = () => {
     physicianProfileId: string,
     physicianProfileUrl: string
   ) => {
-    
+
     dispatch(
       selectAppointment({
         year,
@@ -55,6 +68,8 @@ const useSelectAppointment = () => {
   };
 
 
+
+
   const locked = useMutation({
     mutationFn: async () => {
       const res = await lockedAppointment(
@@ -62,7 +77,7 @@ const useSelectAppointment = () => {
         appointmentSelectInfo.physicianProfileId,
         appointmentSelectInfo.index
       );
-
+     
       if (res.resultCode === 200) {
         const { chargeAmount, id, remainingSeconds, status } = res.value;
         dispatch(
@@ -74,6 +89,13 @@ const useSelectAppointment = () => {
         );
       }
       return res.data;
+    },
+    onSuccess: async () => {
+
+      const result = await queryClient.invalidateQueries({
+        queryKey: [`myAppointment`],
+      });
+      console.log(result)
     },
   });
 
@@ -102,7 +124,7 @@ const useSelectAppointment = () => {
     mutationFn: async () => {
       if (lockedAppointmentInfo.chrageAmount === 0) {
         const res = await createAppointment(appointmentSelectInfo.physicianProfileId, appointmentSelectInfo.calendarId, appointmentSelectInfo.index)
-        
+
         if (res.resultCode === 200) {
           router.replace(
             `/Check/Payment/${appointmentSelectInfo.physicianProfileurl}?Status=Success&AppointmentId=${res?.value.id}`
@@ -115,12 +137,32 @@ const useSelectAppointment = () => {
         return res
       }
     },
+    onSuccess: async () => {
+
+      const result = await queryClient.invalidateQueries({
+        queryKey: [`myAppointment`],
+      });
+      console.log(result)
+
+    },
   });
 
 
+  useEffect(() => {
+    if (status && calendarId && index && year && month && day && physicianUrl && physicianId) {
+      setIsAutoLocked(true)
+      selectAppointmentHandler(year, month, day, +index, calendarId, physicianId, physicianUrl)
+    }
+  }, [])
 
 
+  useEffect(() => {
 
+    if (isAutoLocked) {
+      locked.mutate()
+    }
+
+  }, [isAutoLocked])
 
 
 
@@ -130,7 +172,7 @@ const useSelectAppointment = () => {
     selectAppointment: selectAppointmentHandler,
     selectCalendarId: appointmentSelectInfo.calendarId,
     isSelectAppointment,
-    isNextStep: isSelectAppointment &&  isLogin === "authorization",
+    isNextStep: isSelectAppointment && isLogin === "authorization",
 
     lockedAppointmentHandler: locked,
     firstAppointmentHandler: firstAppointment,

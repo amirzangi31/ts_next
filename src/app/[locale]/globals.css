@@ -153,9 +153,17 @@ html {
 
 
 /*----------Start :gradient-----------*/
-.gradient_after::after {
+.gradient_after::after ,.gradient_after::before  {
   background: rgb(255, 255, 255);
   background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, #008582 50%, rgba(255, 255, 255, 1) 100%);
+}
+.gradient_after_one::after   {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(90deg, transparent 0%, #008582 30%, transparent 100%);
+}
+.gradient_after_one::before  {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(90deg, transparent 0%, #008582 70%, transparent 100%);
 }
 
 /*----------End :gradient-----------*/

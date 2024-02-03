@@ -49,6 +49,10 @@ const MyAppointmentsPage = () => {
   // appointments hook
   const { isLoading, futureAppointments, pastAppointments } = useMyAppointments()
 
+
+  console.log(isLoading)
+
+
   const [pastAppointmentsUi, setPastAppointmentsUi] = useState<MyAppointmentType[]>([])
   const [fetureAppointmentsUi, setFetureAppointmentsUi] = useState<MyAppointmentType[]>([])
 
@@ -66,6 +70,7 @@ const MyAppointmentsPage = () => {
     voiceConsultation: true,
     immediateConsultation: true,
   });
+
 
   //disabled filter
   const disabledFilterHandler = (val: boolean) => {
@@ -89,16 +94,19 @@ const MyAppointmentsPage = () => {
     }
   }
 
+
   //Filtering appointments based on defined filters
   useEffect(() => {
     let pastArray: MyAppointmentType[] = []
     let fetureArray: MyAppointmentType[] = []
 
+
     if (!isLoading) {
       for (let i in filters) {
         if (filters[i]) {
-          const past = disabledFilterHandler(disabledFilter).past.filter((item) => item[i] === filters[i]);
-          const feture = disabledFilterHandler(disabledFilter).feture.filter((item) => item[i] === filters[i]);
+          const past = disabledFilterHandler(disabledFilter)?.past?.length > 0 ? disabledFilterHandler(disabledFilter)?.past?.filter((item) => item[i] === filters[i]) : [];
+          const feture = disabledFilterHandler(disabledFilter)?.feture?.length > 0 ? disabledFilterHandler(disabledFilter)?.feture?.filter((item) => item[i] === filters[i]) : [];
+
           pastArray = [...pastArray, ...past];
           fetureArray = [...fetureArray, ...feture];
         }
@@ -297,7 +305,7 @@ export default MyAppointmentsPage;
 const AppointmentCard = (props: MyAppointmentType) => {
   const g = useTranslations("global");
   const [showModalDelete, setShowModalDelete] = useState(false)
-  const { calendar, index } = props;
+  const { calendar, index, physicianProfileId, physicianProfileUrl } = props;
   const { cancelMutation } = useMyAppointments()
 
   //cancel appointment handler
@@ -440,7 +448,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
                     <>
                       {props.status === "Awaiting Payment" && (
                         <LinkElement
-                          link={`/appointment/online-appointment/${props.physicianProfileUrl}?status=noPayment&calendarId=${calendar.id}&index=${index}&appointmentId=${props.id}&year=${calendar.year}&month=${calendar.month}&day=${calendar.dayOfMonth}`}
+                          link={`/appointment/online-appointment/${props.physicianProfileUrl}?status=noPayment&physicianUrl=${physicianProfileUrl}&physicianId=${physicianProfileId}&calendarId=${calendar.id}&index=${index}&appointmentId=${props.id}&year=${calendar.year}&month=${calendar.month}&day=${calendar.dayOfMonth}`}
 
                         >
                           {/* "Awaiting Payment" */}
