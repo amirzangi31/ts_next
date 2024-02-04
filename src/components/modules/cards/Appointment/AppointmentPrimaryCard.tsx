@@ -126,7 +126,7 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
             <span className="font-bold"> ساعت مراجعه :</span>
             {time ? (
               <span>
-                {`${time.hour}:${time.minute}`} {convertDayTime(+time.hour)}
+                {`${time.hour < 10 ? `0${time.hour}` : time.hour}:${time.minute < 10 ? `0${time.minute}` : time.minute}`} {convertDayTime(+time.hour)}
               </span>
             ) : null}
             {index ? (

@@ -88,7 +88,6 @@ const appointmentSlice = createSlice({
       };
       state.isSelectAppointment = false;
     },
-  
     lockedAppointmentRedux: (state, { payload }) => {
       state.lockedAppointmentInfo = {
         index: payload.index,

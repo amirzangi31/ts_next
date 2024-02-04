@@ -47,11 +47,7 @@ const MyAppointmentsPage = () => {
   const [showModal, setShowModal] = useState(false);
 
   // appointments hook
-  const { isLoading, futureAppointments, pastAppointments } = useMyAppointments()
-
-
-  console.log(isLoading)
-
+  const { isLoading, myAppointments } = useMyAppointments()
 
   const [pastAppointmentsUi, setPastAppointmentsUi] = useState<MyAppointmentType[]>([])
   const [fetureAppointmentsUi, setFetureAppointmentsUi] = useState<MyAppointmentType[]>([])
@@ -75,6 +71,9 @@ const MyAppointmentsPage = () => {
   //disabled filter
   const disabledFilterHandler = (val: boolean) => {
     if (val) {
+      const futureAppointments = myAppointments?.filter((item: MyAppointmentType) => item.passedOrFuture !== "Passed")
+      const pastAppointments = myAppointments?.filter((item: MyAppointmentType) => item.passedOrFuture === "Passed")
+
       const pastArray: MyAppointmentType[] = pastAppointments.filter((item: MyAppointmentType) => item?.status === "Is Deleted By User" || item?.status === "Is Deleted By Physician")
 
       const fetureArray: MyAppointmentType[] = futureAppointments.filter((item: MyAppointmentType) => item?.status === "Is Deleted By User" || item?.status === "Is Deleted By Physician")
@@ -87,35 +86,39 @@ const MyAppointmentsPage = () => {
       }
     }
 
-
+    
     return {
-      past: pastAppointments,
-      feture: futureAppointments
+      past: myAppointments?.filter((item: MyAppointmentType) => item.passedOrFuture === "Passed"),
+      feture: myAppointments?.filter((item: MyAppointmentType) => item.passedOrFuture !== "Passed")
     }
   }
 
 
   //Filtering appointments based on defined filters
   useEffect(() => {
-    let pastArray: MyAppointmentType[] = []
-    let fetureArray: MyAppointmentType[] = []
 
+    
 
     if (!isLoading) {
+      let pastArray: MyAppointmentType[] = []
+      let fetureArray: MyAppointmentType[] = []
+      
       for (let i in filters) {
         if (filters[i]) {
-          const past = disabledFilterHandler(disabledFilter)?.past?.length > 0 ? disabledFilterHandler(disabledFilter)?.past?.filter((item) => item[i] === filters[i]) : [];
-          const feture = disabledFilterHandler(disabledFilter)?.feture?.length > 0 ? disabledFilterHandler(disabledFilter)?.feture?.filter((item) => item[i] === filters[i]) : [];
+          const past = disabledFilterHandler(disabledFilter)?.past?.length > 0 ? disabledFilterHandler(disabledFilter)?.past?.filter((item: MyAppointmentType) => item[i] === filters[i]) : [];
+          
+          const feture = disabledFilterHandler(disabledFilter)?.feture?.length > 0 ? disabledFilterHandler(disabledFilter)?.feture?.filter((item: MyAppointmentType) => item[i] === filters[i]) : [];
 
           pastArray = [...pastArray, ...past];
           fetureArray = [...fetureArray, ...feture];
         }
       }
+
+      setPastAppointmentsUi(pastArray)
+      setFetureAppointmentsUi(fetureArray)
     }
 
-    setPastAppointmentsUi(pastArray)
-    setFetureAppointmentsUi(fetureArray)
-  }, [filters, disabledFilter, pastAppointments, futureAppointments]);
+  }, [filters, disabledFilter, myAppointments , isLoading]);
 
 
 
