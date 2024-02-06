@@ -29,7 +29,7 @@ const ArticleCardPrimary = (props: ArticleCardType) => {
                 />
             </div>
             <div className="w-full">
-                <p className="text-md font-bold py-2">{title}</p>
+                <p className="text-md font-bold py-2 group-hover:text-primary transition-all duration-500">{title}</p>
                 <p className="text-sm short-text-3">{description}</p>
             </div>
             <div className="w-full flex justify-between items-center text-sm font-[300] text-gray-500">

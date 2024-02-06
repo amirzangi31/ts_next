@@ -55,15 +55,24 @@ export interface CommentCardPrimaryType {
 export interface AppointmentPrimaryCardType {
   physician: PhysicianProfile;
   price: number;
-  payment:boolean;
-  index : number;
-  lockTime : number,
+  payment: boolean;
+  index: number;
+  lockTime: number,
   month: number
   year: number
   day: number;
-  time : {
-    hour : number;
-    minute : number;
-    
+  time: {
+    hour: number;
+    minute: number;
+
   }
+}
+
+
+export type AutohrCardType = {
+  id: string,
+  link: string,
+  physicianId: string,
+  physicianName: string,
+  hasImage: boolean,
 }

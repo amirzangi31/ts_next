@@ -101,7 +101,7 @@ const FavoritePage = () => {
                     <TabPanel>
                         <div className="flex flex-col gap-2">
                             {favoriteArticles.length > 0 ?
-                                <ArticleCardSecondary />
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus odio voluptate corrupti numquam ducimus laboriosam libero eligendi atque magnam. Vitae, voluptate maxime. Voluptates, veritatis quaerat quos facilis at unde consequatur.</p>
                                 :
                                 <div className='h-[calc(100vh-220px)] flex justify-center items-center flex-col gap-8'>
                                     <div>

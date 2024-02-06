@@ -8,7 +8,7 @@ import { FreeMode, Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import { ArticleCardType, CategoryPrimaryType, CommentCardPrimaryType, PhysicainCardPrimaryType } from '@/types/cards';
+import { ArticleCardType, AutohrCardType, CategoryPrimaryType, CommentCardPrimaryType, PhysicainCardPrimaryType } from '@/types/cards';
 import { RelatedPhysicianType } from '@/types/physicianProfile';
 import { PhysicianSpecialityType, SearchSmallCardType, SpecialitySearchTagType } from '@/types/search';
 
@@ -17,7 +17,7 @@ import { PhysicianSpecialityType, SearchSmallCardType, SpecialitySearchTagType }
 interface SwiperContainerFreeModeType {
     CardComponent: React.ComponentType<any>;
     gap?: number;
-    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[] | ArticleCardType[] | CommentCardPrimaryType[] | RelatedPhysicianType[] | SearchSmallCardType[] | SpecialitySearchTagType[] | PhysicianSpecialityType[]
+    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[] | ArticleCardType[] | CommentCardPrimaryType[] | RelatedPhysicianType[] | SearchSmallCardType[] | SpecialitySearchTagType[] | PhysicianSpecialityType[] | AutohrCardType[]
 }
 
 
