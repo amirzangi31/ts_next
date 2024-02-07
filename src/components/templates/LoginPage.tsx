@@ -19,6 +19,7 @@ import LinkProfilePageCard from "../modules/cards/Link/LinkProfilePageCard";
 import TitlePagesMobile from "../modules/titles/TitlePagesMobile";
 import ModalLogin from "../layouts/ModalLogin/ModalLogin";
 import useUserInfo from "@/hooks/useUserInfo";
+import LinkElement from "../elements/LinkElement";
 
 const LoginPage = () => {
     const local = useLocale();
@@ -70,20 +71,20 @@ const LoginPage = () => {
                 </header>
 
                 <section className="mt-4 flex justify-start items-center gap-2 flex-col">
-                    <LinkProfilePageCard title={t("rules")} link={"/arenap/rules"} />
+                    <LinkProfilePageCard title={t("rules")} link={"/policy"} />
                     <LinkProfilePageCard
                         title={t("contact-us")}
-                        link={"/arenap/contact"}
+                        link={"/contactus"}
                     />
-                    <LinkProfilePageCard title={t("about-us")} link={"/arenap/about"} />
+                    <LinkProfilePageCard title={t("about-us")} link={"/aboutus"} />
                     <LinkProfilePageCard
                         title={t("common-questions")}
-                        link={"/arenap/questions"}
+                        link={"/faq"}
                     />
                 </section>
 
                 <div className="flex justify-end items-center mt-2 ">
-                    <Link href={`/${local}/Auth/Login`} className="w-[15.625rem]">
+                    <LinkElement link={`Auth/Login`} className="w-[15.625rem]">
                         <ButtonElement typeButton="secondary" size="sm" >
                             <p className="text-md">
                                 {" "}
@@ -93,7 +94,7 @@ const LoginPage = () => {
                                 </span>
                             </p>
                         </ButtonElement>
-                    </Link>
+                    </LinkElement>
                 </div>
             </div>
             <BottomNavigation route={"login"} />

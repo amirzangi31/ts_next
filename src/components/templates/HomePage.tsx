@@ -46,7 +46,7 @@ const HomePage = (props: HomePagePropType) => {
     return (
         <>
             <TitlePagesMobile title={t("home")} />
-            {/* ----------section------------- */}
+            {/* ----------header------------- */}
             {/* Best Specialities  */}
             <header className='py-4'>
                
@@ -54,7 +54,7 @@ const HomePage = (props: HomePagePropType) => {
 
                 <SearchHomePage physicians={physicians} />
             </header>
-            {/* ----------section------------- */}
+            {/* ----------header------------- */}
 
             {/* ----------section------------- */}
             {/* Best Specialities  */}

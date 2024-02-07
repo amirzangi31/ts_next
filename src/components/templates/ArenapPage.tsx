@@ -11,10 +11,10 @@ const ArenapPage = () => {
             <>
                   <TitlePagesMobile title={"آرناپ"} />
                   <div className="container max-w-[1000px] pb-5 mt-4 flex justify-start items-start gap-4 flex-col">
-                        <LinkProfilePageCard title={"قوانین و مقررات آرناپ"} link={`/arenap/rules`} />
-                        <LinkProfilePageCard title={"تماس با ما"} link={`/arenap/contact`} />
-                        <LinkProfilePageCard title={"درباره ما (آرناپ)"} link={`/arenap/about`} />
-                        <LinkProfilePageCard title={"پرسش های متداول"} link={`/arenap/faq`} />
+                        <LinkProfilePageCard title={"قوانین و مقررات آرناپ"} link={`/policy`} />
+                        <LinkProfilePageCard title={"تماس با ما"} link={`/contactus`} />
+                        <LinkProfilePageCard title={"درباره ما (آرناپ)"} link={`/aboutus`} />
+                        <LinkProfilePageCard title={"پرسش های متداول"} link={`/faq`} />
                   </div>
             </>
       )

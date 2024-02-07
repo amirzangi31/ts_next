@@ -14,6 +14,7 @@ import BestSpeciality from "../modules/BestSpeciality";
 import bestAuthors from "@/data/bestAuthors";
 
 import TitleHeading from "../modules/titles/TitleHeading";
+import { ArticleCardType } from "@/types/cards";
 
 const BlogPage = () => {
 
@@ -26,7 +27,7 @@ const BlogPage = () => {
     return (
         <>
             <TitlePagesMobile title={"بلاگ آرناپ"} />
-            <div className="container max-w-[1000px]  ">
+            <div className="container max-w-[1300px]  ">
                 {/* search section */}
                 <header className="mt-4 md:rounded-sm md:shadow-shadow_blog md:h-[12.5rem] flex justify-center items-center ">
                     <div className="w-full ">
@@ -62,10 +63,10 @@ const BlogPage = () => {
                         />
                     </div>
                     <div className="grid gird-cols-1 md:grid-cols-2 gap-2">
-                        {articles.map((article) => (
+                        {articles.map((article : ArticleCardType) => (
                             <ArticleCardSecondary
                                 key={article.id}
-                                link={`/blog/${article.id}`}
+                                link={`blog/${article.id}`}
                                 title={article.title}
                                 author={article.author}
                                 description={article.description}
@@ -103,12 +104,12 @@ const BlogPage = () => {
                 {/* ----------section------------- */}
                 {/* ----------section------------- */}
                 {/* best authors */}
-                <section className="my-6 ">
+                {/* <section className="my-6 ">
                     <div className="py-3">
                         <TitlePrimary title={"برترین نویسندگان"} btn={false} />
                         <SwiperContainerFreeMode data={authors} CardComponent={AuthorCard} gap={10} />
                     </div>
-                </section>
+                </section> */}
                 {/* ----------section------------- */}
             </div>
             <BottomNavigation route={"blog"} />

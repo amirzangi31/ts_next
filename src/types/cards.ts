@@ -41,7 +41,6 @@ export interface ArticleCardType {
   image: string;
   author: string;
   date: string;
-
   speciality: string;
 }
 
@@ -75,4 +74,5 @@ export type AutohrCardType = {
   physicianId: string,
   physicianName: string,
   hasImage: boolean,
+  speciality : string
 }

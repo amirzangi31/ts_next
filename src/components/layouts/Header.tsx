@@ -56,9 +56,9 @@ const Header = () => {
                 </LinkElement>
               </li>
               <li>
-                <LinkElement link="/search">
+                <LinkElement link="/physicians">
                   <ButtonElement type={"button"}
-                    typeButton={pathName !== '/search' && pathName !== "/en/search" ? "primary" : pathName === '/search' || pathName === "/en/search" ? "gray" : undefined}
+                    typeButton={pathName !== '/physicians' && pathName !== "/en/physicians" ? "primary" : pathName === '/physicians' || pathName === "/en/physicians" ? "gray" : undefined}
                     size={"sm"}
                     variant='contained'
                     width='min-w-[7rem]'

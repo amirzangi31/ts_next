@@ -1,8 +1,9 @@
 import React from 'react'
+import PhysiciansPage from '@/components/templates/PhysiciansPage'
 
 const Doctors = () => {
   return (
-    <div>Doctors</div>
+    <PhysiciansPage /> 
   )
 }
 
