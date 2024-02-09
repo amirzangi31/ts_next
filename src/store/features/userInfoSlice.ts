@@ -1,5 +1,6 @@
 import { http } from "@/services/axios";
 import { apiDomainNobat } from "@/services/getApiUrl";
+import urls from "@/services/urls";
 import { UserType } from "@/types/global";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -33,7 +34,7 @@ const fetchUser = createAsyncThunk("userInfo/fetchUser", async () => {
     if (!accessToken) {
       throw new Error("no accessToken");
     }
-    const res = await http.get(`${apiDomainNobat}/User/UserInfo`);
+    const res = await http.get(`${apiDomainNobat}${urls.user.getUser.url}`);
     return { data: res.data.value, auth: "authorization" };
   } catch (error) {
     return { data: {}, auth: "unauthorization" };

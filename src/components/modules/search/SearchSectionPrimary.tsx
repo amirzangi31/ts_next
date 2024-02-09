@@ -4,16 +4,23 @@ import cn from '@/utils/clsxFun'
 import CloseButton from '@elements/CloseButton'
 import ArrowLeft from '@icons/ArrowLeft'
 import ButtonElement from '@elements/ButtonElement'
+import { useRouter } from 'next/navigation'
 
-const SearchSectionPrimary = () => {
+const SearchSectionPrimary = (props : {showFilters : boolean , closeFilterHandler : () => void}) => {
     const [activeCard, setActiveCard] = useState<null | number>(0)
-    const [showFilters , setShowFilters] = useState(false)
+    const router = useRouter()
+    const [titles ,setTitles] = useState({
+        speciality : "تخصص"
+    })
+    const {showFilters , closeFilterHandler} = props
+
     const openFilterCard = (fitlerIndex: number | null) => {
         setActiveCard(fitlerIndex)
     }
 
-    const radioButtonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
+    const radioButtonHandler = (e: React.ChangeEvent<HTMLInputElement> ) => {
+
+        
     }
 
     const genderContent = [
@@ -33,31 +40,34 @@ const SearchSectionPrimary = () => {
     return (
         <div className={
             cn(
-                'fixed -top-full left-0 h-screen w-full  bg-white-200 p-4 bg-bg_content',
+                'fixed -top-full left-0 h-screen w-full  bg-white-200 p-4 bg-bg_content transition-all duration-300',
                 "md:static md:h-auto md:w-[300px] md:rounded-sm md:bg-white md:shadow-shadow_category",
                 {
-                    "top-0" : showFilters
+                    "top-0 z-[20]" : showFilters
                 }
             )
         }>
-            <div className='absolute top-4 left-4 '>
-                <CloseButton closeHanlder={() => console.log("Test")} />
+            <div className='absolute top-4 left-4 md:hidden '>
+                <CloseButton closeHanlder={closeFilterHandler} />
             </div>
             <div className='flex justify-between items-center gap-4 font-bold'>
                 <p className='text-primary md:min-w-fit  w-full font-bold md:font-normal text-center md:text-right'>فیلتر ها</p>
-                <button type='button' className='text-error hidden md:block min-w-fit'>حذف فیلترها</button>
+                <button type='button' className='text-error hidden md:block min-w-fit' onClick={() => {
+                    console.log("test")
+                    router.push("/physicians")
+                } } >حذف فیلترها</button>
             </div>
-            <div className='grid grid-cols-1 gap-4 mt-4'>
-                <FilterCard title='تخصص' name='name_1' index={1} active={activeCard === 1} openHandler={openFilterCard} />
+            <div className='grid grid-cols-1 gap-4 mt-6 md:mt-4'>
+                <FilterCard title={titles.speciality} name='name_1' index={1} active={activeCard === 1} openHandler={openFilterCard} />
                 {/* <FilterCard title='خدمات' name='name_2' index={2} active={activeCard === 2} openHandler={openFilterCard} /> */}
                 {/* <FilterCard title='علائم' name='name_3' index={3} active={activeCard === 3} openHandler={openFilterCard} /> */}
                 {/* <FilterCard title='بیماری' name='name_4' index={4} active={activeCard === 4} openHandler={openFilterCard} /> */}
                 <FilterCardSecondary inputContent={genderContent} changeInputHandler={radioButtonHandler} title='جنسیت' name='name_5' index={5} active={activeCard === 5} openHandler={openFilterCard} />
                 <FilterCardSecondary inputContent={plans} changeInputHandler={radioButtonHandler} title='پلن مشاوره' name='name_6' index={6} active={activeCard === 6} openHandler={openFilterCard} />
             </div>
-            <div className='mt-4 grid md:grid-cols-1 gap-4'>
+            <div className='mt-4 grid md:grid-cols-1 grid-cols-2 gap-4'>
                 <ButtonElement typeButton='primary' >اعمال فیلتر</ButtonElement>
-                <div className='md:hidden'><ButtonElement typeButton='transparent' >حذف فیلتر</ButtonElement></div>
+                <div className='md:hidden'><ButtonElement typeButton='transparent'  >حذف فیلتر</ButtonElement></div>
             </div>
         </div>
     )
@@ -98,7 +108,7 @@ const FilterCard = (props: FilterCardProps) => {
                     "after:absolute after:-right-5 md:after:-right-3 after:rounded-lg after:top-0 after:block after:bg-primary after:w-1 after:h-full"
                 )
             }>
-                <p>{title}</p>
+                <p>{title} <span className='text-gray-500 text-md'>(test)</span> </p>
                 <span className={cn(
                     '', {
                     "-rotate-90": !active,
@@ -129,13 +139,13 @@ export type FilterCardSecondaryProps = {
     active: boolean,
     index: number,
     title: string,
-    changeInputHandler: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    changeInputHandler: (e: React.ChangeEvent<HTMLInputElement> ) => void,
     inputContent: { id: number, value: number | string, name: string }[]
 }
 
 const FilterCardSecondary = (props: FilterCardSecondaryProps) => {
     const { openHandler, active, name, index, title, changeInputHandler, inputContent } = props
-
+    const [titleState , setTitleState ] = useState("")
     return (
         <div className={cn(
             " rounded-sm shadow-shadow_category max-w-full cursor-pointer ",
@@ -155,7 +165,7 @@ const FilterCardSecondary = (props: FilterCardSecondaryProps) => {
                     "after:absolute after:-right-5 md:after:-right-3 after:rounded-lg after:top-0 after:block after:bg-primary after:w-1 after:h-full"
                 )
             }>
-                <p>{title}</p>
+                <p>{title} <span className='text-md text-gray-500'>{titleState ? `(${titleState})` : ""}</span> </p>
                 <span className={cn(
                     '', {
                     "-rotate-90": !active,
@@ -169,11 +179,14 @@ const FilterCardSecondary = (props: FilterCardSecondaryProps) => {
                     "hidden": !active
                 }
             )}>
-                <div className=' mt-2  rounded-sm   flex justify-between items-center flex-wrap gap-2 text-sm'>
+                <div className=' mt-2  rounded-sm   flex justify-start md:justify-between items-center flex-wrap gap-2 text-sm'>
                     {
                         inputContent.map(item => (
                             <label key={item.id} className='flex justify-start items-center  gap-2 cursor-pointer '>
-                                <input onChange={changeInputHandler} hidden type="radio" name={name} className='bg-red-200 peer' value={item.value} />
+                                <input onChange={(e) => {
+                                    changeInputHandler(e )
+                                    setTitleState(item.name)
+                                }} hidden type="radio" name={name} className='bg-red-200 peer' value={item.value} />
                                 <div className={cn(
                                     "size-5 rounded-full bg-gray-100 peer-checked:bg-primary md:bg-white md:peer-checked:bg-primary relative peer-checked:after:block",
                                     "after:absolute after:top-1 after:left-1 after:rounded-full after:bg-white md:after:bg-white after:hidden after:w-3 after:h-3"

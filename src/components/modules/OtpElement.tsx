@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 type PartialInputProps = Pick<
     React.ComponentPropsWithoutRef<"input">,
     "className" | "style"
@@ -75,8 +77,11 @@ const OtpInput = (props: Props) => {
         }
       };
 
-      
+    const inputRef = useRef<HTMLInputElement>(null)
 
+    useEffect(() => {
+        inputRef?.current?.focus()
+    }, [])
 
     return (
         <div className="grid grid-cols-5  gap-2" dir="ltr">
@@ -84,6 +89,7 @@ const OtpInput = (props: Props) => {
             {arr.map((_, index) => {
                 return (
                     <input
+                        ref={index === 0 ? inputRef : null}
                         key={index}
                         {...restProps}
                         /**

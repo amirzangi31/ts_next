@@ -67,6 +67,17 @@ const urls = {
       },
     },
   },
+  //user
+  user : {
+    getUser : {
+      url : "/User/UserInfo",
+      method : "GET"
+    },
+    editUser : {
+      url : "/User/UserInfo",
+      method : "PUT"
+    },
+  },
   //captcha
   captcha: {
     captcha: {

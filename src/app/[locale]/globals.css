@@ -8,6 +8,10 @@ body {
   @apply min-h-screen bg-bg_content;
 }
 
+ul , li {
+  @apply list-none;
+}
+
 input,
 textarea {
   @apply bg-transparent outline-none ;

@@ -142,7 +142,7 @@ const ChnageCityButton = () => {
                     grabCursor={true}
                     centeredSlides={true}
                     direction={'vertical'}
-                    className='swiper-vertical'
+                    className='swiper-vertical overflow-hidden'
                     coverflowEffect={{
                       rotate: 0,
                       stretch: 0,
@@ -196,7 +196,7 @@ const ChnageCityButton = () => {
                     grabCursor={true}
                     centeredSlides={true}
                     direction={'vertical'}
-                    className='swiper-vertical'
+                    className='swiper-vertical overflow-hidden'
                     coverflowEffect={{
                       rotate: 0,
                       stretch: 0,

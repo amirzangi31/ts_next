@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { editProfileSchema } from '@/utils/validations'
 import {
       Formik,
@@ -10,6 +10,8 @@ import {
 import ButtonElement from '@elements/ButtonElement';
 import FormControlEdit from '@elements/inputs/FormControlEdit';
 import useUserInfo from '@/hooks/useUserInfo';
+import { UserType } from '@/types/global';
+import editProfile from '@/services/user/user';
 
 interface InitialValuesType {
       firstName: string;
@@ -20,39 +22,34 @@ interface InitialValuesType {
 
 
 const EditProfilePage = () => {
-      const { user , isLogin } = useUserInfo()
 
-
-
-
+      const {user} = useUserInfo()
+      const [loadingButton , setLoadingButton] = useState(false)
 
       let initialValues: InitialValuesType = {
-            firstName: "",
-            lastName: "",
-            notionalNumber: "",
-            phoneNumber: ""
+            firstName: user.firstName || "",
+            lastName: user.lastName || "",
+            notionalNumber: user.nationalNumber || "",
+            phoneNumber: user.phoneNumber || ""
       }
 
 
-      useEffect(() => {
-            initialValues = {
-                  firstName: user.firstName,
-                  lastName: user.lastName,
-                  notionalNumber: user.nationalNumber,
-                  phoneNumber: user.phoneNumber
-            }
-      }, [user])
-
+      
 
       return (
             <div>
                   <Formik
                         initialValues={initialValues}
-                        // validationSchema={editProfileSchema}
+                        validationSchema={editProfileSchema}
                         onSubmit={async (values, actions) => {
-
-                              actions.resetForm()
+                              setLoadingButton(true)
+                              const res = await editProfile(values.firstName , values.lastName , values.notionalNumber)                        
+                              setLoadingButton(false)
+                              
                         }}
+                          
+                        enableReinitialize={true}
+                        
 
                   >
                         {(props: FormikProps<any>) => (
@@ -62,7 +59,7 @@ const EditProfilePage = () => {
                                     <Field name="notionalNumber" type="text" placeholder=" کدملی  خود را وارد کنید" title="کدملی" component={FormControlEdit} />
                                     <Field name="phoneNumber" type="string" disabled={true} placeholder=" شماره همراه خود را وارد کنید" title="شماره همراه" component={FormControlEdit} />
                                     <div className='mt-4'>
-                                          <ButtonElement type='submit' typeButton='primary' size='sm' loading={false} >
+                                          <ButtonElement type='submit' typeButton='primary' size='sm' loading={loadingButton} >
                                                 ارسال
                                           </ButtonElement>
                                     </div>

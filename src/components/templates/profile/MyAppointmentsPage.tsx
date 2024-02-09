@@ -127,7 +127,7 @@ const MyAppointmentsPage = () => {
   return (
     <>
       <TitlePagesMobile title={t("appointments")} />
-      <div className="container">
+      <div className="">
         <Tabs
           selectedIndex={activeTab}
           onSelect={(index) => setActiveTab(index)}
@@ -524,7 +524,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
   );
 };
 const AppointmentCardOff = (props: MyAppointmentType) => {
-
+  
   const g = useTranslations("global");
   return (
     <div className="bg-white rounded-sm shadow-shadow_category  w-full  flex justify-start items-start flex-col gap-2">
@@ -540,8 +540,8 @@ const AppointmentCardOff = (props: MyAppointmentType) => {
           <span className="w-[1rem] h-[1rem] bg-white rounded-full absolute bottom-0 rtl:right-0 ltr:left-0 flex justify-center items-center ">
             <span
               className={cn(`w-[0.75rem] h-[0.75rem]  rounded-full `, {
-                "bg-primary-100": props.onlineAppointment,
-                "bg-gray-400": !props.onlineAppointment,
+                "bg-primary-100": props.immediateConsultation,
+                "bg-gray-400": !props.immediateConsultation,
               })}
             ></span>
           </span>

@@ -36,17 +36,21 @@ const FormControlEdit = (props: FormControlEdit) => {
                 })}
                 placeholder={placeholder}
             />
-            <span
-                className={cn(
-                    `text-sm px-2 text-error  `,
-                    {
-                        "opacity-100": form.errors?.[field.name] && form.touched?.[field.name],
-                        "opacity-0": !form.errors?.[field.name] && !form.touched?.[field.name],
-                    }
-                )}
-            >
-                {form.errors?.[field.name]}
-            </span>
+            {
+                form.errors?.[field.name] && form.touched?.[field.name] && (
+                    <span
+                        className={cn(
+                            `text-sm px-2 text-error  `,
+                            {
+                                "opacity-100": form.errors?.[field.name] && form.touched?.[field.name],
+                                "opacity-0": !form.errors?.[field.name] && !form.touched?.[field.name],
+                            }
+                        )}
+                    >
+                        {form.errors?.[field.name]}
+                    </span>
+                )
+            }
         </div>
     )
 }

@@ -23,7 +23,7 @@ import CloseButton from '@/components/elements/CloseButton';
 
 
 const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment, changeStep }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null, changeStep: (step: 1 | 2) => void }) => {
-
+  
 
   const [selectAppointmentBeforeSign, setSelectAppointmentBeforeSign] = useState({
     year: "",
@@ -361,12 +361,12 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
               <div>
                 <ButtonElement
                   disabled={
-                    ramainingTime > 0 && firstAppointmentHandler.isLoading
+                    ramainingTime > 0 ||  firstAppointmentHandler.isLoading  || firstAppointment === null
                   }
                   fontWeight='bold'
                   loading={firstAppointmentHandler.isLoading}
                   typeButton={
-                    ramainingTime > 0 && firstAppointment !== null ? "gray-light" : "primary"
+                    ramainingTime > 0 || firstAppointment=== null ? "gray-light" : "primary"
                   }
 
                   handler={getFirstAppointment}
