@@ -68,14 +68,14 @@ const urls = {
     },
   },
   //user
-  user : {
-    getUser : {
-      url : "/User/UserInfo",
-      method : "GET"
+  user: {
+    getUser: {
+      url: "/User/UserInfo",
+      method: "GET"
     },
-    editUser : {
-      url : "/User/UserInfo",
-      method : "PUT"
+    editUser: {
+      url: "/User/UserInfo",
+      method: "PUT"
     },
   },
   //captcha
@@ -248,10 +248,24 @@ const urls = {
   price: {
     getPrice: {
       url: "/Public/Captcha",
-      method : "POST",
-      parametrs : {}
+      method: "POST",
+      parametrs: {}
     },
   },
+  //comment site 
+  commentSite: {
+    sendComment: {
+      url: "/PublicServices/SupportTicket",
+      method: "POST",
+      parametrs: {
+        fullName: "string",
+        emailAddress: "string",
+        phoneNumber: "string",
+        title: "string",
+        message: "string"
+      }
+    }
+  }
 };
 
 export default urls;
