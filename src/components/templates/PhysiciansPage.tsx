@@ -20,7 +20,7 @@ export type PhysiciansPageProps = {
         service?: string,
         region?: string
     },
-    searchKey: string | undefined
+    searchKey?: string | undefined
 }
 
 
@@ -144,19 +144,19 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                     <div className='hidden md:flex justify-start items-center  gap-2 w-full text-md p-2 bg-white rounded-sm min-h-[2.8125rem]'>
                         <p className='font-bold text-primary min-w-fit'>نتایج فیلتر : </p>
                         <div className='flex justify-start items-center gap-2 flex-wrap'>
-                            <div className='flex justify-center items-center gap-2 px-1 py-1 border border-gray-500 rounded-full cursor-pointer'>
+                            <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'>
                                 <span className='text-gray-500'>کرمان</span>
                                 <span ><CloseIcon color='stroke-gray-500' /> </span>
                             </div>
-                            <div className='flex justify-center items-center gap-2 px-1 py-1 border border-gray-500 rounded-full cursor-pointer'>
+                            <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'>
                                 <span className='text-gray-500'>فلوشیپ جراحی درون بین کلیه ادراری و تناسلی</span>
                                 <span ><CloseIcon color='stroke-gray-500' /> </span>
                             </div>
-                            <div className='flex justify-center items-center gap-2 px-1 py-1 border border-gray-500 rounded-full cursor-pointer'>
+                            <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'>
                                 <span className='text-gray-500'>سنگ کلیه</span>
                                 <span ><CloseIcon color='stroke-gray-500' /> </span>
                             </div>
-                            <div className='flex justify-center items-center gap-2 px-1 py-1 border border-gray-500 rounded-full cursor-pointer'>
+                            <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'>
                                 <span className='text-gray-500'>خانم</span>
                                 <span ><CloseIcon color='stroke-gray-500' /> </span>
                             </div>

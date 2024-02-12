@@ -38,7 +38,7 @@ const Header = () => {
                     variant='contained'
                     width='min-w-[7rem]'
                   >
-                    {t("home")}
+                    صفحه اصلی
                   </ButtonElement>
 
                 </LinkElement>
@@ -51,7 +51,7 @@ const Header = () => {
                     variant='contained'
                     width='min-w-[7rem]'
                   >
-                    {t("blog")}
+                    بلاگ
                   </ButtonElement>
                 </LinkElement>
               </li>
@@ -63,7 +63,31 @@ const Header = () => {
                     variant='contained'
                     width='min-w-[7rem]'
                   >
-                    {t("search")}
+                    جستجو پیشرفته
+                  </ButtonElement>
+                </LinkElement>
+              </li>
+              <li>
+                <LinkElement link="/aboutus">
+                  <ButtonElement type={"button"}
+                    typeButton={pathName !== '/aboutus' && pathName !== "/en/aboutus" ? "primary" : pathName === '/aboutus' || pathName === "/en/aboutus" ? "gray" : undefined}
+                    size={"sm"}
+                    variant='contained'
+                    width='min-w-[7rem]'
+                  >
+                    درباره ما
+                  </ButtonElement>
+                </LinkElement>
+              </li>
+              <li>
+                <LinkElement link="/contactus">
+                  <ButtonElement type={"button"}
+                    typeButton={pathName !== '/contactus' && pathName !== "/en/contactus" ? "primary" : pathName === '/contactus' || pathName === "/en/contactus" ? "gray" : undefined}
+                    size={"sm"}
+                    variant='contained'
+                    width='min-w-[7rem]'
+                  >
+                    تماس با ما
                   </ButtonElement>
                 </LinkElement>
               </li>
