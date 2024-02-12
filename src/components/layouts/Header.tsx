@@ -23,14 +23,14 @@ const Header = () => {
         <div className='flex items-center w-full '>
 
           {/* Logo */}
-          <LinkElement link='/' prefetch={true} >
+          <LinkElement link='' prefetch={true} >
             <Image src={"/Logo.png"} width={1000} height={1000} alt='Logo website' className='w-[1.875rem]' />
           </LinkElement>
           {/* Navbar */}
           <nav className='rtl:mr-4 ltr:ml-4 flex-1 ' >
             <ul className='flex justify-start items-center gap-3 text-white  w-full'>
               <li>
-                <LinkElement link="/">
+                <LinkElement link="">
 
                   <ButtonElement type={"button"}
                     typeButton={pathName !== '/' && pathName !== "/en" ? "primary" : pathName === '/' || pathName === "/en" ? "gray" : undefined}
@@ -44,7 +44,7 @@ const Header = () => {
                 </LinkElement>
               </li>
               <li>
-                <LinkElement link="/blog">
+                <LinkElement link="blog">
                   <ButtonElement type={"button"}
                     typeButton={pathName !== '/blog' && pathName !== "/en/blog" ? "primary" : pathName === '/blog' || pathName === "/en/blog" ? "gray" : undefined}
                     size={"sm"}
@@ -56,7 +56,7 @@ const Header = () => {
                 </LinkElement>
               </li>
               <li>
-                <LinkElement link="/physicians">
+                <LinkElement link="physicians">
                   <ButtonElement type={"button"}
                     typeButton={pathName !== '/physicians' && pathName !== "/en/physicians" ? "primary" : pathName === '/physicians' || pathName === "/en/physicians" ? "gray" : undefined}
                     size={"sm"}
@@ -68,7 +68,7 @@ const Header = () => {
                 </LinkElement>
               </li>
               <li>
-                <LinkElement link="/aboutus">
+                <LinkElement link="aboutus">
                   <ButtonElement type={"button"}
                     typeButton={pathName !== '/aboutus' && pathName !== "/en/aboutus" ? "primary" : pathName === '/aboutus' || pathName === "/en/aboutus" ? "gray" : undefined}
                     size={"sm"}
@@ -80,7 +80,7 @@ const Header = () => {
                 </LinkElement>
               </li>
               <li>
-                <LinkElement link="/contactus">
+                <LinkElement link="contactus">
                   <ButtonElement type={"button"}
                     typeButton={pathName !== '/contactus' && pathName !== "/en/contactus" ? "primary" : pathName === '/contactus' || pathName === "/en/contactus" ? "gray" : undefined}
                     size={"sm"}
@@ -105,7 +105,7 @@ const Header = () => {
                 }
                 {
                   isLogin === "unauthorization" ?
-                    <LinkElement link="/login">
+                    <LinkElement link="login">
                       <ButtonElement type={"button"}
                         typeButton={"secondary"}
                         size={"md"}
