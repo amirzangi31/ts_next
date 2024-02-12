@@ -168,9 +168,12 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeConsultation]);
 
+  const spliterName = physician.firstName.split(" ")
+
+
   return (
     <>
-      <TitlePagesMobile title={`صفحه ی اختصاصی دکتر ${physician.firstName} ${physician.lastName}`} />
+      <TitlePagesMobile title={`صفحه ی اختصاصی ${spliterName[0] === "مرکز" ? "" : "دکتر"} ${physician.firstName} ${physician.lastName}`} />
       <ModalLogin isCallback={true} callbacks={callbacks} callbacksIndex={callbackIndex} />
 
       {/* ----------content------------- */}
@@ -199,7 +202,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
         <div className="w-full order-0">
           <PhysicianProfileCard
             profileURL={physician.hasImage ? getUrlImage(physician.id) : "/noImage.jfif"}
-            name={`دکتر ${physician.firstName} ${physician.lastName}`}
+            name={`${spliterName[0] === "مرکز" ? "" : "دکتر"} ${physician.firstName} ${physician.lastName}`}
             speciality={physician.physicianSpecialities[0]?.specialityTitle}
             rate={{ rate: physician.rate, count: physician.comments.length }}
             services={{
