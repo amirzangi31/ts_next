@@ -13,7 +13,7 @@ import Skeleton from "react-loading-skeleton";
 import moment from "jalali-moment";
 
 
-import { useTranslations } from "next-intl";
+
 
 
 
@@ -34,14 +34,14 @@ import ButtonElement from "@/components/elements/ButtonElement";
 import TitlePagesMobile from "@/components/modules/titles/TitlePagesMobile";
 import { TransctionsType } from "@/types/global";
 import SwiperContainerWalletPage from "@/components/modules/swiper/SwiperContainerWalletPage";
-import { SearchParamsWalletType } from "@/app/[locale]/profile/wallet/page";
+import { SearchParamsWalletType } from "@/app/profile/wallet/page";
 
 
 const WalletPage = (props: { params: SearchParamsWalletType }) => {
 
 
   const { transactions, isLoading, loadingPayment, paymentHandler } = useTransactions()
-  const t = useTranslations("wallet_page");
+
   const { isLogin, user } = useUserInfo();
   const [activePrice, setActivePrice] = useState(1)
   const [showCount, setShowCount] = useState(false)
@@ -142,12 +142,12 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
 
   return (
     <>
-      <TitlePagesMobile title={t("title")} />
+      <TitlePagesMobile title={"کیف پول"} />
       <div className="container mt-4">
 
         {/* header  */}
         <header>
-          <BaseCard title={t("title")}>
+          <BaseCard title={"کیف پول"}>
             <div className="py-4 px-6 bg-gray-100 rounded-sm mt-4">
               <div className="flex justify-start items-center gap-2 ">
                 <span>
@@ -192,7 +192,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
                 </span>
 
                 <p className="font-bold text-md flex justify-start gap-2 items-center ">
-                  {t("Wallet-balance")}:
+                  موجودی کیف پول:
                   {isLogin === "isLoading" && (
                     <span className="w-[6.25rem] block">
                       <Skeleton className="h-[1.25rem]" />{" "}
@@ -203,7 +203,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
                       `${+user.accountBalance === 0
                         ? 0
                         : priceSplitter(+user.accountBalance / 10)
-                      } ${t("Toman")}`}
+                      } تومان`}
                   </span>
                 </p>
               </div>
@@ -215,7 +215,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
                 handler={showModalIncreaseHandler}
                 size="sm"
               >
-                {t("Increase-credit")}
+                افزایش اعتبار
               </ButtonElement>
             </div>
           </BaseCard>
@@ -235,15 +235,15 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
                 />
               </div>
               <div className="flex justify-start items-center gap-4 flex-col">
-                <p className="text-md ">{t("No-transaction")}!</p>
-                <p className="text-sm ">{t("Log-in-search")} </p>
+                <p className="text-md ">در حال حاضر تراکنشی صورت نگرفته !</p>
+                <p className="text-sm ">برای گرفتن نوبت به صفحه جستجو وارد شوید  </p>
                 <div className="w-[21.25rem]">
                   <ButtonElement
                     typeButton="primary"
                     fontWeight="bold"
                     handler={showModalIncreaseHandler}
                   >
-                    {t("Increase-credit")}
+                    افزایش اعتبار
                   </ButtonElement>
                 </div>
               </div>
@@ -251,7 +251,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
           ) : null}
           {/* if  transactions is length > 0 */}
           {!isLoading && transactions?.length > 0 ?
-            <BaseCard title={t("Transaction-history")}>
+            <BaseCard title={"تاریخچه تراکنش ها"}>
               <div className="flex justify-start items-center flex-col gap-2">
                 {transactions?.map((item: TransctionsType, index: number) => (
                   <TransactionCard key={item.id} {...item} />
@@ -263,7 +263,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
           {/* loding */}
           {
             isLoading ?
-              <BaseCard title={t("Transaction-history")}>
+              <BaseCard title={"تاریخچه تراکنش ها"}>
 
 
                 <div className="flex justify-start items-center gap-2 flex-col">
@@ -287,7 +287,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
                   closeHanlder={() => setShowModalIncrease(false)}
                 />
               </span>
-              <p className="text-md font-bold">{t("Wallet-balance")} : <span className={cn("   ", {
+              <p className="text-md font-bold">موجودی کیف پول : <span className={cn("   ", {
                 "text-error": +user.accountBalance < 100000,
                 "text-primary": +user.accountBalance > 0
               })}>{+user.accountBalance === 0
@@ -318,7 +318,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
                   loading={loadingPayment}
                 >
 
-                  <p>{t("Record")} <span className="text-sm">({priceSplitter(totalPrice)} تومان)</span></p>
+                  <p>ثبت <span className="text-sm">({priceSplitter(totalPrice)} تومان)</span></p>
 
                 </ButtonElement>) : null}
 
@@ -416,9 +416,9 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
                     handler={() => paymentHandler.mutate({ id: 0, price: +price * 10, paymentType: 0 })}
                     loading={loadingPayment}
                   >
-                    
-                      تلاش مجدد
-              
+
+                    تلاش مجدد
+
                   </ButtonElement>
                 </div>
               </div>
@@ -437,15 +437,15 @@ export default WalletPage;
 
 
 const TransactionCard = (props: TransctionsType) => {
-  const t = useTranslations("wallet_page");
+
 
   return (
     <div className="p-4 rounded-sm border border-gray-200  flex justify-between items-center w-full">
       <div>
         <p className="text-md">
-          <span className="font-bold">{t("Amount")} :</span>{" "}
+          <span className="font-bold"> مبلغ:</span>{" "}
           {priceSplitter(props.amount / 10)}
-          {t("Toman")}
+          تومان
         </p>
       </div>
       <div>
@@ -466,21 +466,21 @@ const TransactionCard = (props: TransctionsType) => {
           <span
             className={`bg-link-light text-link py-2 px-4 flex justify-center items-center rounded-sm text-md font-bold`}
           >
-            {t("deposit")}
+            واریزی
           </span>
         ) : null}
         {props.actionType === 2 && (
           <span
             className={`bg-error-light text-error-100 py-2 px-4 flex justify-center items-center rounded-sm text-md font-bold`}
           >
-            {t("withdrawal")}
+            برداشت
           </span>
         )}
         {props.isSuccess === null && (
           <span
             className={`bg-error-light bg-error/20 text-error py-2 px-4 flex justify-center items-center rounded-sm text-md font-bold`}
           >
-            {t("cancel")}
+            لغو
           </span>
         )}
       </div>

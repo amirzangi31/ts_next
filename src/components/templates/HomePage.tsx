@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { useTranslations } from 'next-intl'
+
 // data
 import commentsList from '@/data/commentData';
 import articleData from '@/data/articleData';
@@ -18,7 +18,6 @@ import SectionTitle from '@modules/titles/SectionTitle';
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
 import SearchHomePage from '../modules/search/SearchHomePage';
 import FaqPage from './FaqPage';
-import cn from '@/utils/clsxFun';
 import BestSpeciality from '../modules/BestSpeciality';
 import TitleHeading from '../modules/titles/TitleHeading';
 
@@ -32,9 +31,9 @@ interface HomePagePropType {
 const HomePage = (props: HomePagePropType) => {
     const { physicians } = props
 
-    // translations
-    const g = useTranslations("global");
-    const t = useTranslations("Routes_name_m");
+    
+    
+    
 
     // Static Data
 
@@ -45,7 +44,7 @@ const HomePage = (props: HomePagePropType) => {
 
     return (
         <>
-            <TitlePagesMobile title={t("home")} />
+            <TitlePagesMobile title={"صفحه اصلی"} />
             {/* ----------header------------- */}
             {/* Best Specialities  */}
             <header className='py-4'>
@@ -67,8 +66,8 @@ const HomePage = (props: HomePagePropType) => {
             {/* Best Physicians */}
             <section className='mt-6'>
                 <SectionTitle
-                    title={g("most-visited-specializations")}
-                    textLink={g("View-more")}
+                    title={"پربازدیدترین تخصص ها"}
+                    textLink={"مشاهده بیشتر"}
                     link='/search'
                     btn={true}
                 />
@@ -80,8 +79,8 @@ const HomePage = (props: HomePagePropType) => {
             {/* Newest Articles  */}
             <section className="mt-6">
                 <SectionTitle
-                    title={g("latest-articles")}
-                    textLink={g("View-more")}
+                    title={"جدیدترین مقالات"}
+                    textLink={"مشاهده بیشتر"}
                     link='/search'
                     btn={true}
                 />
@@ -93,8 +92,8 @@ const HomePage = (props: HomePagePropType) => {
             {/* User Comments  */}
             <section className="mt-6">
                 <SectionTitle
-                    title={g("User-comments")}
-                    textLink={g("View-more")}
+                    title={"نظرات کاربران"}
+                    textLink={"مشاهده بیشتر"}
                     link='/search'
                     btn={true}
                 />
@@ -107,7 +106,7 @@ const HomePage = (props: HomePagePropType) => {
             <section className='mt-6'>
                 <SectionTitle
                     title={"سوالات متداول"}
-                    textLink={g("View-more")}
+                    textLink={"مشاهده بیشتر"}
                     link='/faq'
                     btn={true}
                 />

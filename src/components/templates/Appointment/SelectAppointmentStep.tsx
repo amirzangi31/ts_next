@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Firstppointment, PhysicianProfile, PhysicianProfileCalendar } from '@/types/appointment'
 import TurnsIcon from '@/components/icons/menu/TurnsIcon'
-import { useTranslations } from 'next-intl';
+
 import convertMonthOfYear from '@/utils/convertMonthOfYear';
 import cn from '@/utils/clsxFun';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
@@ -23,7 +23,7 @@ import CloseButton from '@/components/elements/CloseButton';
 
 
 const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firstAppointment, changeStep }: { calendar: PhysicianProfileCalendar[], physician: PhysicianProfile, ramainingTime: number, times: string[], firstAppointment: Firstppointment | null, changeStep: (step: 1 | 2) => void }) => {
-  
+
 
   const [selectAppointmentBeforeSign, setSelectAppointmentBeforeSign] = useState({
     year: "",
@@ -37,16 +37,14 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
   const [showModalRules, setShowModalRules] = useState(false)
   const [showModalRulesArenap, setShowModalRulesArenap] = useState(false)
 
-  const t = useTranslations("appointment_page");
-  const p = useTranslations("person");
-  // 
+
 
   const [activeTab, setActiveTab] = useState(calendar.findIndex(item => item.available === true) ? calendar.findIndex(item => item.available === true) : 0)
   const [activeMonth, setActiveMonth] = useState<string | number | undefined>(calendar.findIndex(item => item.available === true) ? calendar.find(item => item.available === true)?.calendar.month : calendar.find(item => item.available === false)?.calendar.month)
   const [showWarningRules, setShowWarningRules] = useState(false)
 
   const showHoursType = !physician.doNotShowMyCalendar
-  
+
 
 
   //Authorization
@@ -147,7 +145,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
         behavior: "smooth",
       });
     }
-    
+
     for (let i = 0; i < calendar.length; i++) {
       if (calendar[i].calendar.id === appointmentInfo.calendarId) {
         setActiveTab(i);
@@ -190,11 +188,11 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
                   src={"/Clock.png"}
                   alt="clock-image"
                 />
-                <p>{t("It-possible-register-appointment")}</p>
+                <p>امکان ثبت نوبت از ۱۲ شب تا ۹:۳۰ امکان پذیر نخواهد بود</p>
               </div>
 
               <div className="flex">
-                <p className="ml-2">{t("You-take-another-turn")}:</p>
+                <p className="ml-2">زمان تا شروع نوبت دهی:</p>
                 <div className="font-bold">
                   <Timer
 
@@ -273,13 +271,13 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
                   }
                 )}
               >
-                {t("Choose-consultation-time")}
+                انتخاب ساعت مشاوره
 
               </div>
               {firstAppointment === null && ramainingTime <= 0 && (
                 <div className="flex flex-col gap-2 absolute z-[15]  left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
                   <p className="text-md drop-shadow-[0px_0px_4px_rgba(0,0,0,1)] ">
-                    {t("Free-time-not-found")}
+                    نوبت خالی پیدا نشد!
                   </p>
 
                 </div>
@@ -361,19 +359,19 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
               <div>
                 <ButtonElement
                   disabled={
-                    ramainingTime > 0 ||  firstAppointmentHandler.isLoading  || firstAppointment === null
+                    ramainingTime > 0 || firstAppointmentHandler.isLoading || firstAppointment === null
                   }
                   fontWeight='bold'
                   loading={firstAppointmentHandler.isLoading}
                   typeButton={
-                    ramainingTime > 0 || firstAppointment=== null ? "gray-light" : "primary"
+                    ramainingTime > 0 || firstAppointment === null ? "gray-light" : "primary"
                   }
 
                   handler={getFirstAppointment}
                 >
 
 
-                  {t("first-turn-empty")}
+                  اولین نوبت خالی
 
                 </ButtonElement>
 
@@ -388,7 +386,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
                   loading={lockedAppointmentHandler.isLoading}
                 >
 
-                  {t("next-step")}
+                  قدم بعدی
 
                 </ButtonElement>
               </div>

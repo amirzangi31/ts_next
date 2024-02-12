@@ -8,7 +8,7 @@ import Image from "next/image";
 
 import Link from "next/link";
 import useModalLogin from "@/hooks/useModalLogin";
-import { useLocale, useTranslations } from "next-intl";
+
 import { useRouter } from "next/navigation";
 
 import Toastify from "../elements/toasts/Toastify";
@@ -22,8 +22,8 @@ import useUserInfo from "@/hooks/useUserInfo";
 import LinkElement from "../elements/LinkElement";
 
 const LoginPage = () => {
-    const local = useLocale();
-    const t = useTranslations("profile");
+    
+    
     const router = useRouter();
     const { openModalLogin } = useModalLogin()
     const { isLogin } = useUserInfo()
@@ -31,7 +31,7 @@ const LoginPage = () => {
     
     useEffect(() => {
         if (isLogin === "authorization") {
-            router.replace(`/${local}/profile`)
+            router.replace(`/profile`)
         }
     }, [isLogin])
 
@@ -42,7 +42,7 @@ const LoginPage = () => {
 
     return (
         <>
-            <TitlePagesMobile title={t("sign")} />
+            <TitlePagesMobile title={"ثبت نام / ورود"} />
             <ModalLogin  />
             <div className="container pb-5 max-w-[62.5rem]">
                 <header className="mt-12">
@@ -64,21 +64,21 @@ const LoginPage = () => {
                                 fontSize={"md"}
                                 handler={openModalLogin}
                             >
-                                {t("signOne")}
+                                ثبت نام و ورود کاربر
                             </ButtonElement>
                         </div>
                     </div>
                 </header>
 
                 <section className="mt-4 flex justify-start items-center gap-2 flex-col">
-                    <LinkProfilePageCard title={t("rules")} link={"/policy"} />
+                    <LinkProfilePageCard title={"قوانین و مقررات آرناپ"} link={"/policy"} />
                     <LinkProfilePageCard
-                        title={t("contact-us")}
+                        title={"تماس با ما"}
                         link={"/contactus"}
                     />
-                    <LinkProfilePageCard title={t("about-us")} link={"/aboutus"} />
+                    <LinkProfilePageCard title={"درباره ما"} link={"/aboutus"} />
                     <LinkProfilePageCard
-                        title={t("common-questions")}
+                        title={"پرسش های متداول"}
                         link={"/faq"}
                     />
                 </section>
@@ -88,9 +88,9 @@ const LoginPage = () => {
                         <ButtonElement typeButton="secondary" size="sm" >
                             <p className="text-md">
                                 {" "}
-                                {t("quiz")}{" "}
+                                پزشک هستید؟
                                 <span className="font-bold">
-                                    {t("Arrival-of-doctors")}
+                                ورود پزشکان
                                 </span>
                             </p>
                         </ButtonElement>

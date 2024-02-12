@@ -2,7 +2,7 @@
 import Image from 'next/image'
 
 import { usePathname } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+
 
 import LinkElement from '@elements/LinkElement'
 import ButtonElement from '@elements/ButtonElement'
@@ -14,7 +14,7 @@ import ModalLogOut from './ModalLogOut'
 
 const Header = () => {
   const { user, isLogin } = useUserInfo()
-  const t = useTranslations("header")
+  
   const pathName = usePathname()
 
   return (
@@ -112,7 +112,7 @@ const Header = () => {
                         variant='contained'
                         width='w-[10.625rem]'
                       >
-                        {t("profile")}
+                        حساب کاربری
                       </ButtonElement>
                     </LinkElement>
                     : null

@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
+
 import "react-loading-skeleton/dist/skeleton.css";
 
 
@@ -19,7 +19,7 @@ import SidebarProfile from "@modules/cards/Profile/SidebarProfile";
 
 const ProfileLayout = ({ children }: { children: ReactNode }) => {
 
-    const local = useLocale();
+    
 
     const { isLogin, getUser } = useUserInfo()
     const router = useRouter()
@@ -27,7 +27,7 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         
         if (isLogin === "unauthorization") {
-            router.replace(`/${local}/login`)
+            router.replace(`/login`)
         }
     }, [isLogin])
 

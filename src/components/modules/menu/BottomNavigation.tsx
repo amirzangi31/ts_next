@@ -1,5 +1,5 @@
 "use client"
-import { useTranslations } from "next-intl";
+
 
 import cn from "@utils/clsxFun";
 
@@ -13,7 +13,7 @@ import MagnifierIcon from "@icons/menu/MagnifierIcon";
 import ProfileIcon from "@icons/menu/ProfileIcon";
 
 const BottomNavigation = ({ route }: { route: string }) => {
-    const t = useTranslations("Menu");
+    
     // const { isLogin } = useAuth(true)
 
     return (
@@ -30,7 +30,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
                     }
                 )}
             >
-                <span>{t("blog")}</span>
+                <span>بلاگ</span>
                 <span>
                     <BlogIcon active={route === "blog" ? true : false} />
                 </span>
@@ -46,7 +46,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
                     }
                 )}
             >
-                <span>{t("home")}</span>
+                <span>صفحه اصلی</span>
                 <span>
                     <HomeIcon active={route === "home"} />{" "}
                 </span>
@@ -62,7 +62,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
                     }
                 )}
             >
-                <span>{t("search")}</span>
+                <span>جستجو</span>
                 <span>
                     <MagnifierIcon active={route === "search" ? true : false} />
                 </span>
@@ -80,7 +80,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
                         }
                     )}
                 >
-                    <span>{t("profile")}</span>
+                    <span>حساب کاربری</span>
                     <span>
                         <ProfileIcon active={route === "profile"} />
                     </span>
@@ -97,7 +97,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
                         }
                     )}
                 >
-                    <span>{t("sign")}</span>
+                    <span>ثبتنام/ورود</span>
                     <span>
                         <ProfileIcon active={route === "login" ? true : false} />
                     </span>

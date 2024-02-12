@@ -1,8 +1,9 @@
+import NotFoundPage from '@templates/NotFoundPage'
 import React from 'react'
 
 const NotFound = () => {
     return (
-        <div>NotFound</div>
+        <NotFoundPage /> 
     )
 }
 

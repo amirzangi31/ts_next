@@ -6,13 +6,13 @@ import CloseButton from "../elements/CloseButton"
 import useLogoutModal from "@/hooks/useLogoutModal"
 import useUserInfo from "@/hooks/useUserInfo"
 import { useRouter } from "next/navigation"
-import { useLocale } from "next-intl"
+
 
 const ModalLogOut = () => {
     const { isShow, closeLogoutModal } = useLogoutModal()
     const { getUser } = useUserInfo()
     const router = useRouter()
-    const local = useLocale()
+    
     const [finalLogoutModalShow, setFinalLogoutModalShow] = useState(false)
 
 
@@ -31,7 +31,7 @@ const ModalLogOut = () => {
         localStorage.removeItem("refreshToken")
         getUser()
         closeLogoutModal()
-        router.replace(`/${local}/login`)
+        router.replace(`/login`)
     }
 
 

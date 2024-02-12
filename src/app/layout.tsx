@@ -1,11 +1,11 @@
 
 import './globals.css'
-import { useLocale } from 'next-intl'
-import { notFound } from 'next/navigation'
+
+
 import iranSans from '@utils/localFonts'
-import { isRtlLang } from 'rtl-detect'
+
 import Layout from '@layouts/Layout'
-import { NextIntlClientProvider } from 'next-intl'
+
 import StoreProvider from '@/providers/StoreProvider'
 
 
@@ -36,36 +36,26 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
-  params: { locale }
+
 }: {
   children: React.ReactNode,
-  params: { locale: string }
+ 
 }) {
-  const local = useLocale()
-  const isRtl = isRtlLang(local)
 
-  if (locale !== local) {
-    notFound()
-  }
 
-  let messages;
-  try {
-    messages = (await import(`../../messages/${locale}.json`)).default;
-  } catch (error) {
-    notFound();
-  }
+
 
   return (
-    <html lang={locale} dir={isRtl ? "rtl" : "ltr"} >
+    <html lang='fa' dir='rtl' >
       <body className={iranSans.className} data-theme="Arenap_theme">
         
-        <NextIntlClientProvider locale={local} messages={messages}>
+        
           <StoreProvider>
             <Layout>
               {children}
             </Layout>
           </StoreProvider>
-        </NextIntlClientProvider>
+        
       </body>
     </html>
   )

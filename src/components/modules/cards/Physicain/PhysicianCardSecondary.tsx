@@ -2,8 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-//NextIntl
-import { useLocale } from "next-intl";
 
 //COMPONENTS
 import PathLine from "@components/elements/PathLine";

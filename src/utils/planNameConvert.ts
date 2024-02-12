@@ -7,30 +7,31 @@ const planNameConvert = (type: string) => {
 
     switch (type) {
         case "onlineAppointment":
-            return "Face-to-face-appointment"
+            return "نوبت دهی حضوری"
             break;
 
         case "textConsultation":
-            return "Text-advice"
+            return "مشاوره متنی"
 
             break;
 
         case "voiceConsultation":
-            return "phone-consultancy"
+            return "مشاوره تلفنی"
 
             break;
 
         case "immediateConsultation":
 
-            return "Immediate-phone-consultation"
+            return "مشاوره تلفنی فوری"
             break;
 
         case "disabled":
-            return "Canceled"
+            return "لغو شده"
 
             break;
 
         default:
+            return "نامشخص"
             break;
     }
 }

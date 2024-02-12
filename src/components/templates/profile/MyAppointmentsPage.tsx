@@ -13,10 +13,10 @@ import statusApppointmentHandler from "@utils/statusApppointment";
 
 
 
-import { useLocale, useTranslations } from "next-intl";
+
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+
+
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
@@ -38,10 +38,10 @@ import { MyAppointmentType } from "@/types/appointment";
 import LinkElement from "@/components/elements/LinkElement";
 
 const MyAppointmentsPage = () => {
-  const g = useTranslations("global");
-  const t = useTranslations("profile");
-  const a = useTranslations("apponitment_profile");
-  const s = useTranslations("search");
+
+
+
+
 
   const [activeTab, setActiveTab] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -86,7 +86,7 @@ const MyAppointmentsPage = () => {
       }
     }
 
-    
+
     return {
       past: myAppointments?.filter((item: MyAppointmentType) => item.passedOrFuture === "Passed"),
       feture: myAppointments?.filter((item: MyAppointmentType) => item.passedOrFuture !== "Passed")
@@ -97,16 +97,16 @@ const MyAppointmentsPage = () => {
   //Filtering appointments based on defined filters
   useEffect(() => {
 
-    
+
 
     if (!isLoading) {
       let pastArray: MyAppointmentType[] = []
       let fetureArray: MyAppointmentType[] = []
-      
+
       for (let i in filters) {
         if (filters[i]) {
           const past = disabledFilterHandler(disabledFilter)?.past?.length > 0 ? disabledFilterHandler(disabledFilter)?.past?.filter((item: MyAppointmentType) => item[i] === filters[i]) : [];
-          
+
           const feture = disabledFilterHandler(disabledFilter)?.feture?.length > 0 ? disabledFilterHandler(disabledFilter)?.feture?.filter((item: MyAppointmentType) => item[i] === filters[i]) : [];
 
           pastArray = [...pastArray, ...past];
@@ -118,7 +118,7 @@ const MyAppointmentsPage = () => {
       setFetureAppointmentsUi(fetureArray)
     }
 
-  }, [filters, disabledFilter, myAppointments , isLoading]);
+  }, [filters, disabledFilter, myAppointments, isLoading]);
 
 
 
@@ -126,7 +126,7 @@ const MyAppointmentsPage = () => {
 
   return (
     <>
-      <TitlePagesMobile title={t("appointments")} />
+      <TitlePagesMobile title={"نوبت های من"} />
       <div className="">
         <Tabs
           selectedIndex={activeTab}
@@ -136,10 +136,10 @@ const MyAppointmentsPage = () => {
           <TabList>
             <div className="grid grid-cols-2 text-center gap-2 bg-white rounded-sm shadow-shadow_category py-3 px-5 mt-6 mb-2">
               <Tab className="px-2 cursor-pointer">
-                <button type="button">{g("Future-turns")}</button>
+                <button type="button">نوبت های آینده من</button>
               </Tab>
               <Tab className="px-2 cursor-pointer">
-                <button type="button">{g("past-turns")}</button>
+                <button type="button">نوبت های گذشته من</button>
               </Tab>
             </div>
           </TabList>
@@ -154,7 +154,7 @@ const MyAppointmentsPage = () => {
               className="bg-white  min-w-[12.5rem] h-[3.4375rem] rounded-sm shadow-shadow_category flex justify-center items-center gap-2 px-2"
             >
               <FilterIcon />
-              <span className="text-lg font-bold ">{t("Filters")}</span>
+              <span className="text-lg font-bold ">فیلترها</span>
               <span className="text-sm ">
                 ({Object.values(filters).filter((item) => item === true).length + (disabledFilter ? 1 : 0)}
                 مورد)
@@ -185,8 +185,8 @@ const MyAppointmentsPage = () => {
                   />
                 </div>
                 <div className="flex justify-start items-center gap-4 flex-col">
-                  <p className="text-md font-bold ">{a("text-one")}</p>
-                  <p className="text-md ">{a("text-two")} </p>
+                  <p className="text-md font-bold ">در حال حاضر نوبتی گرفته نشده !!</p>
+                  <p className="text-md ">برای گرفتن نوبت به صفحه جستجو وارد شوید </p>
                   <div className="w-[13.75rem]">
                     <LinkElement link="/search">
                       <ButtonElement
@@ -195,7 +195,7 @@ const MyAppointmentsPage = () => {
                         fontSize="md"
                         size="sm"
                       >
-                        {a("text-button")}!
+                        جستجو کن!
                       </ButtonElement>
                     </LinkElement>
                   </div>
@@ -225,8 +225,8 @@ const MyAppointmentsPage = () => {
                   />
                 </div>
                 <div className="flex justify-start items-center gap-4 flex-col">
-                  <p className="text-md font-bold ">{a("text-three")}</p>
-                  <p className="text-md ">{a("text-two")} </p>
+                  <p className="text-md font-bold ">نوبت گذشته ای وجود ندارد</p>
+                  <p className="text-md ">برای گرفتن نوبت به صفحه جستجو وارد شوید  </p>
                   <div className="w-[13.75rem]">
                     <LinkElement link="/search">
                       <ButtonElement
@@ -235,7 +235,7 @@ const MyAppointmentsPage = () => {
                         fontWeight="bold"
                         size="sm"
                       >
-                        {a("text-button")}!
+                        جستجو کن!
                       </ButtonElement>
                     </LinkElement>
                   </div>
@@ -261,14 +261,14 @@ const MyAppointmentsPage = () => {
               <CloseButton closeHanlder={() => setShowModal(false)} />
             </span>
             <p className="flex justify-center items-center h-[2.5rem] font-bold ">
-              {g("Filters")}
+              فیلترها
             </p>
             <div className="mt-4 flex justify-start items-start gap-2 flex-col ">
               {Object.keys(filters).map((item, index) => (
 
                 <Checkbox
                   key={item}
-                  title={s(planNameConvert(item))}
+                  title={planNameConvert(item)}
                   id={item}
                   checkHandler={(e) => {
                     setFilters({
@@ -286,7 +286,7 @@ const MyAppointmentsPage = () => {
               ))}
               <Checkbox
 
-                title={s(planNameConvert("disabled"))}
+                title={planNameConvert("disabled")}
 
                 checkHandler={(e) => {
                   setDisabledFilter(!disabledFilter)
@@ -306,7 +306,7 @@ const MyAppointmentsPage = () => {
 export default MyAppointmentsPage;
 
 const AppointmentCard = (props: MyAppointmentType) => {
-  const g = useTranslations("global");
+  
   const [showModalDelete, setShowModalDelete] = useState(false)
   const { calendar, index, physicianProfileId, physicianProfileUrl } = props;
   const { cancelMutation } = useMyAppointments()
@@ -414,7 +414,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
               </svg>
             </span>
             <p>
-              <span>{g("date")} : </span>
+              <span>تاریخ : </span>
               <span>
                 {calendar.year}/{calendar.month}/{calendar.dayOfMonth}
               </span>
@@ -428,7 +428,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
                 props.status !== "Awaiting Payment",
             })}
           >
-            <p>{g("last-status")} :</p>
+            <p>آخرین وضعیت :</p>
             <p
               className={cn(`text-m`, {
                 "text-primary-100": props.status === "Paid",
@@ -459,7 +459,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
                             type="button"
                             className="w-[7.5rem] flex justify-center items-center text-primary bg-[#EFF1F0] h-[2.5rem] font-bold rounded-sm"
                           >
-                            {g("View-details")}
+                            مشاهده جزییات
                           </button>
                         </LinkElement>
                       )}
@@ -473,7 +473,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
                             type="button"
                             className="w-[7.5rem] flex justify-center items-center text-primary bg-[#EFF1F0] h-[2.5rem] font-bold rounded-sm"
                           >
-                            {g("View-details")}
+                            مشاهده جزییات
                           </button>
                         </LinkElement>
                       )}
@@ -524,8 +524,8 @@ const AppointmentCard = (props: MyAppointmentType) => {
   );
 };
 const AppointmentCardOff = (props: MyAppointmentType) => {
+
   
-  const g = useTranslations("global");
   return (
     <div className="bg-white rounded-sm shadow-shadow_category  w-full  flex justify-start items-start flex-col gap-2">
       <div className="p-4  w-full flex justify-between items-center">
@@ -613,7 +613,7 @@ const AppointmentCardOff = (props: MyAppointmentType) => {
             </svg>
           </span>
           <p>
-            <span>{g("date")} : </span>
+            <span>تاریخ : </span>
             <span>
               {props.calendar.year}/{props.calendar.month}/{props.calendar.dayOfMonth}
             </span>
@@ -622,8 +622,8 @@ const AppointmentCardOff = (props: MyAppointmentType) => {
       </div>
       <div className="px-4 pb-4 flex justify-between items-center w-full">
         <div className="flex justify-start items-center gap-1 text-md">
-          <p>{g("last-status")} :</p>
-          <p className="text-md  ">{g(props.status)}</p>
+          <p>آخرین وضعیت :</p>
+          <p className="text-md  ">{planNameConvert(props.status)}</p>
         </div>
         <div>
           {props.status !== "Is Deleted By User" &&
@@ -639,7 +639,7 @@ const AppointmentCardOff = (props: MyAppointmentType) => {
                       type="button"
                       className="px-2 flex justify-center items-center text-primary bg-[#EFF1F0] h-[2.5rem] font-bold rounded-sm"
                     >
-                      {g("View-details")}
+                      مشاهده جزییات
                     </button>
                   </LinkElement>
                 )}

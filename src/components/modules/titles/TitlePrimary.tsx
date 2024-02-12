@@ -1,6 +1,5 @@
 import React from "react";
 import ArrowLeft from "@icons/ArrowLeft";
-import { useLocale } from "next-intl";
 import cn from "@/utils/clsxFun";
 import ButtonElement from "@/components/elements/ButtonElement";
 import LinkElement from "@/components/elements/LinkElement";

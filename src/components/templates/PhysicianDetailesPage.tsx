@@ -14,7 +14,6 @@ import useModalLogin from "@/hooks/useModalLogin";
 
 
 
-import { useLocale } from "next-intl";
 
 
 
@@ -43,7 +42,6 @@ import CreateCommentCom from "../modules/CreateCommentCom";
 const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }) => {
 
 
-  const local = useLocale();
 
   const { isLogin, getUser } = useUserInfo();
   const { isShow, openModalLogin } = useModalLogin();
@@ -260,7 +258,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
               <div className="flex justify-start items-center gap-2 flex-wrap">
                 {physician.physicianSpecialities.map((item, index) => (
                   <Link
-                    href={`/${local}/search?specialities=${item.specialityTitle}`}
+                    href={`/search?specialities=${item.specialityTitle}`}
                     key={index}
                     className="bg-gray-100 w-auto px-3 py-1 rounded-sm text-md transition-all duration-300 hover:bg-gray-400 hover:text-white"
                   >
@@ -425,7 +423,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
           <TitlePrimary
             title={"پزشکان مرتبط"}
             textLink={"مشاهده بیشتر"}
-            link={`/${local}/search?specialities=${physician.physicianSpecialities[0]?.specialityTitle}`}
+            link={`/search?specialities=${physician.physicianSpecialities[0]?.specialityTitle}`}
             btn={true}
             prefix={true}
           />

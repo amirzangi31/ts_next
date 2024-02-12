@@ -7,7 +7,6 @@ import EditIcon from '@icons/profile/EditIcon'
 import MessageIcon from '@icons/profile/MessageIcon'
 
 import WalletIcon from '@icons/profile/WalletIcon'
-import { useTranslations } from 'next-intl'
 import LogoutIcon from '@/components/icons/LogoutIcon'
 
 
@@ -26,8 +25,6 @@ import useUserInfo from '@/hooks/useUserInfo'
 
 const ProfileCard = ({ type }: { type: boolean }) => {
     const { openLogoutModal } = useLogoutModal()
-    const t = useTranslations("profile")
-    const p = useTranslations("person")
     const { user } = useUserInfo()
     const pathName = usePathname()
 
@@ -62,10 +59,10 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                         "flex-col": type
                     })}>
                         <div className='bg-gray-100 py-1 px-2 rounded-sm text-md'>
-                            {p("nationalNumber")} : <span className='text-sm min-[430px]:text-md'>{user?.nationalNumber}</span>
+                            کدملی : <span className='text-sm min-[430px]:text-md'>{user?.nationalNumber}</span>
                         </div>
                         <div className='bg-gray-100 py-1 px-2 rounded-sm text-md'>
-                            {p("phoneNumber")} : <span className='text-sm min-[430px]:text-md'>{user?.phoneNumber}</span>
+                            شماره تماس : <span className='text-sm min-[430px]:text-md'>{user?.phoneNumber}</span>
                         </div>
                     </div>
                     <div className={cn(`grid mt-6 `, {
@@ -80,7 +77,7 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                                     "flex-row justify-start py-3": type,
                                 })} >
                                     <span><UserIcon /> </span>
-                                    <span>{t("profile")}</span>
+                                    <span>حساب کاربری</span>
                                 </LinkElement>
                             ) : null
                         }
@@ -89,7 +86,7 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                             "flex-row justify-start py-3": type,
                         })} >
                             <span><MessageIcon /> </span>
-                            <span>{t("My-messages")}</span>
+                            <span>پیام های من</span>
                         </LinkElement>
 
                         <LinkElement link={`/profile/myappointments`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
@@ -97,7 +94,7 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                             "flex-row justify-start py-3": type,
                         })} >
                             <span><AppointmentIcon /> </span>
-                            <span>{t("appointments")}</span>
+                            <span>نوبت های من</span>
                         </LinkElement>
 
                         <LinkElement link={`/profile/wallet`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
@@ -105,7 +102,7 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                             "flex-row justify-start py-3": type,
                         })} >
                             <span><WalletIcon /> </span>
-                            <span>{t("wallet")}</span>
+                            <span>کیف پول</span>
                         </LinkElement>
 
                     </div>

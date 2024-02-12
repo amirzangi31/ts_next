@@ -15,8 +15,6 @@ import ArticleCardSecondary from '@/components/modules/cards/Articles/ArticleCar
 //REACT-TABS
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 
-//NEXT-INTL
-import { useLocale, useTranslations } from 'next-intl'
 
 //SKELETON
 import Skeleton from 'react-loading-skeleton'
@@ -35,8 +33,8 @@ import PhysicianLoadingPrimaryCard from '@/components/modules/cards/Skeletons/Ph
 
 const FavoritePage = () => {
     const [activeTab, setActiveTab] = useState(0)
-    const g = useTranslations("global")
-    const t = useTranslations("profile")
+
+
     const [favoriteArticles, setFavoriteArticles] = useState([])
     const { myFavorite, isLoading } = useAllFavorite()
 
@@ -45,19 +43,19 @@ const FavoritePage = () => {
 
     return (
         <>
-            <TitlePagesMobile title={t("interest")} />
+            <TitlePagesMobile title={"پزشکان و مقالات مورد علاقه"} />
             <div className="container">
                 <Tabs selectedIndex={activeTab} onSelect={(index) => setActiveTab(index)} selectedTabClassName="pb-2 border-b-[3px] border-[#00A29E] font-bold">
                     <TabList>
                         <div className="grid grid-cols-2 text-center gap-2 bg-white rounded-sm shadow-shadow_category py-3 px-5 mt-6 mb-2">
                             <Tab className="px-2 cursor-pointer">
                                 <button type="button">
-                                    {g("favorite-physicians")}
+                                    پزشکان مورد علاقه
                                 </button>
                             </Tab>
                             <Tab className="px-2 cursor-pointer">
                                 <button type="button">
-                                    {g("favorite-articles")}
+                                    مقالات مورد علاقه
                                 </button>
                             </Tab>
                         </div>
@@ -84,11 +82,11 @@ const FavoritePage = () => {
                                             <Image src={"/noPeoples.png"} width={500} height={500} alt='noPeoples_image' className='w-full' />
                                         </div>
                                         <div className='flex justify-start items-center gap-4 flex-col'>
-                                            <p className='text-md '>{t("No-favorite-doctor")}</p>
+                                            <p className='text-md '>تا بحال پزشک مورد علاقه ای ثبت نشده</p>
                                             <div className='w-[220px]'>
                                                 <LinkElement link={`/search`}>
                                                     <ButtonElement typeButton='primary' fontWeight='bold' >
-                                                        {t("Search-among-doctors")}
+                                                        جستجو بین پزشکان
                                                     </ButtonElement>
                                                 </LinkElement>
                                             </div>
@@ -108,10 +106,10 @@ const FavoritePage = () => {
                                         <Image src={"/noPeoples.png"} width={500} height={500} alt='noPeoples_image' className='w-full' />
                                     </div>
                                     <div className='flex justify-start items-center gap-4 flex-col'>
-                                        <p className='text-md '>{t("No-favorite-articles")}</p>
+                                        <p className='text-md '>تا بحال مقاله مورد علاقه ای ثبت نشده</p>
                                         <LinkElement link={`/blog`} className='w-[220px]'>
                                             <ButtonElement typeButton='primary' fontWeight='bold'>
-                                                {t("Search-among-articles")}
+                                                جستجو بین مقالات
                                             </ButtonElement>
                                         </LinkElement>
                                     </div>
