@@ -106,7 +106,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
   }[] = [
       {
         id: "appointment",
-        url: `/appointment/online-appointment/${physician.physicianProfileUrl}`,
+        url: `appointment/online-appointment/${physician.physicianProfileUrl}`,
         title: "دریافت نوبت اینترنتی",
         price: 1000 ? 1000 : null,
         // firstDescription: waitingTimeAvg ? `میانگین زمان انتظار ${waitingTimeAvg} دقیقه` : null,
@@ -116,7 +116,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       },
       {
         id: "emergencyPhoneConsultation",
-        url: `/appointment/online-appointment/${physician.physicianProfileUrl}`,
+        url: `appointment/online-appointment/${physician.physicianProfileUrl}`,
         title: "مشاوره تلفنی فوری",
         price: 1000 ? 100 : null,
         // firstDescription: physician.emergencyPhoneConsultationDuration ? `${physician.emergencyPhoneConsultationDuration} دقیقه گفتگو` : null,
@@ -126,7 +126,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       },
       {
         id: "phoneConsultation",
-        url: `/appointment/online-appointment/${physician.physicianProfileUrl}`,
+        url: `appointment/online-appointment/${physician.physicianProfileUrl}`,
         title: "مشاوره تلفنی",
         price: 1000 ? 100 : null,
         // firstDescription: physician.phoneConsultationDuration ? `${physician.phoneConsultationDuration} دقیقه گفتگو` : null,
@@ -136,7 +136,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       },
       {
         id: "textConsultation",
-        url: `/appointment/online-appointment/${physician.physicianProfileUrl}`,
+        url: `appointment/online-appointment/${physician.physicianProfileUrl}`,
         title: "مشاوره متنی",
         price: 1000 ? 100 : null,
         // firstDescription: physician.textConsultationWaitingTimeAvg ? `میانگین زمان انتظار ${physician.textConsultationWaitingTimeAvg} دقیقه` : null,
