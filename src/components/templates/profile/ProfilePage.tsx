@@ -81,10 +81,10 @@ const ProfilePage = () => {
                     )}
                 </section>
                 <section className='mt-4 grid grid-cols-1 gap-4'>
-                    {/* <LinkProfilePageCard link={"/profile/family"} title={t("my-relatives")} /> */}
-                    <LinkProfilePageCard link={"/profile/favorites"} title={"پزشکان و مقالات مورد علاقه"} />
-                    {/* <LinkProfilePageCard link={"/profile/family"} title={t("ticket")} /> */}
-                    <LinkProfilePageCard link={"/arenap"} title={"آرناپ"} />
+                    {/* <LinkProfilePageCard link={"profile/family"} title={t("my-relatives")} /> */}
+                    <LinkProfilePageCard link={"profile/favorites"} title={"پزشکان و مقالات مورد علاقه"} />
+                    {/* <LinkProfilePageCard link={"profile/family"} title={t("ticket")} /> */}
+                    <LinkProfilePageCard link={"arenap"} title={"آرناپ"} />
                 </section>
                 <section className='mt-4 flex justify-between items-start md:items-stretch ltr:flex-row-reverse bg-[#C0E1E7] py-3 rounded-sm overflow-hidden  '>
                     <div className='w-1/4'><Image src={'/banner.png'} width={500} height={500} alt='banner-image' className='w-full' /> </div>
@@ -94,7 +94,7 @@ const ProfilePage = () => {
                             <p className='text-lg max-w-[31.25rem] text-center'>کامل ترین نرم افزار مدیریت امور مطب و نسخه نویسی در کمترین زمان</p>
                         </div>
                         <div className='flex justify-center items-center mt-4'>
-                            <LinkElement link={`/Auth/Login`} className='flex justify-center items-center rounded-sm text-primary font-bold px-4 min-w-[9.375rem]  bg-white h-[2.8125rem]' >
+                            <LinkElement link={`Auth/Login`} className='flex justify-center items-center rounded-sm text-primary font-bold px-4 min-w-[9.375rem]  bg-white h-[2.8125rem]' >
                                 ورود به پنل پزشکان
                             </LinkElement>
                         </div>

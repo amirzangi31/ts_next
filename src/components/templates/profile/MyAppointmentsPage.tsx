@@ -329,7 +329,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
       <div className="bg-white rounded-sm shadow-shadow_category  w-full  flex justify-start items-start flex-col gap-2">
         <div className="p-4  w-full flex justify-between items-center ">
 
-          <LinkElement link={`/appointment/online-appointment/${props.physicianProfileUrl}`} className="relative">
+          <LinkElement link={`appointment/online-appointment/${props.physicianProfileUrl}`} className="relative">
             <Image
               src={props.hasImage ? getUrlImage(props.physicianProfileId) : "/noImage.jfif"}
               width={500}
@@ -451,7 +451,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
                     <>
                       {props.status === "Awaiting Payment" && (
                         <LinkElement
-                          link={`/appointment/online-appointment/${props.physicianProfileUrl}?status=noPayment&physicianUrl=${physicianProfileUrl}&physicianId=${physicianProfileId}&calendarId=${calendar.id}&index=${index}&appointmentId=${props.id}&year=${calendar.year}&month=${calendar.month}&day=${calendar.dayOfMonth}`}
+                          link={`appointment/online-appointment/${props.physicianProfileUrl}?status=noPayment&physicianUrl=${physicianProfileUrl}&physicianId=${physicianProfileId}&calendarId=${calendar.id}&index=${index}&appointmentId=${props.id}&year=${calendar.year}&month=${calendar.month}&day=${calendar.dayOfMonth}`}
 
                         >
                           {/* "Awaiting Payment" */}
@@ -465,7 +465,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
                       )}
                       {props.status === "Paid" && (
                         <LinkElement
-                          link={`/Check/Payment/${props.physicianProfileUrl}?Status=Success&AppointmentId=${props.id}`}
+                          link={`Check/Payment/${props.physicianProfileUrl}?Status=Success&AppointmentId=${props.id}`}
 
                         >
                           {/* "Paid Payment" */}
@@ -631,7 +631,7 @@ const AppointmentCardOff = (props: MyAppointmentType) => {
               <>
                 {props.status === "Paid" && (
                   <LinkElement
-                    link={`/Check/Payment/${props.physicianProfileUrl}?Status=Success&AppointmentId=${props.id}`}
+                    link={`Check/Payment/${props.physicianProfileUrl}?Status=Success&AppointmentId=${props.id}`}
 
                   >
                     {/* "Paid Payment" */}

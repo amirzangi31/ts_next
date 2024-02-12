@@ -41,9 +41,9 @@ const AcoountButtonHeader = ({ user }: { user: UserType }) => {
                     showDrop ?
                         <div className='absolute top-full left-0 w-full py-2 text-black  '>
                             <div className='bg-white p-2 rounded-sm text-md  shadow-shadow_category '>
-                                <LinkElement link={`/profile`} className='py-2 border-b border-gray-200 w-full block hover:text-primary transition-all duration-300 hover:border-primary'>حساب کاربری</LinkElement>
-                                <LinkElement link={`/profile/wallet`} className='py-2 border-b border-gray-200 w-full block hover:text-primary transition-all duration-300 hover:border-primary'>کیف پول</LinkElement>
-                                <LinkElement link={`/profile/myappointments`} className='py-2 border-b border-gray-200 w-full block hover:text-primary transition-all duration-300 hover:border-primary'>نوبت های من</LinkElement>
+                                <LinkElement link={`profile`} className='py-2 border-b border-gray-200 w-full block hover:text-primary transition-all duration-300 hover:border-primary'>حساب کاربری</LinkElement>
+                                <LinkElement link={`profile/wallet`} className='py-2 border-b border-gray-200 w-full block hover:text-primary transition-all duration-300 hover:border-primary'>کیف پول</LinkElement>
+                                <LinkElement link={`profile/myappointments`} className='py-2 border-b border-gray-200 w-full block hover:text-primary transition-all duration-300 hover:border-primary'>نوبت های من</LinkElement>
                                 <button type='button' onClick={logOut} className='text-error text-md py-2 w-full text-center '>خروج</button>
                             </div>
                         </div> : null

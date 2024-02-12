@@ -21,7 +21,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
 
             {/* Blog button */}
             <LinkElement
-                link={`/blog`}
+                link={`blog`}
                 className={cn(
                     `flex justify-center items-center gap-1 flex-col-reverse text-sm `,
                     {
@@ -37,7 +37,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
             </LinkElement>
             {/* Home button */}
             <LinkElement
-                link={`/`}
+                link={``}
                 className={cn(
                     `flex justify-center items-center gap-1 flex-col-reverse text-sm `,
                     {
@@ -53,7 +53,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
             </LinkElement>
             {/* Search button */}
             <LinkElement
-                link={`/search`}
+                link={`search`}
                 className={cn(
                     `flex justify-center items-center gap-1 flex-col-reverse text-sm `,
                     {
@@ -70,7 +70,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
             {/* if authorization === true profile button else login button */}
             {false ? (
                 <LinkElement
-                    link={`/profile`}
+                    link={`profile`}
 
                     className={cn(
                         `flex justify-center items-center gap-1 flex-col-reverse text-sm `,
@@ -87,7 +87,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
                 </LinkElement>
             ) : (
                 <LinkElement
-                    link={`/login`}
+                    link={`login`}
 
                     className={cn(
                         `flex justify-center items-center gap-1 flex-col-reverse text-sm `,

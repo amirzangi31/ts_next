@@ -85,19 +85,19 @@ const Footer = () => {
             <div className='flex justify-center items-center flex-col w-full'>
               <h4 className='text-primary text-md font-bold text-center'>برترین پزشکان</h4>
               <ul className='flex justify-start items-center gap-1 flex-col text-sm mt-4'>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`/Physician/دکتر حسین کرمی`}>دکتر حسین کرمی</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`/Physician/دکتر_مژگان _سنجری`}>دکتر مژگان سنجری</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`/Physician/دکتر_فاطمه_میرزایی`}>دکتر فاطمه میرزایی</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`/Physician/majidrezaesheikhrezaee`}>دکتر مجیدرضا شیخ رضایی</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`Physician/دکتر حسین کرمی`}>دکتر حسین کرمی</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`Physician/دکتر_مژگان _سنجری`}>دکتر مژگان سنجری</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`Physician/دکتر_فاطمه_میرزایی`}>دکتر فاطمه میرزایی</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`Physician/majidrezaesheikhrezaee`}>دکتر مجیدرضا شیخ رضایی</LinkElement></li>
               </ul>
             </div>
             <div className='flex justify-center items-center flex-col w-full'>
               <h4 className='text-primary text-md font-bold text-center'>استان های برتر</h4>
               <ul className='flex justify-start items-center gap-1 flex-col text-sm mt-4'>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`/search?pId=8&cId=98`}>پزشکان استان  تهران</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`/search?pId=21&cId=264`}>پزشکان استان  کرمان</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' > <LinkElement link={`/search?pId=11&cId=140`}>پزشکان استان  خراسان رضوی</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`/search?pId=27&cId=343`}>پزشکان استان  مازندران</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`search?pId=8&cId=98`}>پزشکان استان  تهران</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`search?pId=21&cId=264`}>پزشکان استان  کرمان</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' > <LinkElement link={`search?pId=11&cId=140`}>پزشکان استان  خراسان رضوی</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`search?pId=27&cId=343`}>پزشکان استان  مازندران</LinkElement></li>
               </ul>
             </div>
           </div>

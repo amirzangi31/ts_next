@@ -299,7 +299,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
           <TitleSection
             title={"مقالات پزشک"}
             textLink={"مشاهده بیشتر"}
-            link={"/"}
+            link={""}
             btn={true}
             prefix={true}
           />
@@ -423,7 +423,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
           <TitlePrimary
             title={"پزشکان مرتبط"}
             textLink={"مشاهده بیشتر"}
-            link={`/search?specialities=${physician.physicianSpecialities[0]?.specialityTitle}`}
+            link={`search?specialities=${physician.physicianSpecialities[0]?.specialityTitle}`}
             btn={true}
             prefix={true}
           />

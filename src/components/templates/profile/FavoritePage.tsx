@@ -84,7 +84,7 @@ const FavoritePage = () => {
                                         <div className='flex justify-start items-center gap-4 flex-col'>
                                             <p className='text-md '>تا بحال پزشک مورد علاقه ای ثبت نشده</p>
                                             <div className='w-[220px]'>
-                                                <LinkElement link={`/search`}>
+                                                <LinkElement link={`search`}>
                                                     <ButtonElement typeButton='primary' fontWeight='bold' >
                                                         جستجو بین پزشکان
                                                     </ButtonElement>
@@ -107,7 +107,7 @@ const FavoritePage = () => {
                                     </div>
                                     <div className='flex justify-start items-center gap-4 flex-col'>
                                         <p className='text-md '>تا بحال مقاله مورد علاقه ای ثبت نشده</p>
-                                        <LinkElement link={`/blog`} className='w-[220px]'>
+                                        <LinkElement link={`blog`} className='w-[220px]'>
                                             <ButtonElement typeButton='primary' fontWeight='bold'>
                                                 جستجو بین مقالات
                                             </ButtonElement>

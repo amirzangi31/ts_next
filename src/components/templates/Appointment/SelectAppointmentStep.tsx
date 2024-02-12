@@ -401,7 +401,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
             isLogin === "authorization" && user?.accountBalance < 100000 && (
               <>
                 <p className="text-sm md:text-md mt-4 text-center"> میتوانید کیف پول خود را برای دریافت یک  یا چند نوبت شارژ کنید </p>
-                <div className="text-center text-sm md:text-md"><LinkElement className="text-primary font-bold" link={`/profile/wallet`}>افزایش اعتبار کیف پول</LinkElement></div>
+                <div className="text-center text-sm md:text-md"><LinkElement className="text-primary font-bold" link={`profile/wallet`}>افزایش اعتبار کیف پول</LinkElement></div>
               </>
             )
           }

@@ -35,7 +35,7 @@ const ProfileCard = ({ type }: { type: boolean }) => {
 
                 <div className='bg-white rounded-sm p-3.5 relative'>
                     <div className='flex justify-between items-center '>
-                        <LinkElement link={`/profile/edit`} className={cn(`z-[10]`, {
+                        <LinkElement link={`profile/edit`} className={cn(`z-[10]`, {
                             "-mt-6": pathName === "/profile" || pathName === "/en/profile" || pathName === "/fa/profile"
                         })}    ><EditIcon /></LinkElement>
 
@@ -72,7 +72,7 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                     })} >
                         {
                             type && pathName !== "/profile" && pathName !== "/en/profile" && pathName !== "/fa/profile" ? (
-                                <LinkElement link={`/profile`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
+                                <LinkElement link={`profile`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
                                     "flex-col justify-center": !type,
                                     "flex-row justify-start py-3": type,
                                 })} >
@@ -81,7 +81,7 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                                 </LinkElement>
                             ) : null
                         }
-                        <LinkElement link={"/"} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary  md:hidden `, {
+                        <LinkElement link={""} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary  md:hidden `, {
                             "flex-col justify-center": !type,
                             "flex-row justify-start py-3": type,
                         })} >
@@ -89,7 +89,7 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                             <span>پیام های من</span>
                         </LinkElement>
 
-                        <LinkElement link={`/profile/myappointments`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
+                        <LinkElement link={`profile/myappointments`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
                             "flex-col justify-center border-l-2 border-r-2 border-dashed": !type,
                             "flex-row justify-start py-3": type,
                         })} >
@@ -97,7 +97,7 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                             <span>نوبت های من</span>
                         </LinkElement>
 
-                        <LinkElement link={`/profile/wallet`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
+                        <LinkElement link={`profile/wallet`} className={cn(`flex  items-center flex-col  gap-3 text-md font-bold text-primary   `, {
                             "flex-col justify-center": !type,
                             "flex-row justify-start py-3": type,
                         })} >

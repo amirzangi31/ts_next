@@ -71,15 +71,15 @@ const LoginPage = () => {
                 </header>
 
                 <section className="mt-4 flex justify-start items-center gap-2 flex-col">
-                    <LinkProfilePageCard title={"قوانین و مقررات آرناپ"} link={"/policy"} />
+                    <LinkProfilePageCard title={"قوانین و مقررات آرناپ"} link={"policy"} />
                     <LinkProfilePageCard
                         title={"تماس با ما"}
-                        link={"/contactus"}
+                        link={"contactus"}
                     />
-                    <LinkProfilePageCard title={"درباره ما"} link={"/aboutus"} />
+                    <LinkProfilePageCard title={"درباره ما"} link={"aboutus"} />
                     <LinkProfilePageCard
                         title={"پرسش های متداول"}
-                        link={"/faq"}
+                        link={"faq"}
                     />
                 </section>
 

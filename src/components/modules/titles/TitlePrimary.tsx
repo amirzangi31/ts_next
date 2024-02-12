@@ -35,7 +35,7 @@ const TitlePrimary = ({
                 {title} {subTitle ? `(${subTitle})` : ""}
             </h3>
             {btn && link && (
-                <LinkElement link={`/${link}`} >
+                <LinkElement link={`${link}`} >
                     <div className="w-[7.5rem]">
                         <ButtonElement
                             typeButton="gray-light"

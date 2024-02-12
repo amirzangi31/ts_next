@@ -38,7 +38,7 @@ const PhysicianCardSecondary = (props: PhysicainProfileSecondaryType) => {
 
     return (
         <LinkElement
-            link={`/Physician/${physicianProfileUrl}`}
+            link={`Physician/${physicianProfileUrl}`}
             className={cn(
                 `bg-white rounded-sm shadow-shadow_category min-h-[230px]  flex justify-between items-start flex-col`,
                 {

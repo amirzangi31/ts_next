@@ -91,7 +91,7 @@ const BlogPage = () => {
                         {articles.splice(2, 4).map((article) => (
                             <ArticleCardSecondary
                                 key={article.id}
-                                link={`/blog/${article.id}`}
+                                link={`blog/${article.id}`}
                                 title={article.title}
                                 author={article.author}
                                 description={article.description}
