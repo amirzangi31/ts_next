@@ -97,7 +97,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
                         }
                     )}
                 >
-                    <span>ثبتنام/ورود</span>
+                    <span>ثبت نام / ورود</span>
                     <span>
                         <ProfileIcon active={route === "login" ? true : false} />
                     </span>

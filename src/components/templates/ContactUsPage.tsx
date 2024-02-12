@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import BaseCard from '@modules/cards/BaseCard'
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
+import TitleHeading from '../modules/titles/TitleHeading'
 
 const ContactUsPage = () => {
 
@@ -10,6 +11,9 @@ const ContactUsPage = () => {
     return (
         <>
             <TitlePagesMobile title={"تماس با ما"} />
+            <header className='py-4'>
+                <TitleHeading title="تماس با آرناپ" />
+            </header>
             <div className="container max-w-[1000px] pb-5 mt-4">
                 <BaseCard title={"تماس با ما"}>
                     <div className='text-md  flex justify-start items-start gap-2 flex-col'>

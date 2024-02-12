@@ -4,6 +4,7 @@ import AccordionCard from "@/components/modules/cards/AccordionCard";
 import faqData from "@/data/faqData";
 import { useState } from "react";
 import TitlePagesMobile from "@modules/titles/TitlePagesMobile";
+import TitleHeading from "../modules/titles/TitleHeading";
 
 
 
@@ -22,6 +23,9 @@ const FaqPage = () => {
 
   return (
     <>
+      <header className='py-4'>
+          <TitleHeading title='سوالات متداول' /> 
+      </header>
       <TitlePagesMobile title={"پرسش های متداول"} />
       <div className="container max-w-[1000px] pb-5  mt-4 flex justify-start items-center gap-2 flex-col">
         {/* <BaseCardMultipleTitle content={content} /> */}

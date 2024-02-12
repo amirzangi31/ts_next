@@ -1,15 +1,19 @@
-import BaseCard from '@/components/modules/cards/BaseCard'
-import TitlePagesMobile from '../modules/titles/TitlePagesMobile'
+import BaseCard from '@modules/cards/BaseCard'
+import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
+import TitleHeading from '@modules/titles/TitleHeading'
 
 
 
 const PolicyPage = () => {
 
-    
+
 
     return (
         <>
             <TitlePagesMobile title={"قوانین و مقررات آرناپ"} />
+            <header className='py-4'>
+                <TitleHeading title="قوانین و مقررات آرناپ" />
+            </header>
             <div className="container max-w-[1000px] pb-5 mt-4  flex justify-start items-center gap-4 flex-col">
                 <BaseCard title={"قوانین و مقررات آرناپ"}>
                     <div className='text-md  flex justify-start items-start gap-2 flex-col'>

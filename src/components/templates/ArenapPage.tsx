@@ -4,12 +4,16 @@ import React from 'react'
 
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
 import LinkProfilePageCard from '@modules/cards/Link/LinkProfilePageCard'
+import TitleHeading from '../modules/titles/TitleHeading'
 
 const ArenapPage = () => {
 
       return (
             <>
                   <TitlePagesMobile title={"آرناپ"} />
+                  <header className='py-4'>
+                        <TitleHeading title='آرناپ' />
+                  </header>
                   <div className="container max-w-[1000px] pb-5 mt-4 flex justify-start items-start gap-4 flex-col">
                         <LinkProfilePageCard title={"قوانین و مقررات آرناپ"} link={`policy`} />
                         <LinkProfilePageCard title={"تماس با ما"} link={`contactus`} />
