@@ -59,7 +59,7 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
                 "text-error font-bold": !payment,
               })}
             >
-              {payment === true ? "در انتظار برگزاری" : "در انتظار پرداخت"}
+              {payment === true ? "نوبت تایید شده " : "در انتظار پرداخت"}
             </span>
           </p>
         </div>

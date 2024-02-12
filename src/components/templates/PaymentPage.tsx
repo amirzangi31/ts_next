@@ -15,6 +15,10 @@ import AppointmentPrimaryCard from '../modules/cards/Appointment/AppointmentPrim
 import BaseCard from '../modules/cards/BaseCard'
 import LikeIcon from '../icons/LikeIcon'
 import ShareIcon from '../icons/ShareIcon'
+import Image from 'next/image'
+import RefreshIcon from '../icons/RefreshIcon'
+import ButtonElement from '../elements/ButtonElement'
+import LinkElement from '../elements/LinkElement'
 
 export type PaymentPageProps = {
     price: number,
@@ -32,6 +36,7 @@ export type PaymentPageProps = {
 const PaymentPage = (props: PaymentPageProps) => {
 
     const [appointment, setAppointment] = useState<OneAppointmentType | null>(null)
+    const [loadingPayment, setLoadingPayment] = useState(false)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<boolean>(false)
     const [callbackIndex, setCallbackIndex] = useState<number>(0)
@@ -81,7 +86,7 @@ const PaymentPage = (props: PaymentPageProps) => {
             ToastBlue(
                 "در حال انتقال به صفحه درگاه پرداخت...",
                 "",
-                1000000,
+                props.price,
                 "top-center"
             );
             window.location.href = res;
@@ -113,7 +118,7 @@ const PaymentPage = (props: PaymentPageProps) => {
         hour: appointment ? +appointment.hour : 0,
         minute: appointment ? +appointment.minute : 0,
     }
-    
+
 
     return (
         <>
@@ -196,6 +201,34 @@ const PaymentPage = (props: PaymentPageProps) => {
                     </div>
                 </button>
             </div>
+            {/* ----------section------------- */}
+
+
+
+
+            {/* ----------section------------- */}
+            {/* when status = fail */}
+            {props.status === "Fail" && (
+                <div className='min-h-screen flex justify-center items-center '>
+                    <div className='flex justify-start items-center gap-3 flex-col'>
+                        <Image src={"/failPayment.png"} width={1000} height={1000} alt='image' className='w-full' />
+                        <p className='text-center'> لطفا دوباره امتحان کنید</p>
+                        <div className='w-[150px]'>
+                            <ButtonElement typeButton='primary' handler={addAppointmentHandler} loading={loadingPayment} disabled={loadingPayment}>
+                                <RefreshIcon />
+                                تلاش مجدد
+                            </ButtonElement>
+                        </div>
+                        <div className='w-[150px]'>
+                            <LinkElement link='/' >
+                                <ButtonElement typeButton='primary' >
+                                    صفحه اصلی
+                                </ButtonElement>
+                            </LinkElement>
+                        </div>
+                    </div>
+                </div>
+            )}
             {/* ----------section------------- */}
 
         </>
