@@ -112,7 +112,7 @@ const Header = () => {
                         variant='contained'
                         width='w-[10.625rem]'
                       >
-                        حساب کاربری
+                        ثبت نام / ورود
                       </ButtonElement>
                     </LinkElement>
                     : null

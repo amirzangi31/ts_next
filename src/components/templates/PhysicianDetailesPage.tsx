@@ -144,7 +144,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
         active: physician.textConsultation,
         status: null,
       },
-  ];
+    ];
 
   const [buttonText, setButtonText] = useState(
     consultationList.find((item) => item.active)?.title
@@ -251,34 +251,40 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
           </BaseCard>
         </div> */}
         {/* ----------section------------- */}
-        {/* physicianSpecialities */}
-        {physician.physicianSpecialities.length > 0 && (
-          <div className="w-full mt-4 order-2">
-            <BaseCard title={"تخصص ها "}>
-              <div className="flex justify-start items-center gap-2 flex-wrap">
-                {physician.physicianSpecialities.map((item, index) => (
-                  <Link
-                    href={`/search?specialities=${item.specialityTitle}`}
-                    key={index}
-                    className="bg-gray-100 w-auto px-3 py-1 rounded-sm text-md transition-all duration-300 hover:bg-gray-400 hover:text-white"
-                  >
-                    {item.specialityTitle}
-                  </Link>
-                ))}
-              </div>
-            </BaseCard>
-          </div>
-        )}
-        {/* ----------section------------- */}
 
         {/* ----------section------------- */}
-        {/* Physician Description */}
-        {physician.description && (
-          <div className="w-full mt-4 order-3">
-            <BaseCard title={"درباره پزشک"}>{physician.description}</BaseCard>
-          </div>
-        )}
+        <div className="flex justify-between items-stretch flex-col md:flex-row  w-full  gap-2">
+          {/* physicianSpecialities */}
+          {physician.physicianSpecialities.length > 0 && (
+            <div className="w-full mt-4 order-2">
+              <BaseCard title={"تخصص ها "}>
+                <div className="flex justify-start items-center gap-2 flex-wrap">
+                  {physician.physicianSpecialities.map((item, index) => (
+                    <Link
+                      href={`/search?specialities=${item.specialityTitle}`}
+                      key={index}
+                      className="bg-gray-100 w-auto px-3 py-1 rounded-sm text-md transition-all duration-300 hover:bg-gray-400 hover:text-white"
+                    >
+                      {item.specialityTitle}
+                    </Link>
+                  ))}
+                </div>
+              </BaseCard>
+            </div>
+          )}
+          {/* ----------section------------- */}
+
+          {/* ----------section------------- */}
+          {/* Physician Description */}
+          {physician.description && (
+            <div className="w-full mt-4 order-3">
+              <BaseCard title={"درباره پزشک"}>{physician.description}</BaseCard>
+            </div>
+          )}
+          {/* ----------section------------- */}
+        </div>
         {/* ----------section------------- */}
+
 
         {/* ----------section------------- */}
         {/* Office card */}

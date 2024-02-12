@@ -71,6 +71,7 @@ export interface PhysicianProfileCalendar {
   available: boolean;
 }
 
+
 export interface PhysicianProfile {
   id: string;
   firstName: string;
@@ -95,6 +96,7 @@ export interface PhysicianProfile {
   longitude: number;
   aboutDr?: any;
   specialties: Specialty[];
+  physicianSpecialities?: PhysicianSpeciality[]
 }
 
 export interface Specialty {
@@ -111,4 +113,45 @@ export interface City {
 export interface Province {
   id: number;
   name: string;
+}
+
+//--------------------------------------------------------------------------------------------------------------
+export interface OneAppointmentType {
+  userFirstName: string;
+  userLastName: string;
+  userNationalNumber: string;
+  userPhoneNumber: string;
+  physicianId: string;
+  physicianFirstName: string;
+  physicianLastName: string;
+  hasImage: boolean;
+  physicianPhoneNumber: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  physicianSpecialities: PhysicianSpeciality[];
+  calendar: Calendar;
+  passedOrFuture: string;
+  hour: string;
+  minute: string;
+}
+
+export interface Calendar {
+  id: string;
+  dayOffset: number;
+  year: number;
+  month: number;
+  dayOfMonth: number;
+  dayOfWeek: number;
+  isHoliday: boolean;
+}
+
+export interface PhysicianSpeciality {
+  id: number;
+  specialityTitle: string;
+  counter: number;
+  enName: null;
+  parentId: null;
+  parent: null;
+  citySpecialties: null;
 }

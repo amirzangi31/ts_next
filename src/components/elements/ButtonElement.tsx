@@ -39,7 +39,7 @@ const ButtonElement = ({ loading = false, disabled, customStyle, handler, hover,
         "font-normal": fontWeight === "normal",
         "font-bold": fontWeight === "bold",
         "font-[900]": fontWeight === "fat",
-        "bg-error-dark text-white rounded-full hover:bg-white hover:text-error-dark": typeButton === "error" && variant === "contained",
+        "bg-error-dark text-white rounded-full hover:bg-white hover:border hover:border-error hover:text-error-dark": typeButton === "error" && variant === "contained",
 
         "bg-transparent text-primary border border-primary rounded-full hover:bg-primary hover:text-white": typeButton === "transparent" && variant === "contained",
 

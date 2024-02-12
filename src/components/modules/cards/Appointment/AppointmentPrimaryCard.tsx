@@ -18,7 +18,8 @@ import { AppointmentPrimaryCardType } from "@/types/cards";
 const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
 
 
-  const { index, payment, physician: { hasImage, id, firstName, lastName, specialties, address, latitude, longitude }, price, lockTime, year, month, day, time } = props
+  const { index, payment, physician: { hasImage, id, firstName, lastName, specialties, address, latitude, longitude , physicianSpecialities }, price, lockTime, year, month, day, time } = props
+  
 
   const timerTime = new Date();
   timerTime.setSeconds(timerTime.getSeconds() + lockTime);
@@ -45,7 +46,8 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
             <p className="text-primary font-bold">
               دکتر {firstName} {lastName}
             </p>
-            <p>{specialties[0]?.name}</p>
+            <p>{specialties ? specialties[0].name : ""}</p>
+            <p>{physicianSpecialities ? physicianSpecialities[0].specialityTitle : ""}</p>
           </div>
         </div>
         <div className="mt-4">
@@ -259,7 +261,13 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
           </div>
         )}
       </div>
-
+      {/* {
+        payment ? (
+          <div className="py-4 px-6">
+            <ButtonElement typeButton="error" >لغو نوبت</ButtonElement>
+          </div>
+        ) : null
+      } */}
     </div>
   );
 };

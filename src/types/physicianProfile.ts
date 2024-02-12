@@ -45,7 +45,7 @@ export interface RelatedPhysicianType {
   bg?:string
 }
 
-interface PhysicianSpeciality {
+export interface PhysicianSpeciality {
   id: number;
   specialityTitle: string;
   counter: number;

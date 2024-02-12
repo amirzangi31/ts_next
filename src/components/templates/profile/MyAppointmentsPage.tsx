@@ -623,7 +623,7 @@ const AppointmentCardOff = (props: MyAppointmentType) => {
       <div className="px-4 pb-4 flex justify-between items-center w-full">
         <div className="flex justify-start items-center gap-1 text-md">
           <p>آخرین وضعیت :</p>
-          <p className="text-md  ">{planNameConvert(props.status)}</p>
+          <p className="text-md  ">{statusApppointmentHandler(props.status)}</p>
         </div>
         <div>
           {props.status !== "Is Deleted By User" &&

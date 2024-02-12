@@ -105,16 +105,16 @@ const PaymentAppointmentStep = ({ physician }: { physician: PhysicianProfile }) 
                   </p>
                 </div>
                 <div className="flex justify-center items-center gap-1">
-                  <span
-                    className={cn(
-                      `w-[6px] h-[6px] rounded-full  block  `,
-                      {
-                        "bg-primary-100":
-                          Number(user?.accountBalance) >= +price,
-                        "bg-error": Number(user?.accountBalance) < +price,
-                      }
-                    )}
-                  ></span>
+                    {/* <span
+                      className={cn(
+                        `w-[6px] h-[6px] rounded-full  block  `,
+                        {
+                          "bg-primary-100":
+                            Number(user?.accountBalance) >= +price,
+                          "bg-error": Number(user?.accountBalance) < +price,
+                        }
+                      )}
+                    ></span> */}
                   <p
                     className={cn(` font-bold`, {
                       "text-primary-100":

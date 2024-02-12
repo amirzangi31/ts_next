@@ -134,6 +134,14 @@ const urls = {
         physicianId: "string",
       },
     },
+    getOneAppointment: {
+      url: "/User/UserPhysicianProfileCalendar/GetById/",
+      method: "GET",
+      parametrs: {},
+      query: {
+        apponitmentId: "string"
+      }
+    }
   },
   //favorite
   favorite: {

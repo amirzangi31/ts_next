@@ -35,7 +35,7 @@ const useMyAppointments = () => {
         mutationFn: async (params: ParamsCancel) => {
             const res = await deleteAppointment(params.calendarId, params.index, params.physicianProfileUrl)
             if (res.resultCode === 200) {
-                Toastify("error", "نوبت با موفقیت لغو شد")
+                Toastify("success", "نوبت با موفقیت لغو شد")
             }
             return res
         },

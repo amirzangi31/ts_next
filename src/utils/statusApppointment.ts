@@ -8,6 +8,9 @@ const statusApppointmentHandler = (status: string) => {
         case "Is Deleted By User":
             return "لغو شده"
             break;
+        case "Is Deleted By Physician":
+            return "لغو شده"
+            break;
         case "Awaiting Payment":
             return "در انتظار پرداخت"
             break;
@@ -16,8 +19,6 @@ const statusApppointmentHandler = (status: string) => {
             return "نامشخص"
             break;
     }
-
-
 
 }
 

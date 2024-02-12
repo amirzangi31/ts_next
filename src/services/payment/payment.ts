@@ -37,7 +37,7 @@ const createAppointment = async( physicianProfileId: string,calendarId: string,i
 }
 
 
-const createPayment = async (id: number, amount: number, paymentType: number = 1) => {
+const createPayment = async (id: number | string, amount: number, paymentType: number = 1) => {
 
     try {
         const data = {
