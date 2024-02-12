@@ -7,6 +7,8 @@ import iranSans from '@utils/localFonts'
 import Layout from '@layouts/Layout'
 
 import StoreProvider from '@/providers/StoreProvider'
+import { Suspense } from 'react'
+import LoadingPage from './loading'
 
 
 export const metadata = {
@@ -39,7 +41,7 @@ export default async function RootLayout({
 
 }: {
   children: React.ReactNode,
- 
+
 }) {
 
 
@@ -48,14 +50,14 @@ export default async function RootLayout({
   return (
     <html lang='fa' dir='rtl' >
       <body className={iranSans.className} data-theme="Arenap_theme">
-        
-        
+
+        <Suspense fallback={<LoadingPage />}>
           <StoreProvider>
             <Layout>
               {children}
             </Layout>
           </StoreProvider>
-        
+        </Suspense>
       </body>
     </html>
   )

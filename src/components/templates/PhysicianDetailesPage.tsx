@@ -174,7 +174,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       <ModalLogin isCallback={true} callbacks={callbacks} callbacksIndex={callbackIndex} />
 
       {/* ----------content------------- */}
-      <div className="container relative md:pb-5 flex flex-wrap ">
+      <div className="relative md:pb-5 flex flex-wrap ">
         {/* ----------section------------- */}
         {/* Button */}
         {consultationList.find((item) => item.active) && (

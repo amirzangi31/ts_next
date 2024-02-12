@@ -20,22 +20,17 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-// import { deleteAppointment } from "../../../services/appointment/appointmentclient";
-
-
-// import useTransactions from "@/hooks/useTransactions";
-
 import cn from "@/utils/clsxFun";
-import Modal from "@/components/modules/modals/Modal";
-import BottomSheetAndCenterContent from "@/components/modules/modals/BottomSheetAndCenterContent";
-import ButtonElement from "@/components/elements/ButtonElement";
-import CloseButton from "@/components/elements/CloseButton";
+import Modal from "@modules/modals/Modal";
+import BottomSheetAndCenterContent from "@modules/modals/BottomSheetAndCenterContent";
+import ButtonElement from "@elements/ButtonElement";
+import CloseButton from "@elements/CloseButton";
 import useMyAppointments from "@/hooks/useMyAppointments";
-import TitlePagesMobile from "@/components/modules/titles/TitlePagesMobile";
+import TitlePagesMobile from "@modules/titles/TitlePagesMobile";
 import { getUrlImage } from "@/services/getImageUrl/getImageUrl";
-import Checkbox from "@/components/elements/inputs/Checkbox";
+import Checkbox from "@elements/inputs/Checkbox";
 import { MyAppointmentType } from "@/types/appointment";
-import LinkElement from "@/components/elements/LinkElement";
+import LinkElement from "@elements/LinkElement";
 
 const MyAppointmentsPage = () => {
 
