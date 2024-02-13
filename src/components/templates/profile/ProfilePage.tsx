@@ -23,7 +23,7 @@ const ProfilePage = () => {
     return (
         <>
             <TitlePagesMobile title={"حساب کاربری"} />
-            <div className="container " >
+            <div className="" >
                 <section className='mt-12 md:hidden'>
 
                     {isLogin === "authorization" ? (<ProfileCard type={false} />) : (

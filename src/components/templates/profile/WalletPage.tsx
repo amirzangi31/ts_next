@@ -143,7 +143,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
   return (
     <>
       <TitlePagesMobile title={"کیف پول"} />
-      <div className="container mt-4">
+      <div className=" mt-4">
 
         {/* header  */}
         <header>
