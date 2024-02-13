@@ -303,7 +303,7 @@ const WalletPage = (props: { params: SearchParamsWalletType }) => {
                 showCount ?
                   <div className="py-4 flex justify-between items-center gap-2">
                     <p className="text-md">تعداد نوبت : </p>
-                    <input type="number" ref={inputRef} placeholder="تعداد نوبت " value={countAppointment} onChange={changeCountAppointmentHandler} className="border border-primary flex-1 p-1 rounded-3xl px-2 text-center placeholder:text-sm text-primary text-md " style={{ direction: "ltr" }} />
+                    <input type="number" ref={inputRef} placeholder="تعداد نوبت " value={countAppointment} onChange={changeCountAppointmentHandler} className="direction-ltr border border-primary flex-1 p-1 rounded-3xl px-2 text-center placeholder:text-sm text-primary text-md "  />
                   </div> : null
               }
 

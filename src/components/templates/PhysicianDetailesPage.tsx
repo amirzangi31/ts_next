@@ -359,8 +359,11 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                       className="rounded-lg max-w-[4.375rem] w-full bg-gray-100 h-[.5rem] relative"
                     >
                       <div
-                        style={{ width: `${watingTimeProgressPercent[0]}%` }}
-                        className="rounded-lg bg-[#30C018] h-[.5rem] absolute"
+                        
+                        className={cn(
+                          "rounded-lg bg-[#30C018] h-[.5rem] absolute",
+                          `w-[${watingTimeProgressPercent[0]}%]`
+                        )}
                       ></div>
                     </div>
                     <p className="text-md whitespace-nowrap text-right">
@@ -376,8 +379,11 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                       className="rounded-lg max-w-[4.375rem] w-full bg-gray-100 h-[.5rem] relative"
                     >
                       <div
-                        style={{ width: `${watingTimeProgressPercent[1]}%` }}
-                        className="rounded-lg bg-[#30C018] h-[.5rem] absolute"
+                        
+                        className={cn(
+                          "rounded-lg bg-[#30C018] h-[.5rem] absolute",
+                          `w-[${watingTimeProgressPercent[1]}%]`
+                        )}
                       ></div>
                     </div>
                     <p className="text-md whitespace-nowrap">
@@ -393,8 +399,11 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                       className="rounded-lg max-w-[4.375rem] w-full bg-gray-100 h-[.5rem] relative"
                     >
                       <div
-                        style={{ width: `${watingTimeProgressPercent[2]}%` }}
-                        className="rounded-lg bg-[#30C018] h-[.5rem] absolute"
+                        
+                        className={cn(
+                          "rounded-lg bg-[#30C018] h-[.5rem] absolute",
+                          `w-[${watingTimeProgressPercent[2]}%]`
+                        )}
                       ></div>
                     </div>
                     <p className="text-md whitespace-nowrap">
@@ -410,8 +419,11 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                       className="rounded-lg max-w-[4.375rem] w-full bg-gray-100 h-[.5rem] relative"
                     >
                       <div
-                        style={{ width: `${watingTimeProgressPercent[3]}%` }}
-                        className="rounded-lg bg-[#30C018] h-[.5rem] absolute"
+                        
+                        className={cn(
+                          "rounded-lg bg-[#30C018] h-[.5rem] absolute",
+                          `w-[${watingTimeProgressPercent[3]}%]`
+                        )}
                       ></div>
                     </div>
                     <p className="text-md whitespace-nowrap">

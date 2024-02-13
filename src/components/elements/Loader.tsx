@@ -5,7 +5,7 @@ const Loader = ({ color, size }: {
     color: "border-primary" | "border-white" | "border-error",
 }) => {
     return (
-        <div style={{ perspective: "48.75rem" }} className={cn(`relative  rounded-full`,
+        <div  className={cn(`perspective relative  rounded-full`,
             size
         )}>
             <div className={cn("absolute w-full h-full rounded-full left-0 top-0 animate-[loadingCircleOne_1.2s_linear_infinite] border-b-4",

@@ -200,3 +200,11 @@ html {
 }
 
 /*----------End : Swiper Vertical-----------*/
+
+
+.perspective{
+  perspective: 48.75rem;
+}
+.direction-ltr{
+  direction: ltr;
+}
