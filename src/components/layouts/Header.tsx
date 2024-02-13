@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <header className='  bg-primary min-h-[5rem] md:flex  justify-center items-center'>
-      <div className="container py-2 hidden md:block">
+      <div className="container py-2 hidden md:block overflow-hidden">
         <div className='flex items-center w-full '>
 
           {/* Logo */}
@@ -27,7 +27,7 @@ const Header = () => {
             <Image src={"/Logo.png"} width={1000} height={1000} alt='Logo website' className='w-[1.875rem]' />
           </LinkElement>
           {/* Navbar */}
-          <nav className='rtl:mr-4 ltr:ml-4 flex-1 ' >
+          <nav className='rtl:mr-4 ltr:ml-4 w-full ' >
             <ul className='flex justify-start items-center gap-3 text-white  w-full'>
               <li>
                 <LinkElement link="">
