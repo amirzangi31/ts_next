@@ -56,6 +56,21 @@ const HomePage = (props: HomePagePropType) => {
             {/* ----------header------------- */}
 
             {/* ----------section------------- */}
+            {/* services  */}
+            <section className='mt-6'>
+                <h2 className='flex justify-center items-center font-bold text-2xl'>خدمات</h2>
+                <div className='grid grid-cols-2 md:grid-cols-4 gap-2 mt-6'>
+                    <div className="bg-red-200 h-[100px]"></div>
+                    <div className="bg-red-200 h-[100px]"></div>
+                    <div className="bg-red-200 h-[100px]"></div>
+                    <div className="bg-red-200 h-[100px]"></div>
+                </div>
+            </section>
+            {/* ----------section------------- */}
+
+
+
+            {/* ----------section------------- */}
             {/* Best Specialities  */}
             <section>
                 <BestSpeciality />
@@ -73,6 +88,13 @@ const HomePage = (props: HomePagePropType) => {
                 />
                 <SwiperContainerFreeMode gap={10} data={physicians} CardComponent={PhysicainCardPrimary} />
             </section >
+            {/* ----------section------------- */}
+
+            {/* ----------section------------- */}
+            {/* banner */}
+            <section className='h-[300px] bg-green-500 mt-6'>
+
+            </section>
             {/* ----------section------------- */}
 
             {/* ----------section------------- */}

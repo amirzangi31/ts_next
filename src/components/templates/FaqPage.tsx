@@ -23,11 +23,9 @@ const FaqPage = () => {
 
   return (
     <>
-      <header className='py-4'>
-          <TitleHeading title='سوالات متداول' /> 
-      </header>
-      <TitlePagesMobile title={"پرسش های متداول"} />
-      <div className="container max-w-[1000px] pb-5  mt-4 flex justify-start items-center gap-2 flex-col">
+     
+      
+      <div className=" w-full pb-5  mt-4 flex justify-start items-center gap-2 flex-col">
         {/* <BaseCardMultipleTitle content={content} /> */}
         {questions.map((item) => (
           <AccordionCard
