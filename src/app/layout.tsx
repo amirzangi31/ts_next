@@ -11,28 +11,40 @@ import { Suspense } from 'react'
 import LoadingPage from './loading'
 
 
+
 export const metadata = {
 
-  title: 'نرم افزار مدیریت مطب|مدیریت کلینیک|نوبت دهی آنلاین آرناپ ',
-  description: 'بهترین نرم افزار مدیریت مطب آنلاین پزشک و مدیریت کلینک، نوبت دهی آنلاین از طریق اپلیکیشن موبایل، ثبت درمان و ایجاد پرونده الکترونیک با سرعت بالا توسط پزشک، ثبت پرونده الکترونیک سلامت، مدیریت مالی مطب، جستجوی پزشکان، نوبتدهی اینترنتی و تلفنی آرناپ',
+  title: 'آرناپ : نوبت دهی اینترنتی پزشکان | مشاوره و ویزیت آنلاین',
+  description: 'با سامانه آنلاین آرناپ از جستجو و دریافت نوبت از پزشکان و کلینیک ها و درمانگاه ها و بیمارستان ها تا مشاوره و ویزیت آنلاین را داشته باشید',
   other: {
-    author: "طراحان سیستم پنام",
+    author: "پلتفرم آنلاین آرناپ",
     rating: "Safe For Kids",
     index: "googlebot",
-    "DC.creator": "طراحان سیستم پنام",
-    "DC.publisher": "طراحان سیستم پنام",
-    designer: "Design By Penam system designers  Co. Tel: 03432467009",
-    copyright: "طراحان سیستم پنام",
+    "DC.creator": "پلتفرم آنلاین آرناپ",
+    "DC.publisher": "پلتفرم آنلاین آرناپ",
+    designer: "Design By Arenap Team  Co. Tel: 02191096760",
+    copyright: "پلتفرم آنلاین آرناپ",
     "revisit-after": "3 Days",
   },
+
+  // openGraph: {
+  //   "og:site_name" : "سامانه مدیریت پزشکی آرناپ",
+  //   "og:url" : "",
+  //   "og:image" : "/favIcon.png",
+  //   "og:type" : "سامانه پزشکی"
+  // },
+
   keywords: ["نوبت دهی آنلاین", " مدیریت مالی مطب", "مدیریت مطب آنلاین پزشک", " مدیریت کلینک، ثبت درمان"],
   icons: {
     icon: '/favIcon.png', // /public path
+    apple: "/favIcon.png",
     ohter: {
+      rel: 'apple-touch-icon',
+      url: '/favicon.png',
       'og:site_name': 'سامانه مدیریت پزشکی آرناپ',
-    }
-  },
+    },
 
+  },
 
 }
 

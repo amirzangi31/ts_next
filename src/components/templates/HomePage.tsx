@@ -20,6 +20,7 @@ import SearchHomePage from '../modules/search/SearchHomePage';
 import FaqPage from './FaqPage';
 import BestSpeciality from '../modules/BestSpeciality';
 import TitleHeading from '../modules/titles/TitleHeading';
+import ServicesSectionHome from '../modules/ServicesSectionHome';
 
 
 
@@ -31,9 +32,9 @@ interface HomePagePropType {
 const HomePage = (props: HomePagePropType) => {
     const { physicians } = props
 
-    
-    
-    
+
+
+
 
     // Static Data
 
@@ -48,7 +49,7 @@ const HomePage = (props: HomePagePropType) => {
             {/* ----------header------------- */}
             {/* Best Specialities  */}
             <header className='py-4'>
-               
+
                 <TitleHeading title="آرناپ : نوبت دهی اینترنتی پزشکان | مشاوره و ویزیت آنلاین" />
 
                 <SearchHomePage physicians={physicians} />
@@ -58,13 +59,8 @@ const HomePage = (props: HomePagePropType) => {
             {/* ----------section------------- */}
             {/* services  */}
             <section className='mt-6'>
-                <h2 className='flex justify-center items-center font-bold text-2xl'>خدمات</h2>
-                <div className='grid grid-cols-2 md:grid-cols-4 gap-2 mt-6'>
-                    <div className="bg-red-200 h-[6.25rem]"></div>
-                    <div className="bg-red-200 h-[6.25rem]"></div>
-                    <div className="bg-red-200 h-[6.25rem]"></div>
-                    <div className="bg-red-200 h-[6.25rem]"></div>
-                </div>
+                <h2 className='flex justify-start items-center font-bold '>خدمات آرناپ</h2>
+                <ServicesSectionHome />
             </section>
             {/* ----------section------------- */}
 
@@ -90,12 +86,7 @@ const HomePage = (props: HomePagePropType) => {
             </section >
             {/* ----------section------------- */}
 
-            {/* ----------section------------- */}
-            {/* banner */}
-            <section className='h-[18.75rem] bg-green-500 mt-6'>
-
-            </section>
-            {/* ----------section------------- */}
+      
 
             {/* ----------section------------- */}
             {/* Newest Articles  */}

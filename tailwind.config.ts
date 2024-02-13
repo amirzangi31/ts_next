@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens : {
+
+        "xsOne" : "480px"
+
+      },
       container: {
         center: true,
       },

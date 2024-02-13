@@ -48,7 +48,12 @@ const ChnageCityButton = () => {
       }}>
 
       </span>
-      <div className='absolute top-full left-0 w-[10rem] h-[18.75rem] z-10  py-2'>
+      <div className={cn(
+        'absolute top-full left-0 w-[10rem] h-[18.75rem] py-2', {
+          "z-10" : show,
+          "hidden" : !show,
+        }
+      )}>
         {
           show ?
             <div ref={contentRef} className='hidden md:block bg-white shadow-shadow_category p-2 h-full rounded-sm overflow-y-auto'>
@@ -128,7 +133,7 @@ const ChnageCityButton = () => {
             <BottomSheetAndCenterContent show={show}>
 
 
-              <InputSearch value={searchText} changeHandler={(e) => setSearchText(e.target.value)} /> 
+              <InputSearch value={searchText} changeHandler={(e) => setSearchText(e.target.value)} />
 
 
               {
@@ -261,7 +266,7 @@ export default ChnageCityButton
 
 
 
-const InputSearch = ({ value, changeHandler }: { value: string, changeHandler: (e : React.ChangeEvent<HTMLInputElement>) => void }) => {
+const InputSearch = ({ value, changeHandler }: { value: string, changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void }) => {
 
 
   return (

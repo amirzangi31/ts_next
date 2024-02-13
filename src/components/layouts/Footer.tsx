@@ -79,7 +79,7 @@ const Footer = () => {
   return (
 
     <footer className='bg-white'>
-      <div className="container max-w-[81.25rem] pb-[5.8125rem] lg:pb-5 pt-4">
+      <div className="mx-auto max-w-[81.25rem] pb-[5.8125rem] lg:pb-5 pt-4 px-4">
         <div className='flex justify-between items-start flex-wrap'>
           <div className='w-full lg:w-1/3 flex justify-between items-center gap-1 px-2' >
             <div className='flex justify-center items-center flex-col w-full'>
@@ -107,7 +107,7 @@ const Footer = () => {
               هدف ما در آرناپ، تلاش در جهت ایجاد بهبود در فرآیند پرونده الکترونیک بیماران و همچنین ارائه‌ی خدمات نرم افزاری علمی به پزشکان است.
             </p>
           </div>
-          <div className='w-full min-[480px]:w-1/2 lg:w-1/3 px-2 mt-4 lg:mt-0' >
+          <div className='w-full xsOne:w-1/2 lg:w-1/3 px-2 mt-4 lg:mt-0' >
             <h4 className='text-primary text-md font-bold text-center'>تماس با ما</h4>
             <div className='mt-4 text-center flex justify-start items-start gap-2 flex-col'>
               {/* <p className='text-md w-full'>آدرس : کرمان -میدان آزادی - ابتدای بلوار جمهوری - ساختمان رویش - طبقه دو   </p> */}
@@ -127,7 +127,7 @@ const Footer = () => {
             </div>
           </div>
           {/* Send Comment */}
-          <div className='w-full order-3 min-[480px]:order-none min-[480px]:w-1/2 lg:w-1/3 px-2 mt-4 lg:mt-0  rounded-sm p-2'  >
+          <div className='w-full order-3 xsOne:order-none xsOne:w-1/2 lg:w-1/3 px-2 mt-4 lg:mt-0  rounded-sm p-2'  >
             <div className='grid grid-cols-2 gap-1 '>
               <div className='border-b border-gray-500   px-2 h-[2.8125rem] '>
                 <input type="text" name='fullName' value={form.fullName} onChange={changeHandler} className='w-full h-full text-sm ' placeholder='نام و نام خانوادگی' />
@@ -142,7 +142,7 @@ const Footer = () => {
                 <input type="text" name='title' value={form.title} onChange={changeHandler} className='w-full h-full text-sm ' placeholder='عنوان' />
               </div>
             </div>
-            <textarea name='message' value={form.message} onChange={changeHandler} className='w-full resize-none h-6.25rem mt-4 border-b border-gray-500 text-md bg-transparent ' placeholder='دیدگاه شما درباره ما ' ></textarea>
+            <textarea name='message' value={form.message} onChange={changeHandler} className='w-full resize-none  mt-4 border-b border-gray-500 text-md bg-transparent ' placeholder='دیدگاه شما درباره ما ' ></textarea>
             <ButtonElement typeButton="primary" handler={sendComment} loading={loadingButton} disabled={loadingButton}>ثبت دیدگاه</ButtonElement>
           </div>
 
