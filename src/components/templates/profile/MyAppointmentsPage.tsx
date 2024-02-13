@@ -126,7 +126,7 @@ const MyAppointmentsPage = () => {
         <Tabs
           selectedIndex={activeTab}
           onSelect={(index) => setActiveTab(index)}
-          selectedTabClassName="pb-2 border-b-[3px] border-[#00A29E] font-bold"
+          selectedTabClassName="pb-2 border-b-[0.1875rem] border-[#00A29E] font-bold"
         >
           <TabList>
             <div className="grid grid-cols-2 text-center gap-2 bg-white rounded-sm shadow-shadow_category py-3 px-5 mt-6 mb-2">

@@ -40,9 +40,9 @@ const PhysicianCardSecondary = (props: PhysicainProfileSecondaryType) => {
         <LinkElement
             link={`Physician/${physicianProfileUrl}`}
             className={cn(
-                `bg-white rounded-sm shadow-shadow_category min-h-[230px]  flex justify-between items-start flex-col`,
+                `bg-white rounded-sm shadow-shadow_category min-h-[14.375rem]  flex justify-between items-start flex-col`,
                 {
-                    "w-[320px]": freeMode,
+                    "w-[20rem]": freeMode,
                     "w-full": !freeMode,
                 }
             )}
@@ -54,12 +54,12 @@ const PhysicianCardSecondary = (props: PhysicainProfileSecondaryType) => {
                         width={500}
                         height={500}
                         alt="doctor_profile"
-                        className="w-[60px] h-[60px] rounded-full"
+                        className="w-[3.75rem] h-[3.75rem] rounded-full"
                     />
-                    <span className="w-[16px] h-[16px] bg-white rounded-full absolute bottom-0 rtl:right-0 ltr:left-0 flex justify-center items-center ">
+                    <span className="size-[1rem] bg-white rounded-full absolute bottom-0 rtl:right-0 ltr:left-0 flex justify-center items-center ">
                         <span
                             className={cn(
-                                `w-[12px] h-[12px]  rounded-full `,
+                                `size-[0.75rem] rounded-full `,
                                 {
                                     "bg-primary-100": immediateConsultation,
                                     "bg-gray-400": !immediateConsultation,
@@ -68,7 +68,7 @@ const PhysicianCardSecondary = (props: PhysicainProfileSecondaryType) => {
                         ></span>
                     </span>
                 </div>
-                <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-between items-start flex-col min-h-[60px]">
+                <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-between items-start flex-col min-h-[3.75rem]">
                     <div className="flex justify-between items-center w-full">
                         <p className="text-lg font-bold ">
                             {firstName} {lastName}
@@ -110,7 +110,7 @@ const PhysicianCardSecondary = (props: PhysicainProfileSecondaryType) => {
                 />
             </div>
             <div className="px-2 pb-2 w-full">
-                <div className="bg-gray-700 p-1 rounded-ss flex justify-between items-center min-h-[46px]">
+                <div className="bg-gray-700 p-1 rounded-ss flex justify-between items-center min-h-[2.875rem]">
                     <p className="text-sm">
                         اولین نوبت خالی تلفنی:{" "}
                         <span className="font-bold">

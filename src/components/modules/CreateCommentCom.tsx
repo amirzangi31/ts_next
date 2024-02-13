@@ -250,7 +250,7 @@ const CreateCommentCom = ({ firstName, lastName }: CreateCommentComType) => {
                             <label htmlFor="recommended">
                                 <div
                                     className={cn(
-                                        `p-1 flex justify-center bg-[#DEFFDB] rounded-[47px] items-center gap-3 text-md w-full cursor-pointer`,
+                                        `p-1 flex justify-center bg-[#DEFFDB] rounded-[2.9375rem] items-center gap-3 text-md w-full cursor-pointer`,
                                         {
                                             "opacity-100 animate-opacity_60": recommendation,
                                             "opacity-60": !recommendation,

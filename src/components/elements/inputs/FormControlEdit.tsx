@@ -29,7 +29,7 @@ const FormControlEdit = (props: FormControlEdit) => {
                 id={field.name}
                 value={value}
                 {...field}
-                className={cn(` w-full rounded-[30px] h-[50px] px-4 text-md  `, {
+                className={cn(` w-full rounded-[1.875rem] h-[3.125rem] px-4 text-md  `, {
                     "bg-gray-200": disabled,
                     "bg-white": !disabled,
                     "border border-error": form.errors?.[field.name] && form.touched?.[field.name],

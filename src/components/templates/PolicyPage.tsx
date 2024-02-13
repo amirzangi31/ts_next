@@ -14,7 +14,7 @@ const PolicyPage = () => {
             <header className='py-4'>
                 <TitleHeading title="قوانین و مقررات آرناپ" />
             </header>
-            <div className="container max-w-[1000px] pb-5 mt-4  flex justify-start items-center gap-4 flex-col">
+            <div className="container max-w-[62.5rem] pb-5 mt-4  flex justify-start items-center gap-4 flex-col">
                 <BaseCard title={"قوانین و مقررات آرناپ"}>
                     <div className='text-md  flex justify-start items-start gap-2 flex-col'>
                         <p>

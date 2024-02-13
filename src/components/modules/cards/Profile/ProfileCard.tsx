@@ -59,10 +59,10 @@ const ProfileCard = ({ type }: { type: boolean }) => {
                         "flex-col": type
                     })}>
                         <div className='bg-gray-100 py-1 px-2 rounded-sm text-md'>
-                            کدملی : <span className='text-sm min-[430px]:text-md'>{user?.nationalNumber}</span>
+                            کدملی : <span className='text-sm min-[41.875rem]:text-md'>{user?.nationalNumber}</span>
                         </div>
                         <div className='bg-gray-100 py-1 px-2 rounded-sm text-md'>
-                            شماره تماس : <span className='text-sm min-[430px]:text-md'>{user?.phoneNumber}</span>
+                            شماره تماس : <span className='text-sm min-[41.875rem]:text-md'>{user?.phoneNumber}</span>
                         </div>
                     </div>
                     <div className={cn(`grid mt-6 `, {

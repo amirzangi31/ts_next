@@ -26,7 +26,7 @@ const NotFoundPage = () => {
             <TitlePagesMobile title={"اخطار"} />
 
             <div className="container ">
-                <div className='min-h-[calc(100vh-77px)] flex justify-center items-center flex-col gap-4   '  >
+                <div className='min-h-[calc(100vh-4.375rem)] flex justify-center items-center flex-col gap-4   '  >
                     <div>
                         <Image src={"/notfound.png"} width={500} height={500} alt='notfound' className='max-w-[18.75rem]' />
                     </div>

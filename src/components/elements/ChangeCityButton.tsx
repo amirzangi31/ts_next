@@ -48,7 +48,7 @@ const ChnageCityButton = () => {
       }}>
 
       </span>
-      <div className='absolute top-full left-0 w-[10rem] h-[300px] z-10  py-2'>
+      <div className='absolute top-full left-0 w-[10rem] h-[18.75rem] z-10  py-2'>
         {
           show ?
             <div ref={contentRef} className='hidden md:block bg-white shadow-shadow_category p-2 h-full rounded-sm overflow-y-auto'>
@@ -266,9 +266,9 @@ const InputSearch = ({ value, changeHandler }: { value: string, changeHandler: (
 
   return (
     <div className="bg-gray-100 rounded-xl w-full flex items-center">
-      <input className="bg-gray-100 h-[40px] rtl:pr-4 ltr:pl-4 rounded-xl w-[calc(100%-45px)]" value={value} onChange={changeHandler} type="text" placeholder={"جستجو"} />
+      <input className="bg-gray-100 h-[2.5rem] rtl:pr-4 ltr:pl-4 rounded-xl w-[calc(100%-2.8125rem)]" value={value} onChange={changeHandler} type="text" placeholder={"جستجو"} />
 
-      <div className="flex justify-center w-[45px]">
+      <div className="flex justify-center w-[2.8125rem]">
         <MagnifierIcon active={false} />
       </div>
     </div>

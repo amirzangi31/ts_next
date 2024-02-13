@@ -77,13 +77,13 @@ const FavoritePage = () => {
 
                                     </>
                                     :
-                                    <div className='h-[calc(100vh-220px)] flex justify-center items-center flex-col gap-8'>
+                                    <div className='h-[calc(100vh-13.75rem)] flex justify-center items-center flex-col gap-8'>
                                         <div>
                                             <Image src={"/noPeoples.png"} width={500} height={500} alt='noPeoples_image' className='w-full' />
                                         </div>
                                         <div className='flex justify-start items-center gap-4 flex-col'>
                                             <p className='text-md '>تا بحال پزشک مورد علاقه ای ثبت نشده</p>
-                                            <div className='w-[220px]'>
+                                            <div className='w-[13.75rem]'>
                                                 <LinkElement link={`search`}>
                                                     <ButtonElement typeButton='primary' fontWeight='bold' >
                                                         جستجو بین پزشکان
@@ -101,13 +101,13 @@ const FavoritePage = () => {
                             {favoriteArticles.length > 0 ?
                                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus odio voluptate corrupti numquam ducimus laboriosam libero eligendi atque magnam. Vitae, voluptate maxime. Voluptates, veritatis quaerat quos facilis at unde consequatur.</p>
                                 :
-                                <div className='h-[calc(100vh-220px)] flex justify-center items-center flex-col gap-8'>
+                                <div className='h-[calc(100vh-13.75rem)] flex justify-center items-center flex-col gap-8'>
                                     <div>
                                         <Image src={"/noPeoples.png"} width={500} height={500} alt='noPeoples_image' className='w-full' />
                                     </div>
                                     <div className='flex justify-start items-center gap-4 flex-col'>
                                         <p className='text-md '>تا بحال مقاله مورد علاقه ای ثبت نشده</p>
-                                        <LinkElement link={`blog`} className='w-[220px]'>
+                                        <LinkElement link={`blog`} className='w-[13.75rem]'>
                                             <ButtonElement typeButton='primary' fontWeight='bold'>
                                                 جستجو بین مقالات
                                             </ButtonElement>
@@ -142,17 +142,17 @@ const ArticleCardLoading = () => {
             <div className="pl-5">
                 <div className="flex items-center gap-5">
                     <div className='rounded-sm overflow-hidden w-1/3'>
-                        <div className='w-[120px] rounded-sm overflow-hidden'><Skeleton className='h-[120px] ' /> </div>
+                        <div className='w-[7.5rem] rounded-sm overflow-hidden'><Skeleton className='h-[7.5rem] ' /> </div>
                     </div>
                     <div className='w-2/3'>
-                        <div className='text-lg font-bold py-2 w-1/2'><Skeleton className='h-[20px]' /> </div>
+                        <div className='text-lg font-bold py-2 w-1/2'><Skeleton className='h-[1.25rem]' /> </div>
 
                         <div className='text-md short-text-3 w-1/2'>
-                            <Skeleton className='h-[40px]' />
+                            <Skeleton className='h-[2.5rem]' />
                         </div>
                         <div className='w-full flex justify-between items-center text-md text-gray-500 mt-2'>
-                            <div className='w-[20px]'><Skeleton className='h-[12px]' /></div>
-                            <div className='w-[20px]'><Skeleton className='h-[12px]' /></div>
+                            <div className='w-[1.25rem]'><Skeleton className='h-[0.75rem]' /></div>
+                            <div className='w-[1.25rem]'><Skeleton className='h-[0.75rem]' /></div>
                         </div>
                     </div>
                 </div>

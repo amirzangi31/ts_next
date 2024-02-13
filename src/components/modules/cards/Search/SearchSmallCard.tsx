@@ -16,7 +16,7 @@ const SearchSmallCard = (props: RelatedPhysicianType | PhysicianProfileType) => 
       return (
             <LinkElement link={`Physician/${physicianProfileUrl}`} className={cn('flex justify-start items-center bg-white w-full py-2 px-4 rounded-sm', bg)} >
                   <div className='rtl:pl-2 ltr:pr-2'>
-                        <Image src={hasImage ? getUrlImage(id) : "/noImage.jfif"} width={500} height={500} alt='avatar' className='w-[55px] h-[55px] rounded-full' />
+                        <Image src={hasImage ? getUrlImage(id) : "/noImage.jfif"} width={500} height={500} alt='avatar' className='size-[3.4375rem] rounded-full' />
                   </div>
                   <div className='flex-1 text-sm'>
                         <p className='font-bold'>دکتر {firstName} {lastName}</p>

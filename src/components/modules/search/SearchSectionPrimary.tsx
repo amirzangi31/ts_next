@@ -41,7 +41,7 @@ const SearchSectionPrimary = (props : {showFilters : boolean , closeFilterHandle
         <div className={
             cn(
                 'fixed -top-full left-0 h-screen w-full  bg-white-200 p-4 bg-bg_content transition-all duration-300',
-                "md:static md:h-auto md:w-[300px] md:rounded-sm md:bg-white md:shadow-shadow_category",
+                "md:static md:h-auto md:w-[18.75rem] md:rounded-sm md:bg-white md:shadow-shadow_category",
                 {
                     "top-0 z-[20]" : showFilters
                 }
@@ -117,7 +117,7 @@ const FilterCard = (props: FilterCardProps) => {
                 )}><ArrowLeft /></span>
             </div>
             <div className={cn(
-                ' mt-4 relative h-[150px] cursor-auto',
+                ' mt-4 relative h-[9.375rem] cursor-auto',
                 {
                     "hidden": !active
                 }
@@ -125,7 +125,7 @@ const FilterCard = (props: FilterCardProps) => {
                 <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
                     <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' />
                 </div>
-                <div className='h-[100px] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
+                <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
                     لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و
                 </div>
             </div>

@@ -29,7 +29,7 @@ const AppointmentRadioButton = ({ name, time, active, selected, handler, ramaini
                 })}
                 htmlFor={`${calendarId}-${index}`}
             >
-                <div className={clsx(`flex group rounded-[28px] justify-center items-center gap-3 font-bold h-[47px] w-[90px] relative shadow-shadow_category transition-all duration-300 overflow-hidden `,
+                <div className={clsx(`flex group rounded-[1.75rem] justify-center items-center gap-3 font-bold h-[2.9375rem] w-[5.625rem] relative shadow-shadow_category transition-all duration-300 overflow-hidden `,
 
 
                     {
@@ -41,12 +41,12 @@ const AppointmentRadioButton = ({ name, time, active, selected, handler, ramaini
 
                     }
                 )}>
-                    {active && <div className={cn(`rounded-full w-[19px] h-[19px] flex items-center justify-center z-10 `, {
+                    {active && <div className={cn(`rounded-full size-[1.1875rem] flex items-center justify-center z-10 `, {
                         "bg-green-300": selected,
                         "bg-gray-100": !selected
                     })}>
                         {selected &&
-                            <div className="z-10 rounded-full w-[11px] h-[11px] bg-white shadow-[0_2px_4px_0_rgba(0,0,0,0.5)]" />
+                            <div className="z-10 rounded-full size-[0.6875rem] bg-white shadow-[0_2px_4px_0_rgba(0,0,0,0.5)]" />
                         }
                     </div>}
                     <p className="z-10 ">

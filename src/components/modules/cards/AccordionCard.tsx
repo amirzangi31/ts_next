@@ -19,7 +19,7 @@ const AccordionCard = ({ title, description, active, handler, id } : AccordionCa
                   `}
                   onClick={() => handler(id)}
             >
-                  <div className="text-lg flex justify-between items-center font-bold relative after:absolute after:rtl:-right-[20px] after:rounded-lg after:top-0 after:block after:bg-primary after:w-1.5 after:h-full">
+                  <div className="text-lg flex justify-between items-center font-bold relative after:absolute after:rtl:-right-[1.25rem] after:rounded-lg after:top-0 after:block after:bg-primary after:w-1.5 after:h-full">
                         <h2 className="group-hover:text-white transition-all duration-300">{title}</h2>
                         <span
                               className={cn(` transition-all duration-500`, {

@@ -129,20 +129,20 @@ const Footer = () => {
           {/* Send Comment */}
           <div className='w-full order-3 min-[480px]:order-none min-[480px]:w-1/2 lg:w-1/3 px-2 mt-4 lg:mt-0  rounded-sm p-2'  >
             <div className='grid grid-cols-2 gap-1 '>
-              <div className='border-b border-gray-500   px-2 h-[45px] '>
+              <div className='border-b border-gray-500   px-2 h-[2.8125rem] '>
                 <input type="text" name='fullName' value={form.fullName} onChange={changeHandler} className='w-full h-full text-sm ' placeholder='نام و نام خانوادگی' />
               </div>
-              <div className='border-b border-gray-500   px-2 h-[45px] '>
+              <div className='border-b border-gray-500   px-2 h-[2.8125rem] '>
                 <input type="text" name='emailAddre' value={form.emailAddre} onChange={changeHandler} className='w-full h-full text-sm ' placeholder='ایمیل' />
               </div>
-              <div className='border-b border-gray-500   px-2 h-[45px] '>
+              <div className='border-b border-gray-500   px-2 h-[2.8125rem] '>
                 <input type="number" name='phoneNumber' value={form.phoneNumber} onChange={changeHandler} className='w-full h-full text-sm ' placeholder='شماره تلفن همراه' />
               </div>
-              <div className='border-b border-gray-500   px-2 h-[45px] '>
+              <div className='border-b border-gray-500   px-2 h-[2.8125rem] '>
                 <input type="text" name='title' value={form.title} onChange={changeHandler} className='w-full h-full text-sm ' placeholder='عنوان' />
               </div>
             </div>
-            <textarea name='message' value={form.message} onChange={changeHandler} className='w-full resize-none h-100px mt-4 border-b border-gray-500 text-md bg-transparent ' placeholder='دیدگاه شما درباره ما ' ></textarea>
+            <textarea name='message' value={form.message} onChange={changeHandler} className='w-full resize-none h-6.25rem mt-4 border-b border-gray-500 text-md bg-transparent ' placeholder='دیدگاه شما درباره ما ' ></textarea>
             <ButtonElement typeButton="primary" handler={sendComment} loading={loadingButton} disabled={loadingButton}>ثبت دیدگاه</ButtonElement>
           </div>
 
