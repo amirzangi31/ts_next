@@ -78,7 +78,7 @@ const config: Config = {
       boxShadow: {
         shadow_toast: "0px 4px 6px 0px rgba(0, 0, 0, 0.15)",
         shadow_category: "0px 1px 8px 0px rgba(0, 0, 0, 0.05)",
-        shadow_bottom_nav: "10px 10px 30px 10px rgba(0,0,0,0.1)",
+        shadow_bottom_nav: "0.625rem 0.625rem 1.875rem 0.625rem rgba(0,0,0,0.1)",
         shadow_comment: "-12px 9px 19px -12px rgba(0, 0, 0, 0.25)",
         shadow_blog: "0px 2px 58px -13px rgba(0, 0, 0, 0.30)",
         no_appointment_timer: "0px 0px 19px -4px rgba(0, 0, 0, 0.42)",

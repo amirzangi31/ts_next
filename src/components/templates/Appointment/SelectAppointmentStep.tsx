@@ -162,10 +162,10 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
       {/* ----------header------------- */}
       <header className=''>
         <div className="mt-4 flex justify-start items-center gap-2">
-          <div className="w-[42px] h-[42px] rounded-full bg-white shadow-shadow_category flex justify-center items-center">
+          <div className="size-[2.625rem] rounded-full bg-white shadow-shadow_category flex justify-center items-center">
             <TurnsIcon active={false} />
           </div>
-          <div className="h-[42px] px-2 rounded-3xl text-lg font-bold bg-white shadow-shadow_category flex justify-center items-center">
+          <div className="h-[2.625r] px-2 rounded-3xl text-lg font-bold bg-white shadow-shadow_category flex justify-center items-center">
             نوبت دهی اینترنتی مطب
           </div>
         </div>
@@ -184,7 +184,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
                 <Image
                   width={400}
                   height={400}
-                  className="w-[85px] h-[85px]"
+                  className="size-[5.3125rem]"
                   src={"/Clock.png"}
                   alt="clock-image"
                 />
@@ -262,7 +262,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
                 </Tab>
               ))}
             </TabList>
-            <div className="mt-6 py-2 relative min-h-[100px]">
+            <div className="mt-6 py-2 relative min-h-[6.25rem]">
               <div
                 className={cn(
                   `flex justify-center items-center gap-2 text-center text-lg font-bold mb-4 `,
@@ -353,8 +353,8 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
 
         {/* ----------section------------- */}
         {/* buttons */}
-        <section className="mt-6  sticky bottom-[20px] w-full left-0 flex justify-center items-center z-[14]">
-          <div className="w-full max-w-[1300px]   gap-2 ">
+        <section className="mt-6  sticky bottom-[1.25rem] w-full left-0 flex justify-center items-center z-[14]">
+          <div className="w-full max-w-[118.75rem]   gap-2 ">
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <ButtonElement
@@ -454,7 +454,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
       >
         <BottomSheetAndCenterContent show={showModalRulesArenap} >
           <div className=" overflow-y-auto h-[calc(100vh-150px)]">
-            <span className="absolute top-[30px] rtl:left-[15px] ltr:right-[15px] xs:rtl:left-[30px] xs:ltr:right[30px] z-50">
+            <span className="absolute top-[1.875rem] rtl:left-[0.9375rem] ltr:right-[0.9375rem] xs:rtl:left-[1.875rem] xs:ltr:right[1.875rem] z-50">
               <CloseButton closeHanlder={() => {
                 setShowModalRulesArenap(false)
                 setShowModalRules(true)
@@ -463,7 +463,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
             <p className="text-center font-bold text-lg mt-2">
               قوانین و شرایط آرناپ
             </p>
-            <div className="mt-6 flex justify-between items-center gap-6 flex-col  py-[50px]">
+            <div className="mt-6 flex justify-between items-center gap-6 flex-col  py-[3.125rem]">
               <BaseCard bg="bg-bg_content" title={"قوانین و مقررات آرناپ"}>
                 <div className='text-md  flex justify-start items-start gap-2 flex-col'>
                   <p>

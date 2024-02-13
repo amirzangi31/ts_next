@@ -10,7 +10,7 @@ export type DayOfWeekButtonType = {
 
 const DayOfWeekButton = ({ selected, dayOfWeek, dayOfMonth, disabled, isAppointment }: DayOfWeekButtonType) => {
     return (
-        <div className={cn(`group overflow-hidden relative flex flex-shrink-0 flex-col justify-center items-center rounded-[41px] cursor-pointer h-[100px] w-[70px] text-md p-2 transition-all duration-300`, {
+        <div className={cn(`group overflow-hidden relative flex flex-shrink-0 flex-col justify-center items-center rounded-[2.5625rem] cursor-pointer h-[6.25rem] w-[4.375rem] text-md p-2 transition-all duration-300`, {
             "bg-gray-200 text-gray-450 cursor-default": !disabled,
             "bg-primary text-white": disabled && selected,
             "bg-white text-black": disabled && !selected,

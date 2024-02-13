@@ -27,12 +27,12 @@ const BlogPage = () => {
     return (
         <>
             <TitlePagesMobile title={"بلاگ آرناپ"} />
-            <div className="container max-w-[1300px]  ">
+            <div className="container max-w-[118.75rem]  ">
                 {/* search section */}
                 <header className="mt-4 md:rounded-sm md:shadow-shadow_blog md:h-[12.5rem] flex justify-center items-center ">
                     <div className="w-full ">
                         <TitleHeading title="بلاگ پزشکی آرناپ" /> 
-                        <div className="md:w-[385px] mx-auto mt-4  h-[50px]  w-full bg-white rounded-3xl p-[5px] flex justify-between items-center">
+                        <div className="md:w-[24.0625rem] mx-auto mt-4  h-[3.125rem]  w-full bg-white rounded-3xl p-[5px] flex justify-between items-center">
                             <input
                                 type="text"
                                 className="flex-1 h-full px-1 text-md placeholder:text-gray-400"

@@ -142,7 +142,7 @@ const Footer = () => {
                 <input type="text" name='title' value={form.title} onChange={changeHandler} className='w-full h-full text-sm ' placeholder='عنوان' />
               </div>
             </div>
-            <textarea name='message' value={form.message} onChange={changeHandler} className='w-full resize-none h-100px mt-4 border-b border-gray-500 text-md bg-transparent ' placeholder='دیدگاه شما درباره ما ' ></textarea>
+            <textarea name='message' value={form.message} onChange={changeHandler} className='w-full resize-none h-6.25rem mt-4 border-b border-gray-500 text-md bg-transparent ' placeholder='دیدگاه شما درباره ما ' ></textarea>
             <ButtonElement typeButton="primary" handler={sendComment} loading={loadingButton} disabled={loadingButton}>ثبت دیدگاه</ButtonElement>
           </div>
 

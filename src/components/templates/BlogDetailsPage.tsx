@@ -65,7 +65,7 @@ const BlogDetailesPage = (props: { slug: string }) => {
     <>
       <TitlePagesMobile title={article?.title ? article.title : ""} />
       <ModalLogin  />
-      <div className=" mt-4 max-w-[1300px] w-full">
+      <div className=" mt-4 max-w-[118.75rem] w-full">
         <div className="bg-white rounded-sm p-2 flex justify-start items-center flex-wrap gap-2 w-full">
           <LinkElement
             link={`blog`}
@@ -90,13 +90,13 @@ const BlogDetailesPage = (props: { slug: string }) => {
           </LinkElement>
           <button
             type="button"
-            className="bg-[#F0FFFE] text-primary  h-[35px] rounded-3xl text-center px-3"
+            className="bg-[#F0FFFE] text-primary  h-[2.1875rem] rounded-3xl text-center px-3"
           >
             {article?.title}
           </button>
         </div>
       </div>
-      <section className=" max-w-[1300px] w-full   mt-4 mx-0 flex justify-between items-start md:gap-4   md:pb-5">
+      <section className=" max-w-[118.75rem] w-full   mt-4 mx-0 flex justify-between items-start md:gap-4   md:pb-5">
         <div className="md:w-8/12 max-w-full">
           <BlogCard blog={article} />
           <div className="bg-white rounded-sm mt-4 shadow-shadow_category p-5">
@@ -214,7 +214,7 @@ const BlogCard = ({ blog }: { blog: ArticleCardType | undefined }) => {
       </div>
       <p className="my-4 font-bold">{blog?.title}</p>
       <div className="p-4 flex justify-start items-stretch  gap-2 rounded-sm bg-[#EFF4FF] ">
-        <div className="min-w-[55px] h-[55px] rounded-full border border-gray-300  ">
+        <div className="min-w-[3.4375rem] h-[3.4375rem] rounded-full border border-gray-300  ">
           <Image
             src={"/doctor.jpg"}
             width={500}
@@ -303,13 +303,13 @@ export const BlogAsideCard = ({ physicians }: { physicians: AutohrCardType[] }) 
             link={`${item.link}`}
             key={item.id}
           >
-            <div className="flex min-w-[56px] justify-between py-3 border-b border-gray-100">
+            <div className="flex min-w-[3.5rem] justify-between py-3 border-b border-gray-100">
               <Image
                 src={item.hasImage ? getUrlImage(item.id) : "/noImage.jfif"}
                 alt="physician_profile"
                 width={300}
                 height={300}
-                className="w-[56px] h-[56px] rounded-full"
+                className="size-[3.5rem] rounded-full"
               />
               <div className="flex flex-col justify-between items-start py-1 w-[calc(100%-105px)]">
                 <p className="text-sm font-bold text-right">{`دکتر ${item.physicianName}`}</p>
@@ -334,7 +334,7 @@ const PhysicianCard = (props: AutohrCardType) => {
     <Link
       href={`${props.link}`}
     >
-      <div className="bg-white rounded-sm p-3 flex flex-col gap-2 items-center max-w-full w-[170px]">
+      <div className="bg-white rounded-sm p-3 flex flex-col gap-2 items-center max-w-full w-[10.625rem]">
         <Image
           src={
             props.hasImage ? getUrlImage(props.id) : "/noImage.jfif"
@@ -342,7 +342,7 @@ const PhysicianCard = (props: AutohrCardType) => {
           alt="physician_profile"
           width={300}
           height={300}
-          className="w-[65px] h-[65px] rounded-full"
+          className="size-[4.0625rem] rounded-full"
         />
         <p className="font-bold">{`دکتر ${props.physicianName}`}</p>
         <div className="text-md short-text-1">

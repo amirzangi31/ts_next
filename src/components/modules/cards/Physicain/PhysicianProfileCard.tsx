@@ -65,7 +65,7 @@ const PhysicianProfileCard = ({
               className="rounded-full w-full h-full"
             />
             {/* {status &&
-                            <span className='w-[16px] h-[16px] bg-white rounded-full absolute bottom-[1px] rtl:right-[9px] ltr:-left-[5px] flex justify-center items-center '>
+                            <span className='size-[1rem] bg-white rounded-full absolute bottom-[1px] rtl:right-[9px] ltr:-left-[5px] flex justify-center items-center '>
                                 <span className={`w-[10px]  h-[10px] ${status === "online" ? "bg-primary-100 animate-pulse" : "bg-gray-400"} rounded-full `}>
                                 </span>
                             </span>

@@ -43,28 +43,28 @@ const PaymentAppointmentStep = ({ physician }: { physician: PhysicianProfile }) 
         <BaseCard radius="rounded-md" title="مشخصات بیمار">
           <div className="grid grid-cols-2 gap-y-4">
             <div className="flex items-start gap-2">
-              <div className="rounded-full w-[7px] h-[7px] mt-[7px] bg-[#D9D9D9]" />
+              <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
               <div className="flex flex-col gap-1">
                 <p className="font-bold text-md">نام :</p>
                 <p className="text-md">{patient.firstName}</p>
               </div>
             </div>
             <div className="flex items-start gap-2">
-              <div className="rounded-full w-[7px] h-[7px] mt-[7px] bg-[#D9D9D9]" />
+              <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
               <div className="flex flex-col gap-1">
                 <p className="font-bold text-md">شماره موبایل :</p>
                 <p className="text-md">{patient.phoneNumber}</p>
               </div>
             </div>
             <div className="flex items-start gap-2">
-              <div className="rounded-full w-[7px] h-[7px] mt-[7px] bg-[#D9D9D9]" />
+              <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
               <div className="flex flex-col gap-1">
                 <p className="font-bold text-md">نام خانوادگی :</p>
                 <p className="text-md">{patient.lastName}</p>
               </div>
             </div>
             <div className="flex items-start gap-2">
-              <div className="rounded-full w-[7px] h-[7px] mt-[7px] bg-[#D9D9D9]" />
+              <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
               <div className="flex flex-col gap-1">
                 <p className="font-bold text-md">کد ملی :</p>
                 <p className="text-md">{patient.nationalNumber}</p>
@@ -89,7 +89,7 @@ const PaymentAppointmentStep = ({ physician }: { physician: PhysicianProfile }) 
             </ButtonElement>
           ) : (
             <>
-              <div className="w-full h-[43px]  bg-white mb-2 rounded-lg px-3 text-md    shadow-shadow_category flex justify-between items-center">
+              <div className="w-full h-[2.6875rem]  bg-white mb-2 rounded-lg px-3 text-md    shadow-shadow_category flex justify-between items-center">
                 <div className="flex justify-start items-center gap-1">
                   <span>
                     <WalletIcon />{" "}
@@ -107,7 +107,7 @@ const PaymentAppointmentStep = ({ physician }: { physician: PhysicianProfile }) 
                 <div className="flex justify-center items-center gap-1">
                     {/* <span
                       className={cn(
-                        `w-[6px] h-[6px] rounded-full  block  `,
+                        `size-[0.375rem] rounded-full  block  `,
                         {
                           "bg-primary-100":
                             Number(user?.accountBalance) >= +price,

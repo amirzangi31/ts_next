@@ -8,18 +8,18 @@ const PhysicianLoadingPrimaryCard = ({ freeMode }: { freeMode: boolean }) => {
   return (
     <div
       className={cn(
-        `bg-white rounded-sm shadow-shadow_category min-h-[px]   flex justify-between items-start flex-col`,
+        `bg-white rounded-sm shadow-shadow_category    flex justify-between items-start flex-col`,
         {
-          "w-[320px]": freeMode,
+          "w-[20rem]": freeMode,
           "w-full": !freeMode,
         }
       )}
     >
       <div className="p-4  w-full flex justify-between items-start">
-        <div className="relative w-[60px]">
-          <Skeleton circle={true} className=" w-[60px] h-[60px]" />
+        <div className="relative w-[3.75rem]">
+          <Skeleton circle={true} className=" w-[3.75rem] h-[3.75rem]" />
         </div>
-        <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-between items-start flex-col min-h-[60px]">
+        <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-between items-start flex-col min-h-[3.75rem]">
           <div className="w-2/4">
             <Skeleton />{" "}
           </div>
@@ -33,20 +33,20 @@ const PhysicianLoadingPrimaryCard = ({ freeMode }: { freeMode: boolean }) => {
       </div>
       <div className="px-4  w-full grid grid-cols-2 gap-1 py-2">
         <div className="w-3/4">
-          <Skeleton className="h-[28px]" />{" "}
+          <Skeleton className="h-[1.75rem]" />{" "}
         </div>
         <div className="w-3/4">
-          <Skeleton className="h-[28px]" />{" "}
+          <Skeleton className="h-[1.75rem]" />{" "}
         </div>
         <div className="w-3/4">
-          <Skeleton className="h-[28px]" />{" "}
+          <Skeleton className="h-[1.75rem]" />{" "}
         </div>
         <div className="w-3/4">
-          <Skeleton className="h-[28px]" />{" "}
+          <Skeleton className="h-[1.75rem]" />{" "}
         </div>
       </div>
       <div className="px-2 pb-2 w-full">
-        <Skeleton className="h-[30px]" />
+        <Skeleton className="h-[1.875rem]" />
       </div>
     </div>
   );

@@ -250,7 +250,7 @@ const SearchHomePage = ({ physicians }: { physicians: RelatedPhysicianType[] }) 
                 </div>
                 {/* ----------Search Content------------- */}
             </div>
-            <div className="py-2 font-bold md:text-right text-center text-gray-500 text-sm max-w-[800px] mx-auto px-5">
+            <div className="py-2 font-bold md:text-right text-center text-gray-500 text-sm max-w-[50rem] mx-auto px-5">
                 <p>برای دریافت نوبت اینترنتی یا مشاوره متنی، تلفنی و تلفنی فوری می توانید از بین پزشکان آرناپ جستجو کنید.</p>
             </div>
         </>

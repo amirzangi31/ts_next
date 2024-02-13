@@ -83,7 +83,7 @@ const OfficeCard = ({ title, address, numbers, longitude, latitude }: OfficeCard
       <Modal show={showModalAddress} closeHandler={() => { }}>
         <div
           id="modal_address"
-          className="container flex justify-center items-center h-[calc(100vh-77px)] "
+          className="container flex justify-center items-center h-[calc(100vh-4.375rem)] "
           onClick={(e) => {
             const target = e.target as HTMLDivElement
 

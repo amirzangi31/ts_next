@@ -147,28 +147,28 @@ const PaymentPage = (props: PaymentPageProps) => {
                 <BaseCard radius="rounded-md" title="مشخصات بیمار">
                     <div className="grid grid-cols-2 gap-y-4">
                         <div className="flex items-start gap-2">
-                            <div className="rounded-full w-[7px] h-[7px] mt-[7px] bg-[#D9D9D9]" />
+                            <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
                             <div className="flex flex-col gap-1">
                                 <p className="font-bold text-md">نام :</p>
                                 <p className="text-md">{appointment?.userFirstName}</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-2">
-                            <div className="rounded-full w-[7px] h-[7px] mt-[7px] bg-[#D9D9D9]" />
+                            <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
                             <div className="flex flex-col gap-1">
                                 <p className="font-bold text-md">شماره موبایل :</p>
                                 <p className="text-md">{appointment?.userPhoneNumber}</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-2">
-                            <div className="rounded-full w-[7px] h-[7px] mt-[7px] bg-[#D9D9D9]" />
+                            <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
                             <div className="flex flex-col gap-1">
                                 <p className="font-bold text-md">نام خانوادگی :</p>
                                 <p className="text-md">{appointment?.userLastName}</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-2">
-                            <div className="rounded-full w-[7px] h-[7px] mt-[7px] bg-[#D9D9D9]" />
+                            <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
                             <div className="flex flex-col gap-1">
                                 <p className="font-bold text-md">کد ملی :</p>
                                 <p className="text-md">{appointment?.userNationalNumber}</p>
@@ -213,13 +213,13 @@ const PaymentPage = (props: PaymentPageProps) => {
                     <div className='flex justify-start items-center gap-3 flex-col'>
                         <Image src={"/failPayment.png"} width={1000} height={1000} alt='image' className='w-full' />
                         <p className='text-center'> لطفا دوباره امتحان کنید</p>
-                        <div className='w-[150px]'>
+                        <div className='w-[9.375rem]'>
                             <ButtonElement typeButton='primary' handler={addAppointmentHandler} loading={loadingPayment} disabled={loadingPayment}>
                                 <RefreshIcon />
                                 تلاش مجدد
                             </ButtonElement>
                         </div>
-                        <div className='w-[150px]'>
+                        <div className='w-[9.375rem]'>
                             <LinkElement link='/' >
                                 <ButtonElement typeButton='primary' >
                                     صفحه اصلی

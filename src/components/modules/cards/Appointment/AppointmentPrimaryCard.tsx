@@ -27,13 +27,13 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
   return (
     <div className=" bg-white rounded-md pb-6 overflow-hidden relative">
 
-      <div className="fixed md:absolute top-[110px] z-[10] md:top-[50px] left-0 w-[100px] h-[35px] bg-primary rounded-tr-full rounded-br-full  flex justify-center items-center font-bold text-white text-md shadow-shadow_comment">
+      <div className="fixed md:absolute top-[6.875rem] z-[10] md:top-[3.125rem] left-0 w-[6.25rem] h-[2.1875rem] bg-primary rounded-tr-full rounded-br-full  flex justify-center items-center font-bold text-white text-md shadow-shadow_comment">
         حضوری
       </div>
 
       <div className="px-6 pt-6 -mb-3">
         <div className="flex justify-start items-start">
-          <div className="min-w-[60px] h-[60px] rounded-full bg-white shadow-shadow_category  overflow-hidden border-2 border-white">
+          <div className="min-w-[3.75rem] h-[3.75rem] rounded-full bg-white shadow-shadow_category  overflow-hidden border-2 border-white">
             <Image
               src={hasImage ? getUrlImage(id) : "/noImage.jfif"}
               width={500}
@@ -42,7 +42,7 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
               alt="تست"
             />
           </div>
-          <div className="px-4 h-[60px] flex justify-around items-start flex-col">
+          <div className="px-4 h-[3.75rem] flex justify-around items-start flex-col">
             <p className="text-primary font-bold">
               دکتر {firstName} {lastName}
             </p>
@@ -71,7 +71,7 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
         </div>
 
         {lockTime && lockTime > 0 ? (
-          <div className="flex flex-col items-center my-5 max-w-[150px] mx-auto text-center">
+          <div className="flex flex-col items-center my-5 max-w-[9.375rem] mx-auto text-center">
             <small>تا</small>
             <div className="font-bold">
               <Timer
@@ -142,12 +142,12 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
       </div>
 
       {payment && (
-        <div className="h-[55px] relative">
-          <span className="w-[55px] h-[55px] block bg-bg_content rounded-full shadow-inner absolute top-0 -right-[27.5px]"></span>
+        <div className="h-[3.4375rem] relative">
+          <span className="w-[3.4375rem] h-[3.4375rem] block bg-bg_content rounded-full shadow-inner absolute top-0 -right-[1.71875rem]"></span>
           <div className="absolute top-1/2 left-0 w-full ">
             <PathLine color={"stroke-bg_content"} />
           </div>
-          <span className="w-[55px] h-[55px] block bg-bg_content rounded-full shadow-inner absolute top-0 -left-[27.5px]"></span>
+          <span className="w-[3.4375rem] h-[3.4375rem] block bg-bg_content rounded-full shadow-inner absolute top-0 -left-[1.71875rem]"></span>
         </div>
       )}
 
@@ -246,7 +246,7 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
           </>
         ) : (
           <div className="flex justify-center items-start flex-col gap-4 px-9">
-            <div className="w-full h-[45px] bg-[#D4FFDB] text-md rounded-sm flex justify-center items-center">
+            <div className="w-full h-[2.8125rem] bg-[#D4FFDB] text-md rounded-sm flex justify-center items-center">
               {" "}
               بزودی با شما تماس گرفته خواهد شد
             </div>

@@ -111,7 +111,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                 <button
                     type="button"
                     onClick={() => setShowFilters(true)}
-                    className="bg-white w-[140px] h-[55px] rounded-sm shadow-shadow_category flex justify-center items-center gap-2"
+                    className="bg-white w-[8.75rem] h-[3.4375rem] rounded-sm shadow-shadow_category flex justify-center items-center gap-2"
                 >
                     <FilterIcon />
                     <span className="text-lg font-bold ">فیلترها</span>

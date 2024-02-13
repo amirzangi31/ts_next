@@ -9,7 +9,7 @@ const ToastBlue = (title: string, subTitle: string, second = 3000, position: Toa
     return (
         toast.custom((t) => (
             <div
-                className={`animate-opacity max-w-[400px] shadow-shadow_toast  w-full flex items-center h-[60px] rounded-sm justify-between px-4 text-md    text-white pointer-events-auto  bg-link  z-[100] `}
+                className={`animate-opacity max-w-[25rem] shadow-shadow_toast  w-full flex items-center h-[3.75rem] rounded-sm justify-between px-4 text-md    text-white pointer-events-auto  bg-link  z-[100] `}
             >
                 <div className='flex justify-center items-center'>
                     {
