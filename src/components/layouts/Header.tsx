@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <header className='  bg-primary min-h-[5rem] md:flex  justify-center items-center'>
-      <div className="container py-2 hidden md:block overflow-hidden">
+      <div className="container py-2 hidden md:block ">
         <div className='flex items-center w-full '>
 
           {/* Logo */}
