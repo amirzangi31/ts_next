@@ -23,7 +23,7 @@ const useCity = () => {
     }
 
 
-    const province = useQuery(["provinces"], getProvincesHandler, { cacheTime: 1000 * 60 * 10 })
+    const province = useQuery(["provinces"], getProvincesHandler, { cacheTime: 1000 * 60 * 10 , staleTime : 1000 * 60 * 10  })
 
     const cities = useMutation({
         mutationFn: async ({ provinceId, provinceName }: { provinceId: number, provinceName: string }) => {
