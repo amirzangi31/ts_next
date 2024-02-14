@@ -7,19 +7,20 @@ import LocationIcon from "@components/icons/LocationIcon";
 import Timer from "@modules/Timer";
 import { getUrlImage } from "@/services/getImageUrl/getImageUrl";
 import priceSplitter from "@utils/priceSplitter";
-import convertToHour from "@utils/convertHour";
+
 import convertDayTime from "@utils/convertDayTime";
 import cn from "@utils/clsxFun";
 import ButtonElement from "@components/elements/ButtonElement";
 
 
 import { AppointmentPrimaryCardType } from "@/types/cards";
+import LinkElement from "@/components/elements/LinkElement";
 
 const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
 
 
-  const { index, payment, physician: { hasImage, id, firstName, lastName, specialties, address, latitude, longitude , physicianSpecialities }, price, lockTime, year, month, day, time } = props
-  
+  const { index, payment, physician: { hasImage, id, firstName, lastName, specialties, address, latitude, longitude, physicianSpecialities }, price, lockTime, year, month, day, time } = props
+
 
   const timerTime = new Date();
   timerTime.setSeconds(timerTime.getSeconds() + lockTime);
@@ -219,6 +220,7 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
                       </ButtonElement>
                     </a>
 
+
                     <div className="hidden md:block">
                       <ButtonElement
                         fontWeight="bold"
@@ -241,6 +243,16 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
                     </div>
                   </div>
                 ) : null}
+                <div className="md:hidden mt-4 px-5">
+                  {
+                    payment ?
+                      <ButtonElement typeButton="transparent" >
+                        <LinkElement link="profile/myappointment" >
+                          دیدن نوبت ها
+                        </LinkElement>
+                      </ButtonElement> : null
+                  }
+                </div>
               </>
             )}
           </>

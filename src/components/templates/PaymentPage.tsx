@@ -124,111 +124,120 @@ const PaymentPage = (props: PaymentPageProps) => {
         <>
             <ModalLogin isCallback={true} callbacks={callbacks} callbacksIndex={callbackIndex} />
 
-            <TitlePagesMobile title={`نوبت اینترنتی از ${props.physician.firstName} ${props.physician.lastName}`} />
+            {
+                props.status === "Success" ? (<TitlePagesMobile title={`نوبت اینترنتی از ${props.physician.firstName} ${props.physician.lastName}`} />) : (<TitlePagesMobile title={`خطا در نوبت گیری `} />)
+            }
 
-            {/* ----------section------------- */}
-            {/* appointment card */}
-            <AppointmentPrimaryCard
-                physician={props.physician}
-                day={appointment?.calendar.dayOfMonth ? appointment?.calendar.dayOfMonth : 0}
-                price={props.price}
-                lockTime={0}
-                payment={true}
-                year={appointment?.calendar.year ? appointment?.calendar.year : 0}
-                month={appointment?.calendar.month ? appointment?.calendar.month : 0}
-                index={0}
-                time={time}
-            />
-            {/* ----------section------------- */}
+            {
+                props.status === "Success" ? (
+                    <>
+                        {/* ----------section------------- */}
+                        {/* appointment card */}
+                        <AppointmentPrimaryCard
+                            physician={props.physician}
+                            day={appointment?.calendar.dayOfMonth ? appointment?.calendar.dayOfMonth : 0}
+                            price={props.price}
+                            lockTime={0}
+                            payment={true}
+                            year={appointment?.calendar.year ? appointment?.calendar.year : 0}
+                            month={appointment?.calendar.month ? appointment?.calendar.month : 0}
+                            index={0}
+                            time={time}
+                        />
+                        {/* ----------section------------- */}
 
-            {/* ----------section------------- */}
-            {/* patient section */}
-            <section className='my-4 '>
-                <BaseCard radius="rounded-md" title="مشخصات بیمار">
-                    <div className="grid grid-cols-2 gap-y-4">
-                        <div className="flex items-start gap-2">
-                            <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
-                            <div className="flex flex-col gap-1">
-                                <p className="font-bold text-md">نام :</p>
-                                <p className="text-md">{appointment?.userFirstName}</p>
-                            </div>
+                        {/* ----------section------------- */}
+                        {/* patient section */}
+                        <section className='my-4 '>
+                            <BaseCard radius="rounded-md" title="مشخصات بیمار">
+                                <div className="grid grid-cols-2 gap-y-4">
+                                    <div className="flex items-start gap-2">
+                                        <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
+                                        <div className="flex flex-col gap-1">
+                                            <p className="font-bold text-md">نام :</p>
+                                            <p className="text-md">{appointment?.userFirstName}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-2">
+                                        <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
+                                        <div className="flex flex-col gap-1">
+                                            <p className="font-bold text-md">شماره موبایل :</p>
+                                            <p className="text-md">{appointment?.userPhoneNumber}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-2">
+                                        <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
+                                        <div className="flex flex-col gap-1">
+                                            <p className="font-bold text-md">نام خانوادگی :</p>
+                                            <p className="text-md">{appointment?.userLastName}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-2">
+                                        <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
+                                        <div className="flex flex-col gap-1">
+                                            <p className="font-bold text-md">کد ملی :</p>
+                                            <p className="text-md">{appointment?.userNationalNumber}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </BaseCard>
+                        </section>
+                        {/* ----------section------------- */}
+
+                        {/* ----------section------------- */}
+                        {/* favorite  */}
+                        <div className="mt-4">
+                            <button className="rounded-md bg-white p-5 w-full" onClick={favoritePhysicianHandler}>
+                                <div className="flex justify-between items-center">
+                                    <p className="font-bold">پزشک مورد علاقه</p>
+                                    <LikeIcon liked={userFavorite} />
+                                </div>
+                            </button>
                         </div>
-                        <div className="flex items-start gap-2">
-                            <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
-                            <div className="flex flex-col gap-1">
-                                <p className="font-bold text-md">شماره موبایل :</p>
-                                <p className="text-md">{appointment?.userPhoneNumber}</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-2">
-                            <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
-                            <div className="flex flex-col gap-1">
-                                <p className="font-bold text-md">نام خانوادگی :</p>
-                                <p className="text-md">{appointment?.userLastName}</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-2">
-                            <div className="rounded-full w-[0.4375rem] h-[0.4375rem] mt-[0.4375rem] bg-[#D9D9D9]" />
-                            <div className="flex flex-col gap-1">
-                                <p className="font-bold text-md">کد ملی :</p>
-                                <p className="text-md">{appointment?.userNationalNumber}</p>
-                            </div>
-                        </div>
-                    </div>
-                </BaseCard>
-            </section>
-            {/* ----------section------------- */}
+                        {/* ----------section------------- */}
 
-            {/* ----------section------------- */}
-            {/* favorite  */}
-            <div className="mt-4">
-                <button className="rounded-md bg-white p-5 w-full" onClick={favoritePhysicianHandler}>
-                    <div className="flex justify-between items-center">
-                        <p className="font-bold">پزشک مورد علاقه</p>
-                        <LikeIcon liked={userFavorite} />
-                    </div>
-                </button>
-            </div>
-            {/* ----------section------------- */}
-
-            {/* ----------section------------- */}
-            {/* share */}
-            <div className="mt-4">
-                <button className="rounded-md bg-white p-5 w-full">
-                    <div className="flex justify-between items-center">
-                        <p className="font-bold">معرفی پزشک به دوستان</p>
-                        <ShareIcon />
-                    </div>
-                </button>
-            </div>
-            {/* ----------section------------- */}
-
+                        {/* ----------section------------- */}
+                        {/* share */}
+                        <div className="mt-4">
+                            <button className="rounded-md bg-white p-5 w-full">
+                                <div className="flex justify-between items-center">
+                                    <p className="font-bold">معرفی پزشک به دوستان</p>
+                                    <ShareIcon />
+                                </div>
+                            </button>
+                        </div>
+                        {/* ----------section------------- */}
+                    </>
+                ) : null
+            }
 
 
 
             {/* ----------section------------- */}
             {/* when status = fail */}
-            {props.status === "Fail" && (
-                <div className='min-h-screen flex justify-center items-center '>
-                    <div className='flex justify-start items-center gap-3 flex-col'>
-                        <Image src={"/failPayment.png"} width={1000} height={1000} alt='image' className='w-full' />
-                        <p className='text-center'> لطفا دوباره امتحان کنید</p>
-                        <div className='w-[9.375rem]'>
-                            <ButtonElement typeButton='primary' handler={addAppointmentHandler} loading={loadingPayment} disabled={loadingPayment}>
-                                <RefreshIcon />
-                                تلاش مجدد
-                            </ButtonElement>
-                        </div>
-                        <div className='w-[9.375rem]'>
-                            <LinkElement link='/' >
-                                <ButtonElement typeButton='primary' >
-                                    صفحه اصلی
+            {
+                props.status === "Fail" && (
+                    <div className='min-h-screen flex justify-center items-center '>
+                        <div className='flex justify-start items-center gap-3 flex-col'>
+                            <Image src={"/failPayment.png"} width={1000} height={1000} alt='image' className='w-full' />
+                            <p className='text-center'> لطفا دوباره امتحان کنید</p>
+                            <div className='w-[9.375rem]'>
+                                <ButtonElement typeButton='primary' handler={addAppointmentHandler} loading={loadingPayment} disabled={loadingPayment}>
+                                    <RefreshIcon />
+                                    تلاش مجدد
                                 </ButtonElement>
-                            </LinkElement>
+                            </div>
+                            <div className='w-[9.375rem]'>
+                                <LinkElement link='/' >
+                                    <ButtonElement typeButton='primary' >
+                                        صفحه اصلی
+                                    </ButtonElement>
+                                </LinkElement>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )
+            }
             {/* ----------section------------- */}
 
         </>
