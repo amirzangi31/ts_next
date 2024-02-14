@@ -247,7 +247,7 @@ const AppointmentPrimaryCard = (props: AppointmentPrimaryCardType) => {
                   {
                     payment ?
                       <ButtonElement typeButton="transparent" >
-                        <LinkElement link="profile/myappointment" >
+                        <LinkElement link="profile/myappointments" >
                           دیدن نوبت ها
                         </LinkElement>
                       </ButtonElement> : null

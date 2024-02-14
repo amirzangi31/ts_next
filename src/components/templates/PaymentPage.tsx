@@ -1,24 +1,23 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { getInfoAppointment } from '@/services/appointments/appointment'
-import { PhysicainProfileType } from '@/types/physicianProfile'
 import { OneAppointmentType, PhysicianProfile } from '@/types/appointment'
-import TitlePagesMobile from '../modules/titles/TitlePagesMobile'
+import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
 import useModalLogin from '@/hooks/useModalLogin'
 import useUserInfo from '@/hooks/useUserInfo'
-import ModalLogin from '../layouts/ModalLogin/ModalLogin'
+import ModalLogin from '@layouts/ModalLogin/ModalLogin'
 import { createPayment } from '@/services/payment/payment'
-import ToastBlue from '../elements/ToastBlue'
-import Toastify from '../elements/toasts/Toastify'
+import ToastBlue from '@elements/ToastBlue'
+import Toastify from '@elements/toasts/Toastify'
 import useFavorite from '@/hooks/useFavorite'
-import AppointmentPrimaryCard from '../modules/cards/Appointment/AppointmentPrimaryCard'
-import BaseCard from '../modules/cards/BaseCard'
-import LikeIcon from '../icons/LikeIcon'
-import ShareIcon from '../icons/ShareIcon'
+import AppointmentPrimaryCard from '@modules/cards/Appointment/AppointmentPrimaryCard'
+import BaseCard from '@modules/cards/BaseCard'
+import LikeIcon from '@icons/LikeIcon'
+import ShareIcon from '@icons/ShareIcon'
 import Image from 'next/image'
-import RefreshIcon from '../icons/RefreshIcon'
-import ButtonElement from '../elements/ButtonElement'
-import LinkElement from '../elements/LinkElement'
+import RefreshIcon from '@icons/RefreshIcon'
+import ButtonElement from '@elements/ButtonElement'
+import LinkElement from '@elements/LinkElement'
 
 export type PaymentPageProps = {
     price: number,
@@ -81,6 +80,7 @@ const PaymentPage = (props: PaymentPageProps) => {
     }, [isLogin])
 
     const addAppointmentHandler = async () => {
+        setLoadingPayment(true)
         try {
             const res = await createPayment(props.appointmentId, props.price, 1)
             ToastBlue(
@@ -95,6 +95,7 @@ const PaymentPage = (props: PaymentPageProps) => {
         } catch (error: any) {
             Toastify("error", error.response?.data?.resultMessage)
         }
+        setLoadingPayment(true)
     }
 
     const { userFavorite, addFavorite, deleteFavorite } = useFavorite(props.physician.id)
