@@ -26,14 +26,14 @@ const TitlePrimary = ({
 }: TitlePrimaryType) => {
     return (
         <div className="flex justify-between items-center">
-            <h3
+            <h2
                 className={cn(`text-lg font-bold `, {
                     "rtl:mr-[1.25rem] ltr:ml-[1.25rem] relative after:absolute after:rtl:-right-[1.25rem] after:rounded-lg after:top-0 after:block after:bg-primary after:w-1.5 after:h-full":
                         prefix,
                 })}
             >
                 {title} {subTitle ? `(${subTitle})` : ""}
-            </h3>
+            </h2>
             {btn && link && (
                 <LinkElement link={`${link}`} >
                     <div className="w-[7.5rem]">
