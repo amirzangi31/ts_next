@@ -44,7 +44,7 @@ const LoginPage = () => {
         <>
             <TitlePagesMobile title={"ثبت نام / ورود"} />
             <ModalLogin  />
-            <div className="container pb-5 max-w-[62.5rem]">
+            <div className=" pb-5 max-w-[62.5rem] mx-auto">
                 <header className="mt-12">
                     <div className="relative w-full ">
                         <div className="bg-white  rounded-full w-20 h-20 flex justify-center items-center absolute left-[calc(50%-40px)] -top-10 ">

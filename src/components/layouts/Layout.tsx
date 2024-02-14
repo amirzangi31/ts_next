@@ -22,7 +22,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <QueryClientProvider client={query}>
             <CookiesProvider defaultSetOptions={{ path: '/' }}>
                 <Header />
-                <main className='container py-4 min-h-[calc(100vh-26.5375rem)]'>
+                <main className='container  min-h-[calc(100vh-26.5375rem)] '>
                     {children}
                 </main>
                 <Footer />

@@ -11,10 +11,11 @@ import HomeIcon from "@icons/menu/HomeIcon";
 import BlogIcon from "@icons/menu/BlogIcon";
 import MagnifierIcon from "@icons/menu/MagnifierIcon";
 import ProfileIcon from "@icons/menu/ProfileIcon";
+import useUserInfo from "@/hooks/useUserInfo";
 
 const BottomNavigation = ({ route }: { route: string }) => {
     
-    // const { isLogin } = useAuth(true)
+    const {isLogin , user} = useUserInfo()
 
     return (
         <div className="fixed bottom-0 left-0 w-full h-[4.875rem] bg-white flex justify-between items-center flex-row-reverse md:hidden px-8 z-[5] shadow-shadow_bottom_nav">
@@ -68,7 +69,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
                 </span>
             </LinkElement>
             {/* if authorization === true profile button else login button */}
-            {false ? (
+            {isLogin === "authorization" ? (
                 <LinkElement
                     link={`profile`}
 
@@ -80,7 +81,8 @@ const BottomNavigation = ({ route }: { route: string }) => {
                         }
                     )}
                 >
-                    <span>حساب کاربری</span>
+                    <span>{user.lastName}</span>
+                    
                     <span>
                         <ProfileIcon active={route === "profile"} />
                     </span>
@@ -88,7 +90,6 @@ const BottomNavigation = ({ route }: { route: string }) => {
             ) : (
                 <LinkElement
                     link={`login`}
-
                     className={cn(
                         `flex justify-center items-center gap-1 flex-col-reverse text-sm `,
                         {

@@ -68,7 +68,7 @@ const HomePage = (props: HomePagePropType) => {
 
             {/* ----------section------------- */}
             {/* Best Specialities  */}
-            <section>
+            <section className='mt-6'>
                 <BestSpeciality />
             </section >
             {/* ----------section------------- */}

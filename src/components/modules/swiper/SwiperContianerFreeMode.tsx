@@ -11,13 +11,14 @@ import 'swiper/css/free-mode';
 import { ArticleCardType, AutohrCardType, CategoryPrimaryType, CommentCardPrimaryType, PhysicainCardPrimaryType } from '@/types/cards';
 import { RelatedPhysicianType } from '@/types/physicianProfile';
 import { PhysicianSpecialityType, SearchSmallCardType, SpecialitySearchTagType } from '@/types/search';
+import { ServicesDataType } from '@/data/servicesData';
 
 
 
 interface SwiperContainerFreeModeType {
     CardComponent: React.ComponentType<any>;
     gap?: number;
-    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[] | ArticleCardType[] | CommentCardPrimaryType[] | RelatedPhysicianType[] | SearchSmallCardType[] | SpecialitySearchTagType[] | PhysicianSpecialityType[] | AutohrCardType[]
+    data: CategoryPrimaryType[] | PhysicainCardPrimaryType[] | ArticleCardType[] | CommentCardPrimaryType[] | RelatedPhysicianType[] | SearchSmallCardType[] | SpecialitySearchTagType[] | PhysicianSpecialityType[] | AutohrCardType[] | ServicesDataType[]
 }
 
 
@@ -30,6 +31,7 @@ const SwiperContainerFreeMode = ({ data, gap, CardComponent }: SwiperContainerFr
             speed={1000}
             modules={[FreeMode, Autoplay]}
             freeMode={true}
+            centeredSlides={true}
             dir="rtl"
         >
             {

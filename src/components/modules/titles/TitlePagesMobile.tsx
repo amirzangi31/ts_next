@@ -24,7 +24,7 @@ const TitlePagesMobile = ({ title }: { title: string }) => {
                 <div className="absolute top-[calc(50%-1.25rem)] rtl:right-[1.25rem] ltr:left-[1.25rem]">
                     {pathName === "/" || pathName === "/en" ? "" : <ButtonBack />}
                 </div>
-                <p className="text-white font-bold text-lg ">{title}</p>
+                <p className="text-white font-bold text-lg px-[42px] text-center">{title}</p>
                 {
                     isLogin === "unauthorization" ?
 
