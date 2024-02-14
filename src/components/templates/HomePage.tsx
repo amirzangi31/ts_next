@@ -59,7 +59,12 @@ const HomePage = (props: HomePagePropType) => {
             {/* ----------section------------- */}
             {/* services  */}
             <section className='mt-6'>
-                <h2 className='flex justify-start items-center font-bold '>خدمات آرناپ</h2>
+                <SectionTitle
+                    title={"خدمات آرناپ"}
+                    textLink={"مشاهده بیشتر"}
+                    link='/search'
+                    btn={false}
+                />
                 <ServicesSectionHome />
             </section>
             {/* ----------section------------- */}
@@ -86,7 +91,7 @@ const HomePage = (props: HomePagePropType) => {
             </section >
             {/* ----------section------------- */}
 
-      
+
 
             {/* ----------section------------- */}
             {/* Newest Articles  */}
