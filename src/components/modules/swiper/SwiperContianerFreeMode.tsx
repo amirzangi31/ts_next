@@ -31,7 +31,7 @@ const SwiperContainerFreeMode = ({ data, gap, CardComponent }: SwiperContainerFr
             speed={1000}
             modules={[FreeMode, Autoplay]}
             freeMode={true}
-            centeredSlides={true}
+            
             dir="rtl"
         >
             {
