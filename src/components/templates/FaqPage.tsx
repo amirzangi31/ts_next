@@ -4,7 +4,7 @@ import AccordionCard from "@/components/modules/cards/AccordionCard";
 import faqData from "@/data/faqData";
 import { useState } from "react";
 import TitlePagesMobile from "@modules/titles/TitlePagesMobile";
-import TitleHeading from "../modules/titles/TitleHeading";
+import TitleHeading from "@modules/titles/TitleHeading";
 
 
 

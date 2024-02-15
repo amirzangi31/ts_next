@@ -4,7 +4,7 @@ import React from 'react'
 
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
 import LinkProfilePageCard from '@modules/cards/Link/LinkProfilePageCard'
-import TitleHeading from '../modules/titles/TitleHeading'
+import TitleHeading from '@modules/titles/TitleHeading'
 
 const ArenapPage = () => {
 

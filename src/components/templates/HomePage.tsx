@@ -16,11 +16,11 @@ import PhysicainCardPrimary from '@modules/cards/Physicain/PhysicianCardPrimary'
 import BottomNavigation from '@modules/menu/BottomNavigation';
 import SectionTitle from '@modules/titles/SectionTitle';
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
-import SearchHomePage from '../modules/search/SearchHomePage';
+import SearchHomePage from '@modules/search/SearchHomePage';
 import FaqPage from './FaqPage';
-import BestSpeciality from '../modules/BestSpeciality';
-import TitleHeading from '../modules/titles/TitleHeading';
-import ServicesSectionHome from '../modules/ServicesSectionHome';
+import BestSpeciality from '@modules/BestSpeciality';
+import TitleHeading from '@modules/titles/TitleHeading';
+import ServicesSectionHome from '@modules/ServicesSectionHome';
 
 
 

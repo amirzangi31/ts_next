@@ -17,7 +17,7 @@ import ArticleCardPrimary from "@modules/cards/Articles/ArticleCardPrimary";
 import ModalLogin from "@layouts/ModalLogin/ModalLogin";
 import SwiperContainerFreeMode from "@modules/swiper/SwiperContianerFreeMode";
 import { ArticleCardType, AutohrCardType } from "@/types/cards";
-import LinkElement from "../elements/LinkElement";
+import LinkElement from "@elements/LinkElement";
 import bestAuthors from "@data/bestAuthors";
 import articleData from "@data/articleData";
 

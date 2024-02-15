@@ -21,23 +21,23 @@ import useModalLogin from "@/hooks/useModalLogin";
 
 import useFavorite from "@/hooks/useFavorite";
 import { PhysicainProfileType } from "@/types/physicianProfile";
-import TitlePagesMobile from "../modules/titles/TitlePagesMobile";
+import TitlePagesMobile from "@modules/titles/TitlePagesMobile";
 
-import TitlePrimary from "../modules/titles/TitlePrimary";
+import TitlePrimary from "@modules/titles/TitlePrimary";
 
-import ModalLogin from "../layouts/ModalLogin/ModalLogin";
+import ModalLogin from "@layouts/ModalLogin/ModalLogin";
 import cn from "@/utils/clsxFun";
 import { getUrlImage } from "@/services/getImageUrl/getImageUrl";
 
 
 import useUserInfo from "@/hooks/useUserInfo";
-import ButtonElement from "../elements/ButtonElement";
-import OfficeCard from "../modules/cards/OfficeCard";
-import PhysicianProfileCard from "../modules/cards/Physicain/PhysicianProfileCard";
-import LinkElement from "../elements/LinkElement";
-import SwiperContainerFreeMode from "../modules/swiper/SwiperContianerFreeMode";
-import PhysicainCardPrimary from '../modules/cards/Physicain/PhysicianCardPrimary';
-import CreateCommentCom from "../modules/CreateCommentCom";
+import ButtonElement from "@elements/ButtonElement";
+import OfficeCard from "@modules/cards/OfficeCard";
+import PhysicianProfileCard from "@modules/cards/Physicain/PhysicianProfileCard";
+import LinkElement from "@elements/LinkElement";
+import SwiperContainerFreeMode from "@modules/swiper/SwiperContianerFreeMode";
+import PhysicainCardPrimary from '@modules/cards/Physicain/PhysicianCardPrimary';
+import CreateCommentCom from "@modules/CreateCommentCom";
 
 const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }) => {
 

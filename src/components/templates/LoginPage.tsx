@@ -11,15 +11,15 @@ import useModalLogin from "@/hooks/useModalLogin";
 
 import { useRouter } from "next/navigation";
 
-import Toastify from "../elements/toasts/Toastify";
+import Toastify from "@elements/toasts/Toastify";
 
-import ButtonElement from "../elements/ButtonElement";
-import BottomNavigation from "../modules/menu/BottomNavigation";
-import LinkProfilePageCard from "../modules/cards/Link/LinkProfilePageCard";
-import TitlePagesMobile from "../modules/titles/TitlePagesMobile";
-import ModalLogin from "../layouts/ModalLogin/ModalLogin";
+import ButtonElement from "@elements/ButtonElement";
+import BottomNavigation from "@modules/menu/BottomNavigation";
+import LinkProfilePageCard from "@modules/cards/Link/LinkProfilePageCard";
+import TitlePagesMobile from "@modules/titles/TitlePagesMobile";
+import ModalLogin from "@layouts/ModalLogin/ModalLogin";
 import useUserInfo from "@/hooks/useUserInfo";
-import LinkElement from "../elements/LinkElement";
+import LinkElement from "@elements/LinkElement";
 
 const LoginPage = () => {
     

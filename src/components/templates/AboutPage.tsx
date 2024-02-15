@@ -1,8 +1,8 @@
 import React from 'react'
-import BaseCard from '@modules/cards/BaseCard'
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
 import priceSplitter from '@utils/priceSplitter'
-import TitleHeading from '../modules/titles/TitleHeading'
+import TitleHeading from '@modules/titles/TitleHeading'
+import BaseH2Card from '@modules/cards/BaseH2Card'
 
 
 const AboutPage = () => {
@@ -14,14 +14,14 @@ const AboutPage = () => {
       </header>
       <div className="container max-w-[118.75rem] pb-5 mt-4 flex justify-start items-start gap-4 flex-col">
 
-        <BaseCard title={"درباره ما (آرناپ)"}>
+        <BaseH2Card title={"درباره ما (آرناپ)"}>
           <p className='my-2 font-bold'>به آرناپ خوش آمدید</p>
           <ul className='text-md  flex justify-start items-start gap-2 flex-col'>
             <li> آرناپ به واسطه آنلاین بودن به طور پیوسته با سرور های وزارت بهداشت در ارتباط است</li>
             <li>شما در آرناپ همواره آخرین متدهای روز را در حوزه سلامت مشاهده کنید</li>
           </ul>
-        </BaseCard>
-        <BaseCard title={"چرخه فرآیند سامانه آرناپ"}>
+        </BaseH2Card>
+        <BaseH2Card title={"چرخه فرآیند سامانه آرناپ"}>
 
 
           <div className='mt-4'>
@@ -51,8 +51,8 @@ const AboutPage = () => {
 
             </ul>
           </div>
-        </BaseCard>
-        <BaseCard title={"نوبت دهی آنلاین برای بیماران و مراجعه کنندگان"}>
+        </BaseH2Card>
+        <BaseH2Card title={"نوبت دهی آنلاین برای بیماران و مراجعه کنندگان"}>
           <p>
             برای رفع پیچیدگی نوبت گیری از پزشکان کل کشور آرناپ ارائه پلتفرمی جامع جهت بهبود عملکرد نوبت گیری به صورت آنلاین آماده خدمت رسانی می باشد.
           </p>
@@ -63,8 +63,8 @@ const AboutPage = () => {
           <p className='mt-4'>
             در هر نقطه ای از کشور میتوانید از پزشک مورد نظرتان از شهر و استانی دیگر نوبت دریافت کنید.
           </p>
-        </BaseCard>
-        <BaseCard title={"نرم افزاری جامع برای مدیریت مطب"}>
+        </BaseH2Card>
+        <BaseH2Card title={"نرم افزاری جامع برای مدیریت مطب"}>
           <p>پزشکان و درمانگران عزیز میتوانند از خدمات آرناپ که شامل هوشمند سازی مطب به صورت تمام الکترونیک می باشد را بهره مند شوند</p>
           <p className='font-bold text-primary my-4'>از امکانات آرناپ برای پزشکان میتوان :</p>
           <ul className='flex justify-start items-start gap-2 flex-col'>
@@ -75,8 +75,8 @@ const AboutPage = () => {
             <li><span className='font-bold text-primary'>قابلیت استفاده از قلم نوری : </span>نوشتن شرح حال به صورت دست نویس جهت صرفه جویی در زمان پزشک  </li>
             <li><span className='font-bold text-primary'>دارای مجوز های پایه کشور : </span>دارای تاییدیه و مجوز از بیمه های پایه کشور و وزارت بهداشت و دارنده رتبه اول نسخه الکترونیک</li>
           </ul>
-        </BaseCard>
-        <BaseCard title={"چه چیزهایی آرناپ را متمایزمیکند ؟"}>
+        </BaseH2Card>
+        <BaseH2Card title={"چه چیزهایی آرناپ را متمایزمیکند ؟"}>
           <ul className='list-disc px-4'>
             <li className='font-bold '>
               <p>همکاری با بیش از {priceSplitter(10000)} پزشک در سراسر ایران</p>
@@ -84,7 +84,7 @@ const AboutPage = () => {
             </li>
 
           </ul>
-        </BaseCard>
+        </BaseH2Card>
       </div></>
   )
 }

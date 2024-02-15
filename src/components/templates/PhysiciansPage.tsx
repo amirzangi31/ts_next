@@ -5,12 +5,12 @@ import LinkElement from '@elements/LinkElement'
 import ChnageCityButton from '@elements/ChangeCityButton'
 import FilterIcon from '@icons/FilterIcon'
 import ViewOrderIcon from '@icons/ViewOrderIcon'
-import CloseIcon from '../icons/CloseIcon'
+import CloseIcon from '@icons/CloseIcon'
 import { useDebouncedCallback } from 'use-debounce'
 import { useCookies } from 'react-cookie'
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
-import Loader from '../elements/Loader'
-import SwiperContainerFreeMode from '../modules/swiper/SwiperContianerFreeMode'
+import { usePathname, useRouter } from 'next/navigation'
+import Loader from '@elements/Loader'
+
 
 
 export type PhysiciansPageProps = {

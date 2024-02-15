@@ -1,19 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import TitlePagesMobile from "../modules/titles/TitlePagesMobile";
-import BottomNavigation from "../modules/menu/BottomNavigation";
-import ButtonElement from "../elements/ButtonElement";
-import SearchIcon from "../icons/SearchIcon";
-import TitlePrimary from "../modules/titles/TitlePrimary";
-import SwiperContainerFreeMode from "../modules/swiper/SwiperContianerFreeMode";
-import ArticleCardSecondary from "../modules/cards/Articles/ArticleCardSecondary";
-import AuthorCard from "../modules/cards/AuthorCard";
+import TitlePagesMobile from "@modules/titles/TitlePagesMobile";
+import BottomNavigation from "@modules/menu/BottomNavigation";
+import ButtonElement from "@elements/ButtonElement";
+import SearchIcon from "@icons/SearchIcon";
+import TitlePrimary from "@modules/titles/TitlePrimary";
+import ArticleCardSecondary from "@modules/cards/Articles/ArticleCardSecondary";
 import articleData from "@/data/articleData";
-
-import BestSpeciality from "../modules/BestSpeciality";
+import BestSpeciality from "@modules/BestSpeciality";
 import bestAuthors from "@/data/bestAuthors";
-
-import TitleHeading from "../modules/titles/TitleHeading";
+import TitleHeading from "@modules/titles/TitleHeading";
 import { ArticleCardType } from "@/types/cards";
 
 const BlogPage = () => {

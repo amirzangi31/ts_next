@@ -1,6 +1,7 @@
-import BaseCard from '@modules/cards/BaseCard'
+
 import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
 import TitleHeading from '@modules/titles/TitleHeading'
+import BaseH2Card from '../modules/cards/BaseH2Card'
 
 
 
@@ -15,7 +16,7 @@ const PolicyPage = () => {
                 <TitleHeading title="قوانین و مقررات آرناپ" />
             </header>
             <div className="container max-w-[62.5rem] pb-5 mt-4  flex justify-start items-center gap-4 flex-col">
-                <BaseCard title={"قوانین و مقررات آرناپ"}>
+                <BaseH2Card title={"قوانین و مقررات آرناپ"}>
                     <div className='text-md  flex justify-start items-start gap-2 flex-col'>
                         <p>
                             سلام و درود خدمت همراهان گرامی آرناپ
@@ -29,8 +30,8 @@ const PolicyPage = () => {
                         </p>
                         <p className='text-error font-bold'> عدم رعایت هر یک از قوانین توسط شما منجر به غیر فعال شدن حساب کاربریتان میشود . </p>
                     </div>
-                </BaseCard>
-                <BaseCard title={"قوانین و شرایط حساب کاربری :"}>
+                </BaseH2Card>
+                <BaseH2Card title={"قوانین و شرایط حساب کاربری :"}>
                     <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
                         <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2'>
                             <li className='w-full'>نگهداری اطلاعات از طریق رمزنگاری پیشرفته به وسیله بروزترین روش های روز دنیا بروی فضای امن ابری صورت میگیرد.</li>
@@ -40,8 +41,8 @@ const PolicyPage = () => {
                             <li>این پیامک جهت اطلاع رسانی خدمات و سرویس های مناسب با درخواست شما از پلتفرم آرناپ مثل: ثبت نوبت , لغو نوبت و ورود به سایت میباشد.</li>
                         </ul>
                     </div>
-                </BaseCard>
-                <BaseCard title={"لغو نوبت توسط بیمار :"}>
+                </BaseH2Card>
+                <BaseH2Card title={"لغو نوبت توسط بیمار :"}>
                     <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
                         <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2'>
                             <li>اگر در طی یک ماه تعداد نوبت های لغو شده توسط شما به 5 عدد برسد شما تا 24ساعت پس از آن قابلیت نوبت گیری نخواهید داشت</li>
@@ -52,15 +53,15 @@ const PolicyPage = () => {
                             <li>برای دریافت اعتبار موجود در کیف پول با پشتیبان تماس بگیرید.</li>
                         </ul>
                     </div>
-                </BaseCard>
-                <BaseCard title={"قوانین و مقررات ثبت و امتیاز دهی :"}>
+                </BaseH2Card>
+                <BaseH2Card title={"قوانین و مقررات ثبت و امتیاز دهی :"}>
                     <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
                         <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2'>
                             <li>انتقال تجربه مراجعه شما به سایر کاربران در بهبود فرایند در زمان و ارتقا خدمات پزشکی نقش به سزایی دارد و این امکان را فراهم می سازد تا سایر کاربران برای گرفتن نوبت و خدمات مورد نظرشان از پزشک پروسه راحت و دقیق تری را طی کند.</li>
                         </ul>
                     </div>
-                </BaseCard>
-                <BaseCard title={"چگونه در آرناپ امتیاز دهی به پزشک را انجام دهیم :"}>
+                </BaseH2Card>
+                <BaseH2Card title={"چگونه در آرناپ امتیاز دهی به پزشک را انجام دهیم :"}>
                     <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
                         <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2'>
                             <li>پس از ورود و ثبت نام شما در سامانه آرناپ شما میتوانید نظرتان را برای پزشک ثبت نمایید. اما برای امتیازدهی باید توسط پزشک ویزیت شده باشید.</li>
@@ -68,15 +69,15 @@ const PolicyPage = () => {
 
                         </ul>
                     </div>
-                </BaseCard>
-                <BaseCard title={"نمایش نظرات شما : "}>
+                </BaseH2Card>
+                <BaseH2Card title={"نمایش نظرات شما : "}>
                     <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
                         <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2'>
                             <li>به منظور قوانین و مقررات و رعایت اصول اخلاقی نظر شما قبل از نشان دادن در پروفایل پزشک نیاز به تایید کارشناسان سایت دارد.</li>
                         </ul>
                     </div>
-                </BaseCard>
-                <BaseCard title={"قوانین ثبت نظر: "}>
+                </BaseH2Card>
+                <BaseH2Card title={"قوانین ثبت نظر: "}>
                     <div className='text-md  flex justify-start items-start gap-2 flex-col w-full'>
                         <p>در هنگام ثبت نظر موارد زیر را در نظر بگیرید : </p>
                         <ul className='list-disc px-2 flex justify-start items-start flex-col gap-2 mt-2'>
@@ -100,7 +101,7 @@ const PolicyPage = () => {
                         </ul>
 
                     </div>
-                </BaseCard>
+                </BaseH2Card>
             </div>
         </>
     )

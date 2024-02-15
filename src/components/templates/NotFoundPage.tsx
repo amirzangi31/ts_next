@@ -1,11 +1,11 @@
 "use client"
 import React from 'react'
-import TitlePagesMobile from '../modules/titles/TitlePagesMobile'
+import TitlePagesMobile from '@modules/titles/TitlePagesMobile'
 import Image from 'next/image'
-import Timer from '../modules/Timer'
+import Timer from '@modules/Timer'
 import { useRouter } from 'next/navigation'
-import LinkElement from '../elements/LinkElement'
-import ButtonElement from '../elements/ButtonElement'
+import LinkElement from '@elements/LinkElement'
+import ButtonElement from '@elements/ButtonElement'
 
 
 const NotFoundPage = () => {
