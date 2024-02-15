@@ -10,6 +10,8 @@ import { useDebouncedCallback } from 'use-debounce'
 import { useCookies } from 'react-cookie'
 import { usePathname, useRouter } from 'next/navigation'
 import Loader from '@elements/Loader'
+import FilterTag from '../elements/FilterTag'
+import SwiperContainerFreeMode from '../modules/swiper/SwiperContianerFreeMode'
 
 
 
@@ -58,7 +60,11 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
     }, [searchText, cookies?.cityInfo])
 
 
-
+    const tags = [
+        {id : 1 , title: "کرمی", handler: () => console.log("first") },
+        {id : 2 , title: "تست", handler: () => console.log("two") },
+        {id : 3 , title: "تست1", handler: () => console.log("three ") },
+    ]
 
 
 
@@ -99,8 +105,8 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
 
             {/* ----------section------------- */}
             {/* tags in mobile */}
-            <section className='md:hidden'>
-                    {/* <SwiperContainerFreeMode   /> */}
+            <section className='md:hidden pt-4 '>
+                <SwiperContainerFreeMode gap={10} data={tags} CardComponent={FilterTag} />
             </section>
             {/* ----------section------------- */}
 
