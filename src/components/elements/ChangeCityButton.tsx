@@ -8,31 +8,31 @@ import cn from '@/utils/clsxFun'
 import Modal from '../modules/modals/Modal'
 import BottomSheetAndCenterContent from '../modules/modals/BottomSheetAndCenterContent'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow } from 'swiper/modules';
+import { EffectCoverflow , Mousewheel } from 'swiper/modules';
 import MagnifierIcon from '../icons/menu/MagnifierIcon'
+import { useCookies } from 'react-cookie'
 
 
 const ChnageCityButton = () => {
-  const { provinces, isLoadingProvince, step, cities, priviousHandler, cityName, setCityHandler, isLoadingCity, setAllProvince } = useCity()
-  const contentRef = useRef<HTMLDivElement>(null)
+  const { provinces, isLoadingProvince, cityName, isLoadingCity, setAllProvince, cityHandler } = useCity()
   const [show, setShow] = useState(false)
   const [searchText, setSearchText] = useState("")
+  const [cookies, setCookie, removeCookie] = useCookies(['cityInfo']);
 
   const showHandler = () => {
     setShow(!show)
   }
 
+
   const searchProvince = provinces?.filter((item: {
-    id: number;
-    name: string;
+    cityId: number,
+    cityName: string,
+    centerName: string,
+    provinceId: number,
+    provinceName: string
 
-  }) => item.name.toLowerCase().includes(searchText.toLocaleLowerCase()))
+  }) => item.cityName.toLowerCase().includes(searchText.toLocaleLowerCase()))
 
-  const serachCities = cities?.data?.value?.filter((item: {
-    id: number;
-    name: string;
-    cities?: any;
-  }) => item.name.toLowerCase().includes(searchText.toLocaleLowerCase()))
 
   return (
     <div className='relative  md:z-[51]'>
@@ -44,218 +44,86 @@ const ChnageCityButton = () => {
         "hidden": !show
       })} onClick={() => {
         setShow(false)
-        priviousHandler()
+
       }}>
 
       </span>
       <div className={cn(
         'absolute top-full left-0 w-[10rem] h-[18.75rem] py-2', {
-          "z-10" : show,
-          "hidden" : !show,
-        }
+        "z-10": show,
+        "hidden": !show,
+      }
       )}>
-        {
-          show ?
-            <div ref={contentRef} className='hidden md:block bg-white shadow-shadow_category p-2 h-full rounded-sm overflow-y-auto'>
+
+
+
+
+        <Modal show={show} closeHandler={() => setShow(false)}>
+          <BottomSheetAndCenterContent show={show}>
+
+
+            <InputSearch value={searchText} changeHandler={(e) => setSearchText(e.target.value)} />
+
+            <Swiper
+              modules={[EffectCoverflow , Mousewheel]}
+              spaceBetween={10}
+              slidesPerView={5}
+              speed={1000}
+              effect='coverflow'
+              grabCursor={true}
+              centeredSlides={true}
+              direction={'vertical'}
+              mousewheel={true}
+              className='swiper-vertical overflow-hidden'
+              coverflowEffect={{
+                rotate: 0,
+                stretch: 0,
+                depth: 20,
+
+                modifier: 3,
+                slideShadows: false
+                // slideShadows : true
+              }}
+            >
+              <SwiperSlide  >
+                <li
+                  className="border-b border-gray-550 py-2 cursor-pointer text-center"
+                  onClick={() => {
+                    setAllProvince()
+                    setShow(false)
+                    setSearchText("")
+                  }}
+                >
+                  همه استان ها
+                </li>
+              </SwiperSlide>
               {
-                isLoadingProvince || cities.isLoading ? (<div className='h-full flex justify-center items-center'>
-                  <Loader color='border-primary' size='size-[3.125rem]' />
-                </div>) : null
-              }
-              <ul>
-                {
-                  step === 1 ? (
-                    <>
-                      <li
-                        className="text-center  hover:font-bold hover:text-primary  py-2 cursor-pointer transition-all duration-500 relative after:absolute after:bottom-0 after:left-1/2 hover:after:left-0 after:transition-all after:duration-300 after:block after:w-0 hover:after:w-full after:h-[1px]  gradient_after"
-                        onClick={() => {
-                          setAllProvince()
-                          setShow(false)
-                        }}
-                      >
-                        همه استان ها
-                      </li>
-                      {
-                        provinces?.map((item: {
-                          id: number;
-                          name: string;
-                          cities?: any;
-                        }, index: number) => <li
-                          key={item.id}
-                          className="text-center  hover:font-bold hover:text-primary  py-2 cursor-pointer transition-all duration-500 relative after:absolute after:bottom-0 after:left-1/2 hover:after:left-0 after:transition-all after:duration-300 after:block after:w-0 hover:after:w-full after:h-[1px]  gradient_after"
-                          onClick={() => {
-                            cities.mutate({ provinceId: item.id, provinceName: item.name })
-                            contentRef?.current?.scrollTo({ top: 0, behavior: "smooth" })
-                          }}
-                        >
-                            {item.name}
-                          </li>)
-                      }
-                    </>
-                  ) : null
-                }
-
-                {
-                  step === 2 ? (
-                    <>
-                      <li
-
-                        className="text-center  hover:font-bold hover:text-primary  py-2 cursor-pointer transition-all duration-500 relative after:absolute after:bottom-0 after:left-1/2 hover:after:left-0 after:transition-all after:duration-300 after:block after:w-0 hover:after:w-full after:h-[1px]  gradient_after"
-                        onClick={priviousHandler}
-                      >
-                        انتخاب استان دیگر
-                      </li>
-                      {cities.data.value?.map((item: {
-                        id: number;
-                        name: string;
-                        cities?: any;
-                      }, index: number) => <li
-                        key={item.id}
-                        className="text-center  hover:font-bold hover:text-primary  py-2 cursor-pointer transition-all duration-500 relative after:absolute after:bottom-0 after:left-1/2 hover:after:left-0 after:transition-all after:duration-300 after:block after:w-0 hover:after:w-full after:h-[1px]  gradient_after"
-                        onClick={() => {
-                          setCityHandler(item.name, item.id)
-                          priviousHandler()
-                          setShow(false)
-                        }}
-                      >
-                          {item.name}
-                        </li>)}
-                    </>
-                  ) : null
-                }
-              </ul>
-            </div> : null
-        }
-
-
-        <div className='md:hidden'>
-          <Modal show={show} closeHandler={() => setShow(false)}>
-            <BottomSheetAndCenterContent show={show}>
-
-
-              <InputSearch value={searchText} changeHandler={(e) => setSearchText(e.target.value)} />
-
-
-              {
-                step === 1 ? (
-                  <Swiper
-                    modules={[EffectCoverflow]}
-                    spaceBetween={10}
-                    slidesPerView={5}
-                    speed={1000}
-                    effect='coverflow'
-                    grabCursor={true}
-                    centeredSlides={true}
-                    direction={'vertical'}
-                    className='swiper-vertical overflow-hidden'
-                    coverflowEffect={{
-                      rotate: 0,
-                      stretch: 0,
-                      depth: 20,
-
-                      modifier: 3,
-                      slideShadows: false
-                      // slideShadows : true
-                    }}
-                  >
-                    <SwiperSlide  >
-                      <li
-                        className="border-b border-gray-550 py-2 cursor-pointer text-center"
-                        onClick={() => {
-                          setAllProvince()
-                          setShow(false)
-                          setSearchText("")
-                        }}
-                      >
-                        همه استان ها
-                      </li>
-                    </SwiperSlide>
-                    {
-                      searchProvince?.map((item: { id: number, name: string }) => (
-                        <SwiperSlide key={item.id} >
-                          <li
-                            className="border-b border-gray-550 py-2 cursor-pointer text-center"
-                            onClick={() => {
-                              cities.mutate({ provinceId: item.id, provinceName: item.name })
-                              setSearchText("")
-                            }}
-                          >
-                            {item.name}
-                          </li>
-                        </SwiperSlide>
-                      ))
-                    }
-
-
-                  </Swiper>
-                ) : null
-              }
-              {
-                step === 2 ? (
-                  <Swiper
-                    modules={[EffectCoverflow]}
-                    spaceBetween={10}
-                    slidesPerView={5}
-                    speed={1000}
-                    effect='coverflow'
-                    grabCursor={true}
-                    centeredSlides={true}
-                    direction={'vertical'}
-                    className='swiper-vertical overflow-hidden'
-                    coverflowEffect={{
-                      rotate: 0,
-                      stretch: 0,
-                      depth: 20,
-
-                      modifier: 3,
-                      slideShadows: false
-                      // slideShadows : true
-                    }}
-                  >
-                    <SwiperSlide  >
-                      <li
-                        className="border-b border-gray-550 py-2 cursor-pointer text-center"
-                        onClick={
-                          () => {
-                            priviousHandler()
-                            setSearchText("")
-                          }
-                        }
-                      >
-                        انتخاب استان دیگر
-                      </li>
-                    </SwiperSlide>
-                    {
-                      serachCities.map((item: {
-                        id: number;
-                        name: string;
-                        cities?: any;
-                      }, index: number) => (
-                        <SwiperSlide key={item.id} >
-                          <li
-                            className="border-b border-gray-550 py-2 cursor-pointer text-center"
-                            onClick={() => {
-                              setCityHandler(item.name, item.id)
-                              priviousHandler()
-                              setSearchText("")
-                              setShow(false)
-                            }}
-                          >
-                            {item.name}
-                          </li>
-                        </SwiperSlide>
-                      ))
-                    }
-
-
-                  </Swiper>
-                ) : null
+                searchProvince?.map((item: {
+                  cityId: number,
+                  cityName: string,
+                  centerName: string,
+                  provinceId: number,
+                  provinceName: string
+                }) => (
+                  <SwiperSlide key={item.cityId} >
+                    <li
+                      className="border-b border-gray-550 py-2 cursor-pointer text-center"
+                      onClick={() => {
+                        cityHandler("kerman", item.cityName, item.cityId)
+                        setSearchText("")
+                        setShow(false)
+                      }}
+                    >
+                      {item.cityName}
+                    </li>
+                  </SwiperSlide>
+                ))
               }
 
+            </Swiper>
 
-            </BottomSheetAndCenterContent>
-          </Modal>
-        </div>
+          </BottomSheetAndCenterContent>
+        </Modal>
 
       </div>
     </div >

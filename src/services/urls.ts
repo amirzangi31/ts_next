@@ -243,7 +243,7 @@ const urls = {
   //provinces
   provinces: {
     provinces: {
-      url: "/Public/Address/Provinces",
+      url: "/Public/Address/SearchedCities",
       method: "GET",
     },
     cities: {

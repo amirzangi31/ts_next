@@ -7,4 +7,4 @@ const DcotorsCity = ({ params }: { params: { locale: string, city: string } }) =
     )
 }
 
-export default DcotorsCity
+export default DcotorsCity;

@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 
 const DoctorsCityNotFound = () => {
-    redirect("/doctors")
+    redirect("/physicians")
   return (
     <div>DoctorsCityNotFound</div>
   )
