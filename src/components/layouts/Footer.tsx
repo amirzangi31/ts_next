@@ -83,7 +83,7 @@ const Footer = () => {
         <div className='flex justify-between items-start flex-wrap'>
           <div className='w-full lg:w-1/3 flex justify-between items-center gap-1 px-2' >
             <div className='flex justify-center items-center flex-col w-full'>
-              <h4 className='text-primary text-md font-bold text-center'>برترین پزشکان</h4>
+              <h4 className='text-primary text-md font-bold text-center'>پربازدیدترین پزشکان</h4>
               <ul className='flex justify-start items-center gap-1 flex-col text-sm mt-4'>
                 <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`Physician/دکتر حسین کرمی`}>دکتر حسین کرمی</LinkElement></li>
                 <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`Physician/دکتر_مژگان _سنجری`}>دکتر مژگان سنجری</LinkElement></li>
