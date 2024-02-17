@@ -7,6 +7,10 @@ const DoctorsSearch = async(props: { params: { locale: string, slug: string[] },
     const slugs = convertParams(props.params.slug)
 
     
+
+    
+
+
     return (
         <PhysiciansPage slugs={slugs} searchKey={searchParams.search_key}  />
     )

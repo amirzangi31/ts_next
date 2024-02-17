@@ -4,7 +4,10 @@ const convertParams = (params: string[]) => {
         city: "",
         speciality: "",
         service : "",
-        region : ""
+        region : "",
+        diest : "",
+        gender : "",
+        plan:""
     }
 
     for (let key in fitlerParams) {

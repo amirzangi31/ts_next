@@ -50,7 +50,6 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
         }
         router.push(`${pathName}?search_key=${searchText}`)
         setLoadingPage(false)
-
     }, 750)
 
     useEffect(() => {
