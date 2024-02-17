@@ -59,12 +59,12 @@ const HomePage = (props: HomePagePropType) => {
             {/* ----------section------------- */}
             {/* services  */}
             <section className='mt-6'>
-                <SectionTitle
+                {/* <SectionTitle
                     title={"خدمات آرناپ"}
                     textLink={"مشاهده بیشتر"}
                     link='/'
                     btn={false}
-                />
+                /> */}
                 <ServicesSectionHome />
             </section>
             {/* ----------section------------- */}

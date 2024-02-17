@@ -6,32 +6,33 @@ export type ServicesDataType = {
       link : string
 }
 const servicesData : ServicesDataType[] = [
-      {
-            id : 1 ,
-            title : "پنل پزشکان",
-            link :"Auth",
-            image : "/services_1.jpg",
-            disabled : false
-      },
+    
       {
             id : 2 ,
             title : "نوبت دهی پزشکان",
             link :"physicians",
-            image : "/services_2.jpg",
+            image : "/services_2.png",
+            disabled : false
+      },
+      {
+            id : 1 ,
+            title : "پنل پزشکان",
+            link :"Auth",
+            image : "/services_1.png",
             disabled : false
       },
       {
             id : 3 ,
             title : "مشاوره آنلاین",
             link :"physician",
-            image : "/services_3.jpg",
+            image : "/services_3.png",
             disabled : true
       },
       {
             id : 4 ,
             title : "نوبت دهی کلینیک ها",
             link :"physician",
-            image : "/services_4.jpg",
+            image : "/services_4.png",
             disabled : true
       },
 ]

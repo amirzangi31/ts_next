@@ -35,7 +35,7 @@ export const ServicesCard = (props: ServicesDataType) => {
 
                 </div>
                 {/* <span className=' top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-primary-100 text-sm'>(بزودی ... )</span> */}
-                <h3 className='py-4 font-bold text-gray-500'>{title} </h3>
+                <h2 className='py-4 font-bold text-gray-500'>{title} </h2>
             </div>
         ) : (
             <LinkElement link={link} className={cn(
@@ -50,10 +50,10 @@ export const ServicesCard = (props: ServicesDataType) => {
                     )} />
                 </div>
 
-                <h3 className={cn(
+                <h2 className={cn(
                     'py-4 font-bold text-gray-500 transition-all duration-500 delay-500 z-[1]',
                     "group-hover:text-white "
-                )}>{title}</h3>
+                )}>{title}</h2>
 
             </LinkElement>
         )
