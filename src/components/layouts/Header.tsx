@@ -51,7 +51,7 @@ const Header = () => {
                     variant='contained'
                     width='min-w-[7rem]'
                   >
-                    بلاگ
+                    بلاگ آرناپ
                   </ButtonElement>
                 </LinkElement>
               </li>
@@ -63,7 +63,7 @@ const Header = () => {
                     variant='contained'
                     width='min-w-[7rem]'
                   >
-                    جستجو پیشرفته
+                    جستجو پزشکان
                   </ButtonElement>
                 </LinkElement>
               </li>

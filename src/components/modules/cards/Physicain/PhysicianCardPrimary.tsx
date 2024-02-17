@@ -95,9 +95,9 @@ const PhysicainCardPrimary = ({
             </div>
             <div className="px-2 pb-2 w-full">
                 <div className="bg-gray-700 group-hover:bg-gray-400 group-hover:text-white  transition-all duration-500 p-1 rounded-ss flex justify-between items-center min-h-[2.875rem]">
-                    <p className="px-5 relative border-l border-black border-dashed ">
+                    {/* <p className="px-5 relative border-l border-black border-dashed ">
                         {cityName}
-                    </p>
+                    </p> */}
 
                     <div className="flex px-5 justify-start items-center gap-1 ">
                         <span>

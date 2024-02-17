@@ -9,9 +9,9 @@ const BestSpeciality = () => {
 
     return (
         <>
-            <div className="py-3">
+            <div className="py-4">
                 <TitlePrimary
-                    title={"دسته بندی"}
+                    title={"پربازدیدترین تخصص ها"}
                     btn={false}
                     textLink={"مشاهده بیشتر"}
                 />

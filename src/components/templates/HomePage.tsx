@@ -62,7 +62,7 @@ const HomePage = (props: HomePagePropType) => {
                 <SectionTitle
                     title={"خدمات آرناپ"}
                     textLink={"مشاهده بیشتر"}
-                    link='/search'
+                    link='/'
                     btn={false}
                 />
                 <ServicesSectionHome />
@@ -82,9 +82,9 @@ const HomePage = (props: HomePagePropType) => {
             {/* Best Physicians */}
             <section className='mt-6'>
                 <SectionTitle
-                    title={"پربازدیدترین تخصص ها"}
+                    title={"پربازدیدترین پزشکان"}
                     textLink={"مشاهده بیشتر"}
-                    link='/search'
+                    link='physicians'
                     btn={true}
                 />
                 <SwiperContainerFreeMode gap={10} data={physicians} CardComponent={PhysicainCardPrimary} />
