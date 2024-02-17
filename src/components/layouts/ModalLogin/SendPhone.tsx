@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { SetpLoginType } from './ModalLogin'
 
 import {
@@ -57,9 +57,9 @@ const SendPhone = ({ changeStep }: SetpLoginType) => {
       >
         {(props: FormikProps<any>) => (
           <Form>
-            <Field name="phoneNumber" type="tel" placeholder="شماره همراه خود را وارد کنید" title="شماره همراه" component={FormControl} />
+            <Field name="phoneNumber" type="tel" placeholder="شماره همراه خود را وارد کنید" title="شماره همراه"  component={FormControl} />
             <div className='grid grid-cols-2 gap-2 mt-4'>
-              <Field name="captcha" type="number" placeholder="کد امنیتی"        component={FormControl} />
+              <Field name="captcha" type="number" placeholder="کد امنیتی" component={FormControl} />
               <div className="border border-gray rounded-[1.875rem] overflow-hidden flex justify-center items-center">
                 {loading ? (
                   <Loader

@@ -53,6 +53,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
   const [callbackIndex, setCallbackIndex] = useState(0)
   const callbacks = [() => {
     selectAppointment(selectAppointmentBeforeSign.year, selectAppointmentBeforeSign.month, selectAppointmentBeforeSign.day, selectAppointmentBeforeSign.index, selectAppointmentBeforeSign.calendar, selectAppointmentBeforeSign.physicianId, selectAppointmentBeforeSign.physicianUrl)
+    setShowModalRules(true)
   }, () => {
     firstAppointmentHandler.mutate({ physicianProfileId: physician.id, physicianProfileUrl: physician.physicianProfileUrl })
 
@@ -61,6 +62,8 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
         setActiveTab(i);
       }
     }
+
+    
   }, () => { lockedAppointmentHandler.mutate() }]
 
 
@@ -152,7 +155,7 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
       }
     }
   }, [appointmentInfo])
-
+ 
 
 
   return (

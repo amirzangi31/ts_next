@@ -10,13 +10,14 @@ export type FormControlType = {
     field: any,
     placeholder?: string,
     title?: string,
-
+    
 }
 
 
 
 const FormControl = (props: FormControlType) => {
     const { field, title = "", type, placeholder, form } = props
+    
 
     return (
         <div className='flex justify-between items-start flex-col relative'>
