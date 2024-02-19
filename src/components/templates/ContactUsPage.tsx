@@ -41,7 +41,7 @@ const ContactUsPage = () => {
             </header>
             <div className=" pb-5 mt-4">
                 <BaseH2Card title={"تماس با ما"}>
-                    <div className='flex justify-start items-stretch flex-col md:flex-row gap-4'>
+                    <div className='flex justify-start items-stretch flex-col-reverse md:flex-row gap-4'>
                         <div className='w-full md:w-6/12'>
                             <Formik
                                 initialValues={initialValues}
@@ -82,13 +82,13 @@ const ContactUsPage = () => {
                         </div>
                         <div className='text-md  w-full md:w-6/12'>
                             <div className='grid grid-cols-2 gap-2 '>
-                                <div className='bg-bg_content p-2 rounded-sm'><p >شماره تماس: <Link className='font-bold'
+                                <div className='bg-bg_content p-2 rounded-sm'><p className='flex justify-start items-center flex-wrap'>شماره تماس: <Link className='font-bold'
                                     href={"tel:021910966760"}>6760 - 9109 - 021</Link> </p></div>
-                                <div className='bg-bg_content p-2 rounded-sm'><p >اینستاگرام ما : <Link className='font-bold'
+                                <div className='bg-bg_content p-2 rounded-sm'><p className='flex justify-start items-center flex-wrap'>اینستاگرام ما : <Link className='font-bold'
                                     target='_blank' href={"https://www.instagram.com/arenap_team"} >Arenap_team@</Link> </p></div>
-                                <div className='bg-bg_content p-2 rounded-sm'><p >لینکدین ما : <Link className='font-bold'
+                                <div className='bg-bg_content p-2 rounded-sm'><p className='flex justify-start items-center flex-wrap'>لینکدین ما : <Link className='font-bold'
                                     target='_blank' href={"https://www.linkedin.com/company/arenap-team"} >Arenap-team@</Link> </p></div>
-                                <div className='bg-bg_content p-2 rounded-sm' ><p >آدرس: تهران، بزرگراه صدر، قیطریه، دلارام</p></div>
+                                <div className='bg-bg_content p-2 rounded-sm' ><p className='flex justify-start items-center flex-wrap'>آدرس: تهران، بزرگراه صدر، قیطریه، دلارام</p></div>
                             </div>
                             <div className='mt-4  min-h-[12.5rem] md:h-[calc(100%-6.125rem)]'>
                                 <div className='rounded-sm overflow-hidden shadow-shadow_category'>
