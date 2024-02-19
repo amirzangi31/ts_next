@@ -6,10 +6,11 @@ type CheckboxType = {
     title: string,
     checked: boolean,
     bg?: string,
-    checkHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
+    checkHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    className?: string
 }
 
-const Checkbox = ({ name, title, checked, checkHandler, bg }: CheckboxType) => {
+const Checkbox = ({ name, title, checked, checkHandler, bg, className }: CheckboxType) => {
 
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +18,9 @@ const Checkbox = ({ name, title, checked, checkHandler, bg }: CheckboxType) => {
     }
 
     return (
-        <label htmlFor={name} className='flex justify-start items-center gap-2 cursor-pointer' >
+        <label htmlFor={name} className={
+            cn('flex justify-start items-center gap-2 cursor-pointer', className)
+        } >
             {
                 checked ? <span className={cn(
                     ' size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center', bg

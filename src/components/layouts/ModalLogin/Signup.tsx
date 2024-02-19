@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SetpLoginType } from './ModalLogin'
 import {
   Formik,
@@ -6,10 +6,11 @@ import {
   Field,
   FormikProps,
 } from 'formik';
-import { signUpSchema } from '@/utils/validations';
+import { signUpCitizensSchema, signUpSchema } from '@/utils/validations';
 import useLogin from '@/hooks/useLogin';
 import ButtonElement from '@/components/elements/ButtonElement';
 import FormControl from '@/components/elements/inputs/FormControl';
+import Checkbox from '@/components/elements/inputs/Checkbox';
 
 interface InitialValuesType {
   firstName: string;
@@ -19,9 +20,9 @@ interface InitialValuesType {
 
 
 
-const Signup = ({ changeStep , callbacks, isCallback, callbacksIndex = 0 }: SetpLoginType) => {
+const Signup = ({ changeStep, callbacks, isCallback, callbacksIndex = 0 }: SetpLoginType) => {
   const { loadingButton, loginVerifications, signUpHandler } = useLogin()
-
+  const [isCitizens, setISCitizens] = useState(false)
 
   const initialValues: InitialValuesType = {
     firstName: "",
@@ -34,7 +35,7 @@ const Signup = ({ changeStep , callbacks, isCallback, callbacksIndex = 0 }: Setp
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={signUpSchema}
+      validationSchema={isCitizens ? signUpCitizensSchema : signUpSchema}
       onSubmit={async (values, actions) => {
 
         const result = await signUpHandler(values.notionalNumber, values.firstName.toString(), values.lastName.toString(), loginVerifications.sessionId)
@@ -56,7 +57,15 @@ const Signup = ({ changeStep , callbacks, isCallback, callbacksIndex = 0 }: Setp
             <Field name="firstName" type="text" placeholder=" نام خود را وارد کنید" title="نام" component={FormControl} />
             <Field name="lastName" type="text" placeholder=" نام خانوادگی خود را وارد کنید" title="نام خانوادگی " component={FormControl} />
           </div>
-          <Field name="notionalNumber" type="text" placeholder=" کدملی  خود را وارد کنید" title="کدملی" component={FormControl} />
+          {isCitizens ? (
+            <Field name="notionalNumber" type="text" placeholder=" کد اتباع خود را وارد کنید" title="کد اتباع" component={FormControl} />
+          )
+            :
+            (
+              <Field name="notionalNumber" type="text" placeholder=" کدملی  خود را وارد کنید" title="کدملی" component={FormControl} />
+            )}
+            
+          <Checkbox className='text-sm mt-4' title='من از اتباع هستم' checked={isCitizens} checkHandler={(e) => setISCitizens(e.target.checked)} />
           <div className='mt-4'>
             <ButtonElement type='submit' typeButton='primary' size='sm' loading={loadingButton} >
               ارسال

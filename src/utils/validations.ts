@@ -17,17 +17,21 @@ const sendPhoneSchema = Yup.object().shape({
 const signUpSchema = Yup.object().shape({
   firstName: Yup.string().required(" نام الزامی میباشد"),
   lastName: Yup.string().required(" نام خانوادگی الزامی میباشد"),
-  notionalNumber: Yup.string().required(" کدملی  الزامی میباشد").test("validation_nationalCode", "کدملی معتبر وارد کنید", (value: any): any => {
+  notionalNumber: Yup.string().required(" کدملی الزامی میباشد").test("validation_nationalCode", "کدملی معتبر وارد کنید", (value: any): any => {
     const result = verifyIranianNationalId(value)
     return result
   })
 });
-
+const signUpCitizensSchema = Yup.object().shape({
+  firstName: Yup.string().required("نام الزامی میباشد"),
+  lastName: Yup.string().required("نام خانوادگی الزامی میباشد"),
+  notionalNumber: Yup.string().required("کد اتباع الزامی میباشد").min(11 , "کد معتبر وارد کنید").max(11 , "کد معتبر وارد کنید   ")
+});
 
 const editProfileSchema = Yup.object().shape({
   firstName: Yup.string().required("نام الزامی میباشد"),
   lastName: Yup.string().required(" نام خانوادگی الزامی میباشد"),
-  notionalNumber: Yup.string().required(" کدملی  الزامی میباشد").test("validation_nationalCode", "کدملی معتبر وارد کنید", (value: any): any => {
+  notionalNumber: Yup.string().required(" کدملی الزامی میباشد").test("validation_nationalCode", "کدملی معتبر وارد کنید", (value: any): any => {
     const result = verifyIranianNationalId(value)
     return result
   }),
@@ -42,4 +46,4 @@ const editProfileSchema = Yup.object().shape({
 
 
 
-export { sendPhoneSchema, signUpSchema , editProfileSchema };
+export { sendPhoneSchema, signUpSchema, editProfileSchema, signUpCitizensSchema };
