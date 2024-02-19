@@ -16,7 +16,7 @@ const NotFoundPage = () => {
 
 
     const expireHandler = () => {
-        // router.replace("/")
+        router.replace("/")
     }
 
 

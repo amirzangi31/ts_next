@@ -12,7 +12,7 @@ const AboutPage = () => {
       <header className='py-4'>
         <TitleHeading title='درباره آرناپ' />
       </header>
-      <div className="container max-w-[118.75rem] pb-5 mt-4 flex justify-start items-start gap-4 flex-col">
+      <div className=" pb-5 mt-4 flex justify-start items-start gap-4 flex-col">
 
         <BaseH2Card title={"درباره ما (آرناپ)"}>
           <p className='my-2 font-bold'>به آرناپ خوش آمدید</p>

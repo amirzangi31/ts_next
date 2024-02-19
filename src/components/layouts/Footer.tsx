@@ -8,6 +8,7 @@ import ButtonElement from '../elements/ButtonElement';
 import { phoneNumberValidator } from '@persian-tools/persian-tools';
 import Toastify from '../elements/toasts/Toastify';
 import { sendTicketPublic } from '@/services/ticketPublic/ticketPublic';
+import Link from 'next/link';
 
 interface FormType {
   firstName: string;
@@ -111,18 +112,18 @@ const Footer = () => {
             <h4 className='text-primary text-md font-bold text-center'>تماس با ما</h4>
             <div className='mt-4 text-center flex justify-start items-start gap-2 flex-col'>
               {/* <p className='text-md w-full'>آدرس : کرمان -میدان آزادی - ابتدای بلوار جمهوری - ساختمان رویش - طبقه دو   </p> */}
-              <LinkElement link={"tel:02191096760"} className="text-md w-full">شماره تماس : 6760 - 9109 - 021</LinkElement>
+              <Link href={"tel:02191096760"} className="text-md w-full">شماره تماس : 6760 - 9109 - 021</Link>
 
               <div className='flex justify-center items-center gap-2 w-full'>
 
-                <LinkElement link={"https://www.instagram.com/arenap_team"} className='group p-2 border border-gray-500 rounded-full hover:bg-primary hover:shadow-shadow_category transition-all duration-500 '>
+                <Link href={"https://www.instagram.com/arenap_team"} target='_blank' className='group p-2 border border-gray-500 rounded-full hover:bg-primary hover:shadow-shadow_category transition-all duration-500 '>
                   <svg xmlns="http://www.w3.org/2000/svg" className='transition-all duration-500 ' x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50">
                     <path d="M 16 3 C 8.8324839 3 3 8.8324839 3 16 L 3 34 C 3 41.167516 8.8324839 47 16 47 L 34 47 C 41.167516 47 47 41.167516 47 34 L 47 16 C 47 8.8324839 41.167516 3 34 3 L 16 3 z M 16 5 L 34 5 C 40.086484 5 45 9.9135161 45 16 L 45 34 C 45 40.086484 40.086484 45 34 45 L 16 45 C 9.9135161 45 5 40.086484 5 34 L 5 16 C 5 9.9135161 9.9135161 5 16 5 z M 37 11 A 2 2 0 0 0 35 13 A 2 2 0 0 0 37 15 A 2 2 0 0 0 39 13 A 2 2 0 0 0 37 11 z M 25 14 C 18.936712 14 14 18.936712 14 25 C 14 31.063288 18.936712 36 25 36 C 31.063288 36 36 31.063288 36 25 C 36 18.936712 31.063288 14 25 14 z M 25 16 C 29.982407 16 34 20.017593 34 25 C 34 29.982407 29.982407 34 25 34 C 20.017593 34 16 29.982407 16 25 C 16 20.017593 20.017593 16 25 16 z"></path>
                   </svg>
-                </LinkElement>
-                <LinkElement link={"https://www.linkedin.com/company/arenap-team"} className='group p-2 border border-gray-500 rounded-full hover:bg-primary hover:shadow-shadow_category transition-all duration-500 '>
+                </Link>
+                <Link href={"https://www.linkedin.com/company/arenap-team"} target='_blank' className='group p-2 border border-gray-500 rounded-full hover:bg-primary hover:shadow-shadow_category transition-all duration-500 '>
                   <Image src={"/linkedin.png"} width={500} height={500} alt='linkedin' className='w-5 h-5' />
-                </LinkElement>
+                </Link>
               </div>
             </div>
           </div>

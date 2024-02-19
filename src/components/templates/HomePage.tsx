@@ -99,7 +99,7 @@ const HomePage = (props: HomePagePropType) => {
                 <SectionTitle
                     title={"جدیدترین مقالات"}
                     textLink={"مشاهده بیشتر"}
-                    link='/search'
+                    link='blog'
                     btn={true}
                 />
                 <SwiperContainerFreeMode gap={10} data={articles} CardComponent={ArticleCardPrimary} />
@@ -113,7 +113,7 @@ const HomePage = (props: HomePagePropType) => {
                     title={"نظرات کاربران"}
                     textLink={"مشاهده بیشتر"}
                     link='/search'
-                    btn={true}
+                    btn={false}
                 />
                 <SwiperContainerFreeMode gap={10} data={comments} CardComponent={CommentCardPrimary} />
             </section>
