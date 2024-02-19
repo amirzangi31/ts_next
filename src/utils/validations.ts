@@ -25,11 +25,11 @@ const signUpSchema = Yup.object().shape({
 const signUpCitizensSchema = Yup.object().shape({
   firstName: Yup.string().required("نام الزامی میباشد"),
   lastName: Yup.string().required("نام خانوادگی الزامی میباشد"),
-  notionalNumber: Yup.string().required("کد اتباع الزامی میباشد").test("nationalCityzens", "کد معتبر وارد کنید", (value: any) => {   
-    if (value.toString().length === 8 || value.toString().length === 12){
+  notionalNumber: Yup.string().required("کد اتباع الزامی میباشد").test("nationalCityzens", "کد معتبر وارد کنید", (value: any) => {
+    if (value.toString().length === 8 || value.toString().length === 12) {
       return true
     } else {
-      return false  
+      return false
     }
   })
 });
@@ -52,4 +52,14 @@ const editProfileSchema = Yup.object().shape({
 
 
 
-export { sendPhoneSchema, signUpSchema, editProfileSchema, signUpCitizensSchema };
+const ticketPublic = Yup.object().shape({
+  fullName: Yup.object().required("نام و نام خانوادگی الزامی میباشد"),
+  emailAddre: Yup.string().email("ایمیل معتبر نمیباشد").required("ایمیل الزامی میباشد"),
+  phoneNumber: Yup.object().required("شماره همراه الزامی میباشد"),
+  title: Yup.object().required("عنوان الزامی میباشد"),
+  message: Yup.object().required("دیدگاه الزامی میباشد")
+})
+
+
+
+export { sendPhoneSchema, signUpSchema, editProfileSchema, signUpCitizensSchema, ticketPublic };
