@@ -47,18 +47,18 @@ const ContactUsPage = () => {
                                 initialValues={initialValues}
                                 validationSchema={ticketPublic}
                                 onSubmit={async (values, actions) => {
-                                    
+
                                     setLoadingButton(true)
                                     const res = await sendTicketPublic(values.fullName, values.emailAddre, values.phoneNumber, values.title, values.message)
-                                    if(res?.arenapResultCode === 200 ){
+                                    if (res?.arenapResultCode === 200) {
                                         actions.resetForm()
-                                        Toastify("success" , "دیدگاه شما با موفقیت ثبت شد")
+                                        Toastify("success", "دیدگاه شما با موفقیت ثبت شد")
                                     }
                                     setLoadingButton(false)
 
                                 }}
 
-                            
+
                             >
                                 {(props: FormikProps<any>) => (
                                     <Form>
@@ -91,7 +91,9 @@ const ContactUsPage = () => {
                                 <div className='bg-bg_content p-2 rounded-sm' ><p >آدرس: تهران، بزرگراه صدر، قیطریه، دلارام</p></div>
                             </div>
                             <div className='mt-4  min-h-[12.5rem] md:h-[calc(100%-6.125rem)]'>
-                                <MapContainer height={300} zoom={16} markerWidth={25} location={[35.79168985504364, 51.45315390651145]} />
+                                <div className='rounded-sm overflow-hidden shadow-shadow_category'>
+                                    <MapContainer height={300} zoom={16} markerWidth={25} location={[35.79168985504364, 51.45315390651145]} />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -118,7 +120,7 @@ export type FormControlEditType = {
 
 const FormControlEdit = (props: FormControlEditType) => {
     const { field, title, type, placeholder, form, value, disabled } = props
-    
+
     return (
         <div className='border-b border-gray-500  px-2 h-[2.8125rem] relative '>
             <input type={type} name={field.name} value={value} className='w-full h-full text-sm ' placeholder={placeholder} {...field} />
