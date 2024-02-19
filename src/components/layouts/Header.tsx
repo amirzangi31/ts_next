@@ -14,7 +14,7 @@ import ModalLogOut from './ModalLogOut'
 
 const Header = () => {
   const { user, isLogin } = useUserInfo()
-  
+
   const pathName = usePathname()
 
   return (
@@ -91,7 +91,12 @@ const Header = () => {
                   </ButtonElement>
                 </LinkElement>
               </li>
-              <li className='rtl:mr-auto ltr:ml-auto'>
+              <li className='rtl:mr-auto ltr:ml-auto flex justify-start items-center gap-4'>
+                <LinkElement link='/dr.arenap.ir/Dashboard' className='text-md'  >
+                  
+                    ثبت نام / ورود پزشک
+                  
+                </LinkElement>
                 {
                   isLogin === "isLoading" ?
                     <ButtonElement typeButton='secondary' size='md' variant='contained' width='w-[10.625rem]'>
