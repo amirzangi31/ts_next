@@ -17,7 +17,7 @@ const servicesData : ServicesDataType[] = [
       {
             id : 1 ,
             title : "پنل پزشکان",
-            link :"Auth",
+            link :"/dr.arenap.ir/Dashboard",
             image : "/services_1.png",
             disabled : false
       },

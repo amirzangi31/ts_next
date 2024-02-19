@@ -175,7 +175,14 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
     <>
       <TitlePagesMobile title={`صفحه ی اختصاصی ${spliterName[0] === "مرکز" ? "" : "دکتر"} ${physician.firstName} ${physician.lastName}`} />
       <ModalLogin isCallback={true} callbacks={callbacks} callbacksIndex={callbackIndex} />
-
+      <div className=" mt-4 rounded-sm bg-white max-w-[118.75rem] w-full border overflow-x-auto">
+        <div className="  p-2 flex justify-start items-center gap-2 w-fit text-primary">
+          <LinkElement link="/" className="text-sm text-primary">دکترها </LinkElement>/
+          <LinkElement link="/" className="text-sm text-primary">دکترهای {physician.cityName}</LinkElement>/
+          {physician.physicianSpecialities[0] ? <LinkElement link="/" className="text-sm text-primary">دکترهای {physician.physicianSpecialities[0]?.specialityTitle} /</LinkElement> : ""}
+          <LinkElement link="/" className="text-sm text-primary">دکتر {physician.firstName} {physician.lastName}</LinkElement>
+        </div>
+      </div>
       {/* ----------content------------- */}
       <div className="relative md:pb-5 flex flex-wrap ">
         {/* ----------section------------- */}
@@ -359,7 +366,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                       className="rounded-lg max-w-[4.375rem] w-full bg-gray-100 h-[.5rem] relative"
                     >
                       <div
-                        
+
                         className={cn(
                           "rounded-lg bg-[#30C018] h-[.5rem] absolute",
                           `w-[${watingTimeProgressPercent[0]}%]`
@@ -379,7 +386,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                       className="rounded-lg max-w-[4.375rem] w-full bg-gray-100 h-[.5rem] relative"
                     >
                       <div
-                        
+
                         className={cn(
                           "rounded-lg bg-[#30C018] h-[.5rem] absolute",
                           `w-[${watingTimeProgressPercent[1]}%]`
@@ -399,7 +406,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                       className="rounded-lg max-w-[4.375rem] w-full bg-gray-100 h-[.5rem] relative"
                     >
                       <div
-                        
+
                         className={cn(
                           "rounded-lg bg-[#30C018] h-[.5rem] absolute",
                           `w-[${watingTimeProgressPercent[2]}%]`
@@ -419,7 +426,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                       className="rounded-lg max-w-[4.375rem] w-full bg-gray-100 h-[.5rem] relative"
                     >
                       <div
-                        
+
                         className={cn(
                           "rounded-lg bg-[#30C018] h-[.5rem] absolute",
                           `w-[${watingTimeProgressPercent[3]}%]`

@@ -260,8 +260,8 @@ export const BlogAsideCard = ({ physicians }: { physicians: AutohrCardType[] }) 
             key={item.id}
             className="border-b border-gray-100 last:border-none w-full "
           >
-            <Link
-              href={`/${item.id}`}
+            <LinkElement
+              link={`blog/${item.id}`}
               className={cn(
                 `p-4 flex justify-between items-start flex-col  bg-white rounded-sm w-full`)}
             >
@@ -285,7 +285,7 @@ export const BlogAsideCard = ({ physicians }: { physicians: AutohrCardType[] }) 
                   </div>
                 </div>
               </div>
-            </Link>
+            </LinkElement>
           </div>
         ))}
       </div>
