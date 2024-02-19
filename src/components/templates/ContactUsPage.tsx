@@ -43,6 +43,7 @@ const ContactUsPage = () => {
                 <BaseH2Card title={"تماس با ما"}>
                     <div className='flex justify-start items-stretch flex-col-reverse md:flex-row gap-4'>
                         <div className='w-full md:w-6/12'>
+                            <p className='font-bold md:hidden'>ثبت دیدگاه</p>
                             <Formik
                                 initialValues={initialValues}
                                 validationSchema={ticketPublic}
@@ -81,6 +82,7 @@ const ContactUsPage = () => {
                             </Formik>
                         </div>
                         <div className='text-md  w-full md:w-6/12'>
+
                             <div className='grid grid-cols-2 gap-2 '>
                                 <div className='bg-bg_content p-2 rounded-sm'><p className='flex justify-start items-center flex-wrap'>شماره تماس: <Link className='font-bold'
                                     href={"tel:021910966760"}>6760 - 9109 - 021</Link> </p></div>
