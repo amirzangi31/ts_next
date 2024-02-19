@@ -180,7 +180,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
           <LinkElement link="/" className="text-sm text-primary">دکترها </LinkElement>/
           <LinkElement link="/" className="text-sm text-primary">دکترهای {physician.cityName}</LinkElement>/
           {physician.physicianSpecialities[0] ? <LinkElement link="/" className="text-sm text-primary">دکترهای {physician.physicianSpecialities[0]?.specialityTitle} /</LinkElement> : ""}
-          <LinkElement link="/" className="text-sm text-primary">دکتر {physician.firstName} {physician.lastName}</LinkElement>
+          <div  className="text-sm text-primary">دکتر {physician.firstName} {physician.lastName}</div>
         </div>
       </div>
       {/* ----------content------------- */}
