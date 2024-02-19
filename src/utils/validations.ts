@@ -25,7 +25,13 @@ const signUpSchema = Yup.object().shape({
 const signUpCitizensSchema = Yup.object().shape({
   firstName: Yup.string().required("نام الزامی میباشد"),
   lastName: Yup.string().required("نام خانوادگی الزامی میباشد"),
-  notionalNumber: Yup.string().required("کد اتباع الزامی میباشد").min(11 , "کد معتبر وارد کنید").max(11 , "کد معتبر وارد کنید   ")
+  notionalNumber: Yup.string().required("کد اتباع الزامی میباشد").test("nationalCityzens", "کد معتبر وارد کنید", (value: any) => {   
+    if (value.toString().length === 8 || value.toString().length === 12){
+      return true
+    } else {
+      return false  
+    }
+  })
 });
 
 const editProfileSchema = Yup.object().shape({
