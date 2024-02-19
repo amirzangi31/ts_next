@@ -11,11 +11,19 @@ import ButtonElement from '../elements/ButtonElement'
 import cn from '@/utils/clsxFun'
 import { sendTicketPublic } from '@/services/ticketPublic/ticketPublic'
 import MapContainer from '../modules/map/MapContainer'
+import Toastify from '../elements/toasts/Toastify'
 
+interface InitialValuesType {
+    fullName: string,
+    emailAddre: string,
+    phoneNumber: string,
+    title: string,
+    message: string
+}
 
 const ContactUsPage = () => {
     const [loadingButton, setLoadingButton] = useState(false)
-    const initialValues = {
+    let initialValues: InitialValuesType = {
         fullName: "",
         emailAddre: "",
         phoneNumber: "",
@@ -39,16 +47,18 @@ const ContactUsPage = () => {
                                 initialValues={initialValues}
                                 validationSchema={ticketPublic}
                                 onSubmit={async (values, actions) => {
-                                    console.log(values)
+                                    
                                     setLoadingButton(true)
                                     const res = await sendTicketPublic(values.fullName, values.emailAddre, values.phoneNumber, values.title, values.message)
-                                    console.log(res)
+                                    if(res?.arenapResultCode === 200 ){
+                                        actions.resetForm()
+                                        Toastify("success" , "دیدگاه شما با موفقیت ثبت شد")
+                                    }
                                     setLoadingButton(false)
 
                                 }}
 
-                                enableReinitialize={true}
-
+                            
                             >
                                 {(props: FormikProps<any>) => (
                                     <Form>
@@ -81,7 +91,7 @@ const ContactUsPage = () => {
                                 <div className='bg-bg_content p-2 rounded-sm' ><p >آدرس: تهران، بزرگراه صدر، قیطریه، دلارام</p></div>
                             </div>
                             <div className='mt-4  min-h-[12.5rem] md:h-[calc(100%-6.125rem)]'>
-                                <MapContainer height={300} zoom={10} markerWidth={25} location={[35.79168985504364 , 51.45315390651145]} /> 
+                                <MapContainer height={300} zoom={16} markerWidth={25} location={[35.79168985504364, 51.45315390651145]} />
                             </div>
                         </div>
                     </div>
@@ -108,15 +118,15 @@ export type FormControlEditType = {
 
 const FormControlEdit = (props: FormControlEditType) => {
     const { field, title, type, placeholder, form, value, disabled } = props
-
+    
     return (
-        <div className='border-b border-gray-500  px-2 h-[2.8125rem] '>
-            <input type={type} name={field.name} value={field.value} className='w-full h-full text-sm ' placeholder={placeholder} />
+        <div className='border-b border-gray-500  px-2 h-[2.8125rem] relative '>
+            <input type={type} name={field.name} value={value} className='w-full h-full text-sm ' placeholder={placeholder} {...field} />
             {
                 form.errors?.[field.name] && form.touched?.[field.name] && (
                     <span
                         className={cn(
-                            `text-sm px-2 text-error  `,
+                            `text-sm px-2 text-error  absolute top-1/2 left-0`,
                             {
                                 "opacity-100": form.errors?.[field.name] && form.touched?.[field.name],
                                 "opacity-0": !form.errors?.[field.name] && !form.touched?.[field.name],
@@ -134,13 +144,13 @@ const TextAreaControl = (props: FormControlEditType) => {
     const { field, title, type, placeholder, form, value, disabled } = props
 
     return (
-        <div className='border-b border-gray-500  px-2 mt-4 h-[10rem]'>
-            <textarea name={field.name} value={value} className='w-full h-full text-sm resize-none' placeholder={placeholder}  ></textarea>
+        <div className='border-b border-gray-500  px-2 mt-4 h-[10rem] relative'>
+            <textarea name={field.name} value={value} className='w-full h-full text-sm resize-none' placeholder={placeholder} {...field} ></textarea>
             {
                 form.errors?.[field.name] && form.touched?.[field.name] && (
                     <span
                         className={cn(
-                            `text-sm px-2 text-error  `,
+                            `text-sm px-2 text-error  absolute bottom-0 left-0`,
                             {
                                 "opacity-100": form.errors?.[field.name] && form.touched?.[field.name],
                                 "opacity-0": !form.errors?.[field.name] && !form.touched?.[field.name],

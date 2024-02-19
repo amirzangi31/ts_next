@@ -53,11 +53,15 @@ const editProfileSchema = Yup.object().shape({
 
 
 const ticketPublic = Yup.object().shape({
-  fullName: Yup.object().required("نام و نام خانوادگی الزامی میباشد"),
+  fullName: Yup.string().required("نام و نام خانوادگی الزامی میباشد"),
   emailAddre: Yup.string().email("ایمیل معتبر نمیباشد").required("ایمیل الزامی میباشد"),
-  phoneNumber: Yup.object().required("شماره همراه الزامی میباشد"),
-  title: Yup.object().required("عنوان الزامی میباشد"),
-  message: Yup.object().required("دیدگاه الزامی میباشد")
+  phoneNumber: Yup.string()
+    .required("شماره همراه الزامی میباشد")
+    .test("phoneValidation", "شماره همراه معتبر وارد کنید", (value) =>
+      phoneNumberValidator(value)
+    ),
+  title: Yup.string().required("عنوان الزامی میباشد"),
+  message: Yup.string().required("دیدگاه الزامی میباشد")
 })
 
 
