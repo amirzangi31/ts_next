@@ -33,7 +33,7 @@ const ChnageCityButton = () => {
 
   }) => item.cityName.toLowerCase().includes(searchText.toLocaleLowerCase()))
 
-  console.log(searchProvince)
+  
   return (
     <div className={
       cn(
@@ -123,7 +123,7 @@ const ChnageCityButton = () => {
                       }}
                     >
                       
-                      استان {item.provinceName} / شهر {item.cityName}
+                       {item.provinceName} / {item.cityName}
                     </li>
                   </SwiperSlide>
                 ))

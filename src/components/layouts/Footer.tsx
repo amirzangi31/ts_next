@@ -124,6 +124,9 @@ const Footer = () => {
                 <Link href={"https://www.linkedin.com/company/arenap-team"} target='_blank' className='group p-2 border border-gray-500 rounded-full hover:bg-primary hover:shadow-shadow_category transition-all duration-500 '>
                   <Image src={"/linkedin.png"} width={500} height={500} alt='linkedin' className='w-5 h-5' />
                 </Link>
+                <Link href={"mailto:arenapgroup@gmail.com"} target='_blank' className='group p-2 border border-gray-500 rounded-full hover:bg-primary hover:shadow-shadow_category transition-all duration-500 '>
+                  <Image src={"/mail.png"} width={500} height={500} alt='linkedin' className='w-5 h-5' />
+                </Link>
               </div>
             </div>
           </div>

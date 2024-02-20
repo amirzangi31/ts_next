@@ -90,11 +90,12 @@ const ContactUsPage = () => {
                                     target='_blank' href={"https://www.instagram.com/arenap_team"} >Arenap_team@</Link> </p></div>
                                 <div className='bg-bg_content p-2 rounded-sm'><p className='flex justify-start items-center flex-wrap'>لینکدین ما : <Link className='font-bold'
                                     target='_blank' href={"https://www.linkedin.com/company/arenap-team"} >Arenap-team@</Link> </p></div>
-                                <div className='bg-bg_content p-2 rounded-sm' ><p className='flex justify-start items-center flex-wrap'>آدرس: تهران، بزرگراه صدر، قیطریه، دلارام</p></div>
+                                <div className='bg-bg_content p-2 rounded-sm'><p className='flex justify-start items-center flex-wrap'>ایمیل ما : <Link className='font-bold'
+                                    target='_blank' href={"mailto:arenapgroup@gmail.com"} >ArenapGroup@Gmail.com</Link> </p></div>
                             </div>
                             <div className='mt-4  min-h-[12.5rem] md:h-[calc(100%-6.125rem)]'>
                                 <div className='rounded-sm overflow-hidden shadow-shadow_category'>
-                                    <MapContainer height={300} zoom={16} markerWidth={25} location={[35.79168985504364, 51.45315390651145]} />
+                                    <MapContainer height={300} zoom={16} markerWidth={25} location={[35.71755526502500, 51.42751509295143]} />
                                 </div>
                             </div>
                         </div>
