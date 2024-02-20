@@ -35,7 +35,15 @@ const ChnageCityButton = () => {
 
   console.log(searchProvince)
   return (
-    <div className='relative  md:z-[51]'>
+    <div className={
+      cn(
+        "relative",
+        {
+          'md:z-[19]' : !show,
+          "md:z-[20]" : show
+        }
+      )
+    }>
       <ButtonElement typeButton='primary' handler={showHandler} customStyle='group'>
         <span>{isLoadingCity ? <Loader size='size-[1.8rem]' color='border-white' /> : cityName}</span>
         <LocationIcon color='fill-white' />
