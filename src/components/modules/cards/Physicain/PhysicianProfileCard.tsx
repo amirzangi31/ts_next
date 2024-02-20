@@ -11,6 +11,9 @@ import StarIcon from "@/components/icons/StarIcon";
 
 import cn from "@/utils/clsxFun";
 import TagPhysicain from "@/components/elements/TagPhysician";
+import Loader from "@/components/elements/Loader";
+import LinkElement from "@/components/elements/LinkElement";
+import ButtonElement from "@/components/elements/ButtonElement";
 
 
 export type PhysicianProfileCardType = {
@@ -31,7 +34,8 @@ export type PhysicianProfileCardType = {
   city: string,
   liked: boolean,
   status: boolean,
-  addFavorite: () => void
+  addFavorite: () => void,
+  likeLoading: boolean
 }
 
 const PhysicianProfileCard = ({
@@ -44,7 +48,8 @@ const PhysicianProfileCard = ({
   city,
   liked,
   status,
-  addFavorite
+  addFavorite,
+  likeLoading
 }: PhysicianProfileCardType) => {
 
 
@@ -105,7 +110,7 @@ const PhysicianProfileCard = ({
             title={"مشاوره تلفنی فوری"}
           />
         </div>
-        <div className="flex justify-between items-end">
+        <div className="flex justify-between items-end ">
           <div className="flex flex-col gap-5">
             <div className="flex gap-3 items-center">
               <span>
@@ -120,6 +125,11 @@ const PhysicianProfileCard = ({
               <span>{city}</span>
             </div>
           </div>
+          <LinkElement link={`appointment/online-appointment/${profileURL}`} className="w-[12.25rem] hidden md:block">
+            <ButtonElement typeButton="primary">
+                  نوبت دهی اینترنتی
+            </ButtonElement>
+          </LinkElement>
           <div className="flex gap-3 items-center">
             <button
               type="button"
@@ -127,13 +137,20 @@ const PhysicianProfileCard = ({
             >
               <ShareIcon />
             </button>
-            <button
-              type="button"
-              className="flex justify-center items-center rounded-full p-2 bg-gray-100 size-[2.6875rem]"
-              onClick={addFavorite}
-            >
-              <LikeIcon liked={liked} />
-            </button>
+            {
+              likeLoading ? (
+
+                <Loader size="size-[2rem]" color="border-primary" />
+              ) : (
+                <button
+                  type="button"
+                  className="flex justify-center items-center rounded-full p-2 bg-gray-100 size-[2.6875rem]"
+                  onClick={addFavorite}
+                >
+                  <LikeIcon liked={liked} />
+                </button>
+              )
+            }
           </div>
         </div>
       </div>

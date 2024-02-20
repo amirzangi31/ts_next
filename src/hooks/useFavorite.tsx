@@ -53,7 +53,9 @@ const useFavorite = (physicianProfileId: string) => {
         userFavorite: userFavorite?.data?.isFavorite,
         isLodingUserFavorite: userFavorite.isLoading,
         addFavorite: addFavoriteHandler?.mutate,
-        deleteFavorite: deleteFavoriteHandler?.mutate
+        deleteFavorite: deleteFavoriteHandler?.mutate,
+        likeLoading : userFavorite.isLoading || addFavoriteHandler.isLoading || deleteFavoriteHandler.isLoading
+        
     }
 }
 

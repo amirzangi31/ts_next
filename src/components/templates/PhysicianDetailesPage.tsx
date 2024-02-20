@@ -46,7 +46,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
   const { isLogin, getUser } = useUserInfo();
   const { isShow, openModalLogin } = useModalLogin();
   //use favorite hook
-  const { userFavorite, addFavorite, deleteFavorite } = useFavorite(physician.id)
+  const { userFavorite, addFavorite, deleteFavorite , likeLoading} = useFavorite(physician.id)
   const favoritePhysicianHandler = async () => {
     if (isLogin === "isLoading") return;
     if (isLogin === "unauthorization") {
@@ -175,12 +175,12 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
     <>
       <TitlePagesMobile title={`صفحه ی اختصاصی ${spliterName[0] === "مرکز" ? "" : "دکتر"} ${physician.firstName} ${physician.lastName}`} />
       <ModalLogin isCallback={true} callbacks={callbacks} callbacksIndex={callbackIndex} />
-      <div className=" mt-4 rounded-sm bg-white max-w-[118.75rem] w-full border overflow-x-auto">
-        <div className="  p-2 flex justify-start items-center gap-2 w-fit text-primary">
-          <LinkElement link="/" className="text-sm text-primary">دکترها </LinkElement>/
-          <LinkElement link="/" className="text-sm text-primary">دکترهای {physician.cityName}</LinkElement>/
-          {physician.physicianSpecialities[0] ? <LinkElement link="/" className="text-sm text-primary">دکترهای {physician.physicianSpecialities[0]?.specialityTitle} /</LinkElement> : ""}
-          <div  className="text-sm text-primary">دکتر {physician.firstName} {physician.lastName}</div>
+      <div className=" mt-4 rounded-sm bg-white max-w-[118.75rem] w-full border overflow-x-scroll breadcrumb">
+        <div className="  p-2 flex justify-start items-center gap-2 w-fit text-primary rounded-sm">
+          <LinkElement link="/" className="text-sm text-primary min-w-fit">دکترها </LinkElement>/
+          <LinkElement link="/" className="text-sm text-primary min-w-fit">دکترهای {physician.cityName}</LinkElement>/
+          {physician.physicianSpecialities[0] ? <LinkElement link="/" className="text-sm text-primary min-w-fit">دکترهای {physician.physicianSpecialities[0]?.specialityTitle} /</LinkElement> : ""}
+          <div  className="text-sm text-primary min-w-fit pl-2">دکتر {physician.firstName} {physician.lastName}</div>
         </div>
       </div>
       {/* ----------content------------- */}
@@ -221,6 +221,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
             MENumber={physician.medicalSystemCode}
             city={physician.cityName}
             liked={userFavorite}
+            likeLoading={likeLoading}
             status={physician.immediateConsultation}
             addFavorite={favoritePhysicianHandler}
           />

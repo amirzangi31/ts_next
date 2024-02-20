@@ -18,8 +18,8 @@ const Header = () => {
   const pathName = usePathname()
 
   return (
-    <header className='  bg-primary min-h-[5rem] md:flex  justify-center items-center'>
-      <div className="container py-2 hidden md:block ">
+    <header className='  bg-primary min-h-[5rem] mdSecondary:flex  justify-center items-center'>
+      <div className="container py-2 hidden mdSecondary:block ">
         <div className='flex items-center w-full '>
 
           {/* Logo */}
@@ -92,7 +92,7 @@ const Header = () => {
                 </LinkElement>
               </li>
               <li className='rtl:mr-auto ltr:ml-auto flex justify-start items-center gap-4'>
-                <LinkElement link='/dr.arenap.ir/Dashboard' className='text-md'  >
+                <LinkElement link='/dr.arenap.ir/Dashboard' className='text-md'   >
                   
                     ثبت نام / ورود پزشک
                   

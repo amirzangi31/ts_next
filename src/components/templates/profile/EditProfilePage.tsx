@@ -12,6 +12,8 @@ import FormControlEdit from '@elements/inputs/FormControlEdit';
 import useUserInfo from '@/hooks/useUserInfo';
 import { UserType } from '@/types/global';
 import editProfile from '@/services/user/user';
+import TitlePagesMobile from '@/components/modules/titles/TitlePagesMobile';
+import Toastify from '@/components/elements/toasts/Toastify';
 
 interface InitialValuesType {
       firstName: string;
@@ -38,6 +40,8 @@ const EditProfilePage = () => {
 
       return (
             <>
+                  <TitlePagesMobile title={"ویرایش حساب کاربری"} />
+
                   <div>
                         <Formik
                               initialValues={initialValues}
@@ -45,10 +49,12 @@ const EditProfilePage = () => {
                               onSubmit={async (values, actions) => {
                                     setLoadingButton(true)
                                     const res = await editProfile(values.firstName, values.lastName, values.notionalNumber)
+                                    if(res.resultCode){
+                                          Toastify("success" , "حساب کاربری با موفقیت ویرایش شد")
+                                    }
                                     setLoadingButton(false)
 
                               }}
-
                               enableReinitialize={true}
                         >
                               {(props: FormikProps<any>) => (

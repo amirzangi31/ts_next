@@ -207,3 +207,17 @@ html {
 .direction-ltr{
   direction: ltr;
 }
+
+
+.breadcrumb::-webkit-scrollbar  {
+  display: none;
+}
+.breadcrumb::-webkit-scrollbar-track  {
+  display: none;
+}
+.breadcrumb::-webkit-scrollbar-thumb  {
+  display: none;
+}
+.breadcrumb::-webkit-scrollbar-thumb:hover  {
+  display: none;
+}

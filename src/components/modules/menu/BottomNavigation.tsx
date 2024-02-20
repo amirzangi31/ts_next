@@ -18,7 +18,7 @@ const BottomNavigation = ({ route }: { route: string }) => {
     const {isLogin , user} = useUserInfo()
 
     return (
-        <div className="fixed bottom-0 left-0 w-full h-[4.875rem] bg-white flex justify-between items-center flex-row-reverse md:hidden px-8 z-[5] shadow-shadow_bottom_nav">
+        <div className="fixed bottom-0 left-0 w-full h-[4.875rem] bg-white flex justify-between items-center flex-row-reverse mdSecondary:hidden px-8 z-[5] shadow-shadow_bottom_nav">
 
             {/* Blog button */}
             <LinkElement
@@ -54,18 +54,18 @@ const BottomNavigation = ({ route }: { route: string }) => {
             </LinkElement>
             {/* Search button */}
             <LinkElement
-                link={`search`}
+                link={`physicians`}
                 className={cn(
                     `flex justify-center items-center gap-1 flex-col-reverse text-sm `,
                     {
-                        "text-primary font-bold": route === "search",
-                        "text-black font-normal": route !== "search",
+                        "text-primary font-bold": route === "physicians",
+                        "text-black font-normal": route !== "physicians",
                     }
                 )}
             >
                 <span>جستجو</span>
                 <span>
-                    <MagnifierIcon active={route === "search" ? true : false} />
+                    <MagnifierIcon active={route === "physicians" ? true : false} />
                 </span>
             </LinkElement>
             {/* if authorization === true profile button else login button */}

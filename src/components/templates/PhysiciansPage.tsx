@@ -12,6 +12,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import Loader from '@elements/Loader'
 import FilterTag from '../elements/FilterTag'
 import SwiperContainerFreeMode from '../modules/swiper/SwiperContianerFreeMode'
+import TitlePagesMobile from '../modules/titles/TitlePagesMobile'
 
 
 
@@ -60,15 +61,17 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
 
 
     const tags = [
-        {id : 1 , title: "کرمی", handler: () => console.log("first") },
-        {id : 2 , title: "تست", handler: () => console.log("two") },
-        {id : 3 , title: "تست1", handler: () => console.log("three ") },
+        { id: 1, title: "کرمی", handler: () => console.log("first") },
+        { id: 2, title: "تست", handler: () => console.log("two") },
+        { id: 3, title: "تست1", handler: () => console.log("three ") },
     ]
 
 
 
     return (
         <>
+            <TitlePagesMobile title={`جستجو پزشکان آرناپ`} />
+
             {/* ----------section------------- */}
             {/* serach component */}
             <section className='py-4'>

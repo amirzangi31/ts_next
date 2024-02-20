@@ -10,7 +10,8 @@ const config: Config = {
     extend: {
       screens : {
 
-        "xsOne" : "480px"
+        "xsOne" : "480px",
+        "mdSecondary" : "920px",
 
       },
       container: {
