@@ -33,7 +33,7 @@ const ChnageCityButton = () => {
 
   }) => item.cityName.toLowerCase().includes(searchText.toLocaleLowerCase()))
 
-
+  console.log(searchProvince)
   return (
     <div className='relative  md:z-[51]'>
       <ButtonElement typeButton='primary' handler={showHandler} customStyle='group'>
@@ -114,7 +114,8 @@ const ChnageCityButton = () => {
                         setShow(false)
                       }}
                     >
-                      {item.cityName}
+                      
+                      استان {item.provinceName} / شهر {item.cityName}
                     </li>
                   </SwiperSlide>
                 ))
