@@ -43,7 +43,7 @@ const AppointmentPage = ({
         <SelectAppointmentStep
           calendar={calendar}
           physician={physician}
-          ramainingTime={ramainingTime}
+          ramainingTime={0}
           times={times}
           firstAppointment={firstAppointment}
           changeStep={changeStepHandler}
