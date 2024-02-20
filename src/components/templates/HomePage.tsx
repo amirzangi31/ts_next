@@ -45,12 +45,13 @@ const HomePage = (props: HomePagePropType) => {
 
     return (
         <>
-            <TitlePagesMobile title={"صفحه اصلی"} />
+            <TitlePagesMobile title={"آرناپ، پلتفرم آنلاین سلامت"} />
+
             {/* ----------header------------- */}
             {/* Best Specialities  */}
             <header className='py-4'>
 
-                <TitleHeading title="آرناپ : نوبت دهی اینترنتی پزشکان | مشاوره و ویزیت آنلاین" />
+                <TitleHeading title="نوبت دهی اینترنتی پزشکان، مشاوره و ویزیت آنلاین" />
 
                 <SearchHomePage physicians={physicians} />
             </header>

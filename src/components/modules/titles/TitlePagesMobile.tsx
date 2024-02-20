@@ -31,7 +31,7 @@ const TitlePagesMobile = ({ title }: { title: string }) => {
                         <div className={cn(
                             "absolute top-[calc(50%-1.25rem)] rtl:left-[12px] ltr:right-[12px]",
                             {
-                                "hidden" : pathName === "/profile"
+                                "hidden": pathName === "/profile"
                             }
                         )}>
                             <Link href={`/login`} className={`size-[2.5rem] rounded-full flex justify-center items-center bg-white cursor-pointer `} >
@@ -40,14 +40,17 @@ const TitlePagesMobile = ({ title }: { title: string }) => {
                         </div>
                         :
                         <div className={cn(
-                            "absolute top-[calc(50%-1.25rem)] rtl:left-[12px] ltr:right-[12px]",
+                            "absolute top-[calc(50%-1.25rem)] rtl:left-[12px] ltr:right-[12px] flex justify-between items-center flex-col",
                             {
-                                "hidden" : pathName === "/profile"
+                                "hidden": pathName === "/profile" || pathName === "/" ,
+                              
                             }
                         )}>
-                            <Link href={`/profile`} className={`size-[2.5rem] rounded-full flex justify-center items-center bg-white cursor-pointer `} >
+                            <Link href={`/profile`} className={`size-[2.5rem] rounded-full flex justify-center items-center  bg-white cursor-pointer `} >
                                 <Image src={"/user.png"} width={500} height={500} className="w-full h-full" alt="profile_image" />
+
                             </Link>
+                            {/* <p className="text-sm font-bold text-white">حساب من</p> */}
                         </div>
                 }
 
