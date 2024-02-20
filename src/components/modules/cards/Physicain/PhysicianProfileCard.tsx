@@ -128,7 +128,7 @@ const PhysicianProfileCard = ({
               <span>{city}</span>
             </div>
           </div>
-          <LinkElement link={`appointment/online-appointment/${physicianUrl}`} className="w-[12.25rem] hidden md:block">
+          <LinkElement link={physicianUrl} className="w-[12.25rem] hidden md:block">
             <ButtonElement typeButton="primary">
                   نوبت دهی اینترنتی
             </ButtonElement>

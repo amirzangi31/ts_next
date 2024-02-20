@@ -238,7 +238,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
             likeLoading={likeLoading}
             status={physician.immediateConsultation}
             addFavorite={favoritePhysicianHandler}
-            physicianUrl={physician.physicianProfileUrl}
+            physicianUrl={buttonLink as string}
           />
         </div>
         {/* ----------section------------- */}
