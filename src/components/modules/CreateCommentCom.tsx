@@ -11,20 +11,21 @@ import CloseButton from '../elements/CloseButton';
 import cn from '@/utils/clsxFun';
 import UpThumbIcon from '../icons/UpThumbIcon';
 import DownThumbIcon from '../icons/DownThumbIcon';
-import Loader from '../elements/Loader';
-import { PhysicainProfileType } from '../../types/physicianProfile';
 import ToastWarning from '../elements/toasts/ToastWarning';
 import FunctionalStarRateModule from './FunctionalStarRateModule';
 import RadioButton from '../elements/inputs/RadioButton';
 
 export type CreateCommentComType = {
     firstName: string,
-    lastName: string
+    lastName: string,
+    showComment : boolean,
+    setShowComment : () => void,
+    closeComment : () => void,
 }
 
-const CreateCommentCom = ({ firstName, lastName }: CreateCommentComType) => {
+const CreateCommentCom = ({ firstName, lastName , showComment , setShowComment , closeComment }: CreateCommentComType) => {
     const [isPresent, setIsPresent] = useState(false);
-    const [showVisitQuestionModal, setShowVisitQuestionModal] = useState(false);
+    
     const [showVisitTypeQuestionModal, setShowVisitTypeQuestionModal] =
         useState(false);
     const [showFormModal, setShowFormModal] = useState(false);
@@ -33,24 +34,13 @@ const CreateCommentCom = ({ firstName, lastName }: CreateCommentComType) => {
     const [waitingTime, setWaitingTime] = useState(0);
     const [recommendation, setRecommendation] = useState<boolean | null>(null);
     const [commentText, setCommentText] = useState("");
-    const [callbackIndex, setCallbackIndex] = useState(0)
-    const { openModalLogin } = useModalLogin()
-    const { isLogin } = useUserInfo()
-    const callbacks = [() => setShowVisitQuestionModal(true)]
     const [loadingButtonComment, setLoadingButtonComment] = useState(false)
 
 
 
 
-
-
-
     const visitQuestionModalHandler = () => {
-        if (isLogin === "unauthorization") {
-            openModalLogin();
-            setCallbackIndex(0)
-            return;
-        }
+        
 
         setRate(0);
         setWaitingTime(0);
@@ -59,17 +49,17 @@ const CreateCommentCom = ({ firstName, lastName }: CreateCommentComType) => {
 
         setShowVisitTypeQuestionModal(false);
         setShowFormModal(false);
-        setShowVisitQuestionModal(true);
+        setShowComment()
     };
     const visitTypeQuestionModalHandler = () => {
-        setShowVisitQuestionModal(false);
+        closeComment()
         setShowFormModal(false);
         setShowVisitTypeQuestionModal(true);
     };
 
     const newCommentModalHandler = (isPresent: boolean) => {
         setIsPresent(isPresent);
-        setShowVisitQuestionModal(false);
+        closeComment()
         setShowVisitTypeQuestionModal(false);
         setShowFormModal(true);
     };
@@ -118,7 +108,6 @@ const CreateCommentCom = ({ firstName, lastName }: CreateCommentComType) => {
 
     return (
         <>
-            <ModalLogin isCallback={true} callbacks={callbacks} callbacksIndex={callbackIndex} />
             <ButtonElement
                 typeButton="primary"
                 fontWeight="bold"
@@ -131,16 +120,14 @@ const CreateCommentCom = ({ firstName, lastName }: CreateCommentComType) => {
             </ButtonElement>
             {/* ----------modal------------- */}
             <Modal
-                show={showVisitQuestionModal}
-                closeHandler={() => {
-                    setShowVisitQuestionModal(false);
-                }}
+                show={showComment}
+                closeHandler={closeComment}
             >
                 <div className="w-full h-full flex justify-center items-center  ">
                     <div className="bg-white p-5 w-[18.75rem] rounded-sm max-w-full">
                         <div className="flex justify-end items-center ">
                             <CloseButton
-                                closeHanlder={() => setShowVisitQuestionModal(false)}
+                                closeHanlder={closeComment}
                             />
                         </div>
                         <div className="mt-1">
@@ -162,7 +149,7 @@ const CreateCommentCom = ({ firstName, lastName }: CreateCommentComType) => {
                                 size={"sm"}
                                 handler={() => {
                                     ToastWarning("امکان ثبت نظر برای شما وجود ندارد", "بعد از ویزیت شما توسط پزشک نظر خود را ثبت کنید", 3000)
-                                    setShowVisitQuestionModal(false);
+                                    closeComment()
                                 }}
                             >
                                 خیر

@@ -35,10 +35,12 @@ export type PhysicianProfileCardType = {
   liked: boolean,
   status: boolean,
   addFavorite: () => void,
-  likeLoading: boolean
+  likeLoading: boolean,
+  physicianUrl : string
 }
 
 const PhysicianProfileCard = ({
+
   name,
   profileURL,
   speciality,
@@ -49,7 +51,8 @@ const PhysicianProfileCard = ({
   liked,
   status,
   addFavorite,
-  likeLoading
+  likeLoading,
+  physicianUrl
 }: PhysicianProfileCardType) => {
 
 
@@ -125,7 +128,7 @@ const PhysicianProfileCard = ({
               <span>{city}</span>
             </div>
           </div>
-          <LinkElement link={`appointment/online-appointment/${profileURL}`} className="w-[12.25rem] hidden md:block">
+          <LinkElement link={`appointment/online-appointment/${physicianUrl}`} className="w-[12.25rem] hidden md:block">
             <ButtonElement typeButton="primary">
                   نوبت دهی اینترنتی
             </ButtonElement>

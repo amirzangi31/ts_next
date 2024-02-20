@@ -49,7 +49,7 @@ const useFavorite = (physicianProfileId: string) => {
 
     return {
 
-
+        
         userFavorite: userFavorite?.data?.isFavorite,
         isLodingUserFavorite: userFavorite.isLoading,
         addFavorite: addFavoriteHandler?.mutate,

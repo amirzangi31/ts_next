@@ -38,6 +38,7 @@ import LinkElement from "@elements/LinkElement";
 import SwiperContainerFreeMode from "@modules/swiper/SwiperContianerFreeMode";
 import PhysicainCardPrimary from '@modules/cards/Physicain/PhysicianCardPrimary';
 import CreateCommentCom from "@modules/CreateCommentCom";
+import { useRouter } from "next/navigation";
 
 const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }) => {
 
@@ -45,13 +46,28 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
 
   const { isLogin, getUser } = useUserInfo();
   const { isShow, openModalLogin } = useModalLogin();
+  const [showVisitQuestionModal, setShowVisitQuestionModal] = useState(false);
+  
+  const showCreateCommentHandler = () => {
+    if (isLogin === "unauthorization") {
+      openModalLogin()
+      setCallbackIndex(1)
+      return
+    }
+
+    setShowVisitQuestionModal(true)
+
+
+  }
+
+
   //use favorite hook
-  const { userFavorite, addFavorite, deleteFavorite , likeLoading} = useFavorite(physician.id)
+  const { userFavorite, addFavorite, deleteFavorite, likeLoading } = useFavorite(physician.id)
   const favoritePhysicianHandler = async () => {
     if (isLogin === "isLoading") return;
     if (isLogin === "unauthorization") {
-      openModalLogin();
       setCallbackIndex(0)
+      openModalLogin();
       return;
     }
 
@@ -66,11 +82,9 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
   const [callbackIndex, setCallbackIndex] = useState(0)
   //callbacks for after login
   const callbacks = [async () => {
-    if (!userFavorite) {
-      const res = addFavorite();
-    } else {
-      const status = deleteFavorite();
-    }
+    window.location.reload()
+  }, () => {
+    setShowVisitQuestionModal(true)
   }]
 
 
@@ -180,7 +194,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
           <LinkElement link="/" className="text-sm text-primary min-w-fit">دکترها </LinkElement>/
           <LinkElement link="/" className="text-sm text-primary min-w-fit">دکترهای {physician.cityName}</LinkElement>/
           {physician.physicianSpecialities[0] ? <LinkElement link="/" className="text-sm text-primary min-w-fit">دکترهای {physician.physicianSpecialities[0]?.specialityTitle} /</LinkElement> : ""}
-          <div  className="text-sm text-primary min-w-fit pl-2">دکتر {physician.firstName} {physician.lastName}</div>
+          <div className="text-sm text-primary min-w-fit pl-2">دکتر {physician.firstName} {physician.lastName}</div>
         </div>
       </div>
       {/* ----------content------------- */}
@@ -188,7 +202,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
         {/* ----------section------------- */}
         {/* Button */}
         {consultationList.find((item) => item.active) && (
-          <div className="sticky  bottom-[1.25rem] left-0 order-[13]  w-full flex justify-center items-center z-[15] pt-4">
+          <div className="sticky  bottom-[1.25rem] left-0 order-[13] md:hidden  w-full flex justify-center items-center z-[15] pt-4">
             <div className=" w-full ">
               <LinkElement link={buttonLink as string} className="block w-full">
                 <ButtonElement
@@ -224,6 +238,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
             likeLoading={likeLoading}
             status={physician.immediateConsultation}
             addFavorite={favoritePhysicianHandler}
+            physicianUrl={physician.physicianProfileUrl}
           />
         </div>
         {/* ----------section------------- */}
@@ -474,8 +489,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
               </span>
             </h3>
             <div className="w-[11.25rem]">
-              <CreateCommentCom firstName={physician.firstName} lastName={physician.lastName} />
-
+              <CreateCommentCom firstName={physician.firstName} lastName={physician.lastName} showComment={showVisitQuestionModal} setShowComment={showCreateCommentHandler} closeComment={() => setShowVisitQuestionModal(false)} />
             </div>
           </div>
           {physician.comments.length > 0 ? (
