@@ -240,6 +240,25 @@ const urls = {
       query: {},
     },
   },
+  advanceSearch: {
+    serach: {
+      url: "/PublicServices/PhysicianProfile/AdvancedSearch",
+      method: "GET",
+      parametrs: {},
+      query: {
+        fitler: "string",
+        cityName: "string",
+        gender: "string",
+        specilty: "string",
+        disease: "string",
+        sign: "string",
+        service: "string",
+        ConsultingPlan: "string",
+        page: "number",
+        itemsCountPerPage: "number"
+      }
+    }
+  },
   //provinces
   provinces: {
     provinces: {
@@ -272,6 +291,15 @@ const urls = {
         title: "string",
         message: "string"
       }
+    }
+  },
+  //specialities 
+  specialities: {
+    getSpecialities: {
+      url: "/PublicServices/PhysicianSpeciality/List",
+      method : "GET",
+      parametrs : {},
+      query : {}
     }
   }
 };

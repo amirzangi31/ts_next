@@ -31,3 +31,14 @@ export interface TransctionsType {
   userPhysicianProfileClanedar?: any;
 }
 
+export interface SpecialityType {
+  id: number;
+  specialityTitle: string;
+  counter: number;
+  enName: string;
+  parentId?: any;
+  parent?: any;
+  citySpecialties?: any;
+  physicianSpecialtySigns?: any;
+  physicianSpecialtyDiseases?: any;
+}

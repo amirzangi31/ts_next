@@ -13,25 +13,38 @@ import Loader from '@elements/Loader'
 import FilterTag from '../elements/FilterTag'
 import SwiperContainerFreeMode from '../modules/swiper/SwiperContianerFreeMode'
 import TitlePagesMobile from '../modules/titles/TitlePagesMobile'
+import { SpecialityType } from '@/types/global'
+import generateUrlSearchPage from '@/utils/generateUrlSearchPage'
+import useCity from '@/hooks/useCity'
+import convertGender from '@/utils/convertGender'
+import planNameConvert from '@/utils/planNameConvert'
 
 
 
 export type PhysiciansPageProps = {
     slugs?: {
-        city?: string,
-        speciality?: string,
-        service?: string,
-        region?: string
+        cityName: string,
+        specialty: string,
+        consultingPlan: string,
+        search_key: string,
+        page: string,
+        disease: string,
+        sign: string,
+        service: string,
+        gender: string
     },
-    searchKey?: string | undefined
+    searchKey?: string | undefined,
+    specialities: SpecialityType[]
 }
 
 
 const PhysiciansPage = (props: PhysiciansPageProps) => {
+    const { specialities, slugs } = props
+
     const pathName = usePathname()
     const [loadingPage, setLoadingPage] = useState(false)
-
-    const [searchText, setSearchText] = useState(props.searchKey ? props.searchKey : "")
+    
+    const [searchText, setSearchText] = useState(slugs?.search_key ? slugs?.search_key : "")
     const router = useRouter()
 
 
@@ -39,17 +52,25 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
     const [cookies] = useCookies(["cityInfo"])
     const [showFilters, setShowFilters] = useState(false)
     const [infoSearch, setInfoSearch] = useState({
-        city: props.slugs ? props.slugs.city : ""
+        city: slugs?.cityName ? slugs.cityName : ""
     })
 
-
+    
     const debouncedTextSearch = useDebouncedCallback(() => {
-        if (!searchText) {
-            router.push(pathName)
-            setLoadingPage(false)
-            return
-        }
-        router.push(`${pathName}?search_key=${searchText}`)
+
+        const url = generateUrlSearchPage({
+            cityName: cookies.cityInfo ? cookies.cityInfo.slug : "",
+            consultingPlan: slugs?.consultingPlan ? slugs.consultingPlan : "",
+            specialty: slugs?.specialty ? slugs.specialty : "",
+        }, {
+            disease: slugs?.disease ? slugs.disease : "",
+            gender: slugs?.gender ? slugs.gender : "",
+            page: slugs?.page ? slugs.page : "",
+            search_key: searchText,
+            service: slugs?.service ? slugs.service : "",
+            sign: slugs?.sign ? slugs.sign : "",
+        })
+        router.push(`/physicians${url}`)
         setLoadingPage(false)
     }, 750)
 
@@ -65,6 +86,11 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
         { id: 2, title: "تست", handler: () => console.log("two") },
         { id: 3, title: "تست1", handler: () => console.log("three ") },
     ]
+
+
+    const { provinces } = useCity()
+
+
 
 
 
@@ -100,8 +126,8 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
             {/* ----------header------------- */}
             {/* header */}
             <header className='w-full rounded-sm shadow-shadow_category bg-white p-4'>
-                {props.slugs && (<h1 className='text-xl font-bold text-center' >پزشکان <LinkElement link='/' className='font-bold text-primary underline'>{props.slugs.speciality}</LinkElement> برتر استان <LinkElement link={`physicians/city/${props.slugs.city}`} className='font-bold text-primary underline'>{props.slugs.city}</LinkElement> در آرناپ</h1>)}
-                {!props.slugs && (<h1 className='text-xl font-bold text-center' >نوبت دهی از بهترین دکتر های ایران</h1>)}
+                {/* {props.slugs && (<h1 className='text-xl font-bold text-center' >پزشکان <LinkElement link='/' className='font-bold text-primary underline'>{props.slugs.speciality}</LinkElement> برتر استان <LinkElement link={`physicians/city/${props.slugs.city}`} className='font-bold text-primary underline'>{props.slugs.city}</LinkElement> در آرناپ</h1>)} */}
+                {/* {!props.slugs && (<h1 className='text-xl font-bold text-center' >نوبت دهی از بهترین دکتر های ایران</h1>)} */}
             </header>
             {/* ----------header------------- */}
 
@@ -142,7 +168,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                 {/* ----------section------------- */}
                 {/* search section */}
                 <section>
-                    <SearchSectionPrimary showFilters={showFilters} closeFilterHandler={() => setShowFilters(false)} />
+                    <SearchSectionPrimary searchText={searchText} showFilters={showFilters} closeFilterHandler={() => setShowFilters(false)} specialities={specialities} slugs={props.slugs} />
                 </section>
                 {/* ----------section------------- */}
 
@@ -152,22 +178,134 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                     <div className='hidden md:flex justify-start items-center  gap-2 w-full text-md p-2 bg-white rounded-sm min-h-[2.8125rem]'>
                         <p className='font-bold text-primary min-w-fit'>نتایج فیلتر : </p>
                         <div className='flex justify-start items-center gap-2 flex-wrap'>
-                            <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'>
-                                <span className='text-gray-500'>کرمان</span>
-                                <span ><CloseIcon color='stroke-gray-500' /> </span>
-                            </div>
-                            <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'>
-                                <span className='text-gray-500'>فلوشیپ جراحی درون بین کلیه ادراری و تناسلی</span>
-                                <span ><CloseIcon color='stroke-gray-500' /> </span>
-                            </div>
-                            <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'>
-                                <span className='text-gray-500'>سنگ کلیه</span>
-                                <span ><CloseIcon color='stroke-gray-500' /> </span>
-                            </div>
-                            <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'>
-                                <span className='text-gray-500'>خانم</span>
-                                <span ><CloseIcon color='stroke-gray-500' /> </span>
-                            </div>
+                            {
+                                slugs?.cityName ?
+                                    <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'
+                                        onClick={() => {
+                                            const url = generateUrlSearchPage({
+                                                cityName: "",
+                                                consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                                specialty: slugs?.specialty ? slugs?.specialty : "",
+                                            },
+                                                {
+                                                    disease: slugs?.disease ? slugs?.disease : "",
+                                                    gender: slugs?.gender ? slugs?.gender : "",
+                                                    page: slugs?.page ? slugs?.page : "",
+                                                    search_key: slugs?.search_key ? slugs.search_key : "",
+                                                    service: slugs?.service ? slugs?.service : "",
+                                                    sign: slugs?.sign ? slugs?.sign : "",
+                                                })
+                                            router.push(`/physicians${url}`)
+                                        }}>
+                                        <span className='text-gray-500'>{provinces.find((item: {
+                                            cityId: number,
+                                            cityName: string,
+                                            centerName: string,
+                                            provinceId: number,
+                                            provinceName: string
+                                        }) => item.cityName === slugs.cityName)}</span>
+                                        <span ><CloseIcon color='stroke-gray-500' /> </span>
+                                    </div> : null
+                            }
+                            {
+                                slugs?.specialty ?
+                                    <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'
+                                        onClick={() => {
+                                            const url = generateUrlSearchPage({
+                                                cityName: slugs?.cityName ? slugs?.cityName : "",
+                                                consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                                specialty: "",
+                                            },
+                                                {
+                                                    disease: slugs?.disease ? slugs?.disease : "",
+                                                    gender: slugs?.gender ? slugs?.gender : "",
+                                                    page: slugs?.page ? slugs?.page : "",
+                                                    search_key: slugs?.search_key ? slugs.search_key : "",
+                                                    service: slugs?.service ? slugs?.service : "",
+                                                    sign: slugs?.sign ? slugs?.sign : "",
+                                                })
+                                            router.push(`/physicians${url}`)
+                                        }}>
+                                        <span className='text-gray-500'>{specialities.find((item) => item.enName === slugs.specialty)?.specialityTitle}</span>
+                                        <span ><CloseIcon color='stroke-gray-500' /> </span>
+                                    </div> : null
+                            }
+                            {
+                                slugs?.gender ?
+                                    <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'
+                                        onClick={() => {
+                                            const url = generateUrlSearchPage({
+                                                cityName: slugs?.cityName ? slugs?.cityName : "",
+                                                consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                                specialty: slugs?.specialty ? slugs?.specialty : "",
+                                            },
+                                                {
+                                                    disease: slugs?.disease ? slugs?.disease : "",
+                                                    gender: "",
+                                                    page: slugs?.page ? slugs?.page : "",
+                                                    search_key: slugs?.search_key ? slugs.search_key : "",
+                                                    service: slugs?.service ? slugs?.service : "",
+                                                    sign: slugs?.sign ? slugs?.sign : "",
+                                                })
+                                            router.push(`/physicians${url}`)
+                                        }}>
+                                        <span className='text-gray-500'>{convertGender(slugs.gender)}</span>
+                                        <span ><CloseIcon color='stroke-gray-500' /> </span>
+                                    </div> : null
+                            }
+                            {
+                                slugs?.consultingPlan ?
+                                    <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'
+
+                                        onClick={() => {
+                                            const url = generateUrlSearchPage({
+                                                cityName: slugs?.cityName ? slugs?.cityName : "",
+                                                consultingPlan: "",
+                                                specialty: slugs?.specialty ? slugs?.specialty : "",
+                                            },
+                                                {
+                                                    disease: slugs?.disease ? slugs?.disease : "",
+                                                    gender: slugs?.gender ? slugs?.gender : "",
+                                                    page: slugs?.page ? slugs?.page : "",
+                                                    search_key: slugs?.search_key ? slugs.search_key : "",
+                                                    service: slugs?.service ? slugs?.service : "",
+                                                    sign: slugs?.sign ? slugs?.sign : "",
+                                                })
+                                            router.push(`/physicians${url}`)
+                                        }}
+
+                                    >
+                                        <span className='text-gray-500'>{planNameConvert(slugs.consultingPlan)}</span>
+                                        <span ><CloseIcon color='stroke-gray-500' /> </span>
+                                    </div> : null
+                            }
+                            {
+                                slugs?.search_key ?
+                                    <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'
+                                        onClick={() => {
+                                            setSearchText("")
+                                            const url = generateUrlSearchPage({
+                                                cityName: slugs?.cityName ? slugs?.cityName : "",
+                                                consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                                specialty: slugs?.specialty ? slugs?.specialty : "",
+                                            },
+                                                {
+                                                    disease: slugs?.disease ? slugs?.disease : "",
+                                                    gender: slugs?.gender ? slugs?.gender : "",
+                                                    page: slugs?.page ? slugs?.page : "",
+                                                    search_key: "",
+                                                    service: slugs?.service ? slugs?.service : "",
+                                                    sign: slugs?.sign ? slugs?.sign : "",
+                                                })
+                                            router.push(`/physicians${url}`)
+                                            
+                                        }}
+                                    >
+                                        <span className='text-gray-500'>{slugs.search_key}</span>
+                                        <span ><CloseIcon color='stroke-gray-500' /> </span>
+                                    </div> : null
+                            }
+
                         </div>
                     </div>
                 </section>

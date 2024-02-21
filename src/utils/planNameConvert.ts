@@ -24,6 +24,10 @@ const planNameConvert = (type: string) => {
 
             return "مشاوره تلفنی فوری"
             break;
+        case "All":
+
+            return "پلن مشاوره"
+            break;
 
         case "disabled":
             return "لغو شده"

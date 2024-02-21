@@ -16,7 +16,7 @@ export interface SearchSmallCardType {
 }
 
 export interface PhysicianSpecialityType {
-  id?:string
+  id?: string
   specialityTitle: string;
 }
 
@@ -48,5 +48,56 @@ export interface PhysicianProfileType {
   patientAppointmentLimitTotalAppointment: number;
   aboutDr?: string;
   physicianSpecialities: PhysicianSpecialityType[];
-  bg? : string
-} 
+  bg?: string
+}
+
+// ---------------------------------------------------------------------------------------
+
+
+export interface PhysicianSearchType {
+  id: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  physicianProfileUrl: string;
+  address: string;
+  medicalSystemCode: string;
+  provinceName: string;
+  cityName: string;
+  hasImage: boolean;
+  patientAppointmentLimitDaysPeriod: number;
+  patientAppointmentLimitTotalAppointment: number;
+  onlineAppointment: boolean;
+  textConsultation: boolean;
+  voiceConsultation: boolean;
+  immediateConsultation: boolean;
+  aboutDr?: any;
+  rate: number;
+  firstAppointment: FirstAppointment;
+  physicianInsurances: any[];
+  physicianSpecialities: PhysicianSpeciality[];
+  online?: boolean;
+  freeMode?: boolean
+}
+
+interface PhysicianSpeciality {
+  id: number;
+  specialityTitle: string;
+  counter: number;
+  enName?: any;
+  parentId?: any;
+  parent?: any;
+  citySpecialties?: any;
+  physicianSpecialtySigns?: any;
+  physicianSpecialtyDiseases?: any;
+}
+
+interface FirstAppointment {
+  year: number;
+  month: number;
+  dayOfMonth: number;
+  dayOfWeek: number;
+  hour: number;
+  minute: number;
+}
+

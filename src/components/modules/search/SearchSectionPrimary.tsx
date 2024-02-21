@@ -1,40 +1,100 @@
 "use client"
-import React, { useState } from 'react'
+import React, { ChangeEvent, ReactNode, useState } from 'react'
 import cn from '@/utils/clsxFun'
 import CloseButton from '@elements/CloseButton'
 import ArrowLeft from '@icons/ArrowLeft'
 import ButtonElement from '@elements/ButtonElement'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { SpecialityType } from '@/types/global'
+import genderContent from '@/data/genderContent'
+import plansContent from '@/data/plansContent'
+import generateUrlSearchPage from '@/utils/generateUrlSearchPage'
+import convertGender from '@/utils/convertGender'
+import planNameConvert from '@/utils/planNameConvert'
 
-const SearchSectionPrimary = (props : {showFilters : boolean , closeFilterHandler : () => void}) => {
+
+
+
+export interface SearchSectionPrimaryProps {
+    showFilters: boolean;
+    closeFilterHandler: () => void;
+    specialities: SpecialityType[]
+    slugs?: {
+        cityName: string,
+        specialty: string,
+        consultingPlan: string,
+        search_key: string,
+        page: string,
+        disease: string,
+        sign: string,
+        service: string,
+        gender: string
+    },
+    searchText : string
+}
+
+
+
+const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
+    const { specialities, slugs , searchText} = props
     const [activeCard, setActiveCard] = useState<null | number>(0)
+    const { showFilters, closeFilterHandler } = props
     const router = useRouter()
-    const [titles ,setTitles] = useState({
-        speciality : "تخصص"
+    const pathName = usePathname()
+    const [searchsFilterCards, setSearchsFilterCards] = useState({
+        specialty: "",
+        services: ""
     })
-    const {showFilters , closeFilterHandler} = props
-
+    const [searchParametrs, setSearchParametrs] = useState({
+        search_key: slugs?.search_key ? slugs?.search_key : "",
+        cityName: slugs?.cityName ? slugs?.cityName : "",
+        gender: slugs?.gender ? slugs?.gender : "",
+        specialty: slugs?.specialty ? slugs?.specialty : "",
+        disease: slugs?.disease ? slugs?.disease : "",
+        sign: slugs?.sign ? slugs?.sign : "",
+        service: slugs?.service ? slugs?.service : "",
+        consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+        page: slugs?.page ? slugs?.page : "",
+        itemsCountPerPage: 10
+    })
+    const [titlesActive, setTitlesActive] = useState({
+        gender: slugs?.gender ? convertGender(slugs.gender) : "جنسیت",
+        specialty: slugs?.specialty ? specialities.find(item => item.enName === slugs.specialty)?.specialityTitle : "تخصص",
+        disease: "بیماری",
+        sign: "علائم",
+        service: "خدمات",
+        ConsultingPlan: slugs?.consultingPlan ? planNameConvert(slugs.consultingPlan) : "پلن مشاوره",
+    })
     const openFilterCard = (fitlerIndex: number | null) => {
         setActiveCard(fitlerIndex)
     }
-
-    const radioButtonHandler = (e: React.ChangeEvent<HTMLInputElement> ) => {
-
-        
+    const radioButtonHandler = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
+        setSearchParametrs({
+            ...searchParametrs,
+            [name]: e.target.value
+        })
     }
+    const genders = [...genderContent]
+    const plans = [...plansContent]
+    const searchedSpecialities = specialities.filter(item => item.specialityTitle.toLowerCase().includes(searchsFilterCards.specialty.toLocaleLowerCase()))
 
-    const genderContent = [
-        { id: 1, value: "0", name: "فرقی نمیکند" },
-        { id: 2, value: "1", name: "خانم" },
-        { id: 3, value: "2", name: "آقا" },
-    ]
-    const plans = [
-        { id: 1, value: "0", name: "همه پلن ها" },
-        { id: 2, value: "1", name: "نوبت دهی اینترنتی" },
-        { id: 3, value: "2", name: "مشاوره حضوری" },
-        { id: 4, value: "3", name: "مشاوره متنی" },
-        { id: 5, value: "4", name: "مشاوره تلفنی فوری" },
-    ]
+    const filterHandler = () => {
+        const url = generateUrlSearchPage({
+            cityName: searchParametrs.cityName,
+            specialty: searchParametrs.specialty,
+            consultingPlan: searchParametrs.consultingPlan,
+        }, {
+            disease: searchParametrs.disease,
+            sign: searchParametrs.sign,
+            service: searchParametrs.service,
+            gender: searchParametrs.gender,
+            page: searchParametrs.page === "0" ? "" : searchParametrs.page.toString(),
+            search_key: searchText,
+            // itemsCountPerPage: searchParametrs.itemsCountPerPage === 0 ? "" : searchParametrs.itemsCountPerPage.toString()
+        })
+        closeFilterHandler()
+        router.push(`/physicians${url}`)
+    }
 
 
     return (
@@ -43,7 +103,7 @@ const SearchSectionPrimary = (props : {showFilters : boolean , closeFilterHandle
                 'fixed -top-full left-0 h-screen w-full  bg-white-200 p-4 bg-bg_content transition-all duration-300',
                 "md:static md:h-auto md:w-[18.75rem] md:rounded-sm md:bg-white md:shadow-shadow_category",
                 {
-                    "top-0 z-[20]" : showFilters
+                    "top-0 z-[20]": showFilters
                 }
             )
         }>
@@ -55,18 +115,78 @@ const SearchSectionPrimary = (props : {showFilters : boolean , closeFilterHandle
                 <button type='button' className='text-error hidden md:block min-w-fit' onClick={() => {
                     console.log("test")
                     router.push("/physicians")
-                } } >حذف فیلترها</button>
+                }} >حذف فیلترها</button>
             </div>
             <div className='grid grid-cols-1 gap-4 mt-6 md:mt-4'>
-                <FilterCard title={titles.speciality} name='name_1' index={1} active={activeCard === 1} openHandler={openFilterCard} />
-                {/* <FilterCard title='خدمات' name='name_2' index={2} active={activeCard === 2} openHandler={openFilterCard} /> */}
-                {/* <FilterCard title='علائم' name='name_3' index={3} active={activeCard === 3} openHandler={openFilterCard} /> */}
-                {/* <FilterCard title='بیماری' name='name_4' index={4} active={activeCard === 4} openHandler={openFilterCard} /> */}
-                <FilterCardSecondary inputContent={genderContent} changeInputHandler={radioButtonHandler} title='جنسیت' name='name_5' index={5} active={activeCard === 5} openHandler={openFilterCard} />
-                <FilterCardSecondary inputContent={plans} changeInputHandler={radioButtonHandler} title='پلن مشاوره' name='name_6' index={6} active={activeCard === 6} openHandler={openFilterCard} />
+                <FilterCard title={titlesActive.specialty} name='name_1' index={1} active={activeCard === 1} openHandler={openFilterCard} >
+                    <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
+                        <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                            setSearchsFilterCards({
+                                ...searchsFilterCards,
+                                specialty: e.target.value
+                            })
+                        }} />
+                    </div>
+                    <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
+
+                        <label htmlFor={`specialities-`} className='my-2 flex justify-start items-center gap-1'>
+                            {
+                                searchParametrs.specialty === "" ? <span className={cn(
+                                    ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
+                                )}>
+                                    <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.8 4.2998L1.2 2.6998L0 3.8998L2.8 6.6998L8 1.4998L6.8 0.299805L2.8 4.2998Z" fill="white" />
+                                    </svg>
+                                </span> : <span className='min-w-[1rem] size-[1rem] rounded-[0.25rem] border border-gray-300 flex justify-center items-center'>
+
+                                </span>
+                            }
+                            <span>همه تخصص ها</span>
+                            <input id={`specialities-`} type="radio" name='specialty' className='hidden' onChange={() => {
+                                setSearchParametrs({
+                                    ...searchParametrs,
+                                    specialty: ""
+                                })
+                                setTitlesActive({
+                                    ...titlesActive,
+                                    specialty: "تخصص"
+                                })
+                            }} />
+                        </label>
+                        {searchedSpecialities.map((item, index) => (
+                            <label htmlFor={`specialities-${index}`} className='my-2 flex justify-start items-center gap-1' key={item.id}>
+                                {
+                                    item.enName === searchParametrs.specialty ? <span className={cn(
+                                        ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
+                                    )}>
+                                        <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.8 4.2998L1.2 2.6998L0 3.8998L2.8 6.6998L8 1.4998L6.8 0.299805L2.8 4.2998Z" fill="white" />
+                                        </svg>
+                                    </span> : <span className='min-w-[1rem] size-[1rem] rounded-[0.25rem] border border-gray-300 flex justify-center items-center'>
+
+                                    </span>
+                                }
+                                <span>{item.specialityTitle}</span>
+                                <input id={`specialities-${index}`} type="radio" name='specialty' className='hidden' onChange={() => {
+                                    setSearchParametrs({
+                                        ...searchParametrs,
+                                        specialty: item.enName
+                                    })
+                                    setTitlesActive({
+                                        ...titlesActive,
+                                        specialty: item.specialityTitle
+                                    })
+                                }} />
+                            </label>
+                        ))}
+                    </div>
+                </FilterCard>
+
+                <FilterCardSecondary inputContent={genders} defaultCheck={searchParametrs.gender} changeInputHandler={radioButtonHandler} title={titlesActive.gender} name='gender' index={5} active={activeCard === 5} openHandler={openFilterCard} />
+                <FilterCardSecondary inputContent={plans} defaultCheck={searchParametrs.consultingPlan} changeInputHandler={radioButtonHandler} title={titlesActive.ConsultingPlan} name='consultingPlan' index={6} active={activeCard === 6} openHandler={openFilterCard} />
             </div>
             <div className='mt-4 grid md:grid-cols-1 grid-cols-2 gap-4'>
-                <ButtonElement typeButton='primary' >اعمال فیلتر</ButtonElement>
+                <ButtonElement typeButton='primary' handler={filterHandler} >اعمال فیلتر</ButtonElement>
                 <div className='md:hidden'><ButtonElement typeButton='transparent'  >حذف فیلتر</ButtonElement></div>
             </div>
         </div>
@@ -81,12 +201,14 @@ export type FilterCardProps = {
     name: string,
     active: boolean,
     index: number,
-    title: string
+    title?: string,
+    children: ReactNode,
+
 }
 
 const FilterCard = (props: FilterCardProps) => {
 
-    const { openHandler, active, name, index, title } = props
+    const { openHandler, active, name, index, title, children } = props
 
 
     return (
@@ -108,7 +230,7 @@ const FilterCard = (props: FilterCardProps) => {
                     "after:absolute after:-right-5 md:after:-right-3 after:rounded-lg after:top-0 after:block after:bg-primary after:w-1 after:h-full"
                 )
             }>
-                <p>{title} <span className='text-gray-500 text-md'>(test)</span> </p>
+                <p className='text-md'>{title}</p>
                 <span className={cn(
                     '', {
                     "-rotate-90": !active,
@@ -122,12 +244,8 @@ const FilterCard = (props: FilterCardProps) => {
                     "hidden": !active
                 }
             )}>
-                <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
-                    <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' />
-                </div>
-                <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
-                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و
-                </div>
+                {children}
+
             </div>
         </div>
     )
@@ -139,13 +257,15 @@ export type FilterCardSecondaryProps = {
     active: boolean,
     index: number,
     title: string,
-    changeInputHandler: (e: React.ChangeEvent<HTMLInputElement> ) => void,
-    inputContent: { id: number, value: number | string, name: string }[]
+    changeInputHandler: (e: React.ChangeEvent<HTMLInputElement>, name: string) => void,
+    inputContent: { id: number, value: number | string, name: string }[],
+    defaultCheck: string
+
 }
 
 const FilterCardSecondary = (props: FilterCardSecondaryProps) => {
-    const { openHandler, active, name, index, title, changeInputHandler, inputContent } = props
-    const [titleState , setTitleState ] = useState("")
+    const { openHandler, active, name, index, title, changeInputHandler, inputContent, defaultCheck } = props
+    const [titleState, setTitleState] = useState("")
     return (
         <div className={cn(
             " rounded-sm shadow-shadow_category max-w-full cursor-pointer ",
@@ -184,9 +304,9 @@ const FilterCardSecondary = (props: FilterCardSecondaryProps) => {
                         inputContent.map(item => (
                             <label key={item.id} className='flex justify-start items-center  gap-2 cursor-pointer '>
                                 <input onChange={(e) => {
-                                    changeInputHandler(e )
+                                    changeInputHandler(e, name)
                                     setTitleState(item.name)
-                                }} hidden type="radio" name={name} className='bg-red-200 peer' value={item.value} />
+                                }} hidden type="radio" name={name} className='peer' value={item.value} checked={defaultCheck === item.value} />
                                 <div className={cn(
                                     "size-5 rounded-full bg-gray-100 peer-checked:bg-primary md:bg-white md:peer-checked:bg-primary relative peer-checked:after:block",
                                     "after:absolute after:top-1 after:left-1 after:rounded-full after:bg-white md:after:bg-white after:hidden after:w-3 after:h-3"
