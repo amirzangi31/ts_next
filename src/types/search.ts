@@ -101,3 +101,21 @@ interface FirstAppointment {
   minute: number;
 }
 
+
+export interface ServiceType {
+  id : number ;
+  name : string;
+  enName : string
+}
+
+export interface DiseaseType {
+  id : number ;
+  name : string;
+  enName : string
+}
+
+export interface SignType {
+  id : number ;
+  name : string;
+  enName : string
+}

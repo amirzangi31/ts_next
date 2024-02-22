@@ -297,9 +297,25 @@ const urls = {
   specialities: {
     getSpecialities: {
       url: "/PublicServices/PhysicianSpeciality/List",
-      method : "GET",
-      parametrs : {},
-      query : {}
+      method: "GET",
+      parametrs: {},
+      query: {}
+    }
+  },
+  //services 
+  services: {
+    url: "/PublicServices/PhysicianSpeciality/ServicesList",
+    method: "GET",
+    parametrs: {},
+    query: {}
+  },
+  //specialtyBelongings 
+  specialtyBelongings: {
+    url: "/PublicServices/PhysicianSpeciality/SpecialtyBelongings/",
+    method: "GET",
+    parametrs: {},
+    query: {
+      speciality : "string"
     }
   }
 };

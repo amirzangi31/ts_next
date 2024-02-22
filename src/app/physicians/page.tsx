@@ -16,6 +16,10 @@ const Doctors = async (props: {
 
   const specialities = await fetch(`${apiDomainNobat}${urls.specialities.getSpecialities.url}`)
   const specialitiesData = await specialities.json()
+  const services = await fetch(`${apiDomainNobat}${urls.services.url}`, { next: { revalidate: 60 * 60 * 1 } }) //one day
+  const servicesData = await services.json()
+
+  
 
 
   // const res = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}?Gender=0&ConsultingPlan=All&page=1&itemsCountPerPage=10`)
@@ -35,7 +39,7 @@ const Doctors = async (props: {
 
 
   return (
-    <PhysiciansPage specialities={specialitiesData.value} slugs={parametrs} />
+    <PhysiciansPage specialities={specialitiesData.value} slugs={parametrs} services={servicesData.value} />
   )
 }
 

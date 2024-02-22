@@ -1,6 +1,7 @@
 import PhysiciansPage from '@/components/templates/PhysiciansPage'
 import { apiDomainNobat } from '@/services/getApiUrlServer'
 import urls from '@/services/urls'
+import { DiseaseType, SignType } from '@/types/search'
 import convertParams from '@/utils/convertParams'
 import React from 'react'
 
@@ -11,13 +12,19 @@ const DoctorsSearch = async (props: {
         disease: string,
         sign: string,
         service: string,
-        gender : string
+        gender: string
     }
 }) => {
     const { params, searchParams } = props
     const slugs = convertParams(props.params.slug)
-    const specialities = await fetch(`${apiDomainNobat}${urls.specialities.getSpecialities.url}`)
+    const specialities = await fetch(`${apiDomainNobat}${urls.specialities.getSpecialities.url}`, { next: { revalidate: 60 * 60 * 1 } })//one day
     const specialitiesData = await specialities.json()
+    const services = await fetch(`${apiDomainNobat}${urls.services.url}`, { next: { revalidate: 60 * 60 * 1 } }) //one day
+    const servicesData = await services.json()
+   
+    
+
+    
 
     const parametrs = {
         cityName: slugs.cityName ? slugs.cityName : "",
@@ -33,7 +40,7 @@ const DoctorsSearch = async (props: {
 
 
     return (
-        <PhysiciansPage slugs={parametrs} searchKey={searchParams.search_key} specialities={specialitiesData.value} />
+        <PhysiciansPage   slugs={parametrs} searchKey={searchParams.search_key} specialities={specialitiesData.value} services={servicesData.value} />
     )
 }
 

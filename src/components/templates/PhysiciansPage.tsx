@@ -22,6 +22,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
+import { DiseaseType, ServiceType, SignType } from '@/types/search'
+import { specialtyBelongings } from '@/services/specialtyBelongings/specialtyBelongings'
 
 
 
@@ -38,18 +40,39 @@ export type PhysiciansPageProps = {
         gender: string
     },
     searchKey?: string | undefined,
-    specialities: SpecialityType[]
+    specialities: SpecialityType[],
+    services: ServiceType[],
 }
 
 
 const PhysiciansPage = (props: PhysiciansPageProps) => {
-    const { specialities, slugs } = props
+    const { specialities, slugs, services } = props
+
 
     const pathName = usePathname()
     const [loadingPage, setLoadingPage] = useState(false)
+    const [diseasesLoading, setDiseasesLoading] = useState(false)
 
     const [searchText, setSearchText] = useState(slugs?.search_key ? slugs?.search_key : "")
     const router = useRouter()
+    const [diseases, setDiseases] = useState<DiseaseType[]>([])
+    const [signs, setSigns] = useState<SignType[]>([])
+
+    const getDiseaseHandler = async (enName: string) => {
+        setDiseasesLoading(true)
+        const data = await specialtyBelongings(enName)
+        const diseases = data?.diseases
+        const signs = data?.signs
+        setDiseases(diseases)
+        setSigns(signs)
+        setDiseasesLoading(false)
+    }
+
+    useEffect(() => {
+        if (slugs?.specialty) {
+            getDiseaseHandler(slugs?.specialty)
+        }
+    }, [])
 
 
 
@@ -84,21 +107,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
 
     }, [searchText, cookies?.cityInfo])
 
-
-
-
-    const tags = [
-        { id: 1, title: "کرمی", handler: () => console.log("first") },
-    ]
-
-
-
-
-
     const { provinces } = useCity()
-
-
-
 
 
     return (
@@ -197,6 +206,66 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                             }} />
                         </SwiperSlide> : null
                     }
+                    {slugs?.service ?
+                        <SwiperSlide className='swiper_width_auto' >
+                            <FilterTag id={1} title={services.find((item) => item.enName === slugs.service)?.name} handler={() => {
+                                const url = generateUrlSearchPage({
+                                    cityName: slugs?.cityName ? slugs?.cityName : "",
+                                    consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                    specialty: slugs?.specialty ? slugs.specialty : "",
+                                },
+                                    {
+                                        disease: slugs?.disease ? slugs?.disease : "",
+                                        gender: slugs?.gender ? slugs?.gender : "",
+                                        page: slugs?.page ? slugs?.page : "",
+                                        search_key: slugs?.search_key ? slugs.search_key : "",
+                                        service: "",
+                                        sign: slugs?.sign ? slugs?.sign : "",
+                                    })
+                                router.push(`/physicians${url}`)
+                            }} />
+                        </SwiperSlide> : null
+                    }
+                    {slugs?.disease ?
+                        <SwiperSlide className='swiper_width_auto' >
+                            <FilterTag id={1} title={diseases.find((item) => item.enName === slugs.disease)?.name} handler={() => {
+                                const url = generateUrlSearchPage({
+                                    cityName: slugs?.cityName ? slugs?.cityName : "",
+                                    consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                    specialty: slugs?.specialty ? slugs.specialty : "",
+                                },
+                                    {
+                                        disease:  "",
+                                        gender: slugs?.gender ? slugs?.gender : "",
+                                        page: slugs?.page ? slugs?.page : "",
+                                        search_key: slugs?.search_key ? slugs.search_key : "",
+                                        service: slugs?.service ? slugs?.service : "",
+                                        sign: slugs?.sign ? slugs?.sign : "",
+                                    })
+                                router.push(`/physicians${url}`)
+                            }} />
+                        </SwiperSlide> : null
+                    }
+                    {slugs?.sign ?
+                        <SwiperSlide className='swiper_width_auto' >
+                            <FilterTag id={1} title={signs.find((item) => item.enName === slugs.sign)?.name} handler={() => {
+                                const url = generateUrlSearchPage({
+                                    cityName: slugs?.cityName ? slugs?.cityName : "",
+                                    consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                    specialty: slugs?.specialty ? slugs.specialty : "",
+                                },
+                                    {
+                                        disease:  slugs?.disease ? slugs?.disease : "",
+                                        gender: slugs?.gender ? slugs?.gender : "",
+                                        page: slugs?.page ? slugs?.page : "",
+                                        search_key: slugs?.search_key ? slugs.search_key : "",
+                                        service: slugs?.service ? slugs?.service : "",
+                                        sign: "",
+                                    })
+                                router.push(`/physicians${url}`)
+                            }} />
+                        </SwiperSlide> : null
+                    }
                     {slugs?.gender ?
                         <SwiperSlide className='swiper_width_auto' >
                             <FilterTag id={1} title={convertGender(slugs.gender)} handler={() => {
@@ -258,12 +327,6 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                             }} />
                         </SwiperSlide> : null
                     }
-
-
-
-
-
-
                 </Swiper>
 
             </section>
@@ -299,7 +362,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                 {/* ----------section------------- */}
                 {/* search section */}
                 <section>
-                    <SearchSectionPrimary searchText={searchText} showFilters={showFilters} closeFilterHandler={() => setShowFilters(false)} specialities={specialities} slugs={props.slugs} />
+                    <SearchSectionPrimary loading={diseasesLoading} getDisease={getDiseaseHandler} services={services} diseases={diseases} signs={signs} searchText={searchText} showFilters={showFilters} closeFilterHandler={() => setShowFilters(false)} specialities={specialities} slugs={props.slugs} />
                 </section>
                 {/* ----------section------------- */}
 
@@ -358,6 +421,75 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                                             router.push(`/physicians${url}`)
                                         }}>
                                         <span className='text-gray-500'>{specialities.find((item) => item.enName === slugs.specialty)?.specialityTitle}</span>
+                                        <span ><CloseIcon color='stroke-gray-500' /> </span>
+                                    </div> : null
+                            }
+                            {
+                                slugs?.disease ?
+                                    <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'
+                                        onClick={() => {
+                                            const url = generateUrlSearchPage({
+                                                cityName: slugs?.cityName ? slugs?.cityName : "",
+                                                consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                                specialty: slugs?.specialty ? slugs?.specialty : "",
+                                            },
+                                                {
+                                                    disease: "",
+                                                    gender: slugs?.gender ? slugs?.gender : "",
+                                                    page: slugs?.page ? slugs?.page : "",
+                                                    search_key: slugs?.search_key ? slugs.search_key : "",
+                                                    service: slugs?.service ? slugs?.service : "",
+                                                    sign: slugs?.sign ? slugs?.sign : "",
+                                                })
+                                            router.push(`/physicians${url}`)
+                                        }}>
+                                        <span className='text-gray-500'>{diseases.find((item) => item.enName === slugs.disease)?.name}</span>
+                                        <span ><CloseIcon color='stroke-gray-500' /> </span>
+                                    </div> : null
+                            }
+                            {
+                                slugs?.sign ?
+                                    <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'
+                                        onClick={() => {
+                                            const url = generateUrlSearchPage({
+                                                cityName: slugs?.cityName ? slugs?.cityName : "",
+                                                consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                                specialty: slugs?.specialty ? slugs?.specialty : "",
+                                            },
+                                                {
+                                                    disease: slugs?.disease ? slugs?.disease : "",
+                                                    gender: slugs?.gender ? slugs?.gender : "",
+                                                    page: slugs?.page ? slugs?.page : "",
+                                                    search_key: slugs?.search_key ? slugs.search_key : "",
+                                                    service: slugs?.service ? slugs?.service : "",
+                                                    sign: "",
+                                                })
+                                            router.push(`/physicians${url}`)
+                                        }}>
+                                        <span className='text-gray-500'>{signs.find((item) => item.enName === slugs.sign)?.name}</span>
+                                        <span ><CloseIcon color='stroke-gray-500' /> </span>
+                                    </div> : null
+                            }
+                            {
+                                slugs?.service ?
+                                    <div className='flex justify-center items-center gap-2 px-2 py-1 border border-gray-500 rounded-full cursor-pointer'
+                                        onClick={() => {
+                                            const url = generateUrlSearchPage({
+                                                cityName: slugs?.cityName ? slugs?.cityName : "",
+                                                consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                                specialty: slugs?.specialty ? slugs.specialty : "",
+                                            },
+                                                {
+                                                    disease: slugs?.disease ? slugs?.disease : "",
+                                                    gender: slugs?.gender ? slugs?.gender : "",
+                                                    page: slugs?.page ? slugs?.page : "",
+                                                    search_key: slugs?.search_key ? slugs.search_key : "",
+                                                    service: "",
+                                                    sign: slugs?.sign ? slugs?.sign : "",
+                                                })
+                                            router.push(`/physicians${url}`)
+                                        }}>
+                                        <span className='text-gray-500'>{services.find((item) => item.enName === slugs.service)?.name}</span>
                                         <span ><CloseIcon color='stroke-gray-500' /> </span>
                                     </div> : null
                             }
