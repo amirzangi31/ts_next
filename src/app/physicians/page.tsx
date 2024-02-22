@@ -39,7 +39,7 @@ const Doctors = async (props: {
 
 
   return (
-    <PhysiciansPage hasMore={searchData.value.totalPages === searchData.value.currentPage ? false : true} specialities={specialitiesData.value} slugs={parametrs} services={servicesData.value} searchData={searchData?.value?.items} searchParams={props.searchParams} />
+    <PhysiciansPage hasMore={searchData?.value?.totalPages === searchData?.value?.currentPage ? false : true} specialities={specialitiesData.value} slugs={parametrs} services={servicesData.value} searchData={searchData?.value?.items} searchParams={props.searchParams} />
   )
 }
 
