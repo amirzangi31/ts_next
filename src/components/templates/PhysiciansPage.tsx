@@ -29,8 +29,6 @@ import PhysicianLoadingPrimaryCard from '../modules/cards/Skeletons/PhysicianLoa
 import { apiDomainNobat } from '@/services/getApiUrl'
 import urls from '@/services/urls'
 import Toastify from '../elements/toasts/Toastify'
-import servicesData from '@/data/servicesData'
-import ButtonElement from '../elements/ButtonElement'
 
 
 
@@ -64,16 +62,13 @@ export type PhysiciansPageProps = {
 
 const PhysiciansPage = (props: PhysiciansPageProps) => {
     const { specialities, slugs, services, searchData, searchParams, hasMore } = props
-    const [loadingData, setLoadingData] = useState(false)
-    const [searchDataClient, setSearchDataClient] = useState(searchData)
+    
+    const [loadingData, setLoadingData] = useState(true)
+    const [searchDataClient, setSearchDataClient] = useState<PhysicianDataSearch[] | []>([])
     const [hasMoreSatet, setHasMoreState] = useState(hasMore)
     const [page, setPage] = useState(1)
     const pathName = usePathname()
-
-
-
     const [diseasesLoading, setDiseasesLoading] = useState(false)
-
     const [searchText, setSearchText] = useState(slugs?.search_key ? slugs?.search_key : "")
     const router = useRouter()
     const [diseases, setDiseases] = useState<DiseaseType[]>([])
@@ -95,7 +90,10 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
         }
     }, [])
 
-
+    useEffect(() => {
+        setSearchDataClient(searchData === undefined ? [] : searchData)
+        setLoadingData(false)
+    } , [searchData])
 
     const [cookies] = useCookies(["cityInfo"])
     const [showFilters, setShowFilters] = useState(false)
