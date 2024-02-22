@@ -9,7 +9,7 @@ const createComment = async (
   userPhysicianProfileCalnedarId : string,
   rate : number,
   waitingTime : number,
-  recommendation : string,
+  recommendation : boolean | null,
   commentText : string
 ) => {
   const dataObj = {

@@ -86,15 +86,15 @@ const CreateCommentCom = ({ firstName, lastName, physicianId, showComment, setSh
 
         setLoadingButtonComment(true)
         try {
-            // const res = await createComment(
-            //     physicianId,
-            //     "",
-            //     rate,
-            //     waitingTime,
-            //     recommendation,
-            //     commentText
-            // );
-
+            const res = await createComment(
+                physicianId,
+                "",
+                rate,
+                waitingTime,
+                recommendation,
+                commentText
+            );
+            console.log(res)
         } catch (error: any) {
 
         }
