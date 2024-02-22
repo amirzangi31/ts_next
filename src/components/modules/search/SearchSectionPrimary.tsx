@@ -150,15 +150,17 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
         <section className={cn(
             ' md:sticky top-2.5 right-0',
             {
-                "hidden md:block" : showFilters
+                " md:block" : showFilters,
+                "hidden md:block" : !showFilters
             }
         )}>
             <div className={
                 cn(
-                    'fixed -top-full left-0 h-screen w-full  bg-white-200 p-4 bg-bg_content transition-all duration-300',
-                    "md:static md:h-auto md:w-[18.75rem] md:rounded-sm md:bg-white md:shadow-shadow_category",
+                    'fixed  left-0 h-screen w-full  bg-white-200 p-4 bg-bg_content transition-all duration-300',
+                    "md:static md:h-auto md:w-[18.75rem] md:rounded-sm md:bg-white md:shadow-shadow_category ",
                     {
-                        "top-0 z-[20]": showFilters
+                        "top-0 z-[20]": showFilters,
+                        "-top-full" : !showFilters
                     }
                 )
             }>

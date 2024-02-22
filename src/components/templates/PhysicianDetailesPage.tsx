@@ -196,7 +196,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
             <Image src={"/favicon.png"} width={500} height={500} alt='icon' className='size-[2rem]' />
           </LinkElement>
           <LinkElement link="physicians" className="text-sm text-primary min-w-fit">دکترها </LinkElement>/
-          <LinkElement link={`physicians/${physician.cityEnName}`} className="text-sm text-primary min-w-fit">دکترهای {physician.cityName}</LinkElement>/
+          <LinkElement link={`physicians/city/${physician.cityEnName}`} className="text-sm text-primary min-w-fit">دکترهای {physician.cityName}</LinkElement>/
           {physician.physicianSpecialities[0] ? <LinkElement link={`physicians/specialty/${physician?.physicianSpecialities[0]?.enName}`} className="text-sm text-primary min-w-fit">دکترهای {physician.physicianSpecialities[0]?.specialityTitle} /</LinkElement> : ""}
           <div className="text-sm text-primary min-w-fit pl-2">دکتر {physician.firstName} {physician.lastName}</div>
         </div>
