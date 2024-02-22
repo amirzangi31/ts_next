@@ -1,9 +1,17 @@
 import React from 'react'
+import PhysiciansCityPage from '@/components/templates/PhysiciansCityPage';
+import { apiDomainNobat } from '@/services/getApiUrlServer';
+import urls from '@/services/urls';
 
-const DcotorsCity = ({ params }: { params: { locale: string, city: string } }) => {
-    console.log(params.city)
+const DcotorsCity = async ({ params }: { params: { locale: string, city: string } }) => {
+
+    const res = await fetch(`${apiDomainNobat}${urls.provinces.physicians.url}${params.city}`)
+    const data = await res.json()
+
+    
+
     return (
-        <div>{params.city}</div>
+        <PhysiciansCityPage data={data.value} city={params.city} /> 
     )
 }
 

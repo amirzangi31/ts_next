@@ -269,6 +269,13 @@ const urls = {
       url: "/Public/Address/Cities?provinceId=",
       method: "GET",
     },
+    physicians: {
+      url: "/PublicServices/PhysicianSpeciality/CitySpecialties/",
+      method: "GET",
+      query : {
+        enNameCity : "string"
+      }
+    },
   },
 
   //price

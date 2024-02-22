@@ -39,6 +39,7 @@ import SwiperContainerFreeMode from "@modules/swiper/SwiperContianerFreeMode";
 import PhysicainCardPrimary from '@modules/cards/Physicain/PhysicianCardPrimary';
 import CreateCommentCom from "@modules/CreateCommentCom";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }) => {
 
@@ -47,7 +48,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
   const { isLogin, getUser } = useUserInfo();
   const { isShow, openModalLogin } = useModalLogin();
   const [showVisitQuestionModal, setShowVisitQuestionModal] = useState(false);
-  
+
   const showCreateCommentHandler = () => {
     if (isLogin === "unauthorization") {
       openModalLogin()
@@ -191,6 +192,9 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       <ModalLogin isCallback={true} callbacks={callbacks} callbacksIndex={callbackIndex} />
       <div className=" mt-4 rounded-sm bg-white max-w-[118.75rem] w-full border overflow-x-scroll breadcrumb">
         <div className="  p-2 flex justify-start items-center gap-2 w-fit text-primary rounded-sm">
+          <LinkElement link="" className="text-sm text-primary min-w-fit">
+            <Image src={"/favicon.png"} width={500} height={500} alt='icon' className='size-[2rem]' />
+          </LinkElement>
           <LinkElement link="physicians" className="text-sm text-primary min-w-fit">دکترها </LinkElement>/
           <LinkElement link={`physicians/${physician.cityEnName}`} className="text-sm text-primary min-w-fit">دکترهای {physician.cityName}</LinkElement>/
           {physician.physicianSpecialities[0] ? <LinkElement link={`physicians/specialty/${physician?.physicianSpecialities[0]?.enName}`} className="text-sm text-primary min-w-fit">دکترهای {physician.physicianSpecialities[0]?.specialityTitle} /</LinkElement> : ""}

@@ -27,19 +27,19 @@ const Doctors = async (props: {
     consultingPlan: "",
     search_key: props.searchParams.search_key ? props.searchParams.search_key : "",
     page: props.searchParams.page ? props.searchParams.page : "",
-    disease: "",
-    sign: "",
-    service: "",
+    disease: props.searchParams.disease ? props.searchParams.disease : "",
+    sign: props.searchParams.sign ? props.searchParams.sign : "",
+    service: props.searchParams.service ? props.searchParams.service : "",
     gender: props.searchParams.gender ? props.searchParams.gender : ""
   }
 
 
-  const serach = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}?Gender=0&ConsultingPlan=All&PageNumber=1&ItemsCountPerPage=10&filter=${parametrs.search_key}`)
+  const serach = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}?Gender=0&ConsultingPlan=All&PageNumber=1&ItemsCountPerPage=10&filter=${parametrs.search_key}&CityName=${parametrs.cityName}`)
   const searchData = await serach.json()
 
 
   return (
-    <PhysiciansPage specialities={specialitiesData.value} slugs={parametrs} services={servicesData.value} searchData={searchData?.value?.items} searchParams={props.searchParams} />
+    <PhysiciansPage hasMore={searchData.value.totalPages === searchData.value.currentPage ? false : true } specialities={specialitiesData.value} slugs={parametrs} services={servicesData.value} searchData={searchData?.value?.items} searchParams={props.searchParams} />
   )
 }
 

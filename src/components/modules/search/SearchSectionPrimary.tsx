@@ -53,7 +53,7 @@ export interface SearchSectionPrimaryProps {
 
 
 const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
-    const { specialities, slugs, searchText, services, showFilters, closeFilterHandler, diseases, signs, loading, getDisease , searchParams } = props
+    const { specialities, slugs, searchText, services, showFilters, closeFilterHandler, diseases, signs, loading, getDisease, searchParams } = props
     const [cookies] = useCookies(["cityInfo"])
 
     const genders = [...genderContent]
@@ -132,6 +132,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
         })
         closeFilterHandler()
         router.push(`/physicians${url}`)
+        window.scrollTo({ top: 0, behavior: "smooth" })
     }
 
 
@@ -146,64 +147,45 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
 
 
     return (
-        <div className={
-            cn(
-                'fixed -top-full left-0 h-screen w-full  bg-white-200 p-4 bg-bg_content transition-all duration-300',
-                "md:static md:h-auto md:w-[18.75rem] md:rounded-sm md:bg-white md:shadow-shadow_category",
-                {
-                    "top-0 z-[20]": showFilters
-                }
-            )
-        }>
-            <div className='absolute top-4 left-4 md:hidden '>
-                <CloseButton closeHanlder={closeFilterHandler} />
-            </div>
-            <div className='flex justify-between items-center gap-4 font-bold'>
-                <p className='text-primary md:min-w-fit  w-full font-bold md:font-normal text-center md:text-right'>فیلتر ها</p>
-                <button type='button' className='text-error hidden md:block min-w-fit' onClick={() => {
-                    router.push("/physicians")
-                }} >حذف فیلترها</button>
-            </div>
-            <div className='grid grid-cols-1 gap-4 mt-6 md:mt-4'>
-                <FilterCard title={titlesActive.specialty} name='name_1' index={1} active={activeCard === 1} openHandler={openFilterCard} >
-                    <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
-                        <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                            setSearchsFilterCards({
-                                ...searchsFilterCards,
-                                specialty: e.target.value
-                            })
-                        }} />
-                    </div>
-                    <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
-
-                        <label htmlFor={`specialities-`} className='my-2 flex justify-start items-center gap-1 cursor-pointer'>
-                            {
-                                searchParametrs.specialty === "" ? <span className={cn(
-                                    ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
-                                )}>
-                                    <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.8 4.2998L1.2 2.6998L0 3.8998L2.8 6.6998L8 1.4998L6.8 0.299805L2.8 4.2998Z" fill="white" />
-                                    </svg>
-                                </span> : <span className='min-w-[1rem] size-[1rem] rounded-[0.25rem] border border-gray-300 flex justify-center items-center'>
-
-                                </span>
-                            }
-                            <span>همه تخصص ها</span>
-                            <input id={`specialities-`} type="radio" name='specialty' className='hidden' onChange={() => {
-                                setSearchParametrs({
-                                    ...searchParametrs,
-                                    specialty: ""
-                                })
-                                setTitlesActive({
-                                    ...titlesActive,
-                                    specialty: "تخصص"
+        <section className={cn(
+            ' md:sticky top-2.5 right-0',
+            {
+                "hidden md:block" : showFilters
+            }
+        )}>
+            <div className={
+                cn(
+                    'fixed -top-full left-0 h-screen w-full  bg-white-200 p-4 bg-bg_content transition-all duration-300',
+                    "md:static md:h-auto md:w-[18.75rem] md:rounded-sm md:bg-white md:shadow-shadow_category",
+                    {
+                        "top-0 z-[20]": showFilters
+                    }
+                )
+            }>
+                <div className='absolute top-4 left-4 md:hidden '>
+                    <CloseButton closeHanlder={closeFilterHandler} />
+                </div>
+                <div className='flex justify-between items-center gap-4 font-bold'>
+                    <p className='text-primary md:min-w-fit  w-full font-bold md:font-normal text-center md:text-right'>فیلتر ها</p>
+                    <button type='button' className='text-error hidden md:block min-w-fit' onClick={() => {
+                        router.push("/physicians")
+                    }} >حذف فیلترها</button>
+                </div>
+                <div className='grid grid-cols-1 gap-4 mt-6 md:mt-4'>
+                    <FilterCard title={titlesActive.specialty} name='name_1' index={1} active={activeCard === 1} openHandler={openFilterCard} >
+                        <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
+                            <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                setSearchsFilterCards({
+                                    ...searchsFilterCards,
+                                    specialty: e.target.value
                                 })
                             }} />
-                        </label>
-                        {searchedSpecialities.map((item, index) => (
-                            <label htmlFor={`specialities-${index}`} className='my-2 flex justify-start items-center gap-1 cursor-pointer' key={item.id}>
+                        </div>
+                        <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
+
+                            <label htmlFor={`specialities-`} className='my-2 flex justify-start items-center gap-1 cursor-pointer'>
                                 {
-                                    item.enName === searchParametrs.specialty ? <span className={cn(
+                                    searchParametrs.specialty === "" ? <span className={cn(
                                         ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
                                     )}>
                                         <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -213,63 +195,61 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
 
                                     </span>
                                 }
-                                <span>{item.specialityTitle}</span>
-                                <input id={`specialities-${index}`} type="radio" name='specialty' className='hidden' onChange={() => {
+                                <span>همه تخصص ها</span>
+                                <input id={`specialities-`} type="radio" name='specialty' className='hidden' onChange={() => {
                                     setSearchParametrs({
                                         ...searchParametrs,
-                                        specialty: item.enName
+                                        specialty: ""
                                     })
                                     setTitlesActive({
                                         ...titlesActive,
-                                        specialty: item.specialityTitle
+                                        specialty: "تخصص"
                                     })
-                                    getDisease(item.enName)
                                 }} />
                             </label>
-                        ))}
-                    </div>
-                </FilterCard>
-                <FilterCard title={titlesActive.service} name='name_2' index={2} active={activeCard === 2} openHandler={openFilterCard} >
-                    <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
-                        <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                            setSearchsFilterCards({
-                                ...searchsFilterCards,
-                                services: e.target.value
-                            })
-                        }} />
-                    </div>
-                    <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
+                            {searchedSpecialities.map((item, index) => (
+                                <label htmlFor={`specialities-${index}`} className='my-2 flex justify-start items-center gap-1 cursor-pointer' key={item.id}>
+                                    {
+                                        item.enName === searchParametrs.specialty ? <span className={cn(
+                                            ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
+                                        )}>
+                                            <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2.8 4.2998L1.2 2.6998L0 3.8998L2.8 6.6998L8 1.4998L6.8 0.299805L2.8 4.2998Z" fill="white" />
+                                            </svg>
+                                        </span> : <span className='min-w-[1rem] size-[1rem] rounded-[0.25rem] border border-gray-300 flex justify-center items-center'>
 
-                        <label htmlFor={`services-`} className='my-2 flex justify-start items-center gap-1 cursor-pointer'>
-                            {
-                                searchParametrs.service === "" ? <span className={cn(
-                                    ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
-                                )}>
-                                    <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.8 4.2998L1.2 2.6998L0 3.8998L2.8 6.6998L8 1.4998L6.8 0.299805L2.8 4.2998Z" fill="white" />
-                                    </svg>
-                                </span> : <span className='min-w-[1rem] size-[1rem] rounded-[0.25rem] border border-gray-300 flex justify-center items-center'>
-
-                                </span>
-                            }
-                            <span>همه خدمات</span>
-                            <input id={`services-`} type="radio" name='services' className='hidden' onChange={() => {
-                                setSearchParametrs({
-                                    ...searchParametrs,
-                                    service: ""
+                                        </span>
+                                    }
+                                    <span>{item.specialityTitle}</span>
+                                    <input id={`specialities-${index}`} type="radio" name='specialty' className='hidden' onChange={() => {
+                                        setSearchParametrs({
+                                            ...searchParametrs,
+                                            specialty: item.enName
+                                        })
+                                        setTitlesActive({
+                                            ...titlesActive,
+                                            specialty: item.specialityTitle
+                                        })
+                                        getDisease(item.enName)
+                                    }} />
+                                </label>
+                            ))}
+                        </div>
+                    </FilterCard>
+                    <FilterCard title={titlesActive.service} name='name_2' index={2} active={activeCard === 2} openHandler={openFilterCard} >
+                        <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
+                            <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                setSearchsFilterCards({
+                                    ...searchsFilterCards,
+                                    services: e.target.value
                                 })
-                                setTitlesActive({
-                                    ...titlesActive,
-                                    service: "خدمات"
-                                })
-
-
                             }} />
-                        </label>
-                        {serachedServices?.map((item, index) => (
-                            <label htmlFor={`services-${index}`} className='my-2 flex justify-start items-center gap-1 cursor-pointer' key={item.id}>
+                        </div>
+                        <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
+
+                            <label htmlFor={`services-`} className='my-2 flex justify-start items-center gap-1 cursor-pointer'>
                                 {
-                                    item.enName === searchParametrs.service ? <span className={cn(
+                                    searchParametrs.service === "" ? <span className={cn(
                                         ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
                                     )}>
                                         <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -279,40 +259,24 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
 
                                     </span>
                                 }
-                                <span>{item.name}</span>
-                                <input id={`services-${index}`} type="radio" name='services' className='hidden' onChange={() => {
+                                <span>همه خدمات</span>
+                                <input id={`services-`} type="radio" name='services' className='hidden' onChange={() => {
                                     setSearchParametrs({
                                         ...searchParametrs,
-                                        service: item.enName
+                                        service: ""
                                     })
                                     setTitlesActive({
                                         ...titlesActive,
-                                        service: item.name
+                                        service: "خدمات"
                                     })
+
+
                                 }} />
                             </label>
-                        ))}
-                    </div>
-                </FilterCard>
-                {loading ? <div className='flex justify-center items-center'>
-                    <Loader color='border-primary' size='size-[2.5rem]' />
-                </div> : null}
-                {
-                    diseases.length > 0 ?
-                        <FilterCard title={titlesActive.disease} name='name_3' index={3} active={activeCard === 3} openHandler={openFilterCard} >
-                            <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
-                                <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    setSearchsFilterCards({
-                                        ...searchsFilterCards,
-                                        diseases: e.target.value
-                                    })
-                                }} />
-                            </div>
-                            <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
-
-                                <label htmlFor={`diseases-`} className='my-2 flex justify-start items-center gap-1 cursor-pointer'>
+                            {serachedServices?.map((item, index) => (
+                                <label htmlFor={`services-${index}`} className='my-2 flex justify-start items-center gap-1 cursor-pointer' key={item.id}>
                                     {
-                                        searchParametrs.disease === "" ? <span className={cn(
+                                        item.enName === searchParametrs.service ? <span className={cn(
                                             ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
                                         )}>
                                             <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -322,22 +286,40 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
 
                                         </span>
                                     }
-                                    <span>همه بیماری ها</span>
-                                    <input id={`diseases-`} type="radio" name='diseases' className='hidden' onChange={() => {
+                                    <span>{item.name}</span>
+                                    <input id={`services-${index}`} type="radio" name='services' className='hidden' onChange={() => {
                                         setSearchParametrs({
                                             ...searchParametrs,
-                                            disease: ""
+                                            service: item.enName
                                         })
                                         setTitlesActive({
                                             ...titlesActive,
-                                            disease: "بیماری"
+                                            service: item.name
                                         })
                                     }} />
                                 </label>
-                                {serachedDiseases?.map((item, index) => (
-                                    <label htmlFor={`diseases-${index}`} className='my-2 flex justify-start items-center gap-1 cursor-pointer' key={item.id}>
+                            ))}
+                        </div>
+                    </FilterCard>
+                    {loading ? <div className='flex justify-center items-center'>
+                        <Loader color='border-primary' size='size-[2.5rem]' />
+                    </div> : null}
+                    {
+                        diseases?.length > 0 ?
+                            <FilterCard title={titlesActive.disease} name='name_3' index={3} active={activeCard === 3} openHandler={openFilterCard} >
+                                <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
+                                    <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                        setSearchsFilterCards({
+                                            ...searchsFilterCards,
+                                            diseases: e.target.value
+                                        })
+                                    }} />
+                                </div>
+                                <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
+
+                                    <label htmlFor={`diseases-`} className='my-2 flex justify-start items-center gap-1 cursor-pointer'>
                                         {
-                                            item.enName === searchParametrs.disease ? <span className={cn(
+                                            searchParametrs.disease === "" ? <span className={cn(
                                                 ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
                                             )}>
                                                 <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -347,63 +329,63 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
 
                                             </span>
                                         }
-                                        <span>{item.name}</span>
-                                        <input id={`diseases-${index}`} type="radio" name='diseases' className='hidden' onChange={() => {
+                                        <span>همه بیماری ها</span>
+                                        <input id={`diseases-`} type="radio" name='diseases' className='hidden' onChange={() => {
                                             setSearchParametrs({
                                                 ...searchParametrs,
-                                                disease: item.enName
+                                                disease: ""
                                             })
                                             setTitlesActive({
                                                 ...titlesActive,
-                                                disease: item.name
+                                                disease: "بیماری"
                                             })
                                         }} />
                                     </label>
-                                ))}
-                            </div>
-                        </FilterCard> : null
-                }
-                {
-                    signs.length > 0 ?
-                        <FilterCard title={titlesActive.sign} name='name_4' index={4} active={activeCard === 4} openHandler={openFilterCard} >
-                            <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
-                                <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    setSearchsFilterCards({
-                                        ...searchsFilterCards,
-                                        signs: e.target.value
-                                    })
-                                }} />
-                            </div>
-                            <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
+                                    {serachedDiseases?.map((item, index) => (
+                                        <label htmlFor={`diseases-${index}`} className='my-2 flex justify-start items-center gap-1 cursor-pointer' key={item.id}>
+                                            {
+                                                item.enName === searchParametrs.disease ? <span className={cn(
+                                                    ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
+                                                )}>
+                                                    <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M2.8 4.2998L1.2 2.6998L0 3.8998L2.8 6.6998L8 1.4998L6.8 0.299805L2.8 4.2998Z" fill="white" />
+                                                    </svg>
+                                                </span> : <span className='min-w-[1rem] size-[1rem] rounded-[0.25rem] border border-gray-300 flex justify-center items-center'>
 
-                                <label htmlFor={`signs-`} className='my-2 flex justify-start items-center gap-1 cursor-pointer'>
-                                    {
-                                        searchParametrs.sign === "" ? <span className={cn(
-                                            ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
-                                        )}>
-                                            <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2.8 4.2998L1.2 2.6998L0 3.8998L2.8 6.6998L8 1.4998L6.8 0.299805L2.8 4.2998Z" fill="white" />
-                                            </svg>
-                                        </span> : <span className='min-w-[1rem] size-[1rem] rounded-[0.25rem] border border-gray-300 flex justify-center items-center'>
-
-                                        </span>
-                                    }
-                                    <span>همه علائم</span>
-                                    <input id={`signs-`} type="radio" name='signs' className='hidden' onChange={() => {
-                                        setSearchParametrs({
-                                            ...searchParametrs,
-                                            sign: ""
-                                        })
-                                        setTitlesActive({
-                                            ...titlesActive,
-                                            sign: "علائم"
+                                                </span>
+                                            }
+                                            <span>{item.name}</span>
+                                            <input id={`diseases-${index}`} type="radio" name='diseases' className='hidden' onChange={() => {
+                                                setSearchParametrs({
+                                                    ...searchParametrs,
+                                                    disease: item.enName
+                                                })
+                                                setTitlesActive({
+                                                    ...titlesActive,
+                                                    disease: item.name
+                                                })
+                                            }} />
+                                        </label>
+                                    ))}
+                                </div>
+                            </FilterCard> : null
+                    }
+                    {
+                        signs?.length > 0 ?
+                            <FilterCard title={titlesActive.sign} name='name_4' index={4} active={activeCard === 4} openHandler={openFilterCard} >
+                                <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
+                                    <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                        setSearchsFilterCards({
+                                            ...searchsFilterCards,
+                                            signs: e.target.value
                                         })
                                     }} />
-                                </label>
-                                {serachedSigns?.map((item, index) => (
-                                    <label htmlFor={`signs-${index}`} className='my-2 flex justify-start items-center gap-1 cursor-pointer' key={item.id}>
+                                </div>
+                                <div className='h-[6.25rem] overflow-y-auto mt-2 bg-white rounded-sm p-1 text-md'>
+
+                                    <label htmlFor={`signs-`} className='my-2 flex justify-start items-center gap-1 cursor-pointer'>
                                         {
-                                            item.enName === searchParametrs.sign ? <span className={cn(
+                                            searchParametrs.sign === "" ? <span className={cn(
                                                 ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
                                             )}>
                                                 <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -413,31 +395,57 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
 
                                             </span>
                                         }
-                                        <span>{item.name}</span>
-                                        <input id={`signs-${index}`} type="radio" name='signs' className='hidden' onChange={() => {
+                                        <span>همه علائم</span>
+                                        <input id={`signs-`} type="radio" name='signs' className='hidden' onChange={() => {
                                             setSearchParametrs({
                                                 ...searchParametrs,
-                                                sign: item.enName
+                                                sign: ""
                                             })
                                             setTitlesActive({
                                                 ...titlesActive,
-                                                sign: item.name
+                                                sign: "علائم"
                                             })
                                         }} />
                                     </label>
-                                ))}
-                            </div>
-                        </FilterCard> : null
-                }
+                                    {serachedSigns?.map((item, index) => (
+                                        <label htmlFor={`signs-${index}`} className='my-2 flex justify-start items-center gap-1 cursor-pointer' key={item.id}>
+                                            {
+                                                item.enName === searchParametrs.sign ? <span className={cn(
+                                                    ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
+                                                )}>
+                                                    <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M2.8 4.2998L1.2 2.6998L0 3.8998L2.8 6.6998L8 1.4998L6.8 0.299805L2.8 4.2998Z" fill="white" />
+                                                    </svg>
+                                                </span> : <span className='min-w-[1rem] size-[1rem] rounded-[0.25rem] border border-gray-300 flex justify-center items-center'>
 
-                <FilterCardSecondary inputContent={genders} defaultCheck={searchParametrs.gender} changeInputHandler={radioButtonHandler} title={titlesActive.gender} name='gender' index={5} active={activeCard === 5} openHandler={openFilterCard} />
-                <FilterCardSecondary inputContent={plans} defaultCheck={searchParametrs.consultingPlan} changeInputHandler={radioButtonHandler} title={titlesActive.ConsultingPlan} name='consultingPlan' index={6} active={activeCard === 6} openHandler={openFilterCard} />
+                                                </span>
+                                            }
+                                            <span>{item.name}</span>
+                                            <input id={`signs-${index}`} type="radio" name='signs' className='hidden' onChange={() => {
+                                                setSearchParametrs({
+                                                    ...searchParametrs,
+                                                    sign: item.enName
+                                                })
+                                                setTitlesActive({
+                                                    ...titlesActive,
+                                                    sign: item.name
+                                                })
+                                            }} />
+                                        </label>
+                                    ))}
+                                </div>
+                            </FilterCard> : null
+                    }
+
+                    <FilterCardSecondary inputContent={genders} defaultCheck={searchParametrs.gender} changeInputHandler={radioButtonHandler} title={titlesActive.gender} name='gender' index={5} active={activeCard === 5} openHandler={openFilterCard} />
+                    <FilterCardSecondary inputContent={plans} defaultCheck={searchParametrs.consultingPlan} changeInputHandler={radioButtonHandler} title={titlesActive.ConsultingPlan} name='consultingPlan' index={6} active={activeCard === 6} openHandler={openFilterCard} />
+                </div>
+                <div className='mt-4 grid md:grid-cols-1 grid-cols-2 gap-4'>
+                    <ButtonElement typeButton='primary' handler={filterHandler} >اعمال فیلتر</ButtonElement>
+                    <div className='md:hidden'><ButtonElement typeButton='transparent'  >حذف فیلتر</ButtonElement></div>
+                </div>
             </div>
-            <div className='mt-4 grid md:grid-cols-1 grid-cols-2 gap-4'>
-                <ButtonElement typeButton='primary' handler={filterHandler} >اعمال فیلتر</ButtonElement>
-                <div className='md:hidden'><ButtonElement typeButton='transparent'  >حذف فیلتر</ButtonElement></div>
-            </div>
-        </div>
+        </section>
     )
 }
 

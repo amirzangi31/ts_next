@@ -1,9 +1,9 @@
 import PhysiciansPage from '@/components/templates/PhysiciansPage'
 import { apiDomainNobat } from '@/services/getApiUrlServer'
 import urls from '@/services/urls'
-import { DiseaseType, SignType } from '@/types/search'
 import convertParams from '@/utils/convertParams'
 import React from 'react'
+
 
 const DoctorsSearch = async (props: {
     params: { locale: string, slug: string[] }, searchParams: {
@@ -13,22 +13,23 @@ const DoctorsSearch = async (props: {
         sign: string,
         service: string,
         gender: string,
-        city : string
+        city: string
     }
 }) => {
+
     const { params, searchParams } = props
     const slugs = convertParams(props.params.slug)
     const specialities = await fetch(`${apiDomainNobat}${urls.specialities.getSpecialities.url}`, { next: { revalidate: 60 * 60 * 1 } })//one day
     const specialitiesData = await specialities.json()
     const services = await fetch(`${apiDomainNobat}${urls.services.url}`, { next: { revalidate: 60 * 60 * 1 } }) //one day
     const servicesData = await services.json()
-   
-    
-    
-  const serach = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}?Gender=0&ConsultingPlan=All&PageNumber=1&ItemsCountPerPage=10`)
-  const searchData = await serach.json()
 
-    
+
+
+    const serach = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}??Filter=${searchParams?.search_key ? searchParams.search_key : ""}&CityName=${searchParams.city ? searchParams.city : ""}&Gender=${searchParams?.gender ? searchParams.gender : "0"}&Specialty=${slugs?.specialty ? slugs.specialty : ""}&Disease=${searchParams?.disease ? searchParams.disease : ""}&Sign=${searchParams?.sign ? searchParams.sign : ""}&Service=${searchParams?.service ? searchParams.service : ""}&ConsultingPlan=${slugs?.consultingPlan ? slugs.consultingPlan : "All"}&PageNumber=${1}&ItemsCountPerPage=10`)
+    const searchData = await serach.json()
+
+
 
     const parametrs = {
         cityName: searchParams.city ? searchParams.city : "",
@@ -44,7 +45,7 @@ const DoctorsSearch = async (props: {
 
 
     return (
-        <PhysiciansPage  searchParams={props.searchParams} slugs={parametrs} searchKey={searchParams.search_key} specialities={specialitiesData.value} services={servicesData.value} searchData={searchData?.value?.items} />
+        <PhysiciansPage hasMore={searchData.value?.totalPages === searchData.value?.currentPage ? false : true} searchParams={props.searchParams} slugs={parametrs} searchKey={searchParams.search_key} specialities={specialitiesData.value} services={servicesData.value} searchData={searchData?.value?.items} />
     )
 }
 

@@ -8,10 +8,10 @@ import ViewOrderIcon from '@icons/ViewOrderIcon'
 import CloseIcon from '@icons/CloseIcon'
 import { useDebouncedCallback } from 'use-debounce'
 import { useCookies } from 'react-cookie'
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Loader from '@elements/Loader'
 import FilterTag from '../elements/FilterTag'
-import SwiperContainerFreeMode from '../modules/swiper/SwiperContianerFreeMode'
+import InfiniteScroll from "react-infinite-scroll-component";
 import TitlePagesMobile from '../modules/titles/TitlePagesMobile'
 import { SpecialityType } from '@/types/global'
 import generateUrlSearchPage from '@/utils/generateUrlSearchPage'
@@ -24,6 +24,13 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import { DiseaseType, PhysicianDataSearch, ServiceType, SignType } from '@/types/search'
 import { specialtyBelongings } from '@/services/specialtyBelongings/specialtyBelongings'
+import SearchCardPrimary from '../modules/cards/Search/SearchCardPrimary'
+import PhysicianLoadingPrimaryCard from '../modules/cards/Skeletons/PhysicianLoadingPrimaryCard'
+import { apiDomainNobat } from '@/services/getApiUrl'
+import urls from '@/services/urls'
+import Toastify from '../elements/toasts/Toastify'
+import servicesData from '@/data/servicesData'
+import ButtonElement from '../elements/ButtonElement'
 
 
 
@@ -50,19 +57,21 @@ export type PhysiciansPageProps = {
         sign: string,
         service: string,
         gender: string
-    }
+    },
+    hasMore: boolean
 }
 
 
 const PhysiciansPage = (props: PhysiciansPageProps) => {
-    const { specialities, slugs, services, searchData, searchParams } = props
-
-    
-
+    const { specialities, slugs, services, searchData, searchParams, hasMore } = props
+    const [loadingData, setLoadingData] = useState(false)
+    const [searchDataClient, setSearchDataClient] = useState(searchData)
+    const [hasMoreSatet, setHasMoreState] = useState(hasMore)
+    const [page, setPage] = useState(1)
     const pathName = usePathname()
-    const searchParametrs = useSearchParams()
-    // console.log(searchParametrs.getAll())
-    const [loadingPage, setLoadingPage] = useState(false)
+
+
+
     const [diseasesLoading, setDiseasesLoading] = useState(false)
 
     const [searchText, setSearchText] = useState(slugs?.search_key ? slugs?.search_key : "")
@@ -101,7 +110,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
             consultingPlan: slugs?.consultingPlan ? slugs.consultingPlan : "",
             specialty: slugs?.specialty ? slugs.specialty : "",
         }, {
-            city: cookies.cityInfo  ? cookies.cityInfo.slug : "",
+            city: cookies.cityInfo ? cookies.cityInfo.slug : "",
             disease: slugs?.disease ? slugs.disease : "",
             gender: slugs?.gender ? slugs.gender : "",
             page: slugs?.page ? slugs.page : "",
@@ -110,18 +119,46 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
             sign: slugs?.sign ? slugs.sign : "",
         })
         router.push(`/physicians${url}`)
-        setLoadingPage(false)
     }, 750)
 
     useEffect(() => {
-        
-        setLoadingPage(true)
+
         debouncedTextSearch()
 
     }, [searchText, cookies])
 
     const { provinces, setAllProvince } = useCity()
 
+    const fetchMoreData = () => {
+        setLoadingData(true)
+        fetch
+            (
+                `${apiDomainNobat}${urls.advanceSearch.serach.url}?Filter=${searchText}&CityName=${cookies.cityInfo ? cookies.cityInfo.slug : ""}&Gender=${slugs?.gender ? slugs.gender : "0"}&Specialty=${slugs?.specialty ? slugs.specialty : ""}&Disease=${slugs?.disease ? slugs.disease : ""}&Sign=${slugs?.sign ? slugs.sign : ""}&Service=${slugs?.service ? slugs.service : ""}&ConsultingPlan=${slugs?.consultingPlan ? slugs.consultingPlan : "All"}&PageNumber=${page + 1}&ItemsCountPerPage=10`,
+            )
+            .then((res) => res.json()).then(data => {
+
+                if (data?.value === null) {
+                    setSearchDataClient([...searchDataClient]);
+                    setHasMoreState(false);
+                    return;
+                }
+                setSearchDataClient([...searchDataClient, ...data.value?.items]);
+                setHasMoreState(
+                    data.value.currentPage === data.value.totalPages
+                        ? false
+                        : true
+                );
+                setPage(data.value.currentPage);
+                setLoadingData(false)
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoadingData(false)
+                Toastify("error", "خطایی رخ داده است");
+            });
+    }
+    
+    
     return (
         <>
             <TitlePagesMobile title={`جستجو پزشکان آرناپ`} />
@@ -147,9 +184,6 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
             </section>
             {/* ----------section------------- */}
 
-            {/* ----------Laoder------------- */}
-            {loadingPage && <Loader color='border-primary' size='size-[1.5rem]' />}
-            {/* ----------Laoder------------- */}
 
             {/* ----------header------------- */}
             {/* header */}
@@ -176,7 +210,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
 
             {/* ----------section------------- */}
             {/* tags in mobile */}
-            {pathName !== "/physicians" ? (
+            {pathName !== "/physicians" || Object.keys(searchParams).length ? (
                 <section className='md:hidden pt-4 '>
                     <Swiper
                         spaceBetween={10}
@@ -389,20 +423,20 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
             {/* ----------section------------- */}
 
             {/* ----------main------------- */}
-            <main className='flex justify-between items-start gap-4 mt-4'>
+            <main className='flex justify-between items-start gap-4 mt-4 relative'>
 
                 {/* ----------section------------- */}
                 {/* search section */}
-                <section>
+                
                     <SearchSectionPrimary searchParams={searchParams} loading={diseasesLoading} getDisease={getDiseaseHandler} services={services} diseases={diseases} signs={signs} searchText={searchText} showFilters={showFilters} closeFilterHandler={() => setShowFilters(false)} specialities={specialities} slugs={props.slugs} />
-                </section>
+                
                 {/* ----------section------------- */}
 
                 {/* ----------section------------- */}
                 {/* Search content */}
                 <section className='w-full'>
                     {pathName !== "/physicians" || Object.keys(searchParams).length ? (
-                        <div className='hidden md:flex justify-start items-center  gap-2 w-full text-md p-2 bg-white rounded-sm min-h-[2.8125rem]'>
+                        <div className='hidden md:flex shadow-shadow_category justify-start items-center  gap-2 w-full text-md p-2 bg-white rounded-sm min-h-[2.8125rem] mb-4'>
                             <p className='font-bold text-primary min-w-fit'>نتایج فیلتر : </p>
                             <div className='flex justify-start items-center gap-2 flex-wrap'>
                                 {
@@ -607,6 +641,35 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                             </div>
                         </div>
                     ) : null}
+
+                    {
+                        !loadingData && !searchData &&
+                        <div className='bg-white p-5 shadow-shadow_category rounded-sm '>
+                            <p className='text-center font-bold'>متاسفانه دکتری با فیلترهای جستجوی شما پیدا نشد</p>
+                            <p className='text-center text-md max-w-[16rem] mx-auto mt-4'>برای داشتن نتایج بهتر فیلترهای جستجوی خود را عوض کنید</p>
+                            <div className='flex justify-center items-center mt-4'>
+                                <button type='button' className='text-error font-bold' onClick={() => {
+                                    router.push("/physicians")
+                                }}>حذف فیلترها</button>
+                            </div>
+                        </div> 
+                    }
+
+                    <div className=' flex justify-between items-start gap-2 w-full'>
+                        <InfiniteScroll
+                            dataLength={searchDataClient ? searchDataClient.length : 0}
+                            next={fetchMoreData}
+                            hasMore={hasMoreSatet}
+                            loader={<span></span>}
+                        // endMessage={<div className="text-error font-bold">پایان😁</div>}
+                        >
+                            {searchDataClient?.map((item) => (
+                                <SearchCardPrimary key={item.id} {...item} online={item.onlineAppointment} freeMode={false} />
+                            ))}
+                        </InfiniteScroll>
+
+                    </div>
+                    {loadingData ? <LoadingComponent /> : null}
                 </section>
                 {/* ----------section------------- */}
             </main>
@@ -616,3 +679,14 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
 }
 
 export default PhysiciansPage
+const LoadingComponent = () => {
+    return (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full mt-2">
+            <PhysicianLoadingPrimaryCard freeMode={false} />
+            <PhysicianLoadingPrimaryCard freeMode={false} />
+            <PhysicianLoadingPrimaryCard freeMode={false} />
+            <PhysicianLoadingPrimaryCard freeMode={false} />
+            <PhysicianLoadingPrimaryCard freeMode={false} />
+        </div>
+    );
+};

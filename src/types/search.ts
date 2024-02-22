@@ -73,11 +73,12 @@ export interface PhysicianSearchType {
   immediateConsultation: boolean;
   aboutDr?: any;
   rate: number;
-  firstAppointment: FirstAppointment;
+  firstAppointment: FirstAppointment | null;
   physicianInsurances: any[];
   physicianSpecialities: PhysicianSpeciality[];
   online?: boolean;
-  freeMode?: boolean
+  freeMode?: boolean;
+  
 }
 
 interface PhysicianSpeciality {
