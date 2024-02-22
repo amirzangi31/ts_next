@@ -19,14 +19,14 @@ const DoctorsSearch = async (props: {
 
     const { params, searchParams } = props
     const slugs = convertParams(props.params.slug)
-    const specialities = await fetch(`${apiDomainNobat}${urls.specialities.getSpecialities.url}`, { next: { revalidate: 60 * 60 * 1 } })//one day
+    const specialities = await fetch(`${apiDomainNobat}${urls.specialities.getSpecialities.url}`, { next: { revalidate: 60 * 60 * 24* 1 } })//one day
     const specialitiesData = await specialities.json()
-    const services = await fetch(`${apiDomainNobat}${urls.services.url}`, { next: { revalidate: 60 * 60 * 1 } }) //one day
+    const services = await fetch(`${apiDomainNobat}${urls.services.url}`, { next: { revalidate: 60 * 60 * 24* 1 } }) //one day
     const servicesData = await services.json()
 
 
 
-    const serach = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}??Filter=${searchParams?.search_key ? searchParams.search_key : ""}&CityName=${searchParams.city ? searchParams.city : ""}&Gender=${searchParams?.gender ? searchParams.gender : "0"}&Specialty=${slugs?.specialty ? slugs.specialty : ""}&Disease=${searchParams?.disease ? searchParams.disease : ""}&Sign=${searchParams?.sign ? searchParams.sign : ""}&Service=${searchParams?.service ? searchParams.service : ""}&ConsultingPlan=${slugs?.consultingPlan ? slugs.consultingPlan : "All"}&PageNumber=${1}&ItemsCountPerPage=10`)
+    const serach = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}??Filter=${searchParams?.search_key ? searchParams.search_key : ""}&CityName=${searchParams.city ? searchParams.city : ""}&Gender=${searchParams?.gender ? searchParams.gender : "0"}&Specialty=${slugs?.specialty ? slugs.specialty : ""}&Disease=${searchParams?.disease ? searchParams.disease : ""}&Sign=${searchParams?.sign ? searchParams.sign : ""}&Service=${searchParams?.service ? searchParams.service : ""}&ConsultingPlan=${slugs?.consultingPlan ? slugs.consultingPlan : "All"}&PageNumber=${1}&ItemsCountPerPage=10` , {cache : "no-store"})
     const searchData = await serach.json()
 
 

@@ -5,7 +5,7 @@ import urls from '@/services/urls';
 
 const DcotorsCity = async ({ params }: { params: { locale: string, city: string } }) => {
 
-    const res = await fetch(`${apiDomainNobat}${urls.provinces.physicians.url}${params.city}`)
+    const res = await fetch(`${apiDomainNobat}${urls.provinces.physicians.url}${params.city}` , {cache : "no-store"})
     const data = await res.json()
 
     
