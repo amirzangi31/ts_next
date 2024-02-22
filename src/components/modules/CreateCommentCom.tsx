@@ -14,18 +14,20 @@ import DownThumbIcon from '../icons/DownThumbIcon';
 import ToastWarning from '../elements/toasts/ToastWarning';
 import FunctionalStarRateModule from './FunctionalStarRateModule';
 import RadioButton from '../elements/inputs/RadioButton';
+import createComment from '@/services/comment/commen';
 
 export type CreateCommentComType = {
     firstName: string,
     lastName: string,
-    showComment : boolean,
-    setShowComment : () => void,
-    closeComment : () => void,
+    showComment: boolean,
+    setShowComment: () => void,
+    closeComment: () => void,
+    physicianId: string
 }
 
-const CreateCommentCom = ({ firstName, lastName , showComment , setShowComment , closeComment }: CreateCommentComType) => {
+const CreateCommentCom = ({ firstName, lastName, physicianId, showComment, setShowComment, closeComment }: CreateCommentComType) => {
     const [isPresent, setIsPresent] = useState(false);
-    
+
     const [showVisitTypeQuestionModal, setShowVisitTypeQuestionModal] =
         useState(false);
     const [showFormModal, setShowFormModal] = useState(false);
@@ -40,7 +42,7 @@ const CreateCommentCom = ({ firstName, lastName , showComment , setShowComment ,
 
 
     const visitQuestionModalHandler = () => {
-        
+
 
         setRate(0);
         setWaitingTime(0);
@@ -85,14 +87,14 @@ const CreateCommentCom = ({ firstName, lastName , showComment , setShowComment ,
         setLoadingButtonComment(true)
         try {
             // const res = await createComment(
-            //   physician.id,
-            //   null,
-            //   rate,
-            //   waitingTime,
-            //   recommendation,
-            //   commentText
+            //     physicianId,
+            //     "",
+            //     rate,
+            //     waitingTime,
+            //     recommendation,
+            //     commentText
             // );
-            // console.log(res)
+
         } catch (error: any) {
 
         }
@@ -307,7 +309,7 @@ const CreateCommentCom = ({ firstName, lastName , showComment , setShowComment ,
                                 disabled={loadingButtonComment}
                                 loading={loadingButtonComment}
                             >
-                              ثبت نظر
+                                ثبت نظر
                             </ButtonElement>
                         </div>
                     </div>

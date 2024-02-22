@@ -493,7 +493,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
               </span>
             </h3>
             <div className="w-[11.25rem]">
-              <CreateCommentCom firstName={physician.firstName} lastName={physician.lastName} showComment={showVisitQuestionModal} setShowComment={showCreateCommentHandler} closeComment={() => setShowVisitQuestionModal(false)} />
+              <CreateCommentCom physicianId={physician.id} firstName={physician.firstName} lastName={physician.lastName} showComment={showVisitQuestionModal} setShowComment={showCreateCommentHandler} closeComment={() => setShowVisitQuestionModal(false)} />
             </div>
           </div>
           {physician.comments.length > 0 ? (

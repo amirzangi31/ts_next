@@ -71,11 +71,11 @@ const urls = {
   user: {
     getUser: {
       url: "/User/UserInfo",
-      method: "GET"
+      method: "GET",
     },
     editUser: {
       url: "/User/UserInfo",
-      method: "PUT"
+      method: "PUT",
     },
   },
   //captcha
@@ -85,6 +85,22 @@ const urls = {
       method: "GET",
       parametrs: {},
       query: {},
+    },
+  },
+  //comment
+  comment: {
+    create: {
+      url: "/User/Comment/Create",
+      method: "POST",
+      paramters: {
+        userPublicName: "string",
+        userPhysicianProfileClanedarId: "string",
+        physicianProfileId: "string",
+        message: "string",
+        isSuggested: "boolean",
+        rate: "number",
+        waitingTime: "number",
+      },
     },
   },
   //appointment
@@ -139,9 +155,9 @@ const urls = {
       method: "GET",
       parametrs: {},
       query: {
-        apponitmentId: "string"
-      }
-    }
+        apponitmentId: "string",
+      },
+    },
   },
   //favorite
   favorite: {
@@ -255,9 +271,9 @@ const urls = {
         service: "string",
         ConsultingPlan: "string",
         page: "number",
-        itemsCountPerPage: "number"
-      }
-    }
+        itemsCountPerPage: "number",
+      },
+    },
   },
   //provinces
   provinces: {
@@ -272,9 +288,9 @@ const urls = {
     physicians: {
       url: "/PublicServices/PhysicianSpeciality/CitySpecialties/",
       method: "GET",
-      query : {
-        enNameCity : "string"
-      }
+      query: {
+        enNameCity: "string",
+      },
     },
   },
 
@@ -283,10 +299,10 @@ const urls = {
     getPrice: {
       url: "/Public/Captcha",
       method: "POST",
-      parametrs: {}
+      parametrs: {},
     },
   },
-  //comment site 
+  //comment site
   commentSite: {
     sendComment: {
       url: "/PublicServices/SupportTicket",
@@ -296,35 +312,35 @@ const urls = {
         emailAddress: "string",
         phoneNumber: "string",
         title: "string",
-        message: "string"
-      }
-    }
+        message: "string",
+      },
+    },
   },
-  //specialities 
+  //specialities
   specialities: {
     getSpecialities: {
       url: "/PublicServices/PhysicianSpeciality/List",
       method: "GET",
       parametrs: {},
-      query: {}
-    }
+      query: {},
+    },
   },
-  //services 
+  //services
   services: {
     url: "/PublicServices/PhysicianSpeciality/ServicesList",
     method: "GET",
     parametrs: {},
-    query: {}
+    query: {},
   },
-  //specialtyBelongings 
+  //specialtyBelongings
   specialtyBelongings: {
     url: "/PublicServices/PhysicianSpeciality/SpecialtyBelongings/",
     method: "GET",
     parametrs: {},
     query: {
-      speciality : "string"
-    }
-  }
+      speciality: "string",
+    },
+  },
 };
 
 export default urls;
