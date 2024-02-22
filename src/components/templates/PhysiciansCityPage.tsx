@@ -6,6 +6,7 @@ import LinkElement from '../elements/LinkElement'
 import Image from 'next/image'
 import TitleHeading from '../modules/titles/TitleHeading'
 import ArrowLeft from '../icons/ArrowLeft'
+import Loader from '../elements/Loader'
 
 const PhysiciansCityPage = ({ data, city }: {
     data: {
@@ -21,7 +22,7 @@ const PhysiciansCityPage = ({ data, city }: {
 
     return (
         <>
-            <TitlePagesMobile title={`تخصص های شهر ${provinces.find((item: {
+            <TitlePagesMobile title={`تخصص های شهر ${isLoadingCity ? <Loader size='size-[1.5rem]' color='border-white' /> : provinces.find((item: {
                 cityId: number,
                 cityName: string,
                 centerName: string,
@@ -68,7 +69,6 @@ const PhysiciansCityPage = ({ data, city }: {
                 {data.map((item, index) => <LinkCard key={item.specialtyId} link={`physicians/specialty/${item.specialtyEnName}`} title={item.specialtyName} count={item.physicianCount} />)}
             </main>
             {/* ----------main------------- */}
-
 
         </>
     )

@@ -29,7 +29,7 @@ const SearchCardPrimary = (props : PhysicianSearchType) => {
         <LinkElement
             link={`Physician/${physicianProfileUrl}`}
             className={cn(
-                `bg-white rounded-sm shadow-shadow_category min-h-[14.375rem]  flex justify-between items-start flex-col`,
+                `bg-white rounded-sm shadow-shadow_category min-h-[14.375rem]  flex justify-between items-start flex-col group`,
                 {
                     "w-[320px]": freeMode,
                     "w-full": !freeMode,
@@ -99,7 +99,7 @@ const SearchCardPrimary = (props : PhysicianSearchType) => {
                 />
             </div>
             <div className="px-2 pb-2 w-full">
-                <div className="bg-gray-700 p-1 rounded-ss flex justify-between items-center min-h-[46px]">
+                <div className="bg-gray-700 group-hover:bg-gray-400 group-hover:text-white  transition-all duration-500 p-1 rounded-ss flex justify-between items-center min-h-[46px]">
                     <p className="text-sm">
                         اولین نوبت خالی تلفنی:{" "}
                         <span className="font-bold">
