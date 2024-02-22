@@ -4,7 +4,7 @@ import CloseIcon from '../icons/CloseIcon'
 
 export type FilterTagProps = {
     id : number,
-    title : string,
+    title : string | undefined,
     handler : () => void
 }
 

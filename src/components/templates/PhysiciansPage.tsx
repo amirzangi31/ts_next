@@ -18,6 +18,10 @@ import generateUrlSearchPage from '@/utils/generateUrlSearchPage'
 import useCity from '@/hooks/useCity'
 import convertGender from '@/utils/convertGender'
 import planNameConvert from '@/utils/planNameConvert'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/free-mode';
 
 
 
@@ -43,7 +47,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
 
     const pathName = usePathname()
     const [loadingPage, setLoadingPage] = useState(false)
-    
+
     const [searchText, setSearchText] = useState(slugs?.search_key ? slugs?.search_key : "")
     const router = useRouter()
 
@@ -55,7 +59,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
         city: slugs?.cityName ? slugs.cityName : ""
     })
 
-    
+
     const debouncedTextSearch = useDebouncedCallback(() => {
 
         const url = generateUrlSearchPage({
@@ -81,11 +85,14 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
     }, [searchText, cookies?.cityInfo])
 
 
+
+
     const tags = [
         { id: 1, title: "کرمی", handler: () => console.log("first") },
-        { id: 2, title: "تست", handler: () => console.log("two") },
-        { id: 3, title: "تست1", handler: () => console.log("three ") },
     ]
+
+
+
 
 
     const { provinces } = useCity()
@@ -134,7 +141,131 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
             {/* ----------section------------- */}
             {/* tags in mobile */}
             <section className='md:hidden pt-4 '>
-                <SwiperContainerFreeMode gap={10} data={tags} CardComponent={FilterTag} />
+                <Swiper
+                    spaceBetween={10}
+                    slidesPerView="auto"
+                    speed={1000}
+                    modules={[FreeMode, Autoplay]}
+                    freeMode={true}
+
+                    dir="rtl"
+                >
+
+                    {slugs?.cityName ?
+                        <SwiperSlide className='swiper_width_auto' >
+                            <FilterTag id={1} title={provinces.find((item: {
+                                cityId: number,
+                                cityName: string,
+                                centerName: string,
+                                provinceId: number,
+                                provinceName: string
+                            }) => item.cityName === slugs.cityName)} handler={() => {
+                                const url = generateUrlSearchPage({
+                                    cityName: "",
+                                    consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                    specialty: slugs?.specialty ? slugs?.specialty : "",
+                                },
+                                    {
+                                        disease: slugs?.disease ? slugs?.disease : "",
+                                        gender: slugs?.gender ? slugs?.gender : "",
+                                        page: slugs?.page ? slugs?.page : "",
+                                        search_key: slugs?.search_key ? slugs.search_key : "",
+                                        service: slugs?.service ? slugs?.service : "",
+                                        sign: slugs?.sign ? slugs?.sign : "",
+                                    })
+                                router.push(`/physicians${url}`)
+                            }} />
+                        </SwiperSlide> : null
+                    }
+                    {slugs?.specialty ?
+                        <SwiperSlide className='swiper_width_auto' >
+                            <FilterTag id={1} title={specialities.find((item) => item.enName === slugs.specialty)?.specialityTitle} handler={() => {
+                                const url = generateUrlSearchPage({
+                                    cityName: slugs?.cityName ? slugs?.cityName : "",
+                                    consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                    specialty: "",
+                                },
+                                    {
+                                        disease: slugs?.disease ? slugs?.disease : "",
+                                        gender: slugs?.gender ? slugs?.gender : "",
+                                        page: slugs?.page ? slugs?.page : "",
+                                        search_key: slugs?.search_key ? slugs.search_key : "",
+                                        service: slugs?.service ? slugs?.service : "",
+                                        sign: slugs?.sign ? slugs?.sign : "",
+                                    })
+                                router.push(`/physicians${url}`)
+                            }} />
+                        </SwiperSlide> : null
+                    }
+                    {slugs?.gender ?
+                        <SwiperSlide className='swiper_width_auto' >
+                            <FilterTag id={1} title={convertGender(slugs.gender)} handler={() => {
+                                const url = generateUrlSearchPage({
+                                    cityName: slugs?.cityName ? slugs?.cityName : "",
+                                    consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                    specialty: slugs?.specialty ? slugs?.specialty : "",
+                                },
+                                    {
+                                        disease: slugs?.disease ? slugs?.disease : "",
+                                        gender: "",
+                                        page: slugs?.page ? slugs?.page : "",
+                                        search_key: slugs?.search_key ? slugs.search_key : "",
+                                        service: slugs?.service ? slugs?.service : "",
+                                        sign: slugs?.sign ? slugs?.sign : "",
+                                    })
+                                router.push(`/physicians${url}`)
+                            }} />
+                        </SwiperSlide> : null
+                    }
+                    {slugs?.consultingPlan ?
+                        <SwiperSlide className='swiper_width_auto' >
+                            <FilterTag id={1} title={planNameConvert(slugs.consultingPlan)} handler={() => {
+                                const url = generateUrlSearchPage({
+                                    cityName: slugs?.cityName ? slugs?.cityName : "",
+                                    consultingPlan: "",
+                                    specialty: slugs?.specialty ? slugs?.specialty : "",
+                                },
+                                    {
+                                        disease: slugs?.disease ? slugs?.disease : "",
+                                        gender: slugs?.gender ? slugs?.gender : "",
+                                        page: slugs?.page ? slugs?.page : "",
+                                        search_key: slugs?.search_key ? slugs.search_key : "",
+                                        service: slugs?.service ? slugs?.service : "",
+                                        sign: slugs?.sign ? slugs?.sign : "",
+                                    })
+                                router.push(`/physicians${url}`)
+                            }} />
+                        </SwiperSlide> : null
+                    }
+                    {slugs?.search_key ?
+                        <SwiperSlide className='swiper_width_auto' >
+                            <FilterTag id={1} title={slugs.search_key} handler={() => {
+                                setSearchText("")
+                                const url = generateUrlSearchPage({
+                                    cityName: slugs?.cityName ? slugs?.cityName : "",
+                                    consultingPlan: slugs?.consultingPlan ? slugs?.consultingPlan : "",
+                                    specialty: slugs?.specialty ? slugs?.specialty : "",
+                                },
+                                    {
+                                        disease: slugs?.disease ? slugs?.disease : "",
+                                        gender: slugs?.gender ? slugs?.gender : "",
+                                        page: slugs?.page ? slugs?.page : "",
+                                        search_key: "",
+                                        service: slugs?.service ? slugs?.service : "",
+                                        sign: slugs?.sign ? slugs?.sign : "",
+                                    })
+                                router.push(`/physicians${url}`)
+                            }} />
+                        </SwiperSlide> : null
+                    }
+
+
+
+
+
+
+                </Swiper>
+
             </section>
             {/* ----------section------------- */}
 
@@ -298,7 +429,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                                                     sign: slugs?.sign ? slugs?.sign : "",
                                                 })
                                             router.push(`/physicians${url}`)
-                                            
+
                                         }}
                                     >
                                         <span className='text-gray-500'>{slugs.search_key}</span>
