@@ -88,6 +88,7 @@ export interface PhysicianProfile {
   doNotShowMyCalendar: boolean;
   hasImage: boolean;
   appointmentPrice: number;
+  appointmentTimeLimition?: boolean
   oldPatienOnly: boolean;
   rate: number;
   city: City;

@@ -1,7 +1,7 @@
 
 const convertParams = (params: string[]) => {
     let fitlerParams = {
-        cityName: "",
+        city: "",
         specialty: "",
         consultingPlan: "",
     }

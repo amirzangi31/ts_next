@@ -29,10 +29,11 @@ const ChnageCityButton = () => {
     cityName: string,
     centerName: string,
     provinceId: number,
-    provinceName: string
+    provinceName: string,
+    cityEnName : string
 
   }) => item.cityName.toLowerCase().includes(searchText.toLocaleLowerCase()))
-
+  
   
   return (
     <div className={
@@ -111,13 +112,14 @@ const ChnageCityButton = () => {
                   cityName: string,
                   centerName: string,
                   provinceId: number,
-                  provinceName: string
+                  provinceName: string,
+                  cityEnName : string
                 }) => (
                   <SwiperSlide key={item.cityId} >
                     <li
                       className="border-b border-gray-550 py-2 cursor-pointer text-center"
                       onClick={() => {
-                        cityHandler("kerman", item.cityName, item.cityId)
+                        cityHandler(item.cityEnName, item.cityName, item.cityId)
                         setSearchText("")
                         setShow(false)
                       }}

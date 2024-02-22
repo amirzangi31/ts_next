@@ -128,12 +128,12 @@ const PhysicianProfileCard = ({
               <span>{city}</span>
             </div>
           </div>
+          <div className="flex gap-3 items-center">
           <LinkElement link={physicianUrl} className="w-[12.25rem] hidden md:block">
             <ButtonElement typeButton="primary">
                   نوبت دهی اینترنتی
             </ButtonElement>
           </LinkElement>
-          <div className="flex gap-3 items-center">
             <button
               type="button"
               className="flex justify-center items-center rounded-full p-2 bg-gray-100 size-[2.6875rem]"

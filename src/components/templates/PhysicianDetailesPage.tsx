@@ -191,9 +191,9 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
       <ModalLogin isCallback={true} callbacks={callbacks} callbacksIndex={callbackIndex} />
       <div className=" mt-4 rounded-sm bg-white max-w-[118.75rem] w-full border overflow-x-scroll breadcrumb">
         <div className="  p-2 flex justify-start items-center gap-2 w-fit text-primary rounded-sm">
-          <LinkElement link="/" className="text-sm text-primary min-w-fit">دکترها </LinkElement>/
-          <LinkElement link="/" className="text-sm text-primary min-w-fit">دکترهای {physician.cityName}</LinkElement>/
-          {physician.physicianSpecialities[0] ? <LinkElement link="/" className="text-sm text-primary min-w-fit">دکترهای {physician.physicianSpecialities[0]?.specialityTitle} /</LinkElement> : ""}
+          <LinkElement link="physicians" className="text-sm text-primary min-w-fit">دکترها </LinkElement>/
+          <LinkElement link={`physicians/${physician.cityEnName}`} className="text-sm text-primary min-w-fit">دکترهای {physician.cityName}</LinkElement>/
+          {physician.physicianSpecialities[0] ? <LinkElement link={`physicians/specialty/${physician?.physicianSpecialities[0]?.enName}`} className="text-sm text-primary min-w-fit">دکترهای {physician.physicianSpecialities[0]?.specialityTitle} /</LinkElement> : ""}
           <div className="text-sm text-primary min-w-fit pl-2">دکتر {physician.firstName} {physician.lastName}</div>
         </div>
       </div>
@@ -530,9 +530,6 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
 
       </div>
       {/* ----------content------------- */}
-
-
-
 
 
     </>

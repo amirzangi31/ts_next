@@ -14,6 +14,7 @@ import planNameConvert from '@/utils/planNameConvert'
 import { DiseaseType, ServiceType, SignType } from '@/types/search'
 import { specialtyBelongings } from '@/services/specialtyBelongings/specialtyBelongings'
 import Loader from '@/components/elements/Loader'
+import { useCookies } from 'react-cookie'
 
 
 
@@ -35,16 +36,17 @@ export interface SearchSectionPrimaryProps {
     },
     searchText: string,
     services: ServiceType[],
-    signs : SignType[],
-    diseases : DiseaseType[],
-    getDisease : (enName : string) => void,
-    loading : boolean
+    signs: SignType[],
+    diseases: DiseaseType[],
+    getDisease: (enName: string) => void,
+    loading: boolean
 }
 
 
 
 const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
-    const { specialities, slugs, searchText, services, showFilters, closeFilterHandler , diseases , signs , loading ,getDisease } = props
+    const { specialities, slugs, searchText, services, showFilters, closeFilterHandler, diseases, signs, loading, getDisease } = props
+    const [cookies] = useCookies(["cityInfo"])
 
     const genders = [...genderContent]
     const plans = [...plansContent]
@@ -99,11 +101,16 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
     const serachedSigns = signs?.filter(item => item.name.toLowerCase().includes(searchsFilterCards.signs.toLocaleLowerCase()))
 
 
-
+    const pathName = usePathname()
 
     const filterHandler = () => {
+
+        // if (pathName === "/physicians") {
+        //     return
+        // }
+
         const url = generateUrlSearchPage({
-            cityName: searchParametrs.cityName,
+            city: cookies.cityInfo ? cookies.cityInfo.slug : "",
             specialty: searchParametrs.specialty,
             consultingPlan: searchParametrs.consultingPlan,
         }, {
@@ -120,14 +127,14 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
     }
 
 
- 
+
     useEffect(() => {
         setTitlesActive({
             ...titlesActive,
-            disease :  slugs?.disease ? diseases.find(item => item.enName === slugs.disease)?.name : "بیماری",
-            sign :  slugs?.sign ? signs.find(item => item.enName === slugs.sign)?.name : "علائم"
+            disease: slugs?.disease ? diseases.find(item => item.enName === slugs.disease)?.name : "بیماری",
+            sign: slugs?.sign ? signs.find(item => item.enName === slugs.sign)?.name : "علائم"
         })
-    }, [diseases , signs])
+    }, [diseases, signs])
 
 
     return (
@@ -247,8 +254,8 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
                                     ...titlesActive,
                                     service: "خدمات"
                                 })
-                                
-                                
+
+
                             }} />
                         </label>
                         {serachedServices?.map((item, index) => (
@@ -281,7 +288,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
                 </FilterCard>
                 {loading ? <div className='flex justify-center items-center'>
                     <Loader color='border-primary' size='size-[2.5rem]' />
-                   </div> : null}
+                </div> : null}
                 {
                     diseases.length > 0 ?
                         <FilterCard title={titlesActive.disease} name='name_3' index={3} active={activeCard === 3} openHandler={openFilterCard} >

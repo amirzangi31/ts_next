@@ -23,11 +23,11 @@ const DoctorsSearch = async (props: {
     const servicesData = await services.json()
    
     
-
+    
     
 
     const parametrs = {
-        cityName: slugs.cityName ? slugs.cityName : "",
+        cityName: slugs.city ? slugs.city : "",
         specialty: slugs.specialty ? slugs.specialty : "",
         consultingPlan: slugs.consultingPlan ? slugs.consultingPlan : "",
         search_key: searchParams.search_key ? searchParams.search_key : "",

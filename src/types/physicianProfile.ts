@@ -9,6 +9,7 @@ export interface PhysicainProfileType {
   telePhoneNumber: string;
   provinceName: string;
   cityName: string;
+  cityEnName: string;
   hasImage: boolean;
   isFavorite: boolean;
   patientAppointmentLimitDaysPeriod: number;
