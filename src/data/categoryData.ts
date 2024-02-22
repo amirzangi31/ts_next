@@ -3,49 +3,49 @@ const categoryData = [
         id: "1",
         title: "دکتر ارتوپدی",
         image: "/orthoped.png",
-        link: "search?specialities=متخصص ارتوپدی"
+        link: "/physicians/specilaty/urologist"
     },
     {
         id: "2",
         title: "دکتر ارولوژی",
         image: "/kidney.png",
-        link: "search?specialities=فلوشیپ - جراحی درون بین کلیه، مجاری ادراری و تناسلی (اندویورولوژی)"
+        link: "/physicians/specilaty/urologist"
     },
     {
         id: "3",
         title: "دکتر غدد",
         image: "/glands.png",
-        link: "search?specialities=غدد درون ریز و متابولیسم(فوق تخصص)"
+        link: "/physicians/specilaty/urologist"
     },
     {
         id: "4",
         title: "دکتر عمومی",
         image: "/orthoped.png",
-        link: "search?specialities=متخصص زنان و زایمان"
+        link: "/physicians/specilaty/urologist"
     },
     {
         id: "5",
         title: "دکتر زنان و زایمان",
         image: "/female.png",
-        link: "search?specialities=متخصص زنان و زایمان"
+        link: "/physicians/specilaty/urologist"
     },
     {
         id: "6",
         title: "دکتر داخلی",
         image: "/liver.png",
-        link: "search?specialities=متخصص بیماریهای داخلی"
+        link: "/physicians/specilaty/urologist"
     },
     {
         id: "7",
         title: "دکتر گوارش",
         image: "/stomach.png",
-        link: "search?specialities=گوارش و کبد بالغین(فوق تخصص)"
+        link: "/physicians/specilaty/urologist"
     },
     {
         id: "8",
         title: "دکتر عمومی",
         image: "/physician.png",
-        link: "search?specialities=پزشک عمومی"
+        link: "/physicians/specilaty/urologist"
     },
 ]
 

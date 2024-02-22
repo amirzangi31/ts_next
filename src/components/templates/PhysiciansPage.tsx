@@ -62,7 +62,6 @@ export type PhysiciansPageProps = {
 
 const PhysiciansPage = (props: PhysiciansPageProps) => {
     const { specialities, slugs, services, searchData, searchParams, hasMore } = props
-    
     const [loadingData, setLoadingData] = useState(true)
     const [searchDataClient, setSearchDataClient] = useState<PhysicianDataSearch[] | []>([])
     const [hasMoreSatet, setHasMoreState] = useState(hasMore)

@@ -61,8 +61,6 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
 
     const [activeCard, setActiveCard] = useState<null | number>(0)
 
-
-
     const router = useRouter()
 
     const [searchsFilterCards, setSearchsFilterCards] = useState({
@@ -87,7 +85,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
         gender: slugs?.gender ? convertGender(slugs.gender) : "جنسیت",
         specialty: slugs?.specialty ? specialities.find(item => item.enName === slugs.specialty)?.specialityTitle : "تخصص",
         disease: slugs?.disease ? diseases.find(item => item.enName === slugs.disease)?.name : "بیماری",
-        sign: slugs?.sign ? signs.find(item => item.enName === slugs.sign)?.name : "بیماری",
+        sign: slugs?.sign ? signs.find(item => item.enName === slugs.sign)?.name : "علائم",
         service: slugs?.service ? services.find(item => item.enName === slugs.service)?.name : "خدمات",
         ConsultingPlan: slugs?.consultingPlan ? planNameConvert(slugs.consultingPlan) : "پلن مشاوره",
     })
@@ -212,7 +210,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
                             {searchedSpecialities.map((item, index) => (
                                 <label htmlFor={`specialities-${index}`} className='my-2 flex justify-start items-center gap-1 cursor-pointer' key={item.id}>
                                     {
-                                        item.enName === searchParametrs.specialty ? <span className={cn(
+                                        item.enName === searchParametrs.specialty  ? <span className={cn(
                                             ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
                                         )}>
                                             <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
