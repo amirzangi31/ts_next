@@ -39,13 +39,21 @@ export interface SearchSectionPrimaryProps {
     signs: SignType[],
     diseases: DiseaseType[],
     getDisease: (enName: string) => void,
-    loading: boolean
+    loading: boolean,
+    searchParams?: {
+        search_key: string,
+        page: string,
+        disease: string,
+        sign: string,
+        service: string,
+        gender: string
+    }
 }
 
 
 
 const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
-    const { specialities, slugs, searchText, services, showFilters, closeFilterHandler, diseases, signs, loading, getDisease } = props
+    const { specialities, slugs, searchText, services, showFilters, closeFilterHandler, diseases, signs, loading, getDisease , searchParams } = props
     const [cookies] = useCookies(["cityInfo"])
 
     const genders = [...genderContent]
@@ -110,11 +118,11 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
         // }
 
         const url = generateUrlSearchPage({
-            city: cookies.cityInfo ? cookies.cityInfo.slug : "",
             specialty: searchParametrs.specialty,
             consultingPlan: searchParametrs.consultingPlan,
         }, {
             disease: searchParametrs.disease,
+            city: cookies.cityInfo ? cookies.cityInfo.slug : "",
             sign: searchParametrs.sign,
             service: searchParametrs.service,
             gender: searchParametrs.gender,

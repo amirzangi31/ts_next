@@ -103,19 +103,45 @@ interface FirstAppointment {
 
 
 export interface ServiceType {
-  id : number ;
-  name : string;
-  enName : string
+  id: number;
+  name: string;
+  enName: string
 }
 
 export interface DiseaseType {
-  id : number ;
-  name : string;
-  enName : string
+  id: number;
+  name: string;
+  enName: string
 }
 
 export interface SignType {
-  id : number ;
-  name : string;
-  enName : string
+  id: number;
+  name: string;
+  enName: string
 }
+
+export interface PhysicianDataSearch {
+  id: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  physicianProfileUrl: string;
+  address: string;
+  medicalSystemCode: string;
+  provinceName: string;
+  cityName: string;
+  hasImage: boolean;
+  patientAppointmentLimitDaysPeriod: number;
+  patientAppointmentLimitTotalAppointment: number;
+  onlineAppointment: boolean;
+  textConsultation: boolean;
+  voiceConsultation: boolean;
+  immediateConsultation: boolean;
+  aboutDr: null;
+  rate: number;
+  firstAppointment: null;
+  physicianInsurances: any[];
+  physicianSpecialities: PhysicianSpeciality[];
+}
+
+

@@ -10,7 +10,8 @@ const Doctors = async (props: {
     disease: string,
     sign: string,
     service: string,
-    gender: string
+    gender: string,
+    city : string
   }
 }) => {
 
@@ -19,14 +20,9 @@ const Doctors = async (props: {
   const services = await fetch(`${apiDomainNobat}${urls.services.url}`, { next: { revalidate: 60 * 60 * 1 } }) //one day
   const servicesData = await services.json()
 
-  
-
-
-  // const res = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}?Gender=0&ConsultingPlan=All&page=1&itemsCountPerPage=10`)
-  // const data = await res.json()
 
   const parametrs = {
-    cityName: "",
+    cityName: props.searchParams.city ? props.searchParams.city : "",
     specialty: "",
     consultingPlan: "",
     search_key: props.searchParams.search_key ? props.searchParams.search_key : "",
@@ -38,8 +34,12 @@ const Doctors = async (props: {
   }
 
 
+  const serach = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}?Gender=0&ConsultingPlan=All&PageNumber=1&ItemsCountPerPage=10&filter=${parametrs.search_key}`)
+  const searchData = await serach.json()
+
+
   return (
-    <PhysiciansPage specialities={specialitiesData.value} slugs={parametrs} services={servicesData.value} />
+    <PhysiciansPage specialities={specialitiesData.value} slugs={parametrs} services={servicesData.value} searchData={searchData?.value?.items} searchParams={props.searchParams} />
   )
 }
 

@@ -1,5 +1,4 @@
 const generateUrlSearchPage = (parametrs: {
-    city: string,
     specialty: string,
     consultingPlan: string,
     [key: string]: any;
@@ -10,6 +9,7 @@ const generateUrlSearchPage = (parametrs: {
     sign: string,
     service: string,
     search_key : string,
+    city: string,
     // itemsCountPerPage: string,
     [key: string]: any
 }) => {

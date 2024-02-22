@@ -30,16 +30,20 @@ const useCity = () => {
     useEffect(() => {
         const cityInfoLocal = localStorage.getItem("cityInfo")
 
+        if(cityInfoLocal === null) {
+            setCityName("انتخاب شهر")
+        }
         if (typeof cityInfoLocal === "string") {
             let cityInfo = JSON.parse(cityInfoLocal)
             setCityName(cityInfo?.cityName ? cityInfo.cityName : "انتخاب شهر")
         }
+        
         setIsLoadingCity(false)
 
         return () => {
             setIsLoadingCity(true)
         }
-    }, [cookies.cityInfo])
+    }, [cookies?.cityInfo])
 
 
     const cityHandler = (slug: string, cityName: string, cityId: number) => {

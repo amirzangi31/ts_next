@@ -12,7 +12,8 @@ const DoctorsSearch = async (props: {
         disease: string,
         sign: string,
         service: string,
-        gender: string
+        gender: string,
+        city : string
     }
 }) => {
     const { params, searchParams } = props
@@ -24,10 +25,13 @@ const DoctorsSearch = async (props: {
    
     
     
+  const serach = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}?Gender=0&ConsultingPlan=All&PageNumber=1&ItemsCountPerPage=10`)
+  const searchData = await serach.json()
+
     
 
     const parametrs = {
-        cityName: slugs.city ? slugs.city : "",
+        cityName: searchParams.city ? searchParams.city : "",
         specialty: slugs.specialty ? slugs.specialty : "",
         consultingPlan: slugs.consultingPlan ? slugs.consultingPlan : "",
         search_key: searchParams.search_key ? searchParams.search_key : "",
@@ -40,7 +44,7 @@ const DoctorsSearch = async (props: {
 
 
     return (
-        <PhysiciansPage   slugs={parametrs} searchKey={searchParams.search_key} specialities={specialitiesData.value} services={servicesData.value} />
+        <PhysiciansPage  searchParams={props.searchParams} slugs={parametrs} searchKey={searchParams.search_key} specialities={specialitiesData.value} services={servicesData.value} searchData={searchData?.value?.items} />
     )
 }
 
