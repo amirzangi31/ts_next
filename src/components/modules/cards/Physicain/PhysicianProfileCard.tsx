@@ -36,7 +36,7 @@ export type PhysicianProfileCardType = {
   status: boolean,
   addFavorite: () => void,
   likeLoading: boolean,
-  physicianUrl : string
+  physicianUrl: string
 }
 
 const PhysicianProfileCard = ({
@@ -54,6 +54,7 @@ const PhysicianProfileCard = ({
   likeLoading,
   physicianUrl
 }: PhysicianProfileCardType) => {
+
 
 
 
@@ -129,11 +130,14 @@ const PhysicianProfileCard = ({
             </div>
           </div>
           <div className="flex gap-3 items-center">
-          <LinkElement link={physicianUrl} className="w-[12.25rem] hidden md:block">
-            <ButtonElement typeButton="primary">
-                  نوبت دهی اینترنتی
-            </ButtonElement>
-          </LinkElement>
+            {
+              physicianUrl ?
+                <LinkElement link={physicianUrl} className="w-[12.25rem] hidden md:block">
+                  <ButtonElement typeButton="primary">
+                    نوبت دهی اینترنتی
+                  </ButtonElement>
+                </LinkElement> : null
+            }
             <button
               type="button"
               className="flex justify-center items-center rounded-full p-2 bg-gray-100 size-[2.6875rem]"

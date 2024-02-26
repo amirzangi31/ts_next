@@ -283,15 +283,15 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
         {/* ----------section------------- */}
 
         {/* ----------section------------- */}
-        <div className="flex justify-between items-stretch flex-col md:flex-row  w-full  gap-2">
           {/* physicianSpecialities */}
+        <div className="flex justify-between items-stretch flex-col md:flex-row  w-full  gap-2">
           {physician.physicianSpecialities.length > 0 && (
             <div className="w-full mt-4 order-2">
               <BaseCard title={"تخصص ها "}>
                 <div className="flex justify-start items-center gap-2 flex-wrap">
                   {physician.physicianSpecialities.map((item, index) => (
                     <Link
-                      href={`/search?specialities=${item.specialityTitle}`}
+                      href={`/physicians/specialty/${item.specialityTitle}`}
                       key={index}
                       className="bg-gray-100 w-auto px-3 py-1 rounded-sm text-md transition-all duration-300 hover:bg-gray-400 hover:text-white"
                     >
