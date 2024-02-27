@@ -21,6 +21,7 @@ import FaqPage from './FaqPage';
 import BestSpeciality from '@modules/BestSpeciality';
 import TitleHeading from '@modules/titles/TitleHeading';
 import ServicesSectionHome from '@modules/ServicesSectionHome';
+import CommentSectionHomePage from '../modules/CommentSectionHomePage';
 
 
 
@@ -116,7 +117,8 @@ const HomePage = (props: HomePagePropType) => {
                     link='/search'
                     btn={false}
                 />
-                <SwiperContainerFreeMode gap={10} data={comments} CardComponent={CommentCardPrimary} />
+                {/* <SwiperContainerFreeMode gap={10} data={comments} CardComponent={CommentCardPrimary} /> */}
+                <CommentSectionHomePage /> 
             </section>
             {/* ----------section------------- */}
 

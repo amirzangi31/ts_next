@@ -9,6 +9,7 @@ import { phoneNumberValidator } from '@persian-tools/persian-tools';
 import Toastify from '../elements/toasts/Toastify';
 import { sendTicketPublic } from '@/services/ticketPublic/ticketPublic';
 import Link from 'next/link';
+import categoryData, { categoryDataFooter } from '@/data/categoryData';
 
 interface FormType {
   firstName: string;
@@ -76,29 +77,36 @@ const Footer = () => {
   }
 
 
+  const specialities = [...categoryDataFooter]
+
 
   return (
 
     <footer className='bg-white'>
       <div className="mx-auto max-w-[81.25rem] pb-[5.8125rem] lg:pb-5 pt-4 px-4">
         <div className='flex justify-between items-start flex-wrap'>
-          <div className='w-full lg:w-1/3 flex justify-between items-center gap-1 px-2' >
+          <div className='w-full lg:w-1/3 flex justify-between items-start gap-1 px-2' >
             <div className='flex justify-center items-center flex-col w-full'>
-              <h4 className='text-primary text-md font-bold text-center'>پربازدیدترین پزشکان</h4>
+              <h4 className='text-primary text-md font-bold text-center'>پربازدیدترین تخصص ها</h4>
               <ul className='flex justify-start items-center gap-1 flex-col text-sm mt-4'>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`Physician/دکتر حسین کرمی`}>دکتر حسین کرمی</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`Physician/دکتر-عباس-اطمینان`}>دکتر عباس اطمینان</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`Physician/دکتر_مژگان _سنجری`}>دکتر مژگان سنجری</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300'><LinkElement link={`Physician/دکتر-فاطمه-میرزایی`}>دکتر فاطمه میرزایی</LinkElement></li>
+                {
+                  specialities.map((item, index) => (
+                    <li className='hover:font-bold hover:text-primary transition-all duration-300' key={item.id} ><LinkElement link={item.link}>{item.title}</LinkElement></li>
+                  ))
+                }
               </ul>
             </div>
             <div className='flex justify-center items-center flex-col w-full'>
-              <h4 className='text-primary text-md font-bold text-center'>استان های برتر</h4>
+              <h4 className='text-primary text-md font-bold text-center'>پربازدیدترین شهرها</h4>
               <ul className='flex justify-start items-center gap-1 flex-col text-sm mt-4'>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`physicians/city/kerman`}>پزشکان استان  تهران</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`physicians/city/kerman`}>پزشکان استان  کرمان</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' > <LinkElement link={`physicians/city/kerman`}>پزشکان استان  خراسان رضوی</LinkElement></li>
-                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`physicians/city/kerman`}>پزشکان استان  مازندران</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`physicians/city/tehran`}>پزشکان شهر  تهران</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`physicians/city/kerman`}>پزشکان شهر  کرمان</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`physicians/city/esfahan`}>پزشکان شهر  اصفهان</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`physicians/city/shiraz`}>پزشکان شهر  شیراز</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' > <LinkElement link={`physicians/city/mashhad`}>پزشکان شهر  مشهد </LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`physicians/city/karaj`}>پزشکان شهر  کرج</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`physicians/city/tabriz`}>پزشکان شهر  تبریز</LinkElement></li>
+                <li className='hover:font-bold hover:text-primary transition-all duration-300 cursor-pointer' ><LinkElement link={`physicians/city/ahvaz`}>پزشکان شهر  اهواز</LinkElement></li>
               </ul>
             </div>
           </div>

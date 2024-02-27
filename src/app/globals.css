@@ -241,3 +241,12 @@ html {
 }
 
 /*----------End : infinite-scroll-component__outerdiv-----------*/
+
+
+.commnet-slider .swiper-slide {
+  @apply rounded-lg bg-red-200;
+}
+.commnet-slider .swiper-slide .swiper-slide-shadow-left ,
+.commnet-slider .swiper-slide .swiper-slide-shadow-right {
+  @apply rounded-lg ;
+}
