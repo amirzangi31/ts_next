@@ -109,8 +109,12 @@ const MyAppointmentsPage = () => {
         }
       }
 
-      setPastAppointmentsUi(pastArray)
-      setFetureAppointmentsUi(fetureArray)
+      let sortFetureArray = fetureArray.filter((value, index) => { return fetureArray.indexOf(value) === index; })
+
+      let sortPastArray = pastArray.filter((value, index) => { return pastArray.indexOf(value) === index; })
+
+      setPastAppointmentsUi(sortPastArray)
+      setFetureAppointmentsUi(sortFetureArray)
     }
 
   }, [filters, disabledFilter, myAppointments, isLoading]);
@@ -301,7 +305,7 @@ const MyAppointmentsPage = () => {
 export default MyAppointmentsPage;
 
 const AppointmentCard = (props: MyAppointmentType) => {
-  
+
   const [showModalDelete, setShowModalDelete] = useState(false)
   const { calendar, index, physicianProfileId, physicianProfileUrl } = props;
   const { cancelMutation } = useMyAppointments()
@@ -520,7 +524,7 @@ const AppointmentCard = (props: MyAppointmentType) => {
 };
 const AppointmentCardOff = (props: MyAppointmentType) => {
 
-  
+
   return (
     <div className="bg-white rounded-sm shadow-shadow_category  w-full  flex justify-start items-start flex-col gap-2">
       <div className="p-4  w-full flex justify-between items-center">
