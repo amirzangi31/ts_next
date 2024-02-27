@@ -5,4 +5,4 @@ Allow: /*.jpg?*$
 Allow: /*.jpeg?*$
 
 
-Sitemap: https://arenap.ir/sitemap
+Sitemap: https://arenap.ir/sitemap/sitemap.xml
