@@ -63,14 +63,14 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
       }
     }
 
-    
+
   }, () => { lockedAppointmentHandler.mutate() }]
 
 
 
 
   //selectAppointment
-  const { selectAppointment, isSelectAppointment, selectIndex, selectCalendarId, isNextStep, lockedAppointmentHandler, firstAppointmentHandler, appointmentInfo } = useSelectAppointment()
+  const { selectAppointment, offSelectHandler, isSelectAppointment, selectIndex, selectCalendarId, isNextStep, lockedAppointmentHandler, firstAppointmentHandler, appointmentInfo } = useSelectAppointment()
 
 
 
@@ -155,7 +155,12 @@ const SelectAppointmentStep = ({ calendar, physician, ramainingTime, times, firs
       }
     }
   }, [appointmentInfo])
- 
+
+
+  useEffect(() => {
+    offSelectHandler()
+    setActiveTab(calendar.findIndex(item => item.available === true) ? calendar.findIndex(item => item.available === true) : 0)
+  }, [])
 
 
   return (
