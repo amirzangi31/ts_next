@@ -189,7 +189,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                     <span className=''>دکترهای </span>
                     {slugs?.specialty ? (<LinkElement className='text-primary underline underline-offset-4 ' link={`physicians/specialty/${slugs.specialty}`}>{specialities.find((item) => item.enName === slugs.specialty)?.specialityTitle} </LinkElement>) : null}
                     {slugs?.cityName ? (<>
-                        در شهر <LinkElement className='text-primary underline underline-offset-4 ' link={`physicins/city/${slugs.cityName}`}>
+                        در شهر <LinkElement className='text-primary underline underline-offset-4 ' link={`physicians/city/${slugs.cityName}`}>
                             {provinces.find((item: {
                                 cityId: number,
                                 cityName: string,
