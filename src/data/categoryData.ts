@@ -46,6 +46,7 @@ const categoryData = [
         title: "دکتر نفرولوژی",
         image: "/physician.png",
         link: "physicians/specialty/nephrologist"
+ 
     },
 ]
 const categoryDataFooter = [
