@@ -43,9 +43,9 @@ const categoryData = [
     },
     {
         id: "8",
-        title: "دکتر عمومی",
+        title: "دکتر نفرولوژی",
         image: "/physician.png",
-        link: "physicians/specialty/Urologist"
+        link: "physicians/specialty/nephrologist"
     },
 ]
 const categoryDataFooter = [
@@ -93,13 +93,13 @@ const categoryDataFooter = [
     },
     {
         id: "8",
-        title: "پزشکان عمومی",
+        title: "پزشکان نفرولوژی",
         image: "/physician.png",
-        link: "physicians/specialty/Urologist"
+        link: "physicians/specialty/nephrologist"
     },
 ]
 
 
-export {categoryDataFooter}
+export { categoryDataFooter }
 
 export default categoryData
