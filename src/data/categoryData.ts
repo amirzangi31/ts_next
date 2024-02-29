@@ -96,7 +96,7 @@ const categoryDataFooter = [
         id: "8",
         title: "پزشکان نفرولوژی",
         image: "/physician.png",
-        link: "physicians/specialty/primary-care-physician"
+        link: "physicians/specialty/nephrologist"
     },
 ]
 
