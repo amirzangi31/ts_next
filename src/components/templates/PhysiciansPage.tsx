@@ -647,6 +647,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                             <div className='flex justify-center items-center mt-4'>
                                 <button type='button' className='text-error font-bold' onClick={() => {
                                     router.push("/physicians")
+                                    setSearchText("")
                                 }}>حذف فیلترها</button>
                             </div>
                         </div> 
