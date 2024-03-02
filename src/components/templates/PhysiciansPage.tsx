@@ -92,7 +92,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
     useEffect(() => {
         setSearchDataClient(searchData === undefined ? [] : searchData)
         setLoadingData(false)
-    } , [searchData])
+    }, [searchData])
 
     const [cookies] = useCookies(["cityInfo"])
     const [showFilters, setShowFilters] = useState(false)
@@ -105,9 +105,9 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
 
         const url = generateUrlSearchPage({
             consultingPlan: slugs?.consultingPlan ? slugs.consultingPlan : "",
-            specialty: slugs?.specialty ? slugs.specialty : "",
+            specialty: slugs?.specialty ? slugs.specialty : cookies.cityInfo ? cookies.cityInfo.slug : "",
         }, {
-            city: cookies.cityInfo ? cookies.cityInfo.slug : "",
+            city: slugs?.cityName ? slugs.cityName : "",
             disease: slugs?.disease ? slugs.disease : "",
             gender: slugs?.gender ? slugs.gender : "",
             page: slugs?.page ? slugs.page : "",
@@ -154,8 +154,8 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                 Toastify("error", "خطایی رخ داده است");
             });
     }
-    
-    
+
+
     return (
         <>
             <TitlePagesMobile title={`جستجو پزشکان آرناپ`} />
@@ -424,9 +424,9 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
 
                 {/* ----------section------------- */}
                 {/* search section */}
-                
-                    <SearchSectionPrimary searchParams={searchParams} loading={diseasesLoading} getDisease={getDiseaseHandler} services={services} diseases={diseases} signs={signs} searchText={searchText} showFilters={showFilters} closeFilterHandler={() => setShowFilters(false)} specialities={specialities} slugs={props.slugs} />
-                
+
+                <SearchSectionPrimary searchParams={searchParams} loading={diseasesLoading} getDisease={getDiseaseHandler} services={services} diseases={diseases} signs={signs} searchText={searchText} showFilters={showFilters} closeFilterHandler={() => setShowFilters(false)} specialities={specialities} slugs={props.slugs} />
+
                 {/* ----------section------------- */}
 
                 {/* ----------section------------- */}
@@ -650,7 +650,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                                     setSearchText("")
                                 }}>حذف فیلترها</button>
                             </div>
-                        </div> 
+                        </div>
                     }
 
                     <div className=' flex justify-between items-start gap-2 w-full'>

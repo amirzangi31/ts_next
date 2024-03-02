@@ -120,7 +120,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
             consultingPlan: searchParametrs.consultingPlan,
         }, {
             disease: searchParametrs.disease,
-            city: cookies.cityInfo ? cookies.cityInfo.slug : "",
+            city: slugs?.cityName ? slugs.cityName : cookies.cityInfo ? cookies.cityInfo.slug : "",
             sign: searchParametrs.sign,
             service: searchParametrs.service,
             gender: searchParametrs.gender,
@@ -148,8 +148,8 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
         <section className={cn(
             ' md:sticky top-2.5 right-0',
             {
-                " md:block" : showFilters,
-                "hidden md:block" : !showFilters
+                " md:block": showFilters,
+                "hidden md:block": !showFilters
             }
         )}>
             <div className={
@@ -158,7 +158,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
                     "md:static md:h-auto md:w-[18.75rem] md:rounded-sm md:bg-white md:shadow-shadow_category ",
                     {
                         "top-0 z-[20]": showFilters,
-                        "-top-full" : !showFilters
+                        "-top-full": !showFilters
                     }
                 )
             }>
@@ -210,7 +210,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
                             {searchedSpecialities.map((item, index) => (
                                 <label htmlFor={`specialities-${index}`} className='my-2 flex justify-start items-center gap-1 cursor-pointer' key={item.id}>
                                     {
-                                        item.enName === searchParametrs.specialty  ? <span className={cn(
+                                        item.enName === searchParametrs.specialty ? <span className={cn(
                                             ' min-w-[1rem] size-[1rem] rounded-[0.25rem] bg-primary flex justify-center items-center'
                                         )}>
                                             <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">

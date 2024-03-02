@@ -24,15 +24,15 @@ const DoctorsSearch = async (props: {
     const services = await fetch(`${apiDomainNobat}${urls.services.url}`, { next: { revalidate: 60 * 60 * 24* 1 } }) //one day
     const servicesData = await services.json()
 
+    
 
-
-    const serach = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}??Filter=${searchParams?.search_key ? searchParams.search_key : ""}&CityName=${searchParams.city ? searchParams.city : ""}&Gender=${searchParams?.gender ? searchParams.gender : "0"}&Specialty=${slugs?.specialty ? slugs.specialty : ""}&Disease=${searchParams?.disease ? searchParams.disease : ""}&Sign=${searchParams?.sign ? searchParams.sign : ""}&Service=${searchParams?.service ? searchParams.service : ""}&ConsultingPlan=${slugs?.consultingPlan ? slugs.consultingPlan : "All"}&PageNumber=${1}&ItemsCountPerPage=10` , {cache : "no-store"})
+    const serach = await fetch(`${apiDomainNobat}${urls.advanceSearch.serach.url}??Filter=${searchParams?.search_key ? searchParams.search_key : ""}&CityName=${slugs.city ? slugs.city : searchParams.city ? searchParams.city : ""}&Gender=${searchParams?.gender ? searchParams.gender : "0"}&Specialty=${slugs?.specialty ? slugs.specialty : ""}&Disease=${searchParams?.disease ? searchParams.disease : ""}&Sign=${searchParams?.sign ? searchParams.sign : ""}&Service=${searchParams?.service ? searchParams.service : ""}&ConsultingPlan=${slugs?.consultingPlan ? slugs.consultingPlan : "All"}&PageNumber=${1}&ItemsCountPerPage=10` , {cache : "no-store"})
     const searchData = await serach.json()
 
 
 
     const parametrs = {
-        cityName: searchParams.city ? searchParams.city : "",
+        cityName: slugs.city ? slugs.city : searchParams.city ? searchParams.city : "",
         specialty: slugs.specialty ? slugs.specialty : "",
         consultingPlan: slugs.consultingPlan ? slugs.consultingPlan : "",
         search_key: searchParams.search_key ? searchParams.search_key : "",

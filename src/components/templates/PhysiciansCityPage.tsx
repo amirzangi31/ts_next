@@ -66,7 +66,7 @@ const PhysiciansCityPage = ({ data, city }: {
 
             {/* ----------main------------- */}
             <main className='mt-4 grid grid-cols-1 md:grid-cols-2 gap-2'>
-                {data.map((item, index) => <LinkCard key={item.specialtyId} link={`physicians/specialty/${item.specialtyEnName}`} title={item.specialtyName} count={item.physicianCount} />)}
+                {data.map((item, index) => <LinkCard key={item.specialtyId} link={`physicians/specialty/${item.specialtyEnName}?city=${city}`} title={item.specialtyName} count={item.physicianCount} />)}
             </main>
             {/* ----------main------------- */}
 
