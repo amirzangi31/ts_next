@@ -51,7 +51,7 @@ export const ServicesCard = (props: ServicesDataType) => {
                 </div>
 
                 <h2 className={cn(
-                    'py-4 font-bold text-gray-500 transition-all duration-500 delay-500 z-[1]',
+                    'py-4 font-bold text-black transition-all duration-500 delay-500 z-[1]',
                     "group-hover:text-white "
                 )}>{title}</h2>
 

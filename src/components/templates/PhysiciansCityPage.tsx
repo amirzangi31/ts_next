@@ -16,7 +16,7 @@ const PhysiciansCityPage = ({ data, city }: {
         physicianCount: number
     }[], city: string
 }) => {
-
+    
 
     const { provinces, isLoadingCity } = useCity()
 
@@ -53,7 +53,7 @@ const PhysiciansCityPage = ({ data, city }: {
 
             {/* ----------header------------- */}
             <header className='py-4'>
-                <TitleHeading title={`دکترهای شهر ${provinces.find((item: {
+                <TitleHeading isLoading={isLoadingCity} title={`دکترهای شهر ${provinces.find((item: {
                     cityId: number,
                     cityName: string,
                     centerName: string,

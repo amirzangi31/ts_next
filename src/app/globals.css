@@ -248,5 +248,5 @@ html {
 }
 .commnet-slider .swiper-slide .swiper-slide-shadow-left ,
 .commnet-slider .swiper-slide .swiper-slide-shadow-right {
-  @apply rounded-lg ;
+  @apply rounded-lg opacity-10;
 }

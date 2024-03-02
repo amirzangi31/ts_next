@@ -185,7 +185,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
 
   const spliterName = physician.firstName.split(" ")
 
-
+  
   return (
     <>
       <TitlePagesMobile title={`صفحه ی اختصاصی ${spliterName[0] === "مرکز" ? "" : "دکتر"} ${physician.firstName} ${physician.lastName}`} />
@@ -206,7 +206,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
         {/* ----------section------------- */}
         {/* Button */}
         {consultationList.find((item) => item.active) && (
-          <div className="sticky  bottom-[1.25rem] left-0 order-[13] md:hidden  w-full flex justify-center items-center z-[15] pt-4">
+          <div className="sticky  bottom-[1.25rem] left-0 order-[13] md:hidden  w-full flex justify-center items-center z-[14] pt-4">
             <div className=" w-full ">
               <LinkElement link={buttonLink as string} className="block w-full">
                 <ButtonElement
@@ -291,7 +291,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
                 <div className="flex justify-start items-center gap-2 flex-wrap">
                   {physician.physicianSpecialities.map((item, index) => (
                     <Link
-                      href={`/physicians/specialty/${item.specialityTitle}`}
+                      href={`/physicians/specialty/${item.enName}`}
                       key={index}
                       className="bg-gray-100 w-auto px-3 py-1 rounded-sm text-md transition-all duration-300 hover:bg-gray-400 hover:text-white"
                     >
