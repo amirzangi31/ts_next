@@ -91,6 +91,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
     })
 
     const openFilterCard = (fitlerIndex: number | null) => {
+        
         setActiveCard(fitlerIndex)
     }
 
@@ -166,8 +167,8 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
                     <CloseButton closeHanlder={closeFilterHandler} />
                 </div>
                 <div className='flex justify-between items-center gap-4 font-bold'>
-                    <p className='text-primary md:min-w-fit  w-full font-bold md:font-normal text-center md:text-right'>فیلتر ها</p>
-                    <button type='button' className='text-error hidden md:block min-w-fit' onClick={() => {
+                    <p className='text-primary md:min-w-fit  w-full font-[900] md:font-normal text-center md:text-right '>فیلتر ها</p>
+                    <button type='button' className='text-error hidden md:block min-w-fit font-normal text-md' onClick={() => {
                         router.push("/physicians")
                     }} >حذف فیلترها</button>
                 </div>
@@ -477,6 +478,8 @@ const FilterCard = (props: FilterCardProps) => {
             onClick={() => {
                 if (!active) {
                     openHandler(index)
+                }else{
+                    openHandler(null)
                 }
             }}
         >
@@ -532,6 +535,8 @@ const FilterCardSecondary = (props: FilterCardSecondaryProps) => {
             onClick={() => {
                 if (!active) {
                     openHandler(index)
+                }else{
+                    openHandler(null)
                 }
             }}
         >
