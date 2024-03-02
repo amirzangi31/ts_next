@@ -44,6 +44,7 @@ const PhysicainCardPrimary = ({
             link={`Physician/${physicianProfileUrl}`}
             className={cn(
                 `bg-white rounded-sm group   transition-all duration-300 w-[20rem] shadow-shadow_category min-h-[14.375rem]  flex justify-between items-start flex-col`,
+                " hover:border-[#006A67] hover:shadow-hover"
             )}
         >
             <div className="p-4  w-full flex justify-between items-start">
@@ -94,7 +95,7 @@ const PhysicainCardPrimary = ({
                 />
             </div>
             <div className="px-2 pb-2 w-full">
-                <div className="bg-gray-700 group-hover:bg-gray-400 group-hover:text-white  transition-all duration-500 p-1 rounded-ss flex justify-between items-center min-h-[2.875rem]">
+                <div className="bg-gray-700  p-1 rounded-ss flex justify-between items-center min-h-[2.875rem]">
                     {/* <p className="px-5 relative border-l border-black border-dashed ">
                         {cityName}
                     </p> */}

@@ -88,6 +88,7 @@ const config: Config = {
         shadow_comment: "-12px 9px 19px -12px rgba(0, 0, 0, 0.25)",
         shadow_blog: "0px 2px 58px -13px rgba(0, 0, 0, 0.30)",
         no_appointment_timer: "0px 0px 19px -4px rgba(0, 0, 0, 0.42)",
+        hover : "0px 0px 15px 0px #B4C7C6"
       },
       keyframes: {
         modal_search: {

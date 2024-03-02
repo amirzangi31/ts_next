@@ -34,6 +34,7 @@ const SwiperContainerFreeMode = ({ data, gap, CardComponent }: SwiperContainerFr
             freeMode={true}
             centerInsufficientSlides={true}
             dir="rtl"
+            className='swiper_freemode'
         >
             {
                 data?.map((item, index) => (
