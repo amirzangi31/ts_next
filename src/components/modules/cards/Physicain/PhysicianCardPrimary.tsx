@@ -68,7 +68,7 @@ const PhysicainCardPrimary = ({
                     </span>
                 </div>
                 <div className="flex-1 rtl:pr-4 ltr:pl-4 flex justify-center gap-1 items-start flex-col min-h-[3.75rem]">
-                    <p className="text-lg font-bold ">{firstName} {lastName}</p>
+                    <p className="text-lg font-bold ">دکتر {firstName} {lastName}</p>
                     {physicianSpecialities?.length ? <p className="text-md short-text-2">{physicianSpecialities[0]?.specialityTitle}</p> : null}
                 </div>
             </div>
