@@ -52,7 +52,7 @@ const TitlePrimary = ({
                 </LinkElement>
             )}
             {btn && !link && (
-                <div className="w-[8rem]">
+                <div className="w-[8.5rem]">
                     <ButtonElement
                         typeButton="gray-light"
                         fontSize="sm"
