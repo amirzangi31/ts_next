@@ -471,7 +471,7 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
           <TitlePrimary
             title={"پزشکان مرتبط"}
             textLink={"مشاهده بیشتر"}
-            link={`search?specialities=${physician.physicianSpecialities[0]?.specialityTitle}`}
+            link={`specialty/${physician.physicianSpecialities[0]?.enName}`}
             btn={true}
             prefix={true}
           />
@@ -480,7 +480,6 @@ const PhysicianProfilePage = ({ physician }: { physician: PhysicainProfileType }
           </div>
         </div>
         {/* ----------section------------- */}
-
 
         {/* ----------section------------- */}
         {/* Comments */}

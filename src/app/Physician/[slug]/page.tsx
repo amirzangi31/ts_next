@@ -3,7 +3,7 @@ import PhysicianDetailesPage from '@templates/PhysicianDetailesPage';
 import { getProfilePhysician } from '@/services/physicians/physician';
 import { redirect } from 'next/navigation';
 import { apiDomainNobat } from '@/services/getApiUrlServer';
-import { PhysicainProfileType } from '@/types/physicianProfile';
+
 import urls from '@/services/urls';
 
 export async function generateMetadata(props: {
