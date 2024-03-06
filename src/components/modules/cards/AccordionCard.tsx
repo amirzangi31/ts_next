@@ -24,7 +24,7 @@ const AccordionCard = ({ title, description, active, handler, id }: AccordionCar
                         "after:absolute after:rtl:-right-[1.25rem] after:rounded-sm after:transition-all after:duration-500 after:top-0 after:block after:bg-primary after:w-1.5 after:h-full",
                         "group-hover:after:bg-primary group-hover:after:h-[calc(100%+2.5rem)] group-hover:after:-top-[1.25rem] group-hover:after:w-[calc(100%+1.25rem)] group-hover:after:-z-1"
                   )}>
-                        <h2 className="group-hover:text-white transition-all duration-300 z-[1]">{title}</h2>
+                        <h3 className="group-hover:text-white transition-all duration-300 z-[1]">{title}</h3>
                         <span
                               className={cn(` transition-all duration-500 delay-700 z-[1]`, {
                                     "rotate-90": active === id,

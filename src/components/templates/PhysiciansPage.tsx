@@ -102,12 +102,12 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
 
 
     const debouncedTextSearch = useDebouncedCallback(() => {
-
+        
         const url = generateUrlSearchPage({
             consultingPlan: slugs?.consultingPlan ? slugs.consultingPlan : "",
-            specialty: slugs?.specialty ? slugs.specialty : cookies.cityInfo ? cookies.cityInfo.slug : "",
+            specialty: slugs?.specialty ? slugs.specialty : "",
         }, {
-            city: slugs?.cityName ? slugs.cityName : "",
+            city: slugs?.cityName ? slugs.cityName : cookies.cityInfo ? cookies.cityInfo.slug : "",
             disease: slugs?.disease ? slugs.disease : "",
             gender: slugs?.gender ? slugs.gender : "",
             page: slugs?.page ? slugs.page : "",
@@ -122,7 +122,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
 
         debouncedTextSearch()
 
-    }, [searchText, cookies])
+    }, [searchText, cookies?.cityInfo])
 
     const { provinces, setAllProvince } = useCity()
 
