@@ -9,6 +9,7 @@ import Layout from '@layouts/Layout'
 import StoreProvider from '@/providers/StoreProvider'
 import { Suspense } from 'react'
 import LoadingPage from './loading'
+import GoogleAnalytics from '@/google/GoogleAnalytics'
 
 
 
@@ -62,6 +63,7 @@ export default async function RootLayout({
 
   return (
     <html lang='fa' dir='rtl' >
+
       <body className={iranSans.className} data-theme="Arenap_theme">
 
         <Suspense fallback={<LoadingPage />}>
@@ -71,6 +73,10 @@ export default async function RootLayout({
             </Layout>
           </StoreProvider>
         </Suspense>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics ga_id=
+            {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        ) : null}
       </body>
     </html>
   )
