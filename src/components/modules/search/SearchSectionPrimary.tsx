@@ -91,7 +91,6 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
     })
 
     const openFilterCard = (fitlerIndex: number | null) => {
-        
         setActiveCard(fitlerIndex)
     }
 
@@ -173,7 +172,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
                     }} >حذف فیلترها</button>
                 </div>
                 <div className='grid grid-cols-1 gap-4 mt-6 md:mt-4'>
-                    <FilterCard title={titlesActive.specialty} name='name_1' index={1} active={activeCard === 1} openHandler={openFilterCard} >
+                    <FilterCard title={titlesActive.specialty} name='filter_card' index={1} active={activeCard === 1} openHandler={openFilterCard} >
                         <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
                             <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                 setSearchsFilterCards({
@@ -237,7 +236,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
                             ))}
                         </div>
                     </FilterCard>
-                    <FilterCard title={titlesActive.service} name='name_2' index={2} active={activeCard === 2} openHandler={openFilterCard} >
+                    <FilterCard title={titlesActive.service} name='filter_card' index={2} active={activeCard === 2} openHandler={openFilterCard} >
                         <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
                             <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                 setSearchsFilterCards({
@@ -307,7 +306,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
                     </div> : null}
                     {
                         diseases?.length > 0 ?
-                            <FilterCard title={titlesActive.disease} name='name_3' index={3} active={activeCard === 3} openHandler={openFilterCard} >
+                            <FilterCard title={titlesActive.disease} name='filter_card' index={3} active={activeCard === 3} openHandler={openFilterCard} >
                                 <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
                                     <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                         setSearchsFilterCards({
@@ -373,7 +372,7 @@ const SearchSectionPrimary = (props: SearchSectionPrimaryProps) => {
                     }
                     {
                         signs?.length > 0 ?
-                            <FilterCard title={titlesActive.sign} name='name_4' index={4} active={activeCard === 4} openHandler={openFilterCard} >
+                            <FilterCard title={titlesActive.sign} name='filter_card' index={4} active={activeCard === 4} openHandler={openFilterCard} >
                                 <div className='bg-gray-100 md:bg-white h-[2.8125rem] md:h-auto rounded-3xl p-1'>
                                     <input type="text" className='text-md text-black h-full px-2' placeholder='جستجو' onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                         setSearchsFilterCards({
@@ -475,20 +474,22 @@ const FilterCard = (props: FilterCardProps) => {
             "md:bg-gray-100 md:py-2 md:px-3 md:text-primary md:font-bold",
         )}
             id={name}
-            onClick={() => {
-                if (!active) {
-                    openHandler(index)
-                }else{
-                    openHandler(null)
-                }
-            }}
+
         >
             <div className={
                 cn(
                     'flex justify-between items-center  relative ',
                     "after:absolute after:-right-5 md:after:-right-3 after:rounded-lg after:top-0 after:block after:bg-primary after:w-1 after:h-full"
                 )
-            }>
+            }
+                onClick={() => {
+                    if (!active) {
+                        openHandler(index)
+                    } else {
+                        openHandler(null)
+                    }
+                }}
+            >
                 <p className='text-md'>{title}</p>
                 <span className={cn(
                     '', {
@@ -532,20 +533,22 @@ const FilterCardSecondary = (props: FilterCardSecondaryProps) => {
             "md:bg-gray-100 md:py-2 md:px-3 md:text-primary md:font-bold",
         )}
             id={name}
-            onClick={() => {
-                if (!active) {
-                    openHandler(index)
-                }else{
-                    openHandler(null)
-                }
-            }}
+
         >
             <div className={
                 cn(
                     'flex justify-between items-center  relative ',
                     "after:absolute after:-right-5 md:after:-right-3 after:rounded-lg after:top-0 after:block after:bg-primary after:w-1 after:h-full"
                 )
-            }>
+            }
+                onClick={() => {
+                    if (!active) {
+                        openHandler(index)
+                    } else {
+                        openHandler(null)
+                    }
+                }}
+            >
                 <p>{title} <span className='text-md text-gray-500'>{titleState ? `(${titleState})` : ""}</span> </p>
                 <span className={cn(
                     '', {
