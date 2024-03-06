@@ -128,7 +128,7 @@ const HomePage = (props: HomePagePropType) => {
                 <SectionTitle
                     title={"سوالات متداول"}
                     textLink={"مشاهده بیشتر"}
-                    link='/faq'
+                    link='faq'
                     btn={true}
                 />
                 <FaqPage />
