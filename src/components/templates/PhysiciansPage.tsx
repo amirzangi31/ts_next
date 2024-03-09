@@ -662,7 +662,7 @@ const PhysiciansPage = (props: PhysiciansPageProps) => {
                         // endMessage={<div className="text-error font-bold">پایان😁</div>}
                         >
                             {searchDataClient?.map((item) => (
-                                <SearchCardPrimary key={item.id} {...item} online={false} freeMode={false} />
+                                <SearchCardPrimary key={item.id} {...item} online={item.immediateConsultation} freeMode={false} />
                             ))}
                         </InfiniteScroll>
 
