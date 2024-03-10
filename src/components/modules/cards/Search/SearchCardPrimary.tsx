@@ -85,6 +85,7 @@ const SearchCardPrimary = (props : PhysicianSearchType) => {
                 <PathLine color={"stroke-bg_content"} />
             </div>
             <div className="px-4  w-full grid grid-cols-2 gap-1">
+            <TagPhysicain disabled={props.onlineAppointment} title={"نوبت دهی اینترنتی"} />
                 <TagPhysicain
                     disabled={props.voiceConsultation}
                     title={"مشاوره متنی"}
@@ -93,7 +94,7 @@ const SearchCardPrimary = (props : PhysicianSearchType) => {
                     disabled={props.textConsultation}
                     title={"مشاوره تلفنی"}
                 />
-                <TagPhysicain disabled={props.onlineAppointment} title={"نوبت دهی اینترنتی"} />
+                
                 <TagPhysicain
                     disabled={props.immediateConsultation}
                     title={"مشاوره تلفنی فوری"}
